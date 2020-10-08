@@ -1,0 +1,20 @@
+a) the A* algorithm is base on the distance from the initial state plus the heuristic value assigned to S. In case h(S) = 0 for all the state, A* behaves like a breadth first search. So, it would find the optimal solution.
+
+b) Being disoriented by a false heuristic value, it's unlikely (yet not impossible) for the algorithm to find the optimal solution.
+
+FOR THE NEXT 2 ANSWERS I WILL ASSUME UNSATISFIED GOALS ARE THE MID GOALS AS IN EXERCISE 2
+
+c) The idea to use unsatisfied goals might seem nice, however, imagine some of these goal act like local minima/maxima: this would trick the algorithm and have it believe the solution is, respectively, closer or further than it actually is. So, depending on the problem, this is not guaranteed to find the optimal solution.
+
+d) Honestly, I have no idea what the second precondition of the question means. I guess it refers to the the current state.
+In that case, like for the previous one, the algorithm might be tricked by an action which reduces the number of achieved goals, but the is like a local minimum, and from that state, the solution is exactly one action away. So, the optimal solution is not guaranteed in this case either.
+
+
+----------------------------------------------------------------
+
+4) A fact is static when it is part of the initial state and no operator can delete it.
+
+4.a) Any initial predicate can be deleted, as such, none of them is static.
+
+4.b) Static fact can sometimes be removed both from the initial state and from the action preconditions. So doing, each state can be regarded as "smaller" memory wise, and the time required to check that such precondition is true reduces to 0.
+However, there are some other facts that, yet being static, may describe a property of an object, like a colour, and need to be there. In that case, what mentioned before doesn't count anymore.

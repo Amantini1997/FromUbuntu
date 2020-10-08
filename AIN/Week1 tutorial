@@ -1,0 +1,13 @@
+1) Alexa 
+    a -> microphone, wi-fi (to communicate with other devices) (INTERNET?)
+    b -> reply to you, look for stuff on the internet, communicate with other smart devices
+    c -> a office or a house (preferribly a smart one)
+
+2) Dynamic -> people can operate in that environment;
+   Stochastic -> people do action often regularly, but many times based on probability
+
+AI Planning -> how do we get an agent to accomplish a goal figuring out by itself (it only know about possible, atomic actions)
+how do we program a robot to get from a to b
+
+in scheduling we know what the tasks are, we just have to find the best way to sort them and to minimise whatev
+in planning you have to figure out what the tasks are
