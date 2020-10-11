@@ -20,7 +20,7 @@
 }
 
 .definition {
-    background: rgba(80, 80, 255, .3); 
+    background: rgba(80, 80, 255, .2); 
     padding: 5px; 
     padding-left: 10px;
     margin: 20px 0; 
@@ -221,14 +221,14 @@ it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B i
 
 Landmarks can be used in 3 different ways:
 - as **planning subgoals**;
-> This is not optimal due to **Susman anomaly** which claims that 2 landmarks necessary to achieve the goal, are in a sense mutually exclusive, and reaching one prevents us from reaching the other and vice versa
+> This is not optimal due to **Susman anomaly** which claims that 2 landmarks necessary to achieve the goal, can in a sense mutually exclusive, and reaching one prevents us from reaching the other and vice versa.
 - for **heuristic estimates**;
 - for admissible landmarks heuristic.
 
 ## LM Count
-It's a **Path Dependetend Heuristic**, which is not a function of the current observed state, but rather the function of path used to reach it. It is **inadmissible** as the same state (like holding B) could be used to achieve multiple landmarks, even tho it's impossible.    
+<div class="definition"><b>LM</b> is a <b>Path Dependent Heuristic</b>, which is not a function of the current observed state, but rather the function of path used to reach it. It is <b>inadmissible</b> as the same state (like holding B) could be used to achieve multiple landmarks, even tho it's impossible.</div>    
 
-LM heuristic value`h(s,p) where s is the state and p the path` is given by the union of incomplete landmarks with ones required again
+LM heuristic value`h(s,p) where s is the state and p the path` is given by the union of incomplete landmarks with the ones required again.
 <img src="LM_Count.png">
 
 ## Double Heuristic
