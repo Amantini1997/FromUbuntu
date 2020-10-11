@@ -1,8 +1,8 @@
-#HRM First lecture
+# HRM First lecture
 
 ---
 
-##PART 1
+## PART 1
 
 The main idea of HRM is that organizations can boost productivity and performance by designing and managing work so that they take into account **employees' psychological and social need and aspirations**
 
