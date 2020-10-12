@@ -1,8 +1,10 @@
-#HRM First lecture
+[TOC]
+
+# Week 1 - HRM First lecture
 
 ---
 
-##PART 1
+## PART 1
 
 The main idea of HRM is that organizations can boost productivity and performance by designing and managing work so that they take into account **employees' psychological and social need and aspirations**
 
@@ -60,3 +62,56 @@ Bundles are **interrelated** and they mutually reinforce the effect of the other
 > a key thing to point out is about the changes a Company makes: 
 > - when these changes are aimed at improving the working space and the employee benefits, the latter is more committed to work and, of course, happier;
 > - vice versa, when the changes are made to cut costs down, or employees are worried about being fired, the commitment levels drop down
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Week 2
+
+### The IBM Case (a few years ago)
+Looking at the competitive landscape, IBM realised 3 main things:
+- Thanks to globalisation, communication and international trading barriers we're breaking down, which favored trades and investment flows across the countries;
+- Protectionism in most countries was reducing;
+- There were huge technological advances in communications which, to some extent, greatly favored the way work could be structured and teh way people could be managed.
+
+This brought significant opportunities and changes:
+- The production of goods and services flowed globally to places where it was more efficient and most benefit could be created, at the lowest cost (China exploitation);
+- Looking at themselves, they figured they had to evolve **from** a traditional '*multinational*' approach, in which production is organised state by state, market by market, region by region (traditional boundaries of the nation-state) **to** Globally integrated Organisations to keep their competitiveness. (fully globalised and integrated organisation)
+
+Hence, they had to remove redundancy and integrate operations both horizontally and globally.
+
+<img source="IBM_7.png">
+
+So the focus was on:
++ understanding the people working in the organisation, what their environment is like, who are the talent to invest one etc.
++ how to attract the right people and develop them internally, and how to deploy the workforce across cultural and geographical boundaries.
+
+## Globalisation for sociologists
+Globalisation can be seen in many ways, for example:
+- The **intensification of social relations which links together distant localities**, making an event happening somewhere in the world, relevant to shape the life of a place located on the other side of the world;
+- The creation of a big, **heterogeneous culture spread across the world**, but also the **annihilation of small cultures**.
+
+From the sociologists POV these are the key ideas:
+- globalising values and views of the world, meaning tha there is a culture that we all share;
+- interdependence between societies, that can lead to culture enrichment as well as cultural annihilation;
+- globalisation is seen as an irreversible trend.
+
+## Globalisation for economists
+"Globalisation is the **increasing interdependence between countries** which inevitably leads to **increasing volume and varieties of cross-border transactions** (also the increase of technology is part of this phenomenon)"
+
+"**Integration of markets, nation-states and technologies** to a degree that we have never seen before, allowing to **reach for places farther, faster, deeper and cheaper.** It also includes the **spread of free-market capitalism to virtually every country of the world**"
+
+From the economists POV these are the key ideas:
+- there is a growing internationalisation dynamic of our economy;
+- it is dominated by uncontrollable market forces;
+- the main actors agents of change are truly **transnational corporations** located wherever on the global market advantage dictates.
+
+Drop in transports costs and increase in technology allowed richer countries to exploit developing countries for production, however, *premium skills* like R&D are still done in rich countries.
+
+<img src="Fully_globalised.png">
