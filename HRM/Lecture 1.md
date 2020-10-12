@@ -115,3 +115,5 @@ From the economists POV these are the key ideas:
 Drop in transports costs and increase in technology allowed richer countries to exploit developing countries for production, however, *premium skills* like R&D are still done in rich countries.
 
 <img src="Fully_globalised.png">
+
+**Globalisation in not inexorably expanding** (think of Covid or WW)

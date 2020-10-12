@@ -20,7 +20,7 @@
 }
 
 .definition {
-    background: rgba(80, 80, 255, .3); 
+    background: rgba(80, 80, 255, .2); 
     padding: 5px; 
     padding-left: 10px;
     margin: 20px 0; 
@@ -94,6 +94,7 @@ more quickly than the A*, but not necessarily the optimal solution. I lays betwe
 <br>
 <br>
 <br>
+
 # WEEK 2
 
 **Delete Relaxation:** Finding the a good heuristic can be tricky sometimes, **RPG** (or Relaxed Planning Graph) is very handy for that. It assumes that the actions only add and never delete predicates; in other words, **delete relaxations remove only the delete effects of actions**.
@@ -213,6 +214,58 @@ it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B i
 ---
 
 - We say that a plan π obeys a set of orderings O, if for all orderings A →x B ∈ O, regardless of their type, it holds that A is first added at time i in π and B is not 
+
+
+
+# WEEK 3 (Landmarks)
+
+Landmarks can be used in 3 different ways:
+- as **planning subgoals**;
+> This is not optimal due to **Susman anomaly** which claims that 2 landmarks necessary to achieve the goal, can in a sense mutually exclusive, and reaching one prevents us from reaching the other and vice versa.
+- for **heuristic estimates**;
+- for admissible landmarks heuristic.
+
+## LM Count
+<div class="definition"><b>LM</b> is a <b>Path Dependent Heuristic</b>, which is not a function of the current observed state, but rather the function of path used to reach it. It is <b>inadmissible</b> as the same state (like holding B) could be used to achieve multiple landmarks, even tho it's impossible.</div>    
+
+LM heuristic value`h(s,p) where s is the state and p the path` is given by the union of incomplete landmarks with the ones required again.
+<img src="LM_Count.png">
+
+## Double Heuristic
+
+Having 2 heuristic functions might be very good:
+- When you have a plateau with one, the other one might come in help out;
+- Alterning 2 heuristics (even h() = random picking) helps improving the overall heuristic, and, hence, solving the plan.
+
+**EHC** & **FF** are know as **Local Search algorithms**:
+<img src="Local_Search.png">
+
+>**HEURISTICS ARE USED AT POINT 3**
+>Basically we are applying a <b>gradient descent</b>##
+
+
+##  Problems With RPG
+
+- Not perfect;
+- The right move may not lower the heuristic;
+- The best move might prove to be wrong.
+
+##  Problems With EHC
+
+- Can lead to a dead end and not find a soltuion;
+- If FF fails, resort to systematic Best first search from the START!!;
+- Searching on a plateau is expensive.
+
+## IDENTIDEM
+
+Alternative to EHC, it uses what are know as **RESTARTS**
+
+- When reaching a plateau, pick a random generated state (doesn't matter if it's worse than the best node so far);
+- Explore it down for a maximum of d steps(d is set at the beginning);
+- If it doesn't find an optimal solution, RESTART from the original node.
+> If no good state is found at depth **d** , then **increase d** (d += 1)
+
+
 .
 .
 .
