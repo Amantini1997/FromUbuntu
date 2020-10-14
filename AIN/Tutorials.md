@@ -11,16 +11,18 @@ Tutorials
 > .108  + .012 + .072 + .008 
 
 (b) **P**(Toothache)    
-> <.108, .012, .016, .064>
+> <P(toothache), P(¬toothache)> -> <0.2, 0.8> 
 
 (c) **P**(Toothache|cavity)    
-> <.108, .012>
+> <P(toothache | cavity), P(¬toothache | cavity)> -> <.120, .080>
+> if we normalize tho, it becomes <.6, .4>
 
 (d) P(catch ∨ cavity)    
-> .108 + .072
+> .108 + .016 + .012 + .064 + .072 + .144
 
 (e) **P**(Cavity|toothache ∨ catch)    
-> <.108, 0.12, .072> / (.108 + .012 + .016 + .064 + .072 + .144)
+> <.108  + .012 + .072> / (.108 + .012 + .016 + .064 + .072 + .144)
+> 0.2 / 
 
 
 ## 2. 
@@ -32,7 +34,7 @@ b) How would this change if the disease was more common, say affecting 1 person 
     *Nobody mentioned I took the test, as such, the probability I have the disease, based on the description, is that I am the 1 / 10.000 people who has it.*
 
 - b) P(d = True | D = True | 1/100) = 1 / 100
-    *Again, it's nowhere specified I took the test.
+    *Again, it's nowhere specified I took the test.*
 
 > In my opinion, the 2 things are anyways unrelated as taking the test does not change the factor 1 / x people
 
