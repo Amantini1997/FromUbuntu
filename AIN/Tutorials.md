@@ -5,7 +5,7 @@ Tutorials
 # WEEK 2 - Probability
 
 ## 1.
-<img src="Cavity_Probs_Table.png">
+<img src="./img/Cavity_Probs_Table.png">
 
 (a) P(cavity)    
 > .108  + .012 + .072 + .008 
