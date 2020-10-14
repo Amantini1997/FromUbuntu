@@ -84,7 +84,8 @@ A nice to remember formula is:
 Probability distribution can be represented as a vector which has to be exhaustive (include all the possible outcomes), mutual exclusive (no option has to be repeated), and of course the sum has to be 1.
 > eg. <0.72, 0.1, 0.08, 0.1>
 
-A subtle notation to look at is P() which generates a number and **P()** (bold) which generates a vector
+A subtle notation to look at is P() which generates a number and **P()** (bold) which generates a vector.
+In the case the formula is **P**(H | e), the resulting vector is <P(H | e), (¬H | e)>
 
 When looking at the `given clause` (in P(a | b) b is the given clause), some components can be removed. For instance, if a: *Cavity = TRUE* and b: *Toothache & Cavity*, of course P(a | b) = 1, and the Tootache part can be removed as its contribution is less than the other or, like in other cases, meaningless (suppose rather than tootache I had *Curtains Blue = True*).
 <ht</ht>
