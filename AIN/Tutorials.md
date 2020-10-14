@@ -54,6 +54,19 @@ P(B TP | B Positive) = 90 / (90 + 5) = 0.947
 
 **Hence, Bob has more chances of having the disease**
 
+
+# Week 3
+
+## 1
+smoking => cancer       P() = 0.6
+smoking => badBreath    P() = 0.95
+
+P(smoking) = 0.2 
+P(smoking, cancer, badBreath) = 0.2 * 0.6 * 0.95
+
+## 2
+
+
 <br>
 <br>
 <br>

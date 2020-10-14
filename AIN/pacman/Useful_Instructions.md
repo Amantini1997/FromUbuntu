@@ -7,3 +7,8 @@ python2 pacman.py
 
     --layout mediumClassicNoGhosts
         This layout allows no ghosts in the world
+
+cd ~/Desktop/FromUbuntu/AIN
+source Python_env/bin/activate
+cd pacman/pacman_week_2
+python2 pacman.py --pacman HungryAgent --layout mediumClassicNoGhosts

@@ -6,7 +6,7 @@ An agent, normally receives inputs (images, audios, waves from object detectors,
 These percepts are elaborated, help generate new states which, in turn, help decide the next action
 
 ## Environment Characteristics
-<img src="./Agent_characteristics" style="border: solid; margin: 3px">
+<img src="img/Agent_characteristics" style="border: solid; margin: 3px">
 <br>
 <br>
 <br>
@@ -34,7 +34,7 @@ Partial observability may depend on different things:
 <br>
 
 ## Uncertainty
-<img src="./uncertainty.png" style="border: solid; margin: 3px">
+<img src="img/uncertainty.png" style="border: solid; margin: 3px">
 
 
 ### Handling Uncertainty
@@ -44,7 +44,7 @@ Partial observability may depend on different things:
     
     Nonetheless, probabilistic assumptions come with issues such as computational complexities, obtaining values, semantics etc.
 
-> <img src="./fuzzy_logic.png" style="border: solid; margin: 3px">
+> <img src="img/fuzzy_logic.png" style="border: solid; margin: 3px">
 > **Fuzzy logic** might look like probabilistic, but it's completely deterministic
 
 - Using **utility theory**, used to represent and infer preferences;
@@ -93,7 +93,7 @@ When looking at the `given clause` (in P(a | b) b is the given clause), some com
 Comma `,` is often used in place of `AND`, so `P(a,b) = P(a AND b)`
 
 ### Chain Rule
-<img src="./ChainRule.png" style="border: solid; margin: 3px">
+<img src="img/ChainRule.png" style="border: solid; margin: 3px">
 
 > P(a,b) = P(a,b,c) + P(a,b,¬c)
 
@@ -110,6 +110,45 @@ Absolute independence is amazing, but rare. It formulates like
 >**P**(a | b, c) = **P**(a | b)
 
 **ADVICE:** in case you have P(a | b) which is very high, don't automatically expect P(b | a) to be high as well    
+
+
+# Week 3
+
+## Naive Bayes & Bayesian networks
+
+**Naive Bayes** means that you naively assume there's no correlation between 2 events.
+> <img src="img/Bayesian_Independency.png" style="border: solid 2px">
+> 
+> **Bayesian networks** are a vay to represent these dependences
+
+> **CPT** (conditional probability table) are boolean table showing probabilites
+> <img src="CPT.png">
+
+<img src="img/Bayesian_networks.png
+" style="border: solid 2px">
+
+
+I AM NOT SURE WHICH IS THE CORRECT ONE *****
+--
+- A further way to reduce the storage is that to scompose a random variable, and then remove one of them
+> e.g. **North America** <=> **Mexico** V **USA** V **Canada** (one of them can go)
+
+- If there is a boolean random variable which is implied by other variables, this one can be omited
+> e.g. **North America** <=> **Mexico** V **USA** V **Canada**, North America is already specified by the others, hence, we can omit it
+
+## Markov Blanket
+A Markov Blanket of a node X is the set of:
+- parents of X
+- children of X
+- parents of X's children
+
+## Inference
+> **Given some evidence and reasoning, what conclusions can we draw**
+
+### Inference by ENUMERATION
+Among all the inferences, this is the only one that is **deterministic** as opposed to the others which are **probabilistic**.
+
+When sampling, you can just take whatever sample you get, you can **reject** your samples if they are not efficient, or, as opposed to the latter, you can **weight** your samples, so you don't have to throw them away.
 
 <br>
 <br>
