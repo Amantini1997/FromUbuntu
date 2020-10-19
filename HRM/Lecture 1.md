@@ -1,5 +1,13 @@
 [TOC]
 
+<style>
+
+    img {
+        border: solid 2px;
+    }
+
+</style>
+
 # Week 1 - HRM First lecture
 
 ---
@@ -86,7 +94,7 @@ This brought significant opportunities and changes:
 
 Hence, they had to remove redundancy and integrate operations both horizontally and globally.
 
-<img source="IBM_7.png">
+<img src="./img/IBM_7.png">
 
 So the focus was on:
 + understanding the people working in the organisation, what their environment is like, who are the talent to invest one etc.
@@ -114,6 +122,61 @@ From the economists POV these are the key ideas:
 
 Drop in transports costs and increase in technology allowed richer countries to exploit developing countries for production, however, *premium skills* like R&D are still done in rich countries.
 
-<img src="Fully_globalised.png">
+<img src="./img/Fully_globalised.png">
 
 **Globalisation in not inexorably expanding** (think of Covid or WW)
+
+
+# Week 3
+
+## Skills that will be demand in future
+- **Digital skills**: knowing how to use a computer, how to surf the web, able to work remotely and to use software like MS Office;
+- **Agile thinking skills**: ability work and adapt to different scenarios, to complexity and ambiguity, to innovation;
+- **Interpersonal and communicational skills**: collaborative people, able to efficiently communicate to customers and other team members, with good oral and written communication skills, people how can brain storm. 
+- **Global operating kills**: (particularly important for multinationals and big corporations) people speaking different languages, people sensitive to different cultures and traditions, people who understand international markets and can work (and manage) diverse people.
+
+## Talents
+Back in the past (2010), **talents were primarily in developed countries** like US, UK, Germany and so on, and there was a **lack of them in developing countries** like China, India, Brazil etc. As the projection proved, **the situation has become the opposite in our days**, having developing countries with a surplus of talents, and with developed countries having shortages.
+
+> talent here is meant as analytical, digital, agile etc. skills.   
+
+The reason behind this shift in talents is that those developing countries, as they were facing deficits, **invested on new workforce growth, training more college graduates and post grads** per capita.
+
+A quick solution would be **to import talents** from other countries, but these people **hardly understand** the language, the culture, and even less, **the market**. Furthermore you not only have to retain and engage people from your local market, by expanding to other markets and teaching them the fundamentals of your nation.
+
+## Old vs. New Deal
+
+<img src="./img/OldVNewDeal1.png">
+<img src="./img/OldVNewDeal2.png">
+
+## Psychological contract
+
+It is a set of unwritten reciprocal **expectations** between the individual employee and the organisation. But of course it can be subjective, that is, the perceptions of both parts of the employment relationship of the **reciprocal promises and obligations** implied by that relationship.
+
+> During an interview the company promises you great stuff, and you promise to help them fulfill their mission.
+
+## Protean and Boundaryless careers
+<img src="./img/careers.png">
+In spite of being different, these careers types are not opposite; the opposite might be (I am not sure) organisational career.
+A protean career attitude implies that a person strives towards a developmental progression and self-fulfillment; a boundaryless career attitude is characterized by a high physical and/or psychological mobility.
+
+The latter concept is very linked to the fact that long term careers do not exist anymore.
+
+> **Job tenure:** the average years a person spend with the same company.
+
+Although researches have demonstrated a slight increase in job tenure over the years, there's the chance that careers are getting more boundaryless and highly protean.
+
+### Satisfactions and proficiency with protean and boundaryless attitudes
+**Some studies coducted at Kings** show that people taking boundaryless careers have lower job, life and career satisfactions than other workers. 
+From a organisation POV, they have less commitment to work and are more willing to leave the company.
+
+Opposed to that, people taking protean careers tend to be happier than other workers. Also, they have better job performances, and better CB (Citizenship behaviour).
+
+As protean attitude leads people to proactivity and better performance, organisations seeks to retain these employee.
+
+Boundaryless people are instead retained when they have high human capital and high turnover.
+Low boundaryless careers tend to appreciate High HRM commitment, whereas high boundaryless careers seem to prefer not to have HRM investing too much on them. This counts for OCB, OCBI and Job Performance. 
+
+**To conclude**:
+- Protean Careers are a WIN-WIN, the employee is happy and the job performance is good;
+- Boundaryless Careers are a LOSE-LOSE, their general dissatisfaction leads them to less commitment and lower performance at work. Furthermore, HR has little impact on them.
