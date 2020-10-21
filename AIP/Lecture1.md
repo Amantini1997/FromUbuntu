@@ -1,6 +1,13 @@
 [TOC]
 
 <style>
+h1:not(:first-of-type)::before {
+    content: "";
+    height: 100px;
+    padding: 100px;
+    display: block;
+}
+
 .no-mt {
     margin-top: -16px;
 }
@@ -84,16 +91,6 @@ more quickly than the A*, but not necessarily the optimal solution. I lays betwe
     we can (not necessarily the one we will) find, is at most twice as much the best solution
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 # WEEK 2
 
@@ -264,6 +261,7 @@ Alternative to EHC, it uses what are know as **RESTARTS**
 - Explore it down for a maximum of d steps(d is set at the beginning);
 - If it doesn't find an optimal solution, RESTART from the original node.
 > If no good state is found at depth **d** , then **increase d** (d += 1)
+
 
 
 # Week 4 - Numerical Values in Planning 

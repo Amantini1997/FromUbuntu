@@ -59,15 +59,79 @@ P(B TP | B Positive) = 90 / (90 + 5) = 0.947
 
 # Week 3
 
-## 1
-smoking => cancer       P() = 0.6
-smoking => badBreath    P() = 0.95
+#### 1
+Write down a Bayesian network that captures the knowledge that (a) Smoking causes cancer; and (b)Smoking causes bad breath. Given the information that:
 
-P(smoking) = 0.2 
-P(smoking, cancer, badBreath) = 0.2 * 0.6 * 0.95
+    P(cancer|smoking) = 0.6
+    P(badBreath|smoking) = 0.95
+    P(smoking) = 0.2 
+use a Naive Bayes model to determine P(smoking, cancer, badBreath). Assume that all three variables are binary: Smoking has values smoking and ¬smoking, Cancer has values cancer and ¬cancer, and BadBreath has values badBreath and ¬badBreath.
 
-## 2
+>smoking => cancer       P() = 0.6
+>smoking => badBreath    P() = 0.95
+>
+>P(smoking) = 0.2 
+>P(smoking, cancer, badBreath) = 0.2 * 0.6 * 0.95
 
+#### 2
+
+Write down a Bayesian network that captures the knowledge that **(a)** a `Late Start` can cause a student to `Fail their Project`, and **(b)** `Ignoring Advice` can cause a student to `Fail their Project`. Use the binary variables `Late Start`, with values **l** and **¬l**, `Ignore Advice`, with values **i** and **¬i**, and `Fail Project`, with values **f** and **¬f**. You know that `Late Start` and `Ignore Advice` are non-interacting cuases of `Fail Project`, so use a Noisy-Or model to build the conditional probability table relating the three variables from:
+
+    P(f|l) = 0.7
+    P(f|i) = 0.8
+
+> <img src="./img/turorial_Graph_Failure.png">
+
+#### 3 
+How many numbers do we need to specify all the necessary probability values for the network in Figure 1?
+> 1 + 1 + 4 = 6
+
+How many would we need if there were no conditional independencies (if we didn’t have the network)?
+> 1 + 1 + 1 = 3
+
+##### 4
+Compute the joint probability P(m, ¬t, h, s, ¬c)
+
+
+>
+
+#### 5
+Use the enumeration algorithm to compute the probability of P(m|h, s).
+>
+
+#### 6
+Use prior sampling to compute the joint probability over m, t, h, s and c.
+Use the sequence of random numbers in Table 1. Give the results of the first 5 samples only.
+If you need more random numbers than exist in Table 1, start that sequence again from the beginning.
+>
+
+#### 7
+Use rejection sampling to compute P(m|h, s)
+Use the sequence of random numbers in Table 1, starting at the beginning of the sequence. This time you
+should show the results of the first 5 samples that aren’t rejected.
+If you need more random numbers than exist in Table 1, start that sequence again from the beginning.
+>
+
+#### 8
+Use importance sampling to compute P(m|h, s).
+Use the sequence of random numbers in Table 1, starting at the beginning of the sequence, and again report
+the results of the first five samples.
+If you need more random numbers than exist in Table 1, start that sequence again from the beginning.
+>
+
+#### 9
+Compute P(m|h, s) using Gibbs sampling.
+Use the sequence of random numbers in Table 1, and give the results of the first 5 samples only.
+If you need more random numbers than exist in Table 1, start that sequence again from the beginning.
+>
+
+#### 10
+For the optional computational part of the tutorial, download the file wetGrass.py from KEATS.
+This provides code, using pomegranate1, that implements the “Wet Grass” example from Lecture/Week
+>
+
+#### 3
+You can run the example using:
 
 <br>
 <br>
