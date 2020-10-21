@@ -190,7 +190,11 @@ class HungryAgent(Agent):
         self.lastBestFoodPosition = None
         self.lastMinimumDistance = None
 
+    def addVisitedLocation(self, location):
+        pass
+
     def getAction(self, state):
+        
         
 
         # What are the current moves available
@@ -401,10 +405,9 @@ def getPathsAroundTheWall(startPosition, goalPosition, perimeter):
 def sumTuples(tuple1, tuple2):
     return tuple([(i + j) for i, j in zip(tuple1, tuple2)])
 
+
 def getMapWidthAndHeight(state):
-    api
-
-
+    pass
 
 # CornerSeekingAgent
 #
