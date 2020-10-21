@@ -148,11 +148,10 @@
         (communicated_image_data objective1 high_res)
 
         ; a goal preference named g0 (cost 4) that we have communicated the image data of a colour image of objective 1 
-        (communicated_image_data objective1 colour)
+        (preference g0 (at end (communicated_image_data objective1 colour)))
 
         ; a goal preference named g1 (cost 5) that the rover is at the waypoint the lander is located at
-
-         (or (and (at rover0 waypoint0)(at_lander general waypoint0))(and (at rover0 waypoint1)(at_lander general waypoint1))(and (at rover0 waypoint2)(at_lander general waypoint2))(and (at rover0 waypoint3)(at_lander general waypoint3)))
+        (and (preference g1 (at end (at rover0 waypoint0)(at_lander general waypoint0)))
 	)
 
 )
@@ -162,25 +161,22 @@
          (and
 
             ; a preference named t0 (cost 2) that the rover does not return to waypoint2 if it has already been there 
-
             (preference t0 (at-most-once (at rover0 waypoint2)))
 
 
             ; a preference named t1 (cost 3) that at some point during the plan we have communicated data about a soil sample taken at waypoint0
-
             (preference t1 (sometime (communicated_soil_data waypoint0)))
 
             ; a preference named t2 (cost 1) that if the rover has a soil sample from waypoint0 it must have taken a rock sample at waypoint1 first 
-
-            (preference t0 (sometime-before (at_soil_sample waypoint1)(have_rock_analyses rover0 waypoint1)))
+; xxxxxx
+            (preference t2 (sometime-before (have_soil_analysis rover0 waypoint0)(have_rock_analysis rover0 waypoint0)))
 
             ; a preference named t3 (cost 4) that if the rover has taken a soil sample at waypoint0 it must subsequently empty its store
-
-            (preference t0 (sometime-after (at_soil_sample waypoint0)(empty rover0store)))
+; xxxxxx
+            (preference t3 (sometime-after (have_soil_analysis rover0 waypoint0)(empty rover0store)))
 
             ; a preference named t4 (cost 4) that the rover does not visit waypoint1
-
-            (preference t0 (always (at rover0 waypoint1)))
+            (preference t4 (always (not (at rover0 waypoint1))))
 
          )
 

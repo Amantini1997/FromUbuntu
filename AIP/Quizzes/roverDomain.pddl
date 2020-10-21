@@ -1,6 +1,6 @@
 (define (domain Rover)
 
-(:requirements :preferences :constraints)
+(:requirements :preferences :constraints :fluents)
 
 (:types rover waypoint store camera mode lander objective)
 

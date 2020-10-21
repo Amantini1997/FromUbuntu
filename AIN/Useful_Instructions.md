@@ -12,3 +12,5 @@ cd ~/Desktop/FromUbuntu/AIN
 source Python_env/bin/activate
 cd pacman/pacman_week_2
 python2 pacman.py --pacman HungryAgent --layout mediumClassicNoGhosts
+
+python2 pacman.py --pacman BetterHungryAgent --layout mediumClassicNoGhosts
