@@ -285,171 +285,6 @@ class HungryAgent(Agent):
         return api.makeMove(pick, legal)
 
 
-def manhattanNotAbsoluteDistance( xy1, xy2 ):
-    "Returns the Manhattan distance between points xy1 and xy2"
-    return ( xy1[0] - xy2[0], xy1[1] - xy2[1] )
-
-
-def getBestNextMoves(legal, closestPointDistancesXY, immediateBestMoveFlag = False, maxDistanceForImmediateBestMove = 1):
-    '''
-    Given the legal moves and the closes point to pacman,
-    Calculates and return the best moves Direction wise
-    as an array. If best move is best move, return True
-    at the end of the array
-    '''
-    EAST_DISTANCE = closestPointDistancesXY[0]
-    NORTH_DISTANCE = closestPointDistancesXY[1]
-
-    bestMoves = []
-    # immediate move NORTH SOUTH
-    if EAST_DISTANCE == 0 and abs(NORTH_DISTANCE) <= maxDistanceForImmediateBestMove: 
-        if Directions.NORTH in legal and NORTH_DISTANCE > 0:
-            bestMoves.append(Directions.NORTH)
-        elif Directions.SOUTH in legal and NORTH_DISTANCE < 0:
-            bestMoves.append(Directions.SOUTH)
-
-    # immediate move WEST EAST
-    if NORTH_DISTANCE == 0 and abs(EAST_DISTANCE) <= maxDistanceForImmediateBestMove: 
-        if Directions.EAST in legal and EAST_DISTANCE > 0:
-            bestMoves.append(Directions.EAST)
-        elif Directions.WEST in legal and EAST_DISTANCE < 0:
-            bestMoves.append(Directions.WEST)
-    
-    # immediate move exists
-    if len(bestMoves) > 0:
-        if immediateBestMoveFlag: bestMoves.append(True)
-        return bestMoves
-
-
-    bestMoves = []
-    # x-axis move
-    if EAST_DISTANCE >= 0 and Directions.EAST in legal:
-        bestMoves.append(Directions.EAST)
-
-    elif EAST_DISTANCE <= 0 and Directions.WEST in legal:
-        bestMoves.append(Directions.WEST)
-
-    # y-axis move
-    if NORTH_DISTANCE >= 0 and Directions.NORTH in legal:
-        bestMoves.append(Directions.NORTH)
-
-    elif NORTH_DISTANCE <= 0 and Directions.SOUTH in legal:
-        bestMoves.append(Directions.SOUTH)
-
-
-    # print "EAST_D: ", EAST_DISTANCE, "  NORTH_D: ", NORTH_DISTANCE
-
-    return bestMoves
-
-
-# WORKING
-def getFullWallAndPerimeterFromWallBlock(block, walls):
-    ''' 
-    Given a block and the walls map,
-    return perimeter and full wall of the block
-    '''
-    # print block
-    surroundings = []
-    for i in [-1, 0, 1]:
-        for j in [-1, 0, 1]:
-            surroundings.append((i, j))
-    surroundings.remove((0, 0))
-    
-    perimeter = set()
-    knownWall = set()
-    newWall = set([block])
-
-    while len(newWall) > 0:
-        print newWall
-        currentBlock = newWall.pop()
-        if currentBlock in knownWall:
-            continue
-        else:
-            knownWall.add(currentBlock)
-
-        currentSurroundings = surroundings + currentBlock
-        for currentSurrounding in currentSurroundings:
-            if (currentSurrounding[0], currentSurrounding[1]) in walls:
-                newWall.add((currentSurrounding[0], currentSurrounding[1]))
-            else:
-                perimeter.add((currentSurrounding[0], currentSurrounding[1]))
-    return knownWall, perimeter
-                
-    
-
-def getPerimeterAroundWall(pacmanPosition, foodPosition, wall):
-    perimeter = getWallPerimeter(wall)
-    path1, path2 = getPathsAroundTheWall(pacmanPosition, foodPosition, perimeter)
-
-
-def getWallPerimeter(wall):
-    surroundings = []
-    for i in [-1, 0, 1]:
-        for j in [-1, 0, 1]:
-            surroundings.append((i, j))
-    surroundings.remove((0, 0))
-
-    perimeter = []
-    for block in wall:
-        for surrounding in surroundings:
-            position = sumTuples(surrounding, block)
-            if position not in wall and position not in perimeter:
-                perimeter.append(position)
-    return perimeter
-    
-
-def getPathsAroundTheWall(startPosition, goalPosition, perimeter):
-    path1 = [startPosition, goalPosition]
-    path2 = [startPosition, goalPosition]
-    perimeter.remove(startPosition)
-    perimeter.remove(goalPosition)
-    directions = [
-        (1, 0),     # North
-        (0, 1),     # East
-        (-1, 0),    # South
-        (0, -1)     # West
-    ] # North
-    directionPointer = 0
-    while True:
-        newPosition = sumTuples(startPosition, directions[directionPointer])
-        if newPosition in perimeter:
-            path1.append(newPosition)
-            perimeter.remove(newPosition)
-        else:
-            directionPointer %= directionPointer + 1
-
-        if newPosition == goalPosition:
-            return path1, path2 + perimeter
-        
-
-def sumTuples(tuple1, tuple2):
-    return tuple([(i + j) for i, j in zip(tuple1, tuple2)])
-
-
-def getVisitableCorners(corners):
-    topRightCorner = max(corners)
-    visitableCornerns = [(0,0), topRightCorner]
-
-
-def getVisitbaleWidthAndHeight(state):
-    topRightCorner = max(api.walls(state))
-
-    # the corners belong to the walls, so in a map 4 x 4
-    # the top right corner is (3, 3), but it's a wall, so the map is
-    # 2 x 2 from the agent perspective, so the width is 3 - 1
-    return (topRightCorner[0] - 1, topRightCorner[1] - 1)
-
-def getMapCellsMatrix(mapWidth, mapHeight):
-    widthArray = range(1, mapWidth+1)
-    heightArray = range(1, mapHeight+1)
-    return [element for element in itertools.product(heightArray, widthArray)]
-
-def getNonWallCells(walls, state):
-    width, height = getVisitbaleWidthAndHeight(state)
-    mapCellsMatrix = getMapCellsMatrix(height, width)
-    return [x for x in mapCellsMatrix if x not in walls]
-
-
 
 
 # CornerSeekingAgent
@@ -614,6 +449,7 @@ class BetterHungryAgent(Agent):
         self.unvisitedCorners = None
         self.walls = []
         self.firstIteration = True
+        self.worried = False
 
     def getAction(self, state):
         if self.firstIteration:
@@ -729,3 +565,181 @@ class BetterHungryAgent(Agent):
         raw_input()
         print "\n====================================\n"
         return api.makeMove(pick, legal)
+
+# WORKING
+def manhattanNotAbsoluteDistance( xy1, xy2 ):
+    "Returns the Manhattan distance between points xy1 and xy2"
+    return ( xy1[0] - xy2[0], xy1[1] - xy2[1] )
+
+
+def getBestNextMoves(legal, closestPointDistancesXY, immediateBestMoveFlag = False, maxDistanceForImmediateBestMove = 1):
+    '''
+    Given the legal moves and the closes point to pacman,
+    Calculates and return the best moves Direction wise
+    as an array. If best move is best move, return True
+    at the end of the array
+    '''
+    EAST_DISTANCE = closestPointDistancesXY[0]
+    NORTH_DISTANCE = closestPointDistancesXY[1]
+
+    bestMoves = []
+    # immediate move NORTH SOUTH
+    if EAST_DISTANCE == 0 and abs(NORTH_DISTANCE) <= maxDistanceForImmediateBestMove: 
+        if Directions.NORTH in legal and NORTH_DISTANCE > 0:
+            bestMoves.append(Directions.NORTH)
+        elif Directions.SOUTH in legal and NORTH_DISTANCE < 0:
+            bestMoves.append(Directions.SOUTH)
+
+    # immediate move WEST EAST
+    if NORTH_DISTANCE == 0 and abs(EAST_DISTANCE) <= maxDistanceForImmediateBestMove: 
+        if Directions.EAST in legal and EAST_DISTANCE > 0:
+            bestMoves.append(Directions.EAST)
+        elif Directions.WEST in legal and EAST_DISTANCE < 0:
+            bestMoves.append(Directions.WEST)
+    
+    # immediate move exists
+    if len(bestMoves) > 0:
+        if immediateBestMoveFlag: bestMoves.append(True)
+        return bestMoves
+
+
+    bestMoves = []
+    # x-axis move
+    if EAST_DISTANCE >= 0 and Directions.EAST in legal:
+        bestMoves.append(Directions.EAST)
+
+    elif EAST_DISTANCE <= 0 and Directions.WEST in legal:
+        bestMoves.append(Directions.WEST)
+
+    # y-axis move
+    if NORTH_DISTANCE >= 0 and Directions.NORTH in legal:
+        bestMoves.append(Directions.NORTH)
+
+    elif NORTH_DISTANCE <= 0 and Directions.SOUTH in legal:
+        bestMoves.append(Directions.SOUTH)
+
+
+    # print "EAST_D: ", EAST_DISTANCE, "  NORTH_D: ", NORTH_DISTANCE
+
+    return bestMoves
+
+
+# WORKING
+def getFullWallAndPerimeterFromWallBlock(block, walls):
+    ''' 
+    Given a block and the walls map,
+    return perimeter and full wall of the block
+    '''
+    # print block
+    surroundings = []
+    for i in [-1, 0, 1]:
+        for j in [-1, 0, 1]:
+            surroundings.append((i, j))
+    surroundings.remove((0, 0))
+    
+    perimeter = set()
+    knownWall = set()
+    newWall = set([block])
+
+    while len(newWall) > 0:
+        print newWall
+        currentBlock = newWall.pop()
+        if currentBlock in knownWall:
+            continue
+        else:
+            knownWall.add(currentBlock)
+
+        currentSurroundings = surroundings + currentBlock
+        for currentSurrounding in currentSurroundings:
+            if (currentSurrounding[0], currentSurrounding[1]) in walls:
+                newWall.add((currentSurrounding[0], currentSurrounding[1]))
+            else:
+                perimeter.add((currentSurrounding[0], currentSurrounding[1]))
+    return knownWall, perimeter               
+    
+
+def getPerimeterAroundWall(pacmanPosition, foodPosition, wall):
+    perimeter = getWallPerimeter(wall)
+    path1, path2 = getPathsAroundTheWall(pacmanPosition, foodPosition, perimeter)
+
+
+def getWallPerimeter(wall):
+    surroundings = []
+    for i in [-1, 0, 1]:
+        for j in [-1, 0, 1]:
+            surroundings.append((i, j))
+    surroundings.remove((0, 0))
+
+    perimeter = []
+    for block in wall:
+        for surrounding in surroundings:
+            position = sumTuples(surrounding, block)
+            if position not in wall and position not in perimeter:
+                perimeter.append(position)
+    return perimeter
+    
+
+def getPathsAroundTheWall(startPosition, goalPosition, perimeter):
+    path1 = [startPosition, goalPosition]
+    path2 = [startPosition, goalPosition]
+    perimeter.remove(startPosition)
+    perimeter.remove(goalPosition)
+    directions = [
+        (1, 0),     # North
+        (0, 1),     # East
+        (-1, 0),    # South
+        (0, -1)     # West
+    ] # North
+    directionPointer = 0
+    while True:
+        newPosition = sumTuples(startPosition, directions[directionPointer])
+        if newPosition in perimeter:
+            path1.append(newPosition)
+            perimeter.remove(newPosition)
+        else:
+            directionPointer %= directionPointer + 1
+
+        if newPosition == goalPosition:
+            return path1, path2 + perimeter
+        
+
+def sumTuples(tuple1, tuple2):
+    return tuple([(i + j) for i, j in zip(tuple1, tuple2)])
+
+
+def getVisitableCorners(corners):
+    topRightCorner = max(corners)
+    visitableCornerns = [(0,0), topRightCorner]
+
+
+def getVisitbaleWidthAndHeight(state):
+    topRightCorner = max(api.walls(state))
+
+    # the corners belong to the walls, so in a map 4 x 4
+    # the top right corner is (3, 3), but it's a wall, so the map is
+    # 2 x 2 from the agent perspective, so the width is 3 - 1
+    return (topRightCorner[0] - 1, topRightCorner[1] - 1)
+
+
+def getMapCellsMatrix(mapWidth, mapHeight):
+    widthArray = range(1, mapWidth+1)
+    heightArray = range(1, mapHeight+1)
+    return [element for element in itertools.product(heightArray, widthArray)]
+
+
+def getNonWallCells(walls, state):
+    width, height = getVisitbaleWidthAndHeight(state)
+    mapCellsMatrix = getMapCellsMatrix(height, width)
+    return [x for x in mapCellsMatrix if x not in walls]
+
+
+def policyMetric(accessibleMap, unvisitedMap = [], foodMap = [], ghosts = [], policyMap = [], epsilon = 0.1):
+    policyMap = policyMap or 
+
+
+def getLegalMoves(map: list(tuple), location: tuple):
+    pass
+
+
+def getMapMoves(accessibleMap):
+    return map(getLegalMoves, accessibleMap)

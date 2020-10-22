@@ -132,8 +132,7 @@ Absolute independence is amazing, but rare. It formulates like
 > **CPT** (conditional probability table) are boolean table showing probabilites
 > <img src="./img/CPT.png">
 
-<img src="img/Bayesian_networks.png
-" style="border: solid 2px">
+<img src="img/Bayesian_networks.png" style="border: solid 2px">
 
 
 I AM NOT SURE WHICH IS THE CORRECT ONE *****
@@ -158,6 +157,29 @@ Among all the inferences, this is the only one that is **deterministic** as oppo
 
 When sampling, you can just take whatever sample you get, you can **reject** your samples if they are not efficient, or, as opposed to the latter, you can **weight** your samples, so you don't have to throw them away.
 
+### Importance Sampling
+Like for sampling, you may want to calculate a probability P(h | s, t).
+The difference with normal sampling is that, since you want to calculate h given **s** and **t**, you assume that **s** and **t** are both true.
+
+However, this will make the final result (probability) falsish. To fix this, you weight the samples that are taken for granted in the $given$ clause.
+
+Suppose you have this network:
+<img src="./img/network_for_weighting_likelihood.png">
+
+and you want to calculate $P(h|s, t)$, then, using random sampling you calculate $P(m), P(c | s, t), P(h | t)$, `but P(t | M) you assume it's true` as well as `P(s | M)` as they both are part of the given clause. 
+> Look out, **M** is neither **m** nor **¬m** yet as it has to be calculated using sampling.
+
+Say, using sampling, that **M = m (so m = True)**, in that case **s** is still True (as it's part of the given clause), but what is the $likelihood$ of it happening, aka. $P(s | m)$?
+The value (in this case **weight**) is given in the CPT and it's `0.20`.
+Then we do the same for **t**, and the weight for $P(t | m)$, which is `0.70`.
+
+Now, whatever is the probability we obtain using sampling, we wight it taking into account the given clause events weights.
+$<m, c, h, s, t* 0.20 * 0.70$ 
+
+    [always keeping in mind that we don't sample s and t] 
+
+<img src="./img/likelihood_weighting.png">
+<img src="./img/likelihood_weighin.png">
 
 # Week 4
 

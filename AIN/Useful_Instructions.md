@@ -14,3 +14,6 @@ cd pacman/pacman_week_2
 python2 pacman.py --pacman HungryAgent --layout mediumClassicNoGhosts
 
 python2 pacman.py --pacman BetterHungryAgent --layout mediumClassicNoGhosts
+
+
+WINDOWS ONLY C:\"Program Files (x86)"\Python27\python.exe
