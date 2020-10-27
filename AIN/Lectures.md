@@ -283,7 +283,7 @@ Scale the the reward based on the number of steps required to reach a state. Eve
 ## Bellman Equation
 
 The formula to calculate $U(s) = R(s) + \gamma*max \sum P(s' | s, a) U(s')$. 
-What this formula means, is that given a state, to caluclate its utility, when to know the reward you obtain from that state + a $\gamma$ factor times the best E[X] obtained from the following states reacheable from the current state. 
+What this formula means, is that given a state, to calculate its utility, when to know the reward you obtain from that state + a $\gamma$ factor times the best E[X] obtained from the following states reachable from the current state. 
 
 In the pacman example, R(s) is the cost of the action (0.04), whereas the remaining component is taken from the utility score of each possible next state. 
 
@@ -315,6 +315,66 @@ Just look at one step ahead and take the best policy according to the scores giv
 The policy iteration process $O(n^3)$ is way faster the value iteration one $O(n^n)$, especially when using an approximation.
 However, it is not guaranteed to converge. For this reason, it may be a good idea to create a first schema using `Policy `Iteration, and then converge using `Value Iteration`
 
+
+# Week 5 
+
+###### video 1 Introduction to game theory and Payoff matrix
+
+## Payoff matrix
+Suppose you have **2 agents:** $i$ and $j$. Create a matrix: 
+- For each move of $i$ create a row in the matrix. 
+- For each move of $j$ create a column in the matrix. 
+- In each cell, write the reward for each agent, given they operate the move in that combination (row, column)
+
+This matrix should look like this:
+<img src="./img/PayoffMatrix.png">
+
+However, it can be decomposed and a individual matrix can be created for each agent, and contains only the cost of such agent.
+<img src="./img/PayoffMatrix2.png">
+
+
+###### video 2 Dominant strategy
+
+<img src="./img/DominantStrategy.png">
+<img src="./img/Strong&WeakDominations.png">
+
+To reduce the size of the matrix, it is possible to remove columns and row when they are dominated by at least another column or row respectively.
+
+Say you have: <img src="./img/ReduceableMatrix.png">
+
+**R** is always a **dominated strategy**, so you can get rid of it.
+As we have removed a column, we should now look at the rows (again if have already done it).
+Nothing can be removed, so this is it.
+
+
+###### video 3 Nesh Equilibrium
+
+## Nesh Equilibrium (NE)
+
+In Game Theory, it's called **Nash Equilibrium** a state in which, for each agent, if **ONLY** that agent makes a move, there's no improvement in the score.
+
+> In general, we will say that two strategies **s1** and **s2** are in **Nash equilibrium (NE)** if:
+> 1. under the assumption that agent $i$ plays $s1$, agent $j$ can do no better than play $s2$; and
+> 2. under the assumption that agent $j$ plays $s2$, agent $i$ can do no better than play $s1$.
+
+
+Not every interaction scenario has a pure strategy NE.
+Some interaction scenarios **have more than one NE**.
+The optimal pair of strategies might be as well in the NE.
+<img src="./img/NE.png">
+
+###### video 4 Pareto Optimality
+
+## Pareto Optimality (or Efficiency)
+
+A **Pareto Efficient** state is state in which no agent wants to move away from.
+In other terms, you only move away from it if either 
+- the payoff improves for both agents;
+- one agents ends up having the same payoff, but the other one improves it (the agent not improving has to allow it tho)
+
+## Social Welfare
+
+Conversely to the Pareto Efficiency, **Social Welfare** aims to maximise the total payoff of both agent, regardless with the score of each individual agent. So a (9, 0) is preferable to a (4, 4)
 
 <br>
 <br>
