@@ -154,6 +154,6 @@ You can run the example using:
 
 
 
-
+before we move to the next question, could repeat why we included c? is it bc it's in the markov blanket of s?
 
 

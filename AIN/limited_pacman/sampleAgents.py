@@ -285,9 +285,6 @@ class HungryAgent(Agent):
         return api.makeMove(pick, legal)
 
 
-
-
-
 # CornerSeekingAgent
 #
 # A tiny bit more sophisticated. Having picked a direction, keep going
@@ -361,7 +358,7 @@ class CornerSeekingAgent(Agent):
         DISTANCE = 0
         FOOD_INDEX = 1
 
-        firstFood = sortedFoodDistances[0]
+        firstFood = sortedFoodDistances[0] 
         closestFood = food[firstFood[FOOD_INDEX]]
 
         # if firstFood[DISTANCE] == secondFood[DISTANCE]:
@@ -450,8 +447,10 @@ class BetterHungryAgent(Agent):
         self.unvisitedCorners = None
         self.walls = []
         self.firstIteration = True
-        self.worried = True
-
+        self.worried = False
+        self.uneatenFood = set()
+        self.movesMap = None
+        self.policyMap = None
 
     def getAction(self, state):
         if self.firstIteration:
@@ -459,6 +458,8 @@ class BetterHungryAgent(Agent):
             self.unvisitedCorners = api.corners(state)
             self.walls = api.walls(state)
             self.unvisitedCells = getNonWallCells(self.walls, state)
+            self.movesMap = map(getMapMoves, self.unvisitedCells)
+            self.policyMap = { location : 0 for location in self.unvisitedCells }
 
 
         # # Where are the capsules?
@@ -467,23 +468,32 @@ class BetterHungryAgent(Agent):
 
         # AVAILABLE MOVES
         legal = api.legalActions(state)
-        if Directions.STOP in legal:
-            legal.remove(Directions.STOP)
 
         # PACMAN Location
         pacman = api.whereAmI(state)
+        
 
         # UPDATE LISTS BASED ON NEW PACMAN POSITION
         if pacman in self.unvisitedCells: self.unvisitedCells.remove(pacman)
+        if pacman in self.uneatenFood: self.uneatenFood.remove(pacman)
         if pacman == self.lastBestFoodPosition: self.lastBestFoodPosition = None
         
         # FOOD Location
         food = api.food(state)
+        self.uneatenFood.update(food)
 
-        # NO MORE FOOD, look for unvisited locations
+        # NO MORE FOOD nearby, looking for 
+        #   non eaten registered food first 
+        #   and non visited locations second 
         if len(food) == 0:
-            print "NO FOOD FOUND, searching for unvisited cells..."
-            food = self.unvisitedCells
+            message = "NO FOOD FOUND NEARBY, "
+            if len(self.uneatenFood) > 0:
+                print message, "reaching preaviously seen food"
+                food = [food for food in self.uneatenFood]
+            else:
+                print message, "reaching unvisited locations"
+                food = self.unvisitedCells
+
 
         # CLOSEST TARGET
         foodDistances = [(util.manhattanDistance(pacman, point), index) for index, point in enumerate(food)]
@@ -517,7 +527,6 @@ class BetterHungryAgent(Agent):
         self.lastMinimumDistance = xyDistanceToClosestFood
         self.lastBestFoodPosition = closestFood
 
-
         ## CHECK FOR GHOSTS
         ghosts = api.ghosts(state)
         if ghosts:
@@ -543,7 +552,7 @@ class BetterHungryAgent(Agent):
                 return api.makeMove(nextMove, legal)
         
             except:
-                self.worried = False
+                self.worried = False 
 
         # CALCULATE BEST MOVES
         bestMoves = getBestNextMoves(legal, xyDistanceToClosestFood, immediateBestMoveFlag=True, maxDistanceForImmediateBestMove=3)
@@ -588,7 +597,7 @@ class BetterHungryAgent(Agent):
         print "\n====================================\n"
         return api.makeMove(pick, legal)
 
-
+# WORKING
 def manhattanNotAbsoluteDistance( xy1, xy2 ):
     "Returns the Manhattan distance between points xy1 and xy2"
     return ( xy1[0] - xy2[0], xy1[1] - xy2[1] )
@@ -805,3 +814,14 @@ def getNonWallCells(walls, state):
     mapCellsMatrix = getMapCellsMatrix(height, width)
     return [x for x in mapCellsMatrix if x not in walls]
 
+
+def policyMetric(accessibleMap, unvisitedMap = [], foodMap = [], ghosts = [], policyMap = [], epsilon = 0.1):
+    policyMap = policyMap or 0
+
+
+def getLegalMoves(accessibleMap, location):
+    pass
+
+
+def getMapMoves(accessibleMap):
+    return {location: getLegalMoves(accessibleMap, location) for location in accessibleMap}
