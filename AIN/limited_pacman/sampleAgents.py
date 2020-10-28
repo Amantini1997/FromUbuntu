@@ -285,8 +285,6 @@ class HungryAgent(Agent):
         return api.makeMove(pick, legal)
 
 
-
-
 # CornerSeekingAgent
 #
 # A tiny bit more sophisticated. Having picked a direction, keep going
@@ -360,7 +358,7 @@ class CornerSeekingAgent(Agent):
         DISTANCE = 0
         FOOD_INDEX = 1
 
-        firstFood = sortedFoodDistances[0]
+        firstFood = sortedFoodDistances[0] 
         closestFood = food[firstFood[FOOD_INDEX]]
 
         # if firstFood[DISTANCE] == secondFood[DISTANCE]:
@@ -467,20 +465,19 @@ class BetterHungryAgent(Agent):
         self.walls = []
         self.firstIteration = True
         self.worried = False
+        self.uneatenFood = set()
+        self.movesMap = None
+        self.policyMap = None
 
     def getAction(self, state):
         if self.firstIteration:
             self.firstIteration = False
             self.unvisitedCorners = api.corners(state)
             self.walls = api.walls(state)
-            self.accessibleMap = set(getNonWallCells(self.walls, state))
-            self.unvisitedCells = self.accessibleMap.copy()
+            self.unvisitedCells = getNonWallCells(self.walls, state)
+            self.movesMap = map(getMapMoves, self.unvisitedCells)
+            self.policyMap = { location : 0 for location in self.unvisitedCells }
 
-
-        # # How far away are the ghosts?
-        # print "Distance to ghosts:"
-        # for i in range(len(theGhosts)):
-        #     print util.manhattanDistance(pacman,theGhosts[i])
 
         # # Where are the capsules?
         # print "Capsule locations:"
@@ -488,26 +485,32 @@ class BetterHungryAgent(Agent):
 
         # AVAILABLE MOVES
         legal = api.legalActions(state)
-        if Directions.STOP in legal:
-            legal.remove(Directions.STOP)
 
         # PACMAN Location
         pacman = api.whereAmI(state)
+        
 
         # UPDATE LISTS BASED ON NEW PACMAN POSITION
         if pacman in self.unvisitedCells: self.unvisitedCells.remove(pacman)
+        if pacman in self.uneatenFood: self.uneatenFood.remove(pacman)
         if pacman == self.lastBestFoodPosition: self.lastBestFoodPosition = None
-
-        # GHOSTS Location
-        theGhosts = api.ghosts(state)
         
         # FOOD Location
         food = api.food(state)
+        self.uneatenFood.update(food)
 
-        # NO MORE FOOD, look for unvisited locations
+        # NO MORE FOOD nearby, looking for 
+        #   non eaten registered food first 
+        #   and non visited locations second 
         if len(food) == 0:
-            print "NO FOOD FOUND, searching for unvisited cells..."
-            food = self.unvisitedCells
+            message = "NO FOOD FOUND NEARBY, "
+            if len(self.uneatenFood) > 0:
+                print message, "reaching previously seen food"
+                food = [food for food in self.uneatenFood]
+            else:
+                print message, "reaching unvisited locations"
+                food = self.unvisitedCells
+
 
         # CLOSEST TARGET
         foodDistances = [(util.manhattanDistance(pacman, point), index) for index, point in enumerate(food)]
@@ -540,6 +543,33 @@ class BetterHungryAgent(Agent):
         # UPDATE PACMAN TARGET Data
         self.lastMinimumDistance = xyDistanceToClosestFood
         self.lastBestFoodPosition = closestFood
+
+        ## CHECK FOR GHOSTS
+        ghosts = api.ghosts(state)
+        if ghosts:
+            try:
+                print " =====> GHOSTS HEARD AT :"
+                edibleGhosts = False
+                for i in range(len(ghosts)):
+                    ghost = ghosts[i]
+                    if ghost[0] % 1 == 0.5 or ghost[0] % 1 == 0.5: 
+                        print "EDIBLE GHOST: ", ghost
+                        edibleGhosts = True
+                    else:
+                        print "GHOST> ", ghost
+                
+                if edibleGhosts:
+                    raise Exception("Ghosts are edible")
+
+                self.worried = True
+                nextMove = getBestNextMoveGivenGhosts(pacman, ghosts, legal)
+                print "NEXT MOVE: ", nextMove
+                raw_input()
+                print "\n====================================\n"
+                return api.makeMove(nextMove, legal)
+        
+            except:
+                self.worried = False 
 
         # CALCULATE BEST MOVES
         bestMoves = getBestNextMoves(legal, xyDistanceToClosestFood, immediateBestMoveFlag=True, maxDistanceForImmediateBestMove=3)
@@ -642,6 +672,57 @@ def getBestNextMoves(legal, closestPointDistancesXY, immediateBestMoveFlag = Fal
     return bestMoves
 
 
+def getBestNextMoveGivenGhosts(pacman, ghosts, legal):
+    distances = [manhattanNotAbsoluteDistance(pacman, ghost) for ghost in ghosts]
+    print "distances ", distances
+    print "legal ", legal
+
+
+    # ghosts can only be 2 steps away at most so...
+    oneStepDistance = [distance for distance in distances if (abs(distance[0]) == 1 or abs(distance[1]) == 1)]
+    twoOrMoreStepsDistance = [distance for distance in distances if (abs(distance[0]) >= 2 or abs(distance[1]) >= 2)]
+
+    print "oneStepDistance ", oneStepDistance
+    print "twoOrMoreStepsDistance ", twoOrMoreStepsDistance
+
+    priorityGhost = (oneStepDistance if oneStepDistance else twoOrMoreStepsDistance)[0]
+
+    EAST_DISTANCE = priorityGhost[0]
+    NORTH_DISTANCE = priorityGhost[1]
+
+    bestMoves = []
+
+    if EAST_DISTANCE > 0 and Directions.EAST in legal:
+        bestMoves.append(Directions.EAST)
+
+    elif EAST_DISTANCE < 0 and Directions.WEST in legal:
+        bestMoves.append(Directions.WEST)
+
+    # y-axis move
+    if NORTH_DISTANCE > 0 and Directions.NORTH in legal:
+        bestMoves.append(Directions.NORTH)
+
+    elif NORTH_DISTANCE < 0 and Directions.SOUTH in legal:
+        bestMoves.append(Directions.SOUTH)
+
+    # ghost on the same line and cannot go to oppsite direction
+    if not bestMoves:
+        print("___unsatisfied__")
+        if abs(EAST_DISTANCE) > 0:
+            if Directions.NORTH in legal:
+                bestMoves.append(Directions.NORTH)
+            elif Directions.SOUTH in legal:
+                bestMoves.append(Directions.SOUTH)
+        else:
+            if Directions.EAST in legal:
+                bestMoves.append(Directions.EAST)
+            elif Directions.WEST in legal:
+                bestMoves.append(Directions.WEST)
+
+    # pacman is trapped
+    print "BEST MOVES ", bestMoves
+    return Directions.STOP if not bestMoves else random.choice(bestMoves)
+
 # WORKING
 def getFullWallAndPerimeterFromWallBlock(block, walls):
     ''' 
@@ -673,8 +754,8 @@ def getFullWallAndPerimeterFromWallBlock(block, walls):
                 newWall.add((currentSurrounding[0], currentSurrounding[1]))
             else:
                 perimeter.add((currentSurrounding[0], currentSurrounding[1]))
-    return knownWall, perimeter               
-    
+    return knownWall, perimeter
+                
 
 def getPerimeterAroundWall(pacmanPosition, foodPosition, wall):
     perimeter = getWallPerimeter(wall)
@@ -755,32 +836,9 @@ def policyMetric(accessibleMap, unvisitedMap = [], foodMap = [], ghosts = [], po
     policyMap = policyMap or 0
 
 
-def getLegalMoves(map: list(tuple), location: tuple):
+def getLegalMoves(accessibleMap, location):
     pass
 
 
 def getMapMoves(accessibleMap):
-    return map(getLegalMoves, accessibleMap)
-
-
-def getValueIterationMap(accessibleMap, mapMoves, pacman, 
-                            knownFood, foodReward = 2, 
-                            unvisitedLocations, unvisitedReward = .3, 
-                            ghosts = [], ghostPenalty= -10, 
-                            epsilon = 0.01, penalty = 0.04, discountFactor = 0.9
-                        ):
-    '''
-        The input parameters are, (beside the obvious ones)
-        epsilon -> this is the value below which we stop iterating (to improve performance)
-        penalty -> the cost to make a move
-        discountFactor -> the lambda factor that reduces the value of further away elements
-        foodReward -> the reward for getting food
-        unvisitedReward -> the reward for getting on unvisited locations
-        ghostPenalty -> the reward (negative) for bumping into a ghost
-    '''
-
-
-
-def getSurroundingCells(cell, cellMoves, accessibleMap):
-    newCells = [sumTuples(move, cell) for move in cellMoves]
-    return filter(lambda c: c in accessibleMap, newCells)
+    return {location: getLegalMoves(accessibleMap, location) for location in accessibleMap}

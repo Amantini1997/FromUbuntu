@@ -156,7 +156,7 @@ It is a set of unwritten reciprocal **expectations** between the individual empl
 > During an interview the company promises you great stuff, and you promise to help them fulfill their mission.
 
 ## Protean and Boundaryless careers
-<img src="./img/careers.png">
+<img src="./img/careers.png"> 
 In spite of being different, these careers types are not opposite; the opposite might be (I am not sure) organisational career.
 A protean career attitude implies that a person strives towards a developmental progression and self-fulfillment; a boundaryless career attitude is characterized by a high physical and/or psychological mobility.
 
@@ -180,3 +180,67 @@ Low boundaryless careers tend to appreciate High HRM commitment, whereas high bo
 **To conclude**:
 - Protean Careers are a WIN-WIN, the employee is happy and the job performance is good;
 - Boundaryless Careers are a LOSE-LOSE, their general dissatisfaction leads them to less commitment and lower performance at work. Furthermore, HR has little impact on them.
+
+# Week 4 - Recruiting the right talents
+
+Is recruiting a fair process?
+
+> No, the examiner may be **biased** or they might trust their **gut** over non quantifiable matters like **level of confidence** or **how much a candidate talks confidently** or **the energy**.
+
+## The selection process
+The selection is a set of specifications, that you should think thoroughly, about how the candidate should be, that is, you should seek a candidate that fits the criteria you define.
+
+A candidate features belong with 2 type:
+- **Background Factors**: education, experience, etc.
+- **Personal Factors**: intellectual ability, personality, motivation etc.
+
+### Background Factors
+
+Background factors can in turn be divided into sub categories:
+
+**Education**
+Is the educational background mandatory, or is it more of a tradional standard? Also, if you require someone to have a PhD, think of how big is the pool you can draw from when looking for candidate: surely the candidates will be very prepared, but they are also a very small amount.
+
+**Experience**
+Experience is required very often too, but, again, it is important to be precise on the type of experience required:
+
+- **Industry Exp**: you may need an expert in a field, but that person should be able to talk to costumer rather than working on internal stuff
+- **Function Exp**: experience in the sector or in specific tasks, but this kind of requirements may be misleading. Suppose you are a multinational company counting thousands of employees, and are looking for someone with 2 years of experience in HR: a candidate comes up with 3 (even more than what you asked for) years of experience, but in a small company counting 500 people at most.
+- **Company Exp**: some companies heavily invest in the employee training and formation, so a candidate coming from there may be more interesting than someone caming from a "lazy" company that produces paper pushers.
+
+### Personal Factors
+
+**Intellectual ability**
+- **Analytical ability** – Ability to take a complex problem, define it, break it down in pieces to understand it better and then put the pieces back together and come up with a solution
+
+- **Creative ability** – This may encompass the ability to generate strategic options, come up with new product/service ideas, etc.
+
+- **Decision-making Style** –  Some people are extremely analytical, fact-based and structured. Others rely more on gut and intuition. Which style best fits the job/company?
+
+**Motivation** (How much effort is the individual willing to make in his/her job?)
+> Beware, if you promise something to the employee and do not fulfill the commitment, there will probably be a turnover and they will leave.
+
+- **Goals** – Does the work fit with people’s own goals and ambitions?
+
+- **Interests**  - Does the work fit with people’s interests (a salesperson who does not like to talk to people is not likely to be successful) (see career orientations).
+
+## Selection process
+
+### Decide the prerequisites
+This will already skim a lot of candidates
+
+### Aggiungi pic
+
+Candidates may have to meet some prerequisites that could be:
+- **Job wise**: the preparation for a specific job or role;
+- **Person wise**: background, experience, character, relationship capabilities
+
+There are several ways to test these characteristics, for example an interview reveals the person, how they speak etc. whereas a test shows their technical skills. The best idea would be to use multiple testing techniques (interviews, test, assestment centres, references, etc.) to better understand all the aspects you are interested in.
+
+**Characteristics of a good test**
+
+<img>
+
+**standardised** means that a person's score has to be contextualised. A score of x has a different meaning if executed by a graduate rather than a worker (perhaps in the sense that a grad student, who has no practical experience, may be disadvanted, yet prove to have a great potentiality)
+
+**the other thing**
