@@ -8,6 +8,20 @@ h1:not(:first-of-type)::before {
     display: block;
 }
 
+h2:not(:first-child)::before {
+    content: "";
+    height: 60px;
+    padding: 0px;
+    display: block;
+}
+
+h2:not(:first-child)::before {
+    content: "";
+    height: 30px;
+    padding: 0px;
+    display: block;
+}
+
 .no-mt {
     margin-top: -16px;
 }
@@ -38,6 +52,20 @@ h1:not(:first-of-type)::before {
     content: "DEFINITION: ";
     font-weight: bold;
     color: rgb(80, 80, 255); 
+}
+
+.question {
+    background: rgba(200, 200, 0, .2); 
+    padding: 5px; 
+    padding-left: 10px;
+    margin: 20px 0; 
+    border-left: solid 3px rgb(200, 200, 0);
+}
+
+.question::before {
+    content: "QUESTION: ";
+    font-weight: bold;
+    color: rgb(200, 200, 0); 
 }
 </style>
 
@@ -232,7 +260,7 @@ LM heuristic value`h(s,p) where s is the state and p the path` is given by the u
 
 Having 2 heuristic functions might be very good:
 - When you have a plateau with one, the other one might come in help out;
-- Alterning 2 heuristics (even h() = random picking) helps improving the overall heuristic, and, hence, solving the plan.
+- Alterning 2 heuristics (even $h()$ = random picking) helps improving the overall heuristic, and, hence, solving the plan.
 
 **EHC** & **FF** are know as **Local Search algorithms**:
 <img src="./img/Local_Search.png">
@@ -356,7 +384,7 @@ Create an automaton for each preference
 **PVC** Preference violation cost of a state PVC(S) (Sum of violation cost of all the automata in E-Vio)
 
 The way to operate is:
-1. Set the best cost to ± <span style="font-size: 1.6em;">∞</span> (depending on the minimize/maximize metric)
+1. Set the best cost to ± $\infty$ (depending on the minimize/maximize metric)
 2. Find a solution plan, aka, a plan that achieves all the at-end goals;
 3. If the PVC(new solution) > cost of the best plan so far, update the best cost; else, prune the plan and start again. **REMEMBER:** PVC is based only on E-Vio, not on unsatisfied preferences.
 4. Stop when it's clear that no more preferences can be achieved.
@@ -375,24 +403,298 @@ When creating the RPG, beside keeping track of true facts, we also consider the 
 After achieving a fact, if we can find another path which preferences violation set has a lower cost, we use that set instead.
 
 
+# Week 5 - Optimal Planning (first part is continuous of Week 3)
 
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
+## The Perils of Expressivity (video 6 from week 3)
 
-<span style="color: black; font-size: 1.3em; font-weight: bold">
+**Introducing more variables, predicates and actions exponentially increases in the number of possible states**, so the complexity of a problem grows exponentially.
+
+Consider the **Block world** with 3 block (A, B, C), and all the possible predicates:
+> A-On-B, B-On-Table, Clear-C, etc.
+
+There are **12 predicates** that can be **either True or False**, for a total of **$12^2$ combinations**. 
+Just by adding a new block **D**, the total permutations would sum up to  **$22^2$ combinations**, which is a huge number.
+This meticulous description, which counts so many permutations, is known as the **PERIL OF EXPRESSIVITY**. Of course landmarks and heuristics help us canalise the planner to the right path and some configuration are not even reachable at the same time. However, this number can still be a problem, how should we deal with it?
+
+### - Mutex (Invariants)
+For example, for a object it (should be) impossible to be in 2 places at the same time, so say there are 2 places **home** and **Uni**, then
+> $¬ (at-Home \enspace \bigwedge \enspace at-Uni )$ 
+
+The above formula is an **INVARIANT**, that is something that has to hold True throughout the execution of the problem. 
+Beware, finding Invariants might be as hard as solving the problem.
+
+Referring to the blocks world, a mutex would be {A on B, C on B, clear B}, meaning than either B is clear or there's one block on top of it.
+
+### - Finite Domain Representation (FDR)
+
+In a **FINITE DOMAIN REPRESENTATION**, you declare a set of possible states (**domain**) a variable can assume. In the blocks world example:
+ >**above-B $\in$ {a, c, nothing}
+ above-C $\in$ {a, b, nothing}
+ above-A $\in$ {b, c, nothing}**
+
+And this would already drastically reduce the configuration space to $3^3$. To make it complete we should also include the below-X variables. The count would increase to $6^3$, which is still good, and besides, this number can be reduced more by adding constraints such as above-X = Y AND below-Y = X, or by checking that 2 above-X share the same block (nothing doesn't count).
+
+Given an FDR encoding you can always switch back to the normal propositions.
+
+## SAS+
+A famous planner called **SAS+** uses FDR. 
+We can express our SAS+ planning problem as a 4-tupl  of $Π = <𝑉, 𝑂, 𝒔0, 𝒔∗>$ comprised of…
+
+- The **set of all state variables** **$V$** (which can also be fluent or numeric values), each with their own associated domain of possible values.
+  
+    Any assignment of those variables to a value in their domain is known as an atom.
+- The **set of all operators**, effectively replacing the actions.
+This includes the name of the operator, and the partial variable assignments covering the preconditions and effects.
+    An operator is a triple **\<𝑛𝑎𝑚𝑒, 𝑝𝑟𝑒, 𝑒𝑓𝑓\>**
+    - **Name** of the operator
+    - **Pre** and **eff** are partial variable assignments (preconditions and effects).
+  
+- $S_0$ which is the **initial state** and $S$* which is the **goal state**.  In the goal state definition and the preconditions and effects, we provide partial variable assignments.  
+  
+Given we are only interested in a given action in changing specific variables in the current collection of assignments V.  While also in the goal we’re only interested in whether certain conditions are true, much like before in PDDL where we’re not listing the entire state that we expect to happen.
+
+
+### SAS+ Operations Conditions
+In SAS there are 2 types of operation condition:
+- **prevail conditions**: 
+    Variable = Value that stays the same;
+    When loading a package p1 onto a truck t1 at location l1:  <t1,at-l1>
+
+- **pre_post conditions:** 
+    The value of a variable changes from one value to another:
+    When loading a package p1 onto a truck t1 at location l1: <p1,at-l1,in-t1>
+
+### Data Transition Graph (DTG)
+
+It's just a graph of nodes and directed edges. Each node is a state and each edge is an action. 
+<div class="question"><br>What is the difference between that and a normal graph?<br>
+Why is this relevant to SAS+?<br> 
+<b>Possible Answer:</b> This was a way of representing the problem from the perspective of just one variable.
+</div>
+
+## Pattern Databases (PDB) (video 1 from week 5)
+
+As we have seen, adding new variable massively increases the complexity which, however, can be reduced using constraints.
+
+What if we set the cost of the original problem by decomposing it into a set of **sub-problems**?
+- **Solution costs to sub-problems** will provide an **admissible heuristic** to solve the actual problem.  
+- **Heuristic calculation** becomes **very fast** (database lookup).
+- **Searching backwards** from the goal, record costs of states.
+- An **expensive** albeit **one-time calculation**.
+
+<div class="definition">
+A <b>Target Pattern</b> is a partial specification of the goal state.
+</div>
+
+### Abstraction
+
+**ABSTRACTION** is a fundamental concept wherein the problem is only **partially considered**. In hypothetic problem with:
+- 2 Trucks (A, B)
+- 2 Locations (L, R)
+- 1 Package
+
+<img src="./img/Abstraction.png">
+    
+In this diagram, $<x_1, x_2, x_3>$ 
+- $x_1$ = package location {A, B, L, R}
+- $x_2$ = truck A location {L, R}
+- $x_3$ = truck B location {L, R}
+
+Applying an **abstraction formula $\alpha$** we can abstract this problem into a simpler one. 
+For example, we may only consider the problem from the point of view of the package, so **we group the state** based on the location of the package:
+<img src="./img/Abstraction_2.png">
+
+The obtained heuristic value (given $\alpha$) $h^\alpha()$ from the initial state $s_0$ is 
+> $h^{\alpha}(s_0)$ = 2
+
+
+Let's see another case now, which is pretty similar to the one just mentioned, but where the packages are 2 and the truck is just 1. How would we abstract this problem?
+Well, a possible way would be to create 2 abstraction functions, one taking into account one package and the second one taking into account only the other one. The result would be like this:
+<img src="./img/Abstraction2.png">
+<div style="width: 100vw; display: flex; flex-direction: row"> 
+    <img src="./img/Abstraction2_p1.png" style="max-width: 50%">
+    <img src="./img/Abstraction2_p2.png" style="max-width: 50%">
+</div>
+
+
+### Pros and Cons of PDB
+**Pros:**
+- Once the db has been created, the time needed to calculate the heuristic at any given time is constant as you just have to look at the db (**lookup tables are super fast**);
+- The same db is **reusable** throughout the planning.
+
+**Cons:**
+- Creating the db take a lot of time, so it's **pretty slow**;
+- **Adding** a new variable **or changing** a goal would require to **build a brand new db**.
+
+> PDB are just one way of abstraction, other forms exist as well.
+
+
+
+## Cost Partitioning (video 2 from week 5)
+
+Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be choose. We denote this heuristic with 
+> $h^{max}(s_i)$
+> **Beware** that **max** is referred to **best** rather than higher score.
+
+Another way of taking into account all the possible solutions is **adding the different heuristics** $h^{add}(s_i)$. However, even if both the $h^{max}(s_i)$ functions are admissible, their sum is **very likely not to be admissible, and hence not additive**.
+
+The best way to deal with this addition issue is given by the **COST PARTITIONING**
+
+Here we are hoping to **split the action costs** – or more appropriately, partition them - **among the heuristics** in such a way that the total cost implied by the heuristic does not exceed the original action cost, thus **ensuring it remains admissible**. 
+
+So in essence, we’re trying to ensure our suite of available heuristics is additive, such that we can ensure the summation of these heuristics is still admissible. 
+
+The way you do that is if we have found the best values in one heuristics, **we tweak the other heuristics** such that it stills additive.
+
+There are many Cost Partitioning approaches:
+
+### Optimal Cost Partitioning
+Given some possible actions such as those in the figure, you want to redistribute the cost of each action across both the graphs, so that if such a path is included in both $h^{max}(s_i)$, then it's like if\ $h^{add}(s_i)$ would count the action just at its original cost. 
+
+Here is an example:
+<img src="./img/Optimal_Cost_Partitioning.png">
+As you can see, the final heuristic $h^{max}(s_0)$ = 8, which is admissible.
+
+<div class="question"><b>QUESTIONS:</b>
+<br>
+Is there a way to decide how to split the cost between the 2 graphs?
+<br>
+What if the same action (like the black line in the picture) is not present in both the graphs?
+</div>
+
+----
+
+### Post Hoc Optimisation
+
+Another way is to use **weights to weight each abstraction**. The **total SUM of the weight has to add up to 1**. So doing we change the total value of each action by multiplying them by the weight allocated to that abstraction.
+Furthermore, we drop to 0 the cost of **non relevant actions**, those actions that do not help get us closer to the goal.
+<img src="./img/Post_Hoc_Optimasation.png">
+
+----
+
+### Greedy Zero One Cost
+- Take the first abstraction you bump into;
+- Set to 0 the cost of non relevant actions;
+- keep the others to their original value;
+- For all the remaining abstractions, set to 0 the actions already considered (aka not set to 0) in at least one previous abstractions and repeat from the first point.
+  
+The issue with this approach is that we may keep the cost for an action which would not use to reach the goal in a particular abstraction (look at the blue in h1, we use the green instead, yet we keep the cost to 4)
+
+<img src="./img/Greedy_Zero_One_Cost.png">
+
+----
+
+### Saturated Cost Partitioning
+This is in a improvement over the Greedy Zero One Cost. The issue with the Blue action is resolved in a simple way, setting it to 0 would be we would choose that over green and we would reduce the heuristic by 1 (4 + 1) => (4 + 0). Not to change the final heuristic, we se the value of all the actions not used to find the best cost to the cost of the action(s) which achieve the same result.
+So in the example, **green (1)** is preferred over **Blue (4)**, but they both achieve the same state, so **we drop blue cost to the same of green, so that Blue(1)**
+
+The remaining blue cost (3) is used in the next abstractions.
+<img src="./img/Saturated_Cost_Partitioning.png">
+
+----
+
+### Uniform Cost Partitioning
+The cost of the relevant actions for more than one abstraction is evenly distributed across them. In the example, Black and Blue are both relevant to both the abstractions, so we split the cost of each (4) between the abstractions (2 + 2)
+
+The non relevant actions costs drop to 0.
+<img src="./img/Uniform_Cost_Partitioning.png">
+
+## GraphPlan (video 3 week 5)
+
+A **GraphPlan** is pretty similar to the RPG, in fact, RPG is a simplification of the GraphPlan. The main difference is that RPG uses **delete relaxation**, that is, fact are never deleted.
+
+In a GraphPlan, as the fact deletion is taken into account, from an action layers there are two types of lines leading to the next fact layer:
+- The standard straight black lines, indicating addition;
+- **Red dashed lines indicating deletion**;
+
+A valid plan from GraphPlan is one in which:
+- Actions at the same level don’t interfere with one another.
+- Each action’s preconditions are true at that point in the plan.
+- Goals are satisfied at the end of the graph.
+
+<img src="./img/GraphPlan.png">
+
+To enforce these rules, GraphPlan considers **Mutexes**, so some actions are not possible. There are 3 types of mutexes:
+- **Interference**: when 2 actions interfere with each other and **the effect of one negates the precondition for the other**
+  > e.g. Moving the rocket away and loading; if I am loading, the precondition is **`at R L`**, but by **`moving R from L to P`** I delete **`at R L`**
+  > <img src="./img/Interference.png">
+
+- **Competing Needs**: where two actions become mutex because **their preconditions are mutex with one another**.  
+  > As it is impossible for the Rocket to be in 2 places at the same time (mutex), the deriving facts are mutexes as well.
+  > <img src="./img/Competing_Needs.png">
+
+- **Inconsistent Support**: where two literals are mutex because **all ways in which we can create them in the fact layer are also mutex**.
+
+
+The flow is the same as for RPG, you reach a layer where the goals are satisfied, then you **do a back propagation** to find a solution. If it is found that's it, otherwise **add a new layer to the graph and repeat**.
+
+At level **i**, pick a **non-mutex subset of actions** that achieve the goals at level **i+1**. 
+The preconditions of these actions become the goals at level i.
+
+Build the action subset by iterating over goals, choosing an action that has the goal as an effect. 
+Use an action that was already selected if possible. Do forward checking on remaining goals.
+
+> The actual plan generation process is pretty much what we saw with the RPG heuristic: iterate backwards finding actions that at first satisfy the goals at the final fact layer, then add those preconditions to the goal layer as we iterate backwards. Again we’re capable of picking any non-mutex subset of actions.  Hence in this example, we can safely load or unload both packages at the same time.  Given, when we execute it, we’re just going to pick one of them in an arbitrary fashion, it doesn’t matter which one we pick.  Provided they are both executed before the next set of actions, then everything will be valid.
+
+<img src="./img/GraphPlan_Summary.png">
+
+
+## SAT in Planning (video 4 from week 5)
+
+Things about SAT I am too lazy to include, please refer to the powerpoint
+
+The time steps go from 
+- $0 \rArr T$ for the **predicates**, as at $T_0$ there exist some predicates already;
+- $1 \rArr T$ for the **actions**, as the first actions has to be executed at $T_1$
+
+<div class="definition"><b>Planning Horizon (<i>T</i> ):</b> is the last time step at which we execute an action.</div>
+
+How do we know how much to set $T$ to?
+> we don't, it's a **trial and error process** wherein you keep pushing up the value for **T**
+
+Part on which I explain how to write in SAT preconditions and effects
+
+### Framing
+When writing the problem in the form of SAT, you have to write also what changes, but also **what does not change** as a result of the action, and this part is known as **FRAMING**.
+Two types of framing exist:
+
+- **Classical Frame Axioms**
+    - State which facts are not effected for each action.
+    - Must enumerate for all fact/action pairs where no the fact is not affected by the action.
+    - Relies on one action being executed per time-step so axioms can be applied.
+
+
+- **Explanatory Frame Axioms**
+  - Instead of listing what facts are not changed, explain why a fact might have changed between two time steps.
+    i.e. if a fact changes between 𝒊 and 𝒊+𝟏, then an action at step 𝒊 must have caused it. 
+    > Given the effects, you have to find out the action basically
+
+So **(if I got this right)**, in the first approach you write down what **has not changes** whereas in the second you you write down **what did change**x
+
+#### Explanatory Frame Axioms
+Consider the Robot problem
+<img src="./img/robot.png">
+Following are a couple of example of **Explanatory Frame Axios** 
+
+> **𝑎𝑡(𝑟1, 𝑙𝑜𝑐𝐵, 0) ∧ 𝑎𝑡(𝑟1, 𝑙𝑜𝑐𝐵, 1) ⟹ 𝑚𝑜𝑣𝑒(𝑟1, 𝑙𝑜𝑐𝐴, 𝑙𝑜𝑐𝐵, 0)**
+**¬ℎ𝑜𝑙𝑑𝑖𝑛𝑔(𝑙𝑒𝑓𝑡, 𝑏1,0) ∧ ℎ𝑜𝑙𝑑𝑖𝑛𝑔(𝑙𝑒𝑓𝑡, 𝑏1, 1) ⟹ 𝑝𝑖𝑐𝑘𝑢𝑝(𝑏1, 𝑙𝑒𝑓𝑡, 𝑟1, 𝑙𝑜𝑐𝐴, 0)**
+
+In this case if we look at the actions from the example, we identify that in order for the fact that r1 is not a location B on time step 0, but then is in the location at time step 1, then that must mean that the robot was part of a move action at time step 0.  Specifically the move action with r1 going from loc A to loc B.
+
+We still need to list all of the possibilities that could emerge at a given time step. Hence we're going to have a lot of facts changing between time steps, especially as the branching factor of the state space increases.
+
+However, this approach actually enables for parallelism in the planning process, given two actions could be executed in parallel if they have the same preconditions at time step t and their effects don’t conflict. You can spot parallelism is happening because there are other effects beside the ones of the action you are executing. 
+[*"You can more easily identify this by catching whether or not an effect of one action appears within one of the explanatory frame axioms for an action that isn’t the action you’re running against."*]
+
+#### Exclusion Axioms
+
+As some actions may be conflicting, we have to enforce again the concept of **mutex**
+
+- **Complete Exclusion Axiom**: ***only one action at a time***.
+  These constraints will essentially enforce a ***total order plan***, whereby if we list every possible exclusion axiom, then only one action can be executed at the same time step. This also makes sense in the context of our gripper example, given none of the action of picking up boxes or moving the robot can be executed on the same time step.
+
+    > ¬ 𝑚𝑜𝑣𝑒(𝑟1, 𝑙𝑜𝑐𝐴, 𝑙𝑜𝑐𝐵, 0)  ∨ ¬ 𝑚𝑜𝑣𝑒(𝑟1, 𝑙𝑜𝑐𝐵, 𝑙𝑜𝑐𝐴, 0)
+
+- **Conflict Exclusion Axiom**: prevents invalid actions on the same timestep.
+Two actions conflict if either **their preconditions contradict or their preconditions are not consistent with their effects**. This would allow us to solve plans with in a ***partial order*** fashion, which is a topic of a later chapter 
+More on this topic partial order planning in another chapter.

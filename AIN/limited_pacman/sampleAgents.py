@@ -435,17 +435,34 @@ class CornerSeekingAgent(Agent):
 
 class BetterHungryAgent(Agent):
 
+    
+    oppositeDirections = {
+        Directions.SOUTH: Directions.NORTH,
+        Directions.NORTH: Directions.SOUTH,
+        Directions.EAST: Directions.WEST,
+        Directions.WEST: Directions.EAST     
+    }
+
+    moveToDirection = {
+        (0, -1) : Directions.SOUTH,
+        (0, 1) : Directions.NORTH,
+        (1, 0) : Directions.EAST,
+        (-1, 0) : Directions.WEST 
+    }
+
+    directionToMove = {
+        Directions.SOUTH : (0, -1),
+        Directions.NORTH : (0, 1),
+        Directions.EAST : (1, 0),
+        Directions.WEST : (-1, 0)
+    }
+
     def __init__(self):
         self.lastPosition = Directions.STOP
-        self.oppositeDirections = {
-            Directions.SOUTH: Directions.NORTH,
-            Directions.NORTH: Directions.SOUTH,
-            Directions.EAST: Directions.WEST,
-            Directions.WEST: Directions.EAST     
-        }
         self.lastBestFoodPosition = None
         self.lastMinimumDistance = None
         self.unvisitedCells = None
+        self.accessibleMap = None
         self.unvisitedCorners = None
         self.walls = []
         self.firstIteration = True
@@ -456,7 +473,8 @@ class BetterHungryAgent(Agent):
             self.firstIteration = False
             self.unvisitedCorners = api.corners(state)
             self.walls = api.walls(state)
-            self.unvisitedCells = getNonWallCells(self.walls, state)
+            self.accessibleMap = set(getNonWallCells(self.walls, state))
+            self.unvisitedCells = self.accessibleMap.copy()
 
 
         # # How far away are the ghosts?
@@ -734,7 +752,7 @@ def getNonWallCells(walls, state):
 
 
 def policyMetric(accessibleMap, unvisitedMap = [], foodMap = [], ghosts = [], policyMap = [], epsilon = 0.1):
-    policyMap = policyMap or 
+    policyMap = policyMap or 0
 
 
 def getLegalMoves(map: list(tuple), location: tuple):
@@ -743,3 +761,26 @@ def getLegalMoves(map: list(tuple), location: tuple):
 
 def getMapMoves(accessibleMap):
     return map(getLegalMoves, accessibleMap)
+
+
+def getValueIterationMap(accessibleMap, mapMoves, pacman, 
+                            knownFood, foodReward = 2, 
+                            unvisitedLocations, unvisitedReward = .3, 
+                            ghosts = [], ghostPenalty= -10, 
+                            epsilon = 0.01, penalty = 0.04, discountFactor = 0.9
+                        ):
+    '''
+        The input parameters are, (beside the obvious ones)
+        epsilon -> this is the value below which we stop iterating (to improve performance)
+        penalty -> the cost to make a move
+        discountFactor -> the lambda factor that reduces the value of further away elements
+        foodReward -> the reward for getting food
+        unvisitedReward -> the reward for getting on unvisited locations
+        ghostPenalty -> the reward (negative) for bumping into a ghost
+    '''
+
+
+
+def getSurroundingCells(cell, cellMoves, accessibleMap):
+    newCells = [sumTuples(move, cell) for move in cellMoves]
+    return filter(lambda c: c in accessibleMap, newCells)

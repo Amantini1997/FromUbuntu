@@ -363,6 +363,8 @@ Some interaction scenarios **have more than one NE**.
 The optimal pair of strategies might be as well in the NE.
 <img src="./img/NE.png">
 
+> Remember, in a NE, given one agent opts for a **pure strategy** (aka, its strategy is fixed), you have to look at the payoff of the other agent only. In the above example, say $i$ move is **C**, then $j$ can either play **D** or **C**, and the payoffs to look at are respectively **0** and **3** **ONLY**.
+
 ###### video 4 Pareto Optimality
 
 ## Pareto Optimality (or Efficiency)
@@ -372,9 +374,37 @@ In other terms, you only move away from it if either
 - the payoff improves for both agents;
 - one agents ends up having the same payoff, but the other one improves it (the agent not improving has to allow it tho)
 
+> Differently from the Nash Equilibrium, the pareto efficiency allows both agents to make a move. In the previous table, **(C, C)** is not pareto optimal because if both agents move to **(D, D)**, $i$ payoff doesn't get worse whereas $j$'s one does.
+
 ## Social Welfare
 
 Conversely to the Pareto Efficiency, **Social Welfare** aims to maximise the total payoff of both agent, regardless with the score of each individual agent. So a (9, 0) is preferable to a (4, 4)
+
+###### video 4 Pareto Optimality
+
+## Coordination Game
+
+In a coordination game, given 2 agents $i$ and $j$,
+> $u_i(a) = u_j(a)$ for all $a \in A_i$ X $A_j$. 
+
+In other words, both agents have the same payoff for each combination of moves, but when the two agents both take the same action (A, A) or (B, B), **payoff $>$ 0**, whereas different moves like (A, B) or (B, A) have a **zero** payoff.
+
+The opposite of this game is the misanthropes (un)coordination game wherein the reward is bigger than zero when the two agent take opposite moves.
+
+## Constant Sum Games
+In a constant sum game, the sum of the payoff is the same for each move
+> $u_i(a) + u_j(a) = c$ for all $a \in A_i$ X $A_j$.
+
+An example is the tossing a coin game, where you either win (+1) or lose (0), and the sum is always constant (1)
+
+### Zero Game
+
+This is a special type of constant game where the sum is always **0**
+>$u_i(a) + u_j(a) = 0$ for all $a \in A_i$ X $A_j$.
+
+The toss a coin game where the payoff is $\pm 1$ would result in a sum payoff of 0 all the times. Another example is rock, paper, scissor
+
+
 
 <br>
 <br>
