@@ -6,5 +6,9 @@ Innovative and authentic experiences in learning and teaching Computer Science a
 <br>
 
 **Contact:**
-Our first e-meeting will be next Friday (23rd) and you will receive the invitations on your outlook calendar, you don't need to prepare a slide set for this meeting but you will need to submit a form that is explained on the next section of this email. If you are not able to come to the meetings, please let me know.  We will have the following 5 group meetings and you are also more than welcome to come to my office hours on Tuesdays (4-6pm) to discuss any particular issue. Just send me a message on MS Teams during those hours and I will call you.
+Our first e-meeting will be next Friday (23rd) and you will receive the invitations on your outlook calendar, you don't need to prepare a slide set for this meeting but you will need to submit a form that is explained on the next section of this email. If you are not able to come to the meetings, please let me know.  
 
+# Office hours
+We will have the following 5 group meetings and you are also more than welcome to come to my office hours on Tuesdays (4-6pm) to discuss any particular issue. Just send me a message on MS Teams during those hours and I will call you.
+
+Hello, I am a Computer Science with Management and YII student, in order to take the AI specialisation on my degree I am required to take 2 modules for next year which are "machine learning" and "optimisation methods"; in place of "optimasation methods" I am taking a 7 grade module called "data mining" which is still pretty relevant to the theme of AI. Would that be fine to have the specialisation in AI, or do I have to take "optimisation methods"?

@@ -476,6 +476,10 @@ def getVisitableCorners(corners):
 
 class BetterHungryAgent(Agent):
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 3e63bc27a50de7bf51c139bad70ca15bf7b4f07a
     oppositeDirections = {
         Directions.SOUTH: Directions.NORTH,
         Directions.NORTH: Directions.SOUTH,
@@ -483,6 +487,7 @@ class BetterHungryAgent(Agent):
         Directions.WEST: Directions.EAST     
     }
 
+<<<<<<< HEAD
     moves = [
         (1, 0),     # North
         (0, 1),     # East
@@ -490,6 +495,8 @@ class BetterHungryAgent(Agent):
         (0, -1)     # West
     ] # North
 
+=======
+>>>>>>> 3e63bc27a50de7bf51c139bad70ca15bf7b4f07a
     moveToDirection = {
         (0, -1) : Directions.SOUTH,
         (0, 1) : Directions.NORTH,
@@ -504,11 +511,22 @@ class BetterHungryAgent(Agent):
         Directions.WEST : (-1, 0)
     }
 
+<<<<<<< HEAD
 
     def __init__(self):
         self.lastPosition = Directions.STOP
         # self.lastBestFoodPosition = None
         # self.lastMinimumDistance = None
+=======
+    def __init__(self):
+        self.lastPosition = Directions.STOP
+        self.lastBestFoodPosition = None
+        self.lastMinimumDistance = None
+        self.unvisitedCells = None
+        self.accessibleMap = None
+        self.unvisitedCorners = None
+        self.walls = []
+>>>>>>> 3e63bc27a50de7bf51c139bad70ca15bf7b4f07a
         self.firstIteration = True
 
         # ABOUT LOCATIONS
@@ -581,7 +599,7 @@ class BetterHungryAgent(Agent):
         if len(food) == 0:
             message = "NO FOOD FOUND NEARBY, "
             if len(self.uneatenFood) > 0:
-                print message, "reaching preaviously seen food"
+                print message, "reaching previously seen food"
                 food = [food for food in self.uneatenFood]
             else:
                 print message, "reaching unvisited locations"
