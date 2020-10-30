@@ -3,9 +3,49 @@
 <style>
     img {
         border: solid;
-         margin: 3px;
+        margin: 3px;
     }
+        
+    h1:not(:first-of-type)::before {
+        content: "";
+        height: 100px;
+        padding: 100px;
+        display: block;
+    }
+
+    .no-mt {
+        margin-top: -16px;
+    }
+
+    .warning {
+        background: rgba(255, 0, 0, .3); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(220, 0, 0);
+    }
+
+    .warning::before {
+        content: "WARNING: ";
+        font-weight: bold;
+        color: rgb(220, 0, 0);
+    }
+
+    .definition {
+        background: rgba(80, 80, 255, .2); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(80, 80, 255);
+    }
+
+    .definition::before {
+        content: "DEFINITION: ";
+        font-weight: bold;
+        color: rgb(80, 80, 255); 
+}
 </style>
+
 
 # Week 1
 
@@ -362,6 +402,12 @@ Not every interaction scenario has a pure strategy NE.
 Some interaction scenarios **have more than one NE**.
 The optimal pair of strategies might be as well in the NE.
 <img src="./img/NE.png">
+
+<div class="warning">When looking for a NE remember that, if you want to check whether a cell is a NE:
+<ul>
+<li><b>for the column player you can only move LEFT or RIGTH</b></li> vice versa <li><b>for the row player you can only move UP and DOWN</li></b>
+</ul>
+</div>
 
 ###### video 4 Pareto Optimality
 

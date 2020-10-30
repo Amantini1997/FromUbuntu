@@ -430,37 +430,123 @@ class CornerSeekingAgent(Agent):
         print "\n====================================\n"
         return api.makeMove(pick, legal)
 
+def getVisitableCorners(corners):
+    topRightCorner = max(corners)
+    visitableCornerns = [(0,0), topRightCorner]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class BetterHungryAgent(Agent):
 
+    oppositeDirections = {
+        Directions.SOUTH: Directions.NORTH,
+        Directions.NORTH: Directions.SOUTH,
+        Directions.EAST: Directions.WEST,
+        Directions.WEST: Directions.EAST     
+    }
+
+    moves = [
+        (1, 0),     # North
+        (0, 1),     # East
+        (-1, 0),    # South
+        (0, -1)     # West
+    ] # North
+
+    moveToDirection = {
+        (0, -1) : Directions.SOUTH,
+        (0, 1) : Directions.NORTH,
+        (1, 0) : Directions.EAST,
+        (-1, 0) : Directions.WEST 
+    }
+
+    directionToMove = {
+        Directions.SOUTH : (0, -1),
+        Directions.NORTH : (0, 1),
+        Directions.EAST : (1, 0),
+        Directions.WEST : (-1, 0)
+    }
+
+
     def __init__(self):
         self.lastPosition = Directions.STOP
-        self.oppositeDirections = {
-            Directions.SOUTH: Directions.NORTH,
-            Directions.NORTH: Directions.SOUTH,
-            Directions.EAST: Directions.WEST,
-            Directions.WEST: Directions.EAST     
-        }
-        self.lastBestFoodPosition = None
-        self.lastMinimumDistance = None
-        self.unvisitedCells = None
-        self.unvisitedCorners = None
-        self.walls = []
+        # self.lastBestFoodPosition = None
+        # self.lastMinimumDistance = None
         self.firstIteration = True
-        self.worried = False
+
+        # ABOUT LOCATIONS
         self.uneatenFood = set()
-        self.movesMap = None
-        self.policyMap = None
+        self.unvisitedCells = set()
+        self.visitedCells = set()
+        self.accessibleMap = set()
+        self.walls = set()
+
+        # ABOUT GHOSTS
+        self.worried = False # TODO: check if can be removed using value iteration
+
+        # ABOUT MOVES
+        self.movesMap = {}  # { cell: moves[] }
+        self.policyMap = {} # { cell: score }
+
+
+    def getAccessibleMap(self):
+        return self.accessibleMap
+    
+
+    def getMovesMap(self):
+        return self.movesMap
+
 
     def getAction(self, state):
         if self.firstIteration:
             self.firstIteration = False
-            self.unvisitedCorners = api.corners(state)
-            self.walls = api.walls(state)
-            self.unvisitedCells = getNonWallCells(self.walls, state)
-            self.movesMap = map(getMapMoves, self.unvisitedCells)
+            self.walls = set(api.walls(state))
+            self.accessibleMap.update(getNonWallCells(self.walls, state))
+            self.unvisitedCells.update(self.unvisitedCells)
+            self.movesMap = map(getMapMoves, self.accessibleMap)
+            print "$$$ ", self.accessibleMap
+            raw_input()
             self.policyMap = { location : 0 for location in self.unvisitedCells }
 
+
+        print "PERIMETER", getPerimeterOfUnvisitedAndFoodCells(self.accessibleMap, self.visitedCells, self.movesMap)
 
         # # Where are the capsules?
         # print "Capsule locations:"
@@ -474,13 +560,20 @@ class BetterHungryAgent(Agent):
         
 
         # UPDATE LISTS BASED ON NEW PACMAN POSITION
-        if pacman in self.unvisitedCells: self.unvisitedCells.remove(pacman)
-        if pacman in self.uneatenFood: self.uneatenFood.remove(pacman)
-        if pacman == self.lastBestFoodPosition: self.lastBestFoodPosition = None
+        if pacman in self.unvisitedCells: 
+            self.unvisitedCells.remove(pacman)
+            self.visitedCells.add(pacman)
+
+        if pacman in self.uneatenFood: #
+            self.uneatenFood.remove(pacman)
+            self.visitedCells.add(pacman)
+
+        # if pacman == self.lastBestFoodPosition: self.lastBestFoodPosition = None
         
         # FOOD Location
         food = api.food(state)
         self.uneatenFood.update(food)
+        self.accessibleMap.update(food)
 
         # NO MORE FOOD nearby, looking for 
         #   non eaten registered food first 
@@ -597,10 +690,45 @@ class BetterHungryAgent(Agent):
         print "\n====================================\n"
         return api.makeMove(pick, legal)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 # WORKING
 def manhattanNotAbsoluteDistance( xy1, xy2 ):
     "Returns the Manhattan distance between points xy1 and xy2"
     return ( xy1[0] - xy2[0], xy1[1] - xy2[1] )
+
+
+def sumTuples(tuple1, tuple2):
+    return tuple([(i + j) for i, j in zip(tuple1, tuple2)])
 
 
 def getBestNextMoves(legal, closestPointDistancesXY, immediateBestMoveFlag = False, maxDistanceForImmediateBestMove = 1):
@@ -766,15 +894,9 @@ def getPathsAroundTheWall(startPosition, goalPosition, perimeter):
     path2 = [startPosition, goalPosition]
     perimeter.remove(startPosition)
     perimeter.remove(goalPosition)
-    directions = [
-        (1, 0),     # North
-        (0, 1),     # East
-        (-1, 0),    # South
-        (0, -1)     # West
-    ] # North
     directionPointer = 0
     while True:
-        newPosition = sumTuples(startPosition, directions[directionPointer])
+        newPosition = sumTuples(startPosition, BetterHungryAgent.moves[directionPointer])
         if newPosition in perimeter:
             path1.append(newPosition)
             perimeter.remove(newPosition)
@@ -783,15 +905,6 @@ def getPathsAroundTheWall(startPosition, goalPosition, perimeter):
 
         if newPosition == goalPosition:
             return path1, path2 + perimeter
-        
-
-def sumTuples(tuple1, tuple2):
-    return tuple([(i + j) for i, j in zip(tuple1, tuple2)])
-
-
-def getVisitableCorners(corners):
-    topRightCorner = max(corners)
-    visitableCornerns = [(0,0), topRightCorner]
 
 
 def getVisitbaleWidthAndHeight(state):
@@ -814,14 +927,71 @@ def getNonWallCells(walls, state):
     mapCellsMatrix = getMapCellsMatrix(height, width)
     return [x for x in mapCellsMatrix if x not in walls]
 
-
+## TODO MAKE THIS WORKING
 def policyMetric(accessibleMap, unvisitedMap = [], foodMap = [], ghosts = [], policyMap = [], epsilon = 0.1):
     policyMap = policyMap or 0
 
 
 def getLegalMoves(accessibleMap, location):
-    pass
+    '''
+    Given a cell and the accessibleMap, 
+    Return the moves that can be made from there
+    e.g. [(0,1), (0, -1)]
+    Pacman can only move EAST or WEST
+    '''
+    print "++++++++++", accessibleMap,"\n", location,"\n" , BetterHungryAgent.moves
+    raw_input()
+    return [move for move in BetterHungryAgent.moves if sumTuples(location, move) in accessibleMap]
 
 
 def getMapMoves(accessibleMap):
+    '''
+    Return a dictionary in the form {cell: moves[]}
+    e.g. { (6, 5): [(0, 1), (0, -1)]} 
+    the only moves are going either EAST or WEST
+    '''
     return {location: getLegalMoves(accessibleMap, location) for location in accessibleMap}
+
+
+
+def getValueIterationMap(accessibleMap,      visitedLocations,      mapMoves,      pacman, 
+                            knownFood,       unvisitedLocations,    ghosts = [], 
+                            foodReward = 2,  unvisitedReward = .3,  ghostPenalty= -10, 
+                            epsilon = 0.01,  penalty = 0.04,        discountFactor = 0.9
+                        ):
+    '''
+        The input parameters are, (beside the obvious ones)
+        epsilon -> this is the value below which we stop iterating (to improve performance)
+        penalty -> the cost to make a move
+        discountFactor -> the lambda factor that reduces the value of further away elements
+        foodReward -> the reward for getting food
+        unvisitedReward -> the reward for getting on unvisited locations
+        ghostPenalty -> the reward (negative) for bumping into a ghost
+    '''
+    pass
+
+def getPerimeterOfUnvisitedAndFoodCells(accessibleMap, visitedCells, movesMap):
+    perimeter = set()
+    notVisitedCells = accessibleMap.difference(visitedCells)
+    notVisitedCellsSurroundingCells = map(lambda cell: {cell: getSurroundingCells(cell, movesMap[cell], accessibleMap)}, notVisitedCells)
+
+    reachablePerimeter = filter(lambda cellEntry: isFirstReachable(notVisitedCells[cellEntry], notVisitedCells))
+    return set(reachablePerimeter.keys())
+
+
+def isFirstReachable(surroundingCells, notVisitedCells):
+    '''
+    Return True if any of the surrounding cells has been visited.
+    In other words, return True if the cell can be visited without passing
+    on unvisited cells.
+    '''
+    return any(cell not in notVisitedCells for cell in surroundingCells) 
+
+
+def getSurroundingCells(cell, cellMoves, accessibleMap):
+    '''
+    Given the accessible map, a cell position and the moves that can be taken
+    from that cell, return the position of the surrounding cells
+    '''
+    newCells = [sumTuples(move, cell) for move in cellMoves]
+    return filter(lambda c: c in accessibleMap, newCells)
