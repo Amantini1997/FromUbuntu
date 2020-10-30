@@ -153,7 +153,7 @@ If I go out for a coffee, my chance of enjoying my beverage is **0.95**, and the
 
 (a)  Compute the expected utility of staying in my office and of going out for a coffee.
 >E[Staying in the office] = 8 * .5 + 1 * .3  + 5 * .2 = 5.3
->E[Staying in the office] = 10 * .95 -20 * .05 = 8.5
+>E[Leaving for a coffee] = 10 * .95 -20 * .05 = 8.5
 
 (b)  By the principle of maximum expected utility, which action should I choose?
 > Going for a coffee since it has the higher expected utility
@@ -216,7 +216,9 @@ c.
 
 (ii) Use the idea of deleting strongly dominated strategies to simplify the scenario where appropriate.
 > a. For $i$ there is no domination. 
-> &nbsp; &nbsp; For $j$ R dominates L as (4 3) > (3 1)
+> &nbsp; &nbsp; For $j$ R dominates L as (4 3) > (3 1). 
+> Now U dominate D, so we reaming with only U L as a possible move.
+> b. Exactly the same as a., R is deleted first and D follows.
 
 (iii) Identify any Nash equilibria.
 > a. **deleting L**, which is dominated, D dominates U, the only strategy left is (D R)
