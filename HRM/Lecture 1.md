@@ -239,8 +239,29 @@ There are several ways to test these characteristics, for example an interview r
 
 **Characteristics of a good test**
 
-<img>
+<img alt="Testing procedure">
 
 **standardised** means that a person's score has to be contextualised. A score of x has a different meaning if executed by a graduate rather than a worker (perhaps in the sense that a grad student, who has no practical experience, may be disadvanted, yet prove to have a great potentiality)
 
 **the other thing**
+
+###### video 2
+## Assessment Centres
+
+Assesment Centres are very important in the process of selecting new candidates. People taking part to this (on avg 1 assessor per 2 candidates) can give different opinions on the same candidate and, if the criteria are well defined, the **bias** can be removed.
+
+## References
+Very required, can be important to know the responsabilities and the professionality of a candidate, but they don't help much when it comes to character as the person on the other side will probably not talk trash about them. So be careful about it.
+
+## Selection Interviews
+Useful to find out about the candidate skills, competences, knowledge, qualifications, training etc.
+But also to find out how much they are motivated and if they (values and horientations) would fit in the organisation (also, for example, can they travel or come to work on short notice, can they work on social hours)
+
+### How to prepare for a interview
+- Clearly define the requirements and the criteria necessary for a candidate to achieve them (study degree, experience, knowledge and skills);
+- Decide what else to judge the candidate on beside the competences and the behaviour (for example being able to work on social hours, having a car etc.)
+- Will you have a structured or unstructured interview:
+  -  #### Structured interview
+        Super **standardised**, questions are defined and asked in a specific order; these questions are very tied to specific role criteria.
+        The answers are rated based on a **pre-formatted scale**.
+        The advantages of structured interviews are that they are **less prone to bias**, so they are more reliable predictors of future job performance and person job fit 
