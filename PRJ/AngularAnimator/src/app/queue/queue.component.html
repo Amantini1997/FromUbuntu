@@ -27,6 +27,17 @@
     <div class="queue-ctn">
         <img src="assets/img/person.png" *ngFor="let person of queue" [attr.data-person]="person" class="queue-element person" alt="person">
     </div>
+    <div class="queue-ctn">
+        <img src="assets/img/store.png" style="visibility:hidden" alt="palceholder">
+        <ng-container *ngFor="let person of queue; let i = index">
+            <img src="assets/img/front.png" alt="front" ngIf="index == 0">
+            <img src="assets/img/empty.png" ngIf="index > 0 && index != queue.length - 1">
+            <img src="assets/img/rear.png" alt="rear" ngIf="index == queue.length - 1" >
+        </ng-container>
+        <ng-container ngIf="queue.length == 1">
+            <img src="assets/img/frontAndRear" alt="rear & front">
+        </ng-container>
+    </div>
 </div>
 
 <hr>
