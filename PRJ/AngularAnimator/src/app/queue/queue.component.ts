@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QueueComponent implements OnInit {
 
-  queue = ["Alessandro", "Daniele"];
+  outputElement = null;
+  queue = ["John", "Michael"];
   queueContainer = null;
   poppablePerson = null;
   frontIndex = 0;
@@ -18,41 +19,56 @@ export class QueueComponent implements OnInit {
     this.rearIndex = this.queue.length;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.outputElement = document.querySelector(".output");
+  }
   
-  pop(): string {
-    if (!this.queueContainer) this.queueContainer = document.querySelector(".queue-ctn");
-    if (this.rearIndex == this.frontIndex) {
-      alert("EXCEPTION: The queue is empty");
-      return;
-    }
-    const toReturn = this.top();
+  dequeue(): string {
+    if (!this.queueContainer) this.queueContainer = document.querySelector(".queue__ctn");
+    const toReturn = this.front(false);
     this.animatePopping();
     ++this.frontIndex;
     this.moduloIndex();
+    this.setOutputText("dequeue", toReturn);
     return toReturn;
   }
-  
-  top(): string {
-    if (this.rearIndex == this.frontIndex) {
-      alert("EXCEPTION: The queue is empty");
-      return;
-    }
-    return this.queue[0];
+
+  isEmpty(): boolean {
+    const isEmpty = this.queue.length == 0;
+    this.setOutputText("isEmpty", isEmpty);
+    return isEmpty;
   }
 
-  enqueue(x): void {
+  size(): number {
+    const size = this.queue.length;
+    const noun = size == 1 ? "person" : "people"; 
+    this.setOutputText("size", size);
+    return size;
+  }
+  
+  front(print: boolean): string {
+    if (this.queue.length == 0) {
+      this.setOutputText("EXCEPTION", "the queue is empty");
+      return;
+    }
+    const frontPerson = this.queue[0];
+    if (print) this.setOutputText("front", frontPerson);
+    return frontPerson;
+  }
+
+  enqueue(name: string): void {
     if (this.queue.length == this.MAX_QUEUE_LENGTH) {
-      alert("EXCEPTION: The queue is full");
+      this.setOutputText("EXCEPTION","the queue is full");
       return
     }
-    if (!x) {
-      window.alert("Please enter a name to enqueue");
+    if (!name) {
+      this.setOutputText("EXCEPTION","please enter a name to enqueue");
       return;
     }
     ++this.rearIndex;
     this.moduloIndex();
-    this.queue.push(x);
+    this.queue.push(name);
+    this.setOutputText("enqueue", name);
     (<HTMLInputElement> document.getElementById("name")).value = "";
   }
 
@@ -70,5 +86,9 @@ export class QueueComponent implements OnInit {
       this.queue.shift();
       this.queueContainer.classList.remove("active");
     }, 1000);
+  }
+
+  setOutputText(boldText: string, text: any): void {
+    this.outputElement.innerHTML = `<b>${boldText}:</b>&nbsp;${text}`;
   }
 }
