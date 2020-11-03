@@ -2,3 +2,12 @@ $main-color: rgb(40, 185, 142);
 $main-color-active: rgb(46, 240, 182);
 $main-contrast: black;
 
+.flew-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flew-col {
+    display: flex;
+    flex-direction: column;
+}

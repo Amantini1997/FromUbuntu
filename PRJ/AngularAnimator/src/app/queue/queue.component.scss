@@ -5,7 +5,6 @@ $person-height: $person-width * 150 / 140;
 
 :host {
     padding: 30px;
-
 }
 
 .btn-list {
@@ -36,21 +35,25 @@ $person-height: $person-width * 150 / 140;
 
 .queue {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     animation: all 1s;
+    overflow-x: scroll;
 
-    .shop {
+    & > .queue-ctn {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .shop, 
+    .queue-element {
         width: $person-width;
         height: $person-height;
     }
-
     
     & .queue-element {
-        height: $person-height;
         transition: opacity 1s, margin-left 1s;
 
         &.person {
-            width: $person-width;
             animation: enqueue 1s forwards;
 
             &.popped {
@@ -92,4 +95,9 @@ $person-height: $person-width * 150 / 140;
         transform: translateX(-$person-width);
     }
 
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
 }

@@ -23,20 +23,25 @@
 
 <hr>
 <div class="queue">
-    <img src="assets/img/store.png" class="queue-element shop" alt="shop">
-    <div class="queue-ctn">
-        <img src="assets/img/person.png" *ngFor="let person of queue" [attr.data-person]="person" class="queue-element person" alt="person">
+    <div class="flex-row">
+        <img src="assets/img/store.png" class="queue-element" alt="shop">
+        <div class="queue-ctn">
+            <img src="assets/img/person.png" *ngFor="let person of queue" [attr.data-person]="person" class="queue-element person" alt="person">
+        </div>
     </div>
-    <div class="queue-ctn">
-        <img src="assets/img/store.png" style="visibility:hidden" alt="palceholder">
+    <div class="flex-row">
+        <!-- STORE PLACEHOLDER -->
+        <img src="assets/img/store.png" class="queue-element" style="visibility:hidden" alt="palceholder">
+        <!-- FRONT -->
+        <img src="assets/img/front.png" class="queue-element" alt="front" *ngIf="queue.length > 1">
+        <!-- PLACEHOLDERS -->
         <ng-container *ngFor="let person of queue; let i = index">
-            <img src="assets/img/front.png" alt="front" ngIf="index == 0">
-            <img src="assets/img/empty.png" ngIf="index > 0 && index != queue.length - 1">
-            <img src="assets/img/rear.png" alt="rear" ngIf="index == queue.length - 1" >
+            <img src="assets/img/empty.png" class="queue-element" *ngIf="i > 0 && i != queue.length - 1">
         </ng-container>
-        <ng-container ngIf="queue.length == 1">
-            <img src="assets/img/frontAndRear" alt="rear & front">
-        </ng-container>
+        <!-- REAR -->
+        <img src="assets/img/rear.png" class="queue-element" alt="rear" *ngIf="queue.length > 1">
+        <!-- FRONT AND REAR -->
+        <img src="assets/img/frontAndRear" class="queue-element" alt="rear & front" *ngIf="queue.length == 1">
     </div>
 </div>
 
