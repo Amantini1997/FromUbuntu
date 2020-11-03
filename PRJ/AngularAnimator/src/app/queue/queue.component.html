@@ -1,0 +1,40 @@
+<h1>Queue</h1>
+<div>
+    The <b>queue</b> is a data structure of the type <b class="highlight">FIFO</b>.
+    <!-- ADD THE LINK TO THE GLOSSARY FOR FIFO -->
+    It is composed of 3 methods:
+    <ul>
+        <li><b>Eqnueue</b>, which add an element to the rear of the collection;</li>
+        <li><b>Pop</b>, which removes and returns the element at the front of the queue;</li>
+        <li><b>Top</b>, which returns the element at the front of the queue <b>without</b> removing it.</li>
+    </ul>
+    Beside these methods, it also possible the <b>length</b> property which, as the name suggests, returns the number of items in the queue.
+</div>
+<br>
+<br>
+<hr>
+
+<div class="btn-list">
+    <button (click)="enqueue(input.value)">Enqueue</button>
+    <input #input id="name" type="text" placeholder="Name to enqueue">
+    <button (click)="pop()">Pop</button>
+    <button (click)="top()">Top</button>
+</div>
+
+<hr>
+<div class="queue">
+    <img src="assets/img/store.png" class="queue-element shop" alt="shop">
+    <div class="queue-ctn">
+        <img src="assets/img/person.png" *ngFor="let person of queue" [attr.data-person]="person" class="queue-element person" alt="person">
+    </div>
+</div>
+
+<hr>
+<div>
+    <b>Properties:</b>
+    <ul>
+        <li>Length: {{queue.length}} </li>
+        <li>Front: {{frontIndex}} </li>
+        <li>Rear: {{rearIndex}} </li>
+    </ul>
+</div>

@@ -532,9 +532,9 @@ Well, a possible way would be to create 2 abstraction functions, one taking into
 
 ## Cost Partitioning (video 2 from week 5)
 
-Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be choose. We denote this heuristic with 
+Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be choosen. We denote this heuristic with 
 > $h^{max}(s_i)$
-> **Beware** that **max** is referred to **best** rather than higher score.
+> **Max** in this case is referred to the one with the maximum score, which in fact is the best. Why? As we are assuming all the heuristic are admissable, we want to take the one with the highest score as it better represent the actual possible strategy.
 
 Another way of taking into account all the possible solutions is **adding the different heuristics** $h^{add}(s_i)$. However, even if both the $h^{max}(s_i)$ functions are admissible, their sum is **very likely not to be admissible, and hence not additive**.
 
