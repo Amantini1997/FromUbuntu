@@ -19,7 +19,7 @@ The main idea of HRM is that organizations can boost productivity and performanc
 >people don't react to work based only on the physical conditions and the characteristics of the technological system. Organizations are social systems, people like to feel that they matter
 
 What is distinctive about HRM (as compared to traditional personnel management)?
-- with can obtain higher performances through the application of HR practices;
+- companies can obtain higher performances through the application of HR practices;
 - practices need to be seen as bundles: they need to fit together and to fit with the strategy of the organization;
 - line managers need to cooperate with the HR rules, by committing to and applying them.
 
@@ -86,7 +86,7 @@ Bundles are **interrelated** and they mutually reinforce the effect of the other
 Looking at the competitive landscape, IBM realised 3 main things:
 - Thanks to globalisation, communication and international trading barriers we're breaking down, which favored trades and investment flows across the countries;
 - Protectionism in most countries was reducing;
-- There were huge technological advances in communications which, to some extent, greatly favored the way work could be structured and teh way people could be managed.
+- There were huge technological advances in communications which, to some extent, greatly favored the way work could be structured and the way people could be managed.
 
 This brought significant opportunities and changes:
 - The production of goods and services flowed globally to places where it was more efficient and most benefit could be created, at the lowest cost (China exploitation);
@@ -129,11 +129,11 @@ Drop in transports costs and increase in technology allowed richer countries to 
 
 # Week 3
 
-## Skills that will be demand in future
-- **Digital skills**: knowing how to use a computer, how to surf the web, able to work remotely and to use software like MS Office;
-- **Agile thinking skills**: ability work and adapt to different scenarios, to complexity and ambiguity, to innovation;
-- **Interpersonal and communicational skills**: collaborative people, able to efficiently communicate to customers and other team members, with good oral and written communication skills, people how can brain storm. 
-- **Global operating kills**: (particularly important for multinationals and big corporations) people speaking different languages, people sensitive to different cultures and traditions, people who understand international markets and can work (and manage) diverse people.
+## Skills that will be demanded in future
+- **Digital skills**: knowing how to use a computer, how to surf the web, being able to work remotely and to use software like MS Office;
+- **Agile thinking skills**: ability to work and adapt to different scenarios, to complexity and ambiguity, to innovation;
+- **Interpersonal and communicational skills**: collaborative people, able to efficiently communicate to customers and other team members, with good oral and written communication skills, people who can brain storm. 
+- **Global operating skills**: (particularly important for multinationals and big corporations) people speaking different languages, people sensitive to different cultures and traditions, people who understand international markets and can work (and manage) diverse people.
 
 ## Talents
 Back in the past (2010), **talents were primarily in developed countries** like US, UK, Germany and so on, and there was a **lack of them in developing countries** like China, India, Brazil etc. As the projection proved, **the situation has become the opposite in our days**, having developing countries with a surplus of talents, and with developed countries having shortages.
@@ -172,7 +172,7 @@ From a organisation POV, they have less commitment to work and are more willing 
 
 Opposed to that, people taking protean careers tend to be happier than other workers. Also, they have better job performances, and better CB (Citizenship behaviour).
 
-As protean attitude leads people to proactivity and better performance, organisations seeks to retain these employee.
+As protean attitude leads people to proactivity and better performance, organisations seeks to retain these employees.
 
 Boundaryless people are instead retained when they have high human capital and high turnover.
 Low boundaryless careers tend to appreciate High HRM commitment, whereas high boundaryless careers seem to prefer not to have HRM investing too much on them. This counts for OCB, OCBI and Job Performance. 
@@ -239,9 +239,9 @@ There are several ways to test these characteristics, for example an interview r
 
 **Characteristics of a good test**
 
-<img alt="Testing procedure">
+<img src="./img/selection_process.png" alt="Testing procedure">
 
-**standardised** means that a person's score has to be contextualised. A score of x has a different meaning if executed by a graduate rather than a worker (perhaps in the sense that a grad student, who has no practical experience, may be disadvanted, yet prove to have a great potentiality)
+**standardised** means that a person's score has to be contextualised. A score of x has a different meaning if executed by a graduate rather than a worker (perhaps in the sense that a grad student, who has no practical experience, may be disadvantaged, yet prove to have a great potentiality)
 
 **the other thing**
 
@@ -260,8 +260,50 @@ But also to find out how much they are motivated and if they (values and horient
 ### How to prepare for a interview
 - Clearly define the requirements and the criteria necessary for a candidate to achieve them (study degree, experience, knowledge and skills);
 - Decide what else to judge the candidate on beside the competences and the behaviour (for example being able to work on social hours, having a car etc.)
-- Will you have a structured or unstructured interview:
-  -  #### Structured interview
-        Super **standardised**, questions are defined and asked in a specific order; these questions are very tied to specific role criteria.
-        The answers are rated based on a **pre-formatted scale**.
-        The advantages of structured interviews are that they are **less prone to bias**, so they are more reliable predictors of future job performance and person job fit 
+- Will you have a structured or unstructured interview.
+
+## Structured interview (IMPORTANT!)
+Super **standardised**, questions are defined and asked in a specific order; these questions are very tied to specific role criteria.
+The answers are rated based on a **pre-formatted scale**.
+The advantages of structured interviews are that they are **less prone to bias**, so they are more reliable predictors of future job performance and person job fit.
+
+### Researches on structured interviews
+- Interviewers tend to agree more on candidates.
+- They have proven to be more reliable.
+- Candidates chosen via this process are associated with better job performances, tenure and promotions.
+- 
+
+## Biographical Interviews
+
+A **Biographical interview** is one where the interviewer looks at the past experiences of the candidate, from the most recent to the oldest one.
+
+## Behavioral interviews
+
+In **Behavioural interviews**, instead, the candidate is asked how they behave in specific occasion like "how do you deal with a type of client" or "how do you respond when you are under pressure" and so on.
+
+**Pro**
+- Past performances are the best predictor of future behaviour.
+
+**Con**
+- Some candidates may not have experience and this makes it harder to compare them. Also, some of them might have had different experiences than others.
+
+## Situational Interviews
+Look at the behaviour is very specific scenarios such as a difficult client you have to deal with.
+
+The difference with the behavioural is that here you suppose a scenario whereas in the previous one it refers to something that has happened already.
+
+**Pro**
+- Easy to compare candidates as the example is the same for all, and even candidates with no experience can answer.
+
+**Con**
+- People may say "I would do this" but then, in practice, they would not act that way.
+
+## Bias in selection
+<img src="./img/bias.png">
+Obese people (especially women) are way less likely to be hired.
+
+> the first impression an interviewer perceives of the candidate happens between the first **4 minutes**, and then the rest of the time, the interviewers tries to confirm their impression.
+
+Being aware of the fact that we are often biased is the best way to mitigate it.
+
+We are not biased on purpose, it is an unconscious process.
