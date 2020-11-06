@@ -1,11 +1,50 @@
 [TOC]
 
-<style>
 
+<style>
     img {
-        border: solid 2px;
+        border: solid;
+        margin: 3px;
+    }
+        
+    h1:not(:first-of-type)::before {
+        content: "";
+        height: 100px;
+        padding: 100px;
+        display: block;
     }
 
+    .no-mt {
+        margin-top: -16px;
+    }
+
+    .warning {
+        background: rgba(255, 0, 0, .3); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(220, 0, 0);
+    }
+
+    .warning::before {
+        content: "WARNING: ";
+        font-weight: bold;
+        color: rgb(220, 0, 0);
+    }
+
+    .definition {
+        background: rgba(80, 80, 255, .2); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(80, 80, 255);
+    }
+
+    .definition::before {
+        content: "DEFINITION: ";
+        font-weight: bold;
+        color: rgb(80, 80, 255); 
+}
 </style>
 
 # Week 1 - HRM First lecture
@@ -14,7 +53,7 @@
 
 ## PART 1
 
-The main idea of HRM is that organizations can boost productivity and performance by designing and managing work so that they take into account **employees' psychological and social need and aspirations**
+The main idea of HRM is that organizations can boost productivity and performance by designing and managing work so that they take into account **employees' psychological and social needs and aspirations**
 
 >people don't react to work based only on the physical conditions and the characteristics of the technological system. Organizations are social systems, people like to feel that they matter
 
@@ -25,7 +64,7 @@ What is distinctive about HRM (as compared to traditional personnel management)?
 
 ### The development of contemporary HRM also benefits from:
  - the decline of union memberships and union influence (probably it means the HR theory is **widespread across the world** and everyone can bring new features and techniques in);
- - the Japanese model (Toyota and Honda mainly) highlighted the importance of managing people by focus a lot on importance of **social aspects** in organizations and things like **teamwork**
+ - the Japanese model (Toyota and Honda mainly) highlighted the importance of managing people by focusing a lot on the importance of **social aspects** in organizations and things like **teamwork**
 
 ---
 
@@ -71,14 +110,14 @@ Bundles are **interrelated** and they mutually reinforce the effect of the other
 > - when these changes are aimed at improving the working space and the employee benefits, the latter is more committed to work and, of course, happier;
 > - vice versa, when the changes are made to cut costs down, or employees are worried about being fired, the commitment levels drop down
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+
+
+
+
+
+
+
 
 # Week 2
 
@@ -127,6 +166,15 @@ Drop in transports costs and increase in technology allowed richer countries to 
 **Globalisation in not inexorably expanding** (think of Covid or WW)
 
 
+
+
+
+
+
+
+
+
+
 # Week 3
 
 ## Skills that will be demanded in future
@@ -142,7 +190,7 @@ Back in the past (2010), **talents were primarily in developed countries** like 
 
 The reason behind this shift in talents is that those developing countries, as they were facing deficits, **invested on new workforce growth, training more college graduates and post grads** per capita.
 
-A quick solution would be **to import talents** from other countries, but these people **hardly understand** the language, the culture, and even less, **the market**. Furthermore you not only have to retain and engage people from your local market, by expanding to other markets and teaching them the fundamentals of your nation.
+A quick solution would be **to import talents** from other countries, but these people **hardly understand** the language, the culture, and even less, **the market**. Furthermore you have to retain and engage people from your local market, by expanding to other markets and teaching them the fundamentals of your nation.
 
 ## Old vs. New Deal
 
@@ -181,7 +229,126 @@ Low boundaryless careers tend to appreciate High HRM commitment, whereas high bo
 - Protean Careers are a WIN-WIN, the employee is happy and the job performance is good;
 - Boundaryless Careers are a LOSE-LOSE, their general dissatisfaction leads them to less commitment and lower performance at work. Furthermore, HR has little impact on them.
 
-# Week 4 - Recruiting the right talents
+
+
+
+
+
+
+
+
+# Week 4 - Attracting and Retaining Talents
+###### video 1
+60 % of companies reported problems to attract talents and 55 % to retain them.
+
+## Techniques to attract talents
+
+- Understand **what people** - the ones the company wants to attract - **want from work and career**
+- Communicate who they are to current and prospective employees
+- Translate their EVP (Employee Value Proposition) into a strong employer brand
+- Invest in recruitment
+- Very selective in hiring
+
+## Schein's research
+According to this guy who studied alumni for 10/12 years, people do not know what they want from a job at the beginning
+of their career. They generally develop an identity within the first 5 to 7 years and that tends to remain stable throughout their lives.
+Schein Identified 8 types of people:
+<img src="./img/selection_process.png">
+The technical one aims to become a GURU and to be seen as a master in what they do.
+
+
+###### video 2
+## Before the recruitment process
+Companies should wonder 
+- what distinguishes them from the competition, 
+- what they can offer to prospective employees and
+- what people they want to attract
+
+## Signaling the job market WHO YOU ARE as an employer
+Before applying for a job, people may know what leaks out of the company (*outside*) such as their product, their reputation, the salary and the job offer you 
+can get, but they know **little about the working environment** (*inside*) and this unbalanced knowledge is know as **INFORMATION ASYMMETRY**.
+
+Signalling the market about the job is you offer is very important to 
+- the company: because you want to recruit the right people, because the recruiting process is very expensive and time consuming, 
+- but also for candidates who, just like you, do not want to waste time after a job which does not suit them. (both of the parties want to lessen the problem **adverse selcection**)
+
+So the company want to signal the market with the quality of the work they offer.
+
+## Employee Value Proposition (EVP)
+What the company stands for and what it represents, what an employer has to offer in terms of salary, benefits, social responsibility etc. 
+<img src="./img/EVP.png">
+
+To be effective, an EVP has to be:
+- **formalised**: the company has to be conscious of what they have to offer and communicate it very clearly;
+- **effectively communicate to both prospective employees and current employees** via ads, website, during the interviews etc.;
+- **aligned** with the mission of the company;
+- **different** from other to distinguish them from competitors;
+  
+EVP has to reflect in the employees':
+<img src="./img/evp2.png">
+Rewards = salaries and how people are managed 
+
+### Hospital 1
+Life balance, challenge, strong city community, high salary, life amid the nature, "adventure".
+
+Looking to be rich and leave amid the nature.
+
+### Hospital 2
+Serenity, calm, Christian values, strong inner community, strong proposition of curing people to make some good, "spiritual environment", child support
+
+Looking to fulfill the hospital mission to help other people and commit to the Christianity community, great for people with kids, stability, possibility of making career and to use state-of-art machines
+
+###### video 3
+## Recruitment
+A company shoudl attract as many candidates as possible in order to have a big pool to choose from.
+
+### Key recruitment decisions
+- Should we fill a vacancy internally or search for candidates in the external market?
+- Where to look for applicants?
+- The content of the job and the type of person required
+- What to tell applicants? What do we tell them about the company, especially about the **downsides**?
+
+### Filling a vacancy
+This is not a mutual exclusive process, you can look into both external and internal candidates
+<img src="./img/vacancy.png">
+
+### Where to search
+- Direct applicants
+
+- Referrals
+
+- Local/national (?) newspaper (Gardian? FT? Daily Telegraph? Professional journals? e.g. Nursing Times or the Journal of Pharmacy)
+
+- E-recruitment (jobs.ac.uk; facebook; linkedin; company websites; etc.) 
+  > **BEWARE** that you do not really know what kind of people you may attract via social networks
+
+- Employment agencies 
+    - Public (Job Centre)
+    - Temporary employment agencies
+    - Recruitment Consultants
+    - Headhunters/Executive Search Consultants
+
+- University “milk-round” (Key for attracting high potential employees)
+
+### Defining the person requirements
+<img src="./img/competency.png">
+
+
+### What you should tell to applicants
+Every job comes with some downsides, and the recruiter has to give a good dose of realism to the candidate.
+This will prevent a turnover as the candidates are aware of them (and the employer will not have to repeat the recruiting process again in case) and the employee will be more committed. 
+Put it in a nice way of course, for instance, during the interviewing for healthcare assistant, ask the candidate how they would feel about cleaning the vomit, which smells terrible, as it will happen very often. This will give them a chance to reflect on whether or not they really want that job and are ok with that.
+
+
+
+
+
+
+
+
+
+
+# Week 5 - Recruiting the right talents
 
 Is recruiting a fair process?
 
@@ -190,7 +357,7 @@ Is recruiting a fair process?
 ## The selection process
 The selection is a set of specifications, that you should think thoroughly, about how the candidate should be, that is, you should seek a candidate that fits the criteria you define.
 
-A candidate features belong with 2 type:
+A candidate features belong with 2 types:
 - **Background Factors**: education, experience, etc.
 - **Personal Factors**: intellectual ability, personality, motivation etc.
 
@@ -205,7 +372,7 @@ Is the educational background mandatory, or is it more of a tradional standard? 
 Experience is required very often too, but, again, it is important to be precise on the type of experience required:
 
 - **Industry Exp**: you may need an expert in a field, but that person should be able to talk to costumer rather than working on internal stuff
-- **Function Exp**: experience in the sector or in specific tasks, but this kind of requirements may be misleading. Suppose you are a multinational company counting thousands of employees, and are looking for someone with 2 years of experience in HR: a candidate comes up with 3 (even more than what you asked for) years of experience, but in a small company counting 500 people at most.
+- **Function Exp**: experience in the sector or in specific tasks, but this kinds of requirements may be misleading. Suppose you are a multinational company counting thousands of employees, and are looking for someone with 2 years of experience in HR: a candidate comes up with 3 (even more than what you asked for) years of experience, but in a small company counting 500 people at most.
 - **Company Exp**: some companies heavily invest in the employee training and formation, so a candidate coming from there may be more interesting than someone caming from a "lazy" company that produces paper pushers.
 
 ### Personal Factors
@@ -229,7 +396,7 @@ Experience is required very often too, but, again, it is important to be precise
 ### Decide the prerequisites
 This will already skim a lot of candidates
 
-### Aggiungi pic
+> #### PICTURE TO BE ADDED
 
 Candidates may have to meet some prerequisites that could be:
 - **Job wise**: the preparation for a specific job or role;
@@ -243,7 +410,10 @@ There are several ways to test these characteristics, for example an interview r
 
 **standardised** means that a person's score has to be contextualised. A score of x has a different meaning if executed by a graduate rather than a worker (perhaps in the sense that a grad student, who has no practical experience, may be disadvantaged, yet prove to have a great potentiality)
 
-**the other thing**
+<img src="./img/shortlisting.png">
+<img src="./img/tests.png">
+<img src="./img/5Personality.png">
+
 
 ###### video 2
 ## Assessment Centres
@@ -271,7 +441,7 @@ The advantages of structured interviews are that they are **less prone to bias**
 - Interviewers tend to agree more on candidates.
 - They have proven to be more reliable.
 - Candidates chosen via this process are associated with better job performances, tenure and promotions.
-- 
+  
 
 ## Biographical Interviews
 
@@ -288,7 +458,7 @@ In **Behavioural interviews**, instead, the candidate is asked how they behave i
 - Some candidates may not have experience and this makes it harder to compare them. Also, some of them might have had different experiences than others.
 
 ## Situational Interviews
-Look at the behaviour is very specific scenarios such as a difficult client you have to deal with.
+Look at the behaviour in very specific scenarios such as a difficult client you have to deal with.
 
 The difference with the behavioural is that here you suppose a scenario whereas in the previous one it refers to something that has happened already.
 
