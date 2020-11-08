@@ -74,10 +74,10 @@ h2:not(:first-child)::before {
 
 <div class="definition"><b>Closed World Assumption :</b> Any fact not listed as explicitly being true in the initial state can safely be assumed as false.</div>
 
-In PLANNING 3 are the **pillars** to solve a problem:
+In PLANNING, 3 are the **pillars** to solve a problem:
  - The initial state (what is True at the beginning);
  - The goal (what has to be True at the end to consider the problem solved);
- - The executable actions define according to the DOMAIN
+ - The executable actions defined according to the DOMAIN
 
 **Lifted Action:** when the :action contains :parameters
 
@@ -94,10 +94,9 @@ When looking for the optimal plan, you can use different methods to find it:
  - **Breadth First Search** (better than DFS, but not the best yet);
  - **Best First Search** which:
     - assigns a heuristic value h(S) to each new node;
-    - puts all the not visited nodes into a sorted queue, sorted by the h(S) (in case two nodes have the same h(S), https://www.amazon.co.uk/contact-us
-        the first one generated has higher priority);
+    - puts all the not visited nodes into a sorted queue, sorted by the h(S) (in case two nodes have the same h(S),the first one generated has higher priority);
     - removes the first node in queue and visits it.
- - **A\*** which is like Best First Search, but takes into account the distance g(S) from the star<b>WARNING</b> ting node as well (f(S) = h(S) + g(S)).
+ - **A\*** which is like Best First Search, but takes into account the distance g(S) from the start, so it counts (and sum) both the distance to the goal and the distance from the initial state, that is, the number of actions performed so far (f(S) = h(S) + g(S)).
 
 Of course, you choose between BestFS and A* based on what is most convenient for you: 
 - A* -> shorter distance from the initial state (so optimal path) is guaranteed;
@@ -110,9 +109,9 @@ Of course, you choose between BestFS and A* based on what is most convenient for
 >- **CONSISTENT** (Monotonic): at every state, the heuristic value must be less than or equal to the distance from that state to another state + the heuristic value of the other state     h(S) <= h(S') + d(S, S');
 >- **ADDITIVE:** (not necessary, but good for heuristic) given 2 heuristic functions h1 & h2, their sum is **admissible** for each state s (i.e. h(s) = h1(s) + h2(s) ).
 
-A* is very good, but also "expensive", a good trade off comes with WA* (Weighted A* Search), which finds a solution 
-more quickly than the A*, but not necessarily the optimal solution. I lays between A* and BestFS:
-- f(S) = g(S) + W*h(S)
+A* is very good, but also "expensive", a good trade off comes with **WA\* (Weighted A\* Search)**, which finds a solution 
+more quickly than the A*, but not necessarily the optimal solution. It lays between A* and BestFS:
+- the formula is: f(S) = g(S) + W*h(S)
 - when W is 2, the h(S) counts twice as much as it did before, making it more relevant than g(S)
 - when W tends to Inf., WA* behaves like A*
 - the W is the factor than influence the worst possible solution, i.e., if W = 2, the worst solution
@@ -134,7 +133,7 @@ RPG only provides heuristic scores, it's not a search method itself. However, EH
 3. keep doing it until no acceptable state can be found (this situation is called **tableau**);
 4. use **Breadth First Search** on all the child states (even the ones with the worst heuristic) until a state that meets the criteria from rule **2** is found;
 
-If HEC reaches a dead end, FF resorts and uses Best First Search to look for a plan.
+If EHC reaches a dead end, FF resorts and uses Best First Search to look for a plan.
 
 **EHC** can find solutions pretty fast, but it is **incomplete**, that is, it is not guaranteed to find a solution.
 
@@ -196,7 +195,15 @@ This approach can be improved by checking whether is needed to achieve B for the
 <br>
 
 ### RPG propagation
-Not sure how it works...
+Consider an RPG and:
+- each **action** takes into account **the union** of all the preconditions (even not from the very previous state) into account;
+  > e.g suppose action **5** requires facts **C {A}** and **D {A}**, which are both achieved from a state **A**. In this case, action **5** considers the union $\{A, C\} \cap \{A, D\}$ = **{A, C, D}**.
+- each **fact** takes into account **the intersection** of the actions.
+  >  e.g. actions **4 {A, B}** and **6 {A, D}** are both necessary to achieve fact **G**, the intersection $\{A, B, G\} \cap \{A, D, G\}$ = **{A, G}**
+
+<img src="./img/RPG_Landmarks.png">
+
+In the example above, you can see that **G** is a goal state and that, to achieve it, **A** is the only fact necessary as it appears in all the actions required (intersectioj)
 
 ---
 <br>
@@ -206,7 +213,7 @@ Not sure how it works...
 
 ### Sound Ordering
 
-<div style="margin-top: -16px; margin-bottom: 16px;"> We know that A achieves be, but we don't know when exactly.</div>
+<div style="margin-top: -16px; margin-bottom: 16px;"> We know that A achieves B, but we don't know when exactly.</div>
 
 - **Necessary Ordering** A →<sub>n</sub> B : A is always TRUE one step before B becomes TRUE;
 - **Greedy Necessary Ordering** A →<sub>gn</sub> B : A is TRUE one step before B becomes TRUE for the first time, rather than every time;
@@ -215,9 +222,9 @@ Not sure how it works...
 >***[My Guess]*** Both in Necessary and Greedy-Necessary Ordering A is a precondition for the action that achieves B. In Natural ordering A is used to achieve intermediate state that in turns are preconditions for actions that achieve B; hence, A is not required by the action the directly achieves B, but to reach its preconditions I need to achieve A at some point.
 
 ### Unsound Orderings
-<div style="margin-top: -16px; margin-bottom: 16px;"> There are a special conditions on the ordering of landmarks.</div>
+<div style="margin-top: -16px; margin-bottom: 16px;"> There are special conditions on the ordering of landmarks.</div>
 
-- **Reasonable Ordering** A →<sub>r</sub> B : If B was achieved before A, then the plan should **delete B** and re-achieve it after (or at the same time as A);
+- **Reasonable Ordering** A →<sub>r</sub> B : If B was achieved before A, then the plan should **delete B** and re-achieve it after (or at the same time as) A;
 
 >There are cases in which achieving B before A is a waste of time as one has to delete B, re-achieve A, and then again achieve B. However, there are cases, like the *Hanoi Tower*, where achieving,deleting, and eventually re-achieve B is necessary before reaching A.
 
@@ -229,16 +236,11 @@ Not sure how it works...
 
 
 
-- We say that there is a reasonable ordering between A and B, written A →r B, if for every plan π where B is added at time i and A is first added at time j with i < j [*A is added after B*], 
-it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B is true at some time k with j ≤ k.true at any time j ≤ i.
----
-- We say that there is an obedient-reasonable ordering between A and B with regard to a set of orderings O, written A → <sub>or</sub> B, if for every plan π obeying O where B is added at time i and A is first added at time j with i < j, 
-it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B is true at some time k with j ≤ k.
-
-
----
-
-- We say that a plan π obeys a set of orderings O, if for all orderings A →x B ∈ O, regardless of their type, it holds that A is first added at time i in π and B is not 
+   - - We say that there is a reasonable ordering between A and B, written A →r B, if for every plan π where B is added at time i and A is first added at time j with i < j [*A is added after B*], 
+    it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B is true at some time k with j ≤ k.true at any time j ≤ i. 
+      - We say that there is an obedient-reasonable ordering between A and B with regard to a set of orderings O, written A → <sub>or</sub> B, if for every plan π obeying O where B is added at time i and A is first added at time j with i < j, 
+    it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B is true at some time k with j ≤ k.
+      - We say that a plan π obeys a set of orderings O, if for all orderings A →x B ∈ O, regardless of their type, it holds that A is first added at time i in π and B is not 
 
 
 
@@ -246,9 +248,9 @@ it holds that B is not true at some time m with m ∈ {i + 1, . . . , j} and B i
 
 Landmarks can be used in 3 different ways:
 - as **planning subgoals**;
-> This is not optimal due to **Susman anomaly** which claims that 2 landmarks necessary to achieve the goal, can in a sense mutually exclusive, and reaching one prevents us from reaching the other and vice versa.
+> This is not optimal due to **Susman anomaly** which claims that 2 landmarks necessary to achieve the goal, can in a sense be mutually exclusive, and reaching one prevents us from reaching the other and vice versa.
 - for **heuristic estimates**;
-- for admissible landmarks heuristic.
+- for **admissible landmarks heuristic**.
 
 ## LM Count
 <div class="definition"><b>LM</b> is a <b>Path Dependent Heuristic</b>, which is not a function of the current observed state, but rather the function of path used to reach it. It is <b>inadmissible</b> as the same state (like holding B) could be used to achieve multiple landmarks, even tho it's impossible.</div>    
@@ -259,14 +261,14 @@ LM heuristic value`h(s,p) where s is the state and p the path` is given by the u
 ## Double Heuristic
 
 Having 2 heuristic functions might be very good:
-- When you have a plateau with one, the other one might come in help out;
-- Alterning 2 heuristics (even $h()$ = random picking) helps improving the overall heuristic, and, hence, solving the plan.
+- When you have a plateau with one, the other one might come in and rescue you;
+- Alternating 2 heuristics (even $h()$ = random picking) helps improving the overall heuristic, and, hence, solving the plan.
 
 **EHC** & **FF** are know as **Local Search algorithms**:
 <img src="./img/Local_Search.png">
 
 >**HEURISTICS ARE USED AT POINT 3**
->Basically we are applying a <b>gradient descent</b>##
+>Basically we are applying a <b>gradient descent</b>
 
 
 ##  Problems With RPG
@@ -312,7 +314,7 @@ In the goal state, it is possible to ask the planner to either **maximise** or *
 ## RPG
 To calculate the RPG is bit trickier. Actions with the effect of decreasing, which can be seen as a delete effect (you delete a unit), according to the normal RPG solution, should be ignored, but this might be misleading to the solution of the problem or, even worse, make it impossible to solve. The solution is to use **bounds**.
 
-Say we start with (assign (money) 100), and operations may either decrease it or increase it. In the fact layer we write:
+Say we start with `(assign (money) 100)`, and operations may either decrease it or increase it. In the fact layer we write:
 > money **[100, 100]**
 > get-paid (gives you 10 money)
 > buy-candy (takes 15 money away from you)
@@ -326,10 +328,10 @@ The next fact layer should look like this:
 > get-paid (gives you 10 money)
 > buy-candy (takes 15 money away from you)
 
-The reason behind this is that if an action require **money > 100**, or **money <= 50**, we look at both the upper and lower bounds, and if money required for the action falls into that range, we proceed with the execution of the action.
+The reason behind this is that if an action requires **money > 100**, or **money <= 50**, we look at both the upper and lower bounds, and if money required for the action falls into that range, we proceed with the execution of the action.
 
 ## Oversubscription (Video 2)
-<div class="definition"><b>Oversubscription:</b> when a planner has to many goals, and can only achieve some of them.</div>
+<div class="definition"><b>Oversubscription:</b> when a planner has too many goals, and can only achieve some of them.</div>
 
 ## Preferences
 Preferences are condition we want to be true:
@@ -361,7 +363,7 @@ First of all, the way you read these preferences is different from other actions
 - The preference **(sometimes-before (at amanda work) (drink coffee))** is read as *"Amanda should drink a coffee before going to work"*. So the opposite of normal actions and objects
 
 Another thing to point out is **violance** of these two preferences:
-- **sometime-before (a) (b)** requires **a** to happen before **b** has ever happened, I reach an **E-VIO** (or eternally violated) status, and this preference will never be satisfied. Vice versa, if I accomplish **b** anytime before achieving **a**, the preference is **E-SAT**(or eternally satisfied).
+- **sometime-before (a) (b)** requires **b** to happen before **a** has ever happened. If I reach an **E-VIO** (or eternally violated) status, then this preference will never be satisfied. Vice versa, if I accomplish **b** anytime before achieving **a**, the preference is **E-SAT**(or eternally satisfied).
 - **sometime-after (a) (b)** requires **b** to happen after **a**, at any time. This means that, if I ever reach **a** before reaching **b**, I do reach an unsatisfied state, but it's not eternal. Vice versa, I can accomplish **b** after **a**, but as I can reach **a** again, the condition is satisfied, but not eternally.
 
 So, in essence, the two preferences are not the opposite of each other. Also, think at this examples:
@@ -392,7 +394,7 @@ The way to operate is:
 One thing to mention is that, conversely to what said before, the **sometime-after** preference can be violated iff the after-action/fact is no longer achievable.
 <img src="./img/Preferences_automata.PNG">
 
-### LPRPR-P Heuristic
+### LPRPG-P Heuristic
 
 In a plan with no hard goals (at-end), but only soft-goals, the heuristic is 0 for each state, as no actual goal exists.
 
@@ -423,7 +425,7 @@ For example, for a object it (should be) impossible to be in 2 places at the sam
 The above formula is an **INVARIANT**, that is something that has to hold True throughout the execution of the problem. 
 Beware, finding Invariants might be as hard as solving the problem.
 
-Referring to the blocks world, a mutex would be {A on B, C on B, clear B}, meaning than either B is clear or there's one block on top of it.
+Referring to the blocks world, a mutex would be {A on B, C on B, clear B}, meaning that either B is clear or there's a block on top of it.
 
 ### - Finite Domain Representation (FDR)
 
@@ -432,13 +434,13 @@ In a **FINITE DOMAIN REPRESENTATION**, you declare a set of possible states (**d
  above-C $\in$ {a, b, nothing}
  above-A $\in$ {b, c, nothing}**
 
-And this would already drastically reduce the configuration space to $3^3$. To make it complete we should also include the below-X variables. The count would increase to $6^3$, which is still good, and besides, this number can be reduced more by adding constraints such as above-X = Y AND below-Y = X, or by checking that 2 above-X share the same block (nothing doesn't count).
+And this would already drastically reduce the configuration space to $3^3$. To make it complete we should also include the below-X variables. The count would increase to $6^3$, which is still good, and besides, this number can be reduced more by adding constraints such as above-X = Y AND below-Y = X, or by checking that 2 above-X do not share the same block (nothing doesn't count, which means 2 blocks can be clear at the same time).
 
 Given an FDR encoding you can always switch back to the normal propositions.
 
 ## SAS+
 A famous planner called **SAS+** uses FDR. 
-We can express our SAS+ planning problem as a 4-tupl  of $Π = <𝑉, 𝑂, 𝒔0, 𝒔∗>$ comprised of…
+We can express our SAS+ planning problem as a 4-tuple of $Π = <𝑉, 𝑂, 𝒔0, 𝒔∗>$ comprised of…
 
 - The **set of all state variables** **$V$** (which can also be fluent or numeric values), each with their own associated domain of possible values.
   
@@ -457,7 +459,7 @@ Given we are only interested in a given action in changing specific variables in
 ### SAS+ Operations Conditions
 In SAS there are 2 types of operation condition:
 - **prevail conditions**: 
-    Variable = Value that stays the same;
+    The value of a variable stays the same;
     When loading a package p1 onto a truck t1 at location l1:  <t1,at-l1>
 
 - **pre_post conditions:** 
@@ -469,12 +471,12 @@ In SAS there are 2 types of operation condition:
 It's just a graph of nodes and directed edges. Each node is a state and each edge is an action. 
 <div class="question"><br>What is the difference between that and a normal graph?<br>
 Why is this relevant to SAS+?<br> 
-<b>Possible Answer:</b> This was a way of representing the problem from the perspective of just one variable.
+<b>Answer:</b> This is a way of representing the problem from the perspective of just one variable.
 </div>
 
 ## Pattern Databases (PDB) (video 1 from week 5)
 
-As we have seen, adding new variable massively increases the complexity which, however, can be reduced using constraints.
+As we have seen, adding new variables massively increases the complexity which, however, can be reduced using constraints.
 
 What if we set the cost of the original problem by decomposing it into a set of **sub-problems**?
 - **Solution costs to sub-problems** will provide an **admissible heuristic** to solve the actual problem.  
@@ -501,7 +503,7 @@ In this diagram, $<x_1, x_2, x_3>$
 - $x_3$ = truck B location {L, R}
 
 Applying an **abstraction formula $\alpha$** we can abstract this problem into a simpler one. 
-For example, we may only consider the problem from the point of view of the package, so **we group the state** based on the location of the package:
+For example, we may only consider the problem from the point of view of the package, so **we group the states** based on the location of the package:
 <img src="./img/Abstraction_2.png">
 
 The obtained heuristic value (given $\alpha$) $h^\alpha()$ from the initial state $s_0$ is 
@@ -532,7 +534,7 @@ Well, a possible way would be to create 2 abstraction functions, one taking into
 
 ## Cost Partitioning (video 2 from week 5)
 
-Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be choosen. We denote this heuristic with 
+Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be chosen. We denote this heuristic with 
 > $h^{max}(s_i)$
 > **Max** in this case is referred to the one with the maximum score, which in fact is the best. Why? As we are assuming all the heuristic are admissable, we want to take the one with the highest score as it better represent the actual possible strategy.
 
@@ -544,12 +546,12 @@ Here we are hoping to **split the action costs** – or more appropriately, part
 
 So in essence, we’re trying to ensure our suite of available heuristics is additive, such that we can ensure the summation of these heuristics is still admissible. 
 
-The way you do that is if we have found the best values in one heuristics, **we tweak the other heuristics** such that it stills additive.
+The way you do that is if we have found the best values in one heuristics, **we tweak the other heuristics**.
 
 There are many Cost Partitioning approaches:
 
 ### Optimal Cost Partitioning
-Given some possible actions such as those in the figure, you want to redistribute the cost of each action across both the graphs, so that if such a path is included in both $h^{max}(s_i)$, then it's like if\ $h^{add}(s_i)$ would count the action just at its original cost. 
+Given some possible actions such as those in the figure, you want to redistribute the cost of each action across both the graphs, so that if such a path is included in both $h^{max}(s_i)$, then it's like if $h^{add}(s_i)$ would count the action just at its original cost. 
 
 Here is an example:
 <img src="./img/Optimal_Cost_Partitioning.png">
@@ -585,7 +587,7 @@ The issue with this approach is that we may keep the cost for an action which wo
 ----
 
 ### Saturated Cost Partitioning
-This is in a improvement over the Greedy Zero One Cost. The issue with the Blue action is resolved in a simple way, setting it to 0 would be we would choose that over green and we would reduce the heuristic by 1 (4 + 1) => (4 + 0). Not to change the final heuristic, we se the value of all the actions not used to find the best cost to the cost of the action(s) which achieve the same result.
+This is in a improvement over the Greedy Zero One Cost. The issue with the Blue action is resolved in a simple way, setting it to 0 would be we would choose that over green and we would reduce the heuristic by 1 (4 + 1) => (4 + 0). Not to change the final heuristic, we see the value of all the actions not used to find the best cost to the cost of the action(s) which achieve the same result.
 So in the example, **green (1)** is preferred over **Blue (4)**, but they both achieve the same state, so **we drop blue cost to the same of green, so that Blue(1)**
 
 The remaining blue cost (3) is used in the next abstractions.
@@ -601,7 +603,7 @@ The non relevant actions costs drop to 0.
 
 ## GraphPlan (video 3 week 5)
 
-A **GraphPlan** is pretty similar to the RPG, in fact, RPG is a simplification of the GraphPlan. The main difference is that RPG uses **delete relaxation**, that is, fact are never deleted.
+A **GraphPlan** is pretty similar to the RPG, in fact, RPG is a simplification of the GraphPlan. The main difference is that RPG uses **delete relaxation**, that is, facts are never deleted.
 
 In a GraphPlan, as the fact deletion is taken into account, from an action layers there are two types of lines leading to the next fact layer:
 - The standard straight black lines, indicating addition;
@@ -626,7 +628,10 @@ To enforce these rules, GraphPlan considers **Mutexes**, so some actions are not
 - **Inconsistent Support**: where two literals are mutex because **all ways in which we can create them in the fact layer are also mutex**.
 
 
-The flow is the same as for RPG, you reach a layer where the goals are satisfied, then you **do a back propagation** to find a solution. If it is found that's it, otherwise **add a new layer to the graph and repeat**.
+The flow is the same as for RPG:
+- you reach a layer where the goals are satisfied,
+- then you **do a back propagation** to find a solution
+- if it is found that's it, otherwise **add a new layer to the graph and repeat**.
 
 At level **i**, pick a **non-mutex subset of actions** that achieve the goals at level **i+1**. 
 The preconditions of these actions become the goals at level i.
@@ -641,7 +646,22 @@ Use an action that was already selected if possible. Do forward checking on rema
 
 ## SAT in Planning (video 4 from week 5)
 
-Things about SAT I am too lazy to include, please refer to the powerpoint
+CSPs (constraints satisfaction problems) are easily convertible to one another and the solution to one can be, in turn, converted into the solution of another. 
+The idea here is to convert the problem of planning into a SAT problem.
+
+In the context of planning, we’re trying to find a valid configuration of variables at different stages of the planning process such that it yields a true outcome, meaning that there is a combination of states, when put in the right order satisfy the constraints of the actions in the planning domain and enable us to transition from the initial state of the problem to the goal.
+
+**How do we convert planning to SAT?**
+<br>
+Our problem can be expressed as 
+
+> 𝝆 = (𝜮, 𝒔𝒊, 𝒔𝒈) 
+
+Then we create clauses that describe how the variables can possibly change (actions). Denoting how a given variable will change between two time points **t** and **t+1**.
+Once we have these clauses, the trick is to find a SAT formula phi 𝝓 and we then aim to satisfy it.
+>If 𝝓 is satisfiable, then a plan exists for the planning problem 𝝆 <br>
+>Every possible solution for 𝝓 results in a different valid plan for 𝝆
+
 
 The time steps go from 
 - $0 \rArr T$ for the **predicates**, as at $T_0$ there exist some predicates already;
@@ -698,3 +718,14 @@ As some actions may be conflicting, we have to enforce again the concept of **mu
 - **Conflict Exclusion Axiom**: prevents invalid actions on the same timestep.
 Two actions conflict if either **their preconditions contradict or their preconditions are not consistent with their effects**. This would allow us to solve plans with in a ***partial order*** fashion, which is a topic of a later chapter 
 More on this topic partial order planning in another chapter.
+
+# Week 6 
+## Partial Ordering Planning (video 1)
+
+So far we have seen all the plan as starting from the initial state and moving towards the goal state. This is known as **forward search** or progression search. 
+There are however some planners that start from the goal state and move backwards; this planners operate a **regression search**.
+
+The idea behind this planners is to consider what actions could have lead to that state.
+> In the example of the amazon driver that delivers a dvd to myHome, the goal state is (at myHome dvd).
+> If we were to identify this a 3-tuple state $<dvd-loc, truck-loc, driver-loc>$
+> As I do not care of the truck and the driver location, I write my state as <img src="">
