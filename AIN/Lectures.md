@@ -31,6 +31,20 @@
         color: rgb(220, 0, 0);
     }
 
+    .info {
+        background: rgba(240, 240, 0, .3); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(190, 190, 0);
+    }
+
+    .info::before {
+        content: "INFO: ";
+        font-weight: bold;
+        color: rgb(190, 190, 0);
+    }
+
     .definition {
         background: rgba(80, 80, 255, .2); 
         padding: 5px; 
@@ -266,6 +280,7 @@ Now, there are 2 approaches to this problem:
 <br>
 
 ## Markov Decision Process (MDP)
+It is a **Markov Chain** with the addition of **probability and reward**; also, the probability distributions do not change.
 
 This greedy approach takes into account only the next state, but in real life, agents have to take a **series of decisions**.
 
@@ -403,15 +418,13 @@ Some interaction scenarios **have more than one NE**.
 The optimal pair of strategies might be as well in the NE.
 <img src="./img/NE.png">
 
-<<<<<<< HEAD
 <div class="warning">When looking for a NE remember that, if you want to check whether a cell is a NE:
 <ul>
 <li><b>for the column player you can only move LEFT or RIGTH</b></li> vice versa <li><b>for the row player you can only move UP and DOWN</li></b>
 </ul>
 </div>
-=======
+
 > Remember, in a NE, given one agent opts for a **pure strategy** (aka, its strategy is fixed), you have to look at the payoff of the other agent only. In the above example, say $i$ move is **C**, then $j$ can either play **D** or **C**, and the payoffs to look at are respectively **0** and **3** **ONLY**.
->>>>>>> 3e63bc27a50de7bf51c139bad70ca15bf7b4f07a
 
 ###### video 4 Pareto Optimality
 
@@ -452,7 +465,121 @@ This is a special type of constant game where the sum is always **0**
 
 The toss a coin game where the payoff is $\pm 1$ would result in a sum payoff of 0 all the times. Another example is rock, paper, scissor
 
+# Week 6 
+## PCA (video 1)
+**PCA** (or **Principal Component Analysis**) is ***dimensionality reduction*** technique. **SVD** (or **Simple Value Decomposition**) share the same idea and you can often interchange them, however, SVD is preferred.
 
+What you do in PCA is you want to reduce the number of dimensions so that you can use clustering to make easier to analyse and plot the data. The steps are:
+- take 2 or 3 dimensions;
+- (plot them if you want a graphical representation);
+- find a regression function with the **highest variance** (the more spread are the reflections of the X on the line, the better); and
+- use that regression as a new, single dimension.
+
+Say you start with 5 dimensions, you can group them into 2 PCAs (PCA_1 and PCA_2) with 3 and 2 features and make a new graph.
+The PCA represented on X axis is more important than the one on the Y axis, as such, when a cluster A is equally distant from 2 clusters B and C, the further away in the X axis is the more different.
+
+<div class="info">
+    When he operates the LSD (least square distance), the distance from the regression line is actually the minimum distance from the point to the line rather than the distance which is parallel to the Y-axis. 
+    He is using the <b>perpendicular offset</b> rather than the <b>vertical offeset</b>
+    <img src="./img/PCA_LSD.png">
+</div>
+
+
+
+**(video 2)**
+When you have 3 dimensions, ideally you want to reduce them to 1 eventually to be able to plot them in the PCA graph, however, you can go from a 3D to a 2D plot and that is still fine, but you have to remember that your PCA graph will end up with 1 more dimension.
+
+Generally, if you have a 3D plan of **x1, x2, x3** and you create a 2D plan out of it, the hyperplane you have just created has **z1** and **z2** as axis names
+
+## Matrix multiplication (video 3)
+In a matrix $m \times n$ like the following one a common mistake may be to consider the cols as the X-axis and the rows as the Y-axis, but to refer to a cell it is actually the opposite. 
+As you can see by looking at the names, the position of $a_{32}$ uses the **row as the first index** (row 3) and the **column as the second index** (col 2)
+<img src="./img/PCA_matrix.png">
+Even the dimensions are indicated as **$rows \times cols$** that is **$(m \times n)$**
+
+**How do you multiply 2 matrices**
+
+When you multiply matrices the order matters, so the commutative property does not hold.
+Say you have 2 matrices $M_1$ and $M_2$, then $M_1 \times M_2 \ne M_2 \times M_1$.
+In a 2 matrices multiplication, say $M_1 \times M_2$, the resulting matrix $M_3$ will have:
+- the number of columns of $M_1$ and
+- the number of rows of $M_2$;
+
+> e.g. $(M \times K) \cdot (K \times N) = (M \times N)$
+
+<div class="warning">
+    The <b>K</b> dimension from the previous example has to be the same in both matrices, otherwise the operation cannot performed.
+</div>
+
+> Look at this matrix multiplication 
+<img src="./img/scalar_mul.png">
+The first matrix is a <b>5 x 1</b> (5 rows and 1 col) whereas the second is <b>1 x 4</b> (1 row and 4 cols).
+For what said before, the resulting matrix will have 5 rows and 4 cols, so it will be a <b>5 x 4</b> matrix.
+
+Having said that, the way you calculate the value for each cell should be pretty intuitive:
+<img src="./img/Matrix_Multiplication.png">
+
+**Transposition**: it means you flip the matrix along the main axis, aka you invert the indices, so $a_{ij}$ becomes $a_{ji}$.
+
+
+## Matrix transformation
+Let's say we have a matrix $\begin{pmatrix}
+x\\
+y
+\end{pmatrix}$ which represents a **2D image**.
+
+Using Matrix multiplication, you can change the aspect of this image in many ways:
+
+**Image Stretching**
+<img src="./img/matrix_stretching.png">
+
+**Image Rotation**
+<img src="./img/matrix_rotation.png">
+
+**Image Skewing (Shear mapping)**
+<img src="./img/matrix_skewing.png">
+
+## Eigenvector and Eigenvalue
+If you look closely at the third image transformation you will notice that the **X vector** (the green arrow) did not change at all.
+
+When a vector doesn't change its direction after a multiplication with a matrix, then it's an **eigenvector**.
+
+Contrary, the white vector did the change its direction, so it is not an *eigenvector*.
+
+In the first transformation, both the vectors are **eigenvectors** as they keep their direction, however, their length does change and that changing factor is called **eigenvalue**$\lambda$.
+
+### Eigenvector formula
+A vector **v** is an **eigenvector** of the matrix **M** if
+> $M \times v = λv$.
+> 
+$λ$ is the corresponding eigenvalue.
+
+So multiplying **M** by **v** would result in **v times an eigenvalue**.
+
+> e.g. <img src="./img/eigen_example.png">
+
+## Calculating PCA using SVD
+
+1. Start with the matrix $\textbf X$ you are interested in **reducing the dimensionality** of;
+   > $\textbf X$ dimensions are $n \times d$
+2. For each feature (**so actually the columns**) calculate the **mean** $\overline{\textbf x}$ (**mean row vector**);
+3. Using matrix multiplication, multiple $\overline{\textbf x}^T$ by a matrix full of **ones** to obtain a matrix of the same dimensions as $\textbf X$. We will call this matrix $\overline{\textbf X}$ (**mean row matrix**).
+   > $\overline{\textbf X}$ dimensions are $n \times d$ (1 row for each entry and 1 col for each feature, or col, in $\textbf X$). The result should be something like:
+   > $\begin{pmatrix}
+        1 & 5 & 12 & 3,5\\
+        1 & 5 & 12 & 3,5\\
+        & & ... & \\
+        1 & 5 & 12 & 3,5
+        \end{pmatrix}$
+    
+4. Given you have the mean of each row, you can **shift an hypothetical graph** so that its mean is the origin of the plan. The way you do it is by subtracting the mean to each elements $\textbf B = X - \overline{X}$.
+   > **Note**: we shift the values, but the distance from each point remains the same.
+   
+   > $\textbf B$ dimensions are $n \times d$
+5. Given $B$ we want to calculate the **covariance matrix $\textbf C$** we just multiply the values of $B$ by themselves as $\textbf C = B^TB$;
+   > $ \textbf C$ dimensions are $(n \times d)^T \times (n \times d) = (d \times n) \times (n \times d) = d \times d$
+6. (Using a software) Compute the $k$ largest eigenvector $\textbf{v}_1, \textbf{v}_2, ... , \textbf{v}_k$ of $\textbf{C}$. 
+   > Each eigenvector has dimension $1 \times d$.
 
 <br>
 <br>

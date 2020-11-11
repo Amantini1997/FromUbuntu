@@ -208,7 +208,7 @@ c.
 ## 1 - For each of the interaction scenarios below:
 (i) Determine which strategies are dominated (and explain why)
 > a. For $i$ there is no domination. 
-> &nbsp; &nbsp; For $j$ R dominates L as (4 3) > (3 1)
+> &nbsp; &nbsp; For $j$ R dominates L as (4 3) > (2 1)
 > 
 > b. NO domination for either agent
 > 
@@ -216,8 +216,8 @@ c.
 
 (ii) Use the idea of deleting strongly dominated strategies to simplify the scenario where appropriate.
 > a. For $i$ there is no domination. 
-> &nbsp; &nbsp; For $j$ R dominates L as (4 3) > (3 1). 
-> Now U dominate D, so we reaming with only U L as a possible move.
+> &nbsp; &nbsp; For $j$ R dominates L as (4 3) > (2 1). 
+> &nbsp; &nbsp; For $j$ Given this, now U dominate D, so we remain with only U L as a possible move.
 > b. Exactly the same as a., R is deleted first and D follows.
 
 (iii) Identify any Nash equilibria.
@@ -271,35 +271,6 @@ How do the outcomes of this game compare with those of the Prisoner’s dilemma?
 > The worse case for both of the agents (S S) is not a NE, so they would both agree to move away from it. All the other strategies maximise the social welfare and they are all Pareto efficient. So, differently from the previous case, there is no actual solution which is the best `(S S) in the prisoner's dilemma`.
 
 
-1. For the optional computational part of the tutorial.
-On KEATS you can find the file intro.py. This is illustrates the cabailities of the Python package called
-Nashpy:
-https://nashpy.readthedocs.io/en/stable/index.html
-Nashpy provides tools for handling two player games. You can install it using:
-pip install nashpy
-Anaconda includes pip, which is a package manager for Python, as well as its own package maanger conda
-so if you have Anaconda installed1
-installation is easy. Otherwise, I’m afraid that you are on your own.
-With Numpy installed, you can run intro.py with:
-python intro.py
-from the command line. As set up, this loads up Rock, paper, scissors, Matching pennies, and Prisoner’s
-dilemma and shows what Nashpy can do, extracting player utilities under specific strategies and searching for
-Nash equilibria.
-Now try using Nashpy to check your answers to part (iii) of Q1 (a)–(e). Note that where there are mixed
-strategy Nash equilibria, Nashpy will find those also.
-5. Since Nashpy makes it possble to search through the outcomes of the games, you should be able to write code
-that:
-(a) Identifies dominated strategies.
-(b) Identified Pareto optimal outcomes
-(c) Identifies outcomes that maximise social welfare.
-Use your code to check your answers to parts (i), (iv) and (v) of Q1 (a)–(e).
-6. Write code that uses Nashpy to search for pure strategy Nash equilibria.
-1
-If you don’t have Anaconda installed, you can install that from https://www.anaconda.com/download. If you are planning to
-do much with Python, Anaconda is pretty handy to have since it makes it easy to install new packages.
-2
-
-
 
 
 <br>
@@ -309,20 +280,3 @@ do much with Python, Anaconda is pretty handy to have since it makes it easy to 
 <br>
 <br>
 <br>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-before we move to the next question, could repeat why we included c? is it bc it's in the markov blanket of s?
-
-

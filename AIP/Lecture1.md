@@ -203,7 +203,7 @@ Consider an RPG and:
 
 <img src="./img/RPG_Landmarks.png">
 
-In the example above, you can see that **G** is a goal state and that, to achieve it, **A** is the only fact necessary as it appears in all the actions required (intersectioj)
+In the example above, you can see that **G** is a goal state and that, to achieve it, **A** is the only fact necessary as it appears in all the actions required (intersection)
 
 ---
 <br>
@@ -667,7 +667,7 @@ The time steps go from
 - $0 \rArr T$ for the **predicates**, as at $T_0$ there exist some predicates already;
 - $1 \rArr T$ for the **actions**, as the first actions has to be executed at $T_1$
 
-<div class="definition"><b>Planning Horizon (<i>T</i> ):</b> is the last time step at which we execute an action.</div>
+<div class="definition"><b>Planning Horizon (<i>T</i> ):</b> is the last time step at which we execute an action. (this starts at 1 and is increased by 1 if the solution cannot be found)</div>
 
 How do we know how much to set $T$ to?
 > we don't, it's a **trial and error process** wherein you keep pushing up the value for **T**
@@ -720,7 +720,7 @@ Two actions conflict if either **their preconditions contradict or their precond
 More on this topic partial order planning in another chapter.
 
 # Week 6 
-## Partial Ordering Planning (video 1)
+## Partial Ordering Planning - POP (video 1)
 
 So far we have seen all the plan as starting from the initial state and moving towards the goal state. This is known as **forward search** or progression search. 
 There are however some planners that start from the goal state and move backwards; this planners operate a **regression search**.
@@ -728,4 +728,108 @@ There are however some planners that start from the goal state and move backward
 The idea behind this planners is to consider what actions could have lead to that state.
 > In the example of the amazon driver that delivers a dvd to myHome, the goal state is (at myHome dvd).
 > If we were to identify this a 3-tuple state $<dvd-loc, truck-loc, driver-loc>$
-> As I do not care of the truck and the driver location, I write my state as <img src="">
+> As I do not care of the truck and the driver location, I write this predicates as <b>"?"
+> </b> <img src="./img/regression_search.png">
+> As you can see, the load action allows for multiple values of T, this is due to the fact that you do not know where the loading action happened, but you are just implying that it happened before (unload MH), that is, a partial order.
+
+<div class="warning">Searching this way is not guaranteed to be faster and it is harder to find a good heuristic.
+</div> 
+
+As there are many states that you can visit, the idea is to use **Partial Order Planning (POP)**, where we’re going to play within the plan space – a sort of lifted representation of the state model – and find actions we want to apply, but **not dictate the order immediately**. 
+
+
+In fact, we’ll **generate a partial order plan**, after which the job is then to try and **find the optimal solution that ensures their orderings** are valid.
+
+So we begin with:
+- initial state,
+- goal state, and our
+- the set of actions.  
+
+We can then aim to find an action that addresses an unresolved goal much like before, and if it is satisfying what we’re trying to do, we add it to the plan, we add its preconditions as subgoals.  But we also add what is known as a **causal link**.
+
+<div class="definition">
+A <b>causal link</b> is a special identifier that acknowledges which actions meet which preconditions of other actions.
+</div>
+
+An example of causal link in the DVD problem is that, if I eventually want the drive to be at my home to unload the DVD, the truck has to drive from London to home; this action is a first causal link, but also the fact that London and my house have to be linked (aka the driver can drive from London to my house) is a causal link. 
+
+We can then also consider **bindings**: which is ensuring that **two actions use the same parameter**, thus ensuring some **continuity**.  
+> e.g. loading a package and unloading a package at different points in the plan both use the same package or the same truck.
+
+And lastly, there are **threats**: threats are when the search process discovers that an **existing ordering of actions will break bindings and causal links**.  You can then resolve this by either promoting an action, meaning you move it to after the connection it threatens, or demotion, which moves it behind it. (by moving it means that an action has to be executed BEFORE or AFTER another action).
+
+## Hierarchical Task Network - HTN(video 2)
+What if, instead of considering all the possible actions and states, you group them together?
+This is the idea behind HTN wherein you try to accomplish big tasks altogether and to achieve that, you use methods.
+
+**Reframe the problem as follows:*
+Consider **tasks to complete instead of goals to satisfy**.
+> Tasks are little more abstract than a typical planning problem.
+
+Use **methods to decompose tasks into subtasks**.
+> - Enable for gradual decompositions of complex task into smaller and more manageable tasks.
+> - A subtask could be a single action, or another method in and of itself.
+> - We enforce constraints of the problem in the method and actions.
+
+>HTN can be seen as a 4-tuple:
+<img src="./img/HTN_tuple.png">
+
+**HTN planning defines two types of tasks.**
+ - **Primitive Tasks**: Translate to single planning action (this are the only tasks that actually change the state because they translate directly into actions from the planning domain).
+ - **Compound Tasks**: Translate into a collection of one or more tasks.
+
+> Methods can be used to group together multiple actions, but also to add constraints to the original action. Given this, a compound method can translate into a single action, but adding constraints.
+
+**Planning Process:**
+- Recursively refine each task into subtasks.
+- Ensure tasks can then be grounded with literals.
+
+### HTN is Up/Down rather than Backward/Forward
+<img src="./img/HTN_Search.png">
+<div class="warning">When you break down the tasks it is important to take into account the current world state as the actions eventually follow a <b>total ordering of tasks</b> (you can see this in the above picture where task t<sub>M</sub> happens before task t<sub>N</sub></div>
+
+The reason why total ordering is an issue is represented in this problem:
+<img src="./img/HTN_ordering.png">
+
+That said, partial ordering requires a more complex algorithm to achieve it.
+
+HTN is a general concept, what we have seen here is **Simple Task Network (STN) Planning**, which is a subset of HTN.
+
+All the classical planning can be converted into HTN in P TIME, but **not** all HTN problems can be expressed in classical planning. 
+
+
+## Planning under uncertainty (video 3)
+
+<div class="definition"><b>Markov property:</b> The probability distribution of transitioning from state <b>s</b> to any successor <b>s'</b> is only determined by <b>s</b></div>
+
+You are said to be **planning under uncertainty** the transitions and the reward functions are know and the state are fully observable.
+
+If any of these elements is not available, you are doing **reinforcement learning** instead.
+
+**(video 4)**
+Suppose now that you do not know what state you are in, but, using observations, you can assume which states you are possibly in.
+This situation is still a MDP, but with **partial observability (POMDP)** and still uncontrolled decisions (**Hidden Markov Model**).
+
+What you do in these cases is you create a **belief vector** which is a vector of length equal to the number of possible states, and each cell contains the probability for the agent to be in that state.
+
+In the canonical example of (.8 .1 .1 chances of move and -.04 reward per move) the belief vector would start as 1/9 value on each cell, that is the agent has 1/9 possibility to be in that state, but 0 in the final cells (-1 and +1).
+
+As we said, you do not know where you are in, but you can use a **sensor model** $O(o|s)$ for the probability of observations in the current state.
+Let's say you make an UP move and you observe that you have 1 and only 1 wall next to you. Given this you can update the belief vector so that it redistributes the probability correctly over those cells that, given that move, could allow you to reach a 1-wall cell.
+<img src="./img/belief_vector.png">
+
+> the starred states indicates the possible state you may be in given that you are in a 1-wall cell.
+> b(X) indicate the belief vector
+
+
+
+
+
+.
+.
+.
+.
+.
+l
+
+

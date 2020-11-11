@@ -477,3 +477,85 @@ Obese people (especially women) are way less likely to be hired.
 Being aware of the fact that we are often biased is the best way to mitigate it.
 
 We are not biased on purpose, it is an unconscious process.
+
+
+
+# Week 6 - Training
+
+# RITZ-CARLTON Case study
+The history of the Ritz-Carlton is the one of a luxury hotel which guests have always experience an amazing staying. Employees are perhaps the most important resource of the company and their training is fundamental. 
+
+Employees are treated as *ladies and gentlemen* so that the company can retain them and, most importantly, because if the hotel treats them this way, they will treat guest the same way in turn.
+
+The voluntary attrition (abbandono) rate is only 18%, which is well below the industry standard.
+
+Ritz-Carlton realised that the quality of its end products was only as good as the people providing it. They do not "*hire*" people, they "*select*" them. As every employee has to take care of just one task, but they have to do it very well, the company prepared the ideal profile, job description, and quality recruitment based on the top performers from its hotel chain and the other comparable organisations. 
+
+Candidates go through many interviews with different managers and they have to prove worthy of the job and full of empathy, kindness, passion for the job, and the ability to smile naturally.
+
+> Technical skills can be taught, a change in the attitude is instead harder to achieve.
+
+The idea is that people can show no skills, but the training cab teach them. What the training cannot teach them is to be passionate about their job and to smile in every situation.
+
+## After being recruited
+
+**2 day orientation**
+After being recruited, the new employees undergo a 2 day orientation program. During this period they are treated like guests, they stay in the hotel rooms, eat at its restaurants, and a top managers welcome them with hand-written welcome cards. This is to ensure that they enjoy their job since day 1.
+
+**21 day training**
+After the initial orientation, each new recruit is assigned to and experience employee for 3 weeks of training. The 3 week the recruit performs the job and the actual employees gives feedback on his performance.
+Recruits are instructed on the kind of language to use, omn dressing and appearance, and the behaviour with customers.
+After this period, the top managers listens to the employee and the feedback; this allows him to check that the behaviour of employees is in line with the Ritz-Carlton philosophy and that the training is good enough.
+
+At the end of the period, the employee takes a test to gauge(valutare) their technical skills and to demonstrate they have learnt the company philosophy. If not, the employee is offer the possibility to either leave or to join a department more suited to them.
+
+**365 Certificate**
+The training does not stop after those 21 days and employees are trained until day 365. Here they are tested again and certified.
+
+**On going training**
+The training does not stop after the first year and employees keep learning by doing and via courses
+
+
+Each employee was given $2,000 a day to spend in assisting and helping guests. This gave them a lot of freedom as they did not have to ask for approval from managers, but also great responsibility (you consider them like valuable resources who can handle valuable resources).
+
+Employees were also encouraged to suggest ideas to cut costs down or improving quality. Worthwhile ideas were awarded with cash bonuses. "employees have to feel part of the Ritz-Carlton".
+
+**Why employee prefer RC**
+Salaries are not higher than competitors, but employees are treated kindly and respectfully. Also the possibility of escalating the hierarchy lengthens job tenure.
+
+##
+Changes are bigger and are happening faster, and learning is the way to keep ahead, to maintain employability in an era when jobs have gone. It enables organizations to sustain their edge as global competition increases. Learning to learn is the ultimately life skill” (Honey, 1998)
+
+<img src="./img/honey.png">
+
+> What Honey means by that is that **learning** and managing knowledge is the way to achieve innovation and to keep oneself different from the competitors; also that **being different is now more important than being better** with respects to your competitors.
+
+A **learning company** is one that seeks for new ideas, comes up with new ideas, moves them throughout the organisation, and *then* it actually **acts**, it takes the new knowledge as a basis for responding to a changing environment.
+
+This **learning process** is accompanied by a **learning environment** that makes this processes possible, and the **leadership** that fosters and inspires the learning processes and helps create this learning environment model.
+
+Product and services can be copied, so stay ahead of the competition, **learning is the only real competitive advantage you can have**.
+If your rate of learning is smaller than the rate of changing you are gonna fall behind
+.
+.
+.
+.
+.
+.
+.
+..
+.
+.
+.
+.
+.
+.
+.
+.
+.
+...
+.
+.
+.
+.
+.
