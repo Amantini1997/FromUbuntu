@@ -272,6 +272,155 @@ How do the outcomes of this game compare with those of the Prisoner’s dilemma?
 
 
 
+# Week 6
+You’re given the data matrix X with n = 4 houses and d = 3 features. Your goal is to run the PCA
+algorithm from the slides to X in order to reduce the number of dimensions to k = 2
+
+$X = \begin{pmatrix}
+4 & 2 & 3\\
+6 & 1 & 3\\
+4 & 2 & 5\\
+7 & 8 & 3\\
+\end{pmatrix}$
+
+$\overline{x}^T = \begin{pmatrix}
+5.25 & 3.25 & 3.5\\
+\end{pmatrix}$
+
+$\overline{X} = \begin{pmatrix}
+5.25 & 3.25 & 3.5\\
+5.25 & 3.25 & 3.5\\
+5.25 & 3.25 & 3.5\\
+5.25 & 3.25 & 3.5\\
+\end{pmatrix}$
+
+$B = X - \overline{X} = \begin{pmatrix}
+-1.25  &  -1.25  &  -0.5\\
+ 0.75  &  -2.25  &  -0.5\\
+-1.25  &  -1.25  &   1.5\\
+ 1.75  &   4.75  &  -0.5\\
+\end{pmatrix}$
+
+$C = B^TB = \begin{pmatrix}
+-1.25 &  0.75  &  -1.25  & 1.75 \\
+-1.25 &  -2.25 &  -1.25  & 4.75 \\
+-0.5  &  -0.5  &   1.5   & -.05 \\
+\end{pmatrix} \cdot $ $\begin{pmatrix}
+-1.25  &  -1.25  &  -0.5\\
+ 0.75  &  -2.25  &  -0.5\\
+-1.25  &  -1.25  &   1.5\\
+ 1.75  &   4.75  &  -0.5\\
+\end{pmatrix}$
+
+$C = \begin{pmatrix}
+6.75  &  9.75 & -2.5\\
+9.75 & 30.75  & -2.5\\
+-2.5 & -2.5   &  3\\
+\end{pmatrix}$
+
+
+
+
+# Week 7
+## 1 Perform k-Median
+on 
+$x_1 = (3, 4),$ 
+$x_2 = (4, 2),$
+$x_3 = (1, 2),$
+$x_4 = (1, 1),$
+$x_5 = (1, 3)$
+
+$\mu_1(1, 1)$ 
+$\mu_2(2, 4)$
+
+In case of tie assign to the cluster with lower ID $\mu_{ID}$
+
+**ITERATION 1**
+
+|node | d to $\mu_1$ | d to $\mu_2$ |
+|-|-|-|
+|x1 | (2, 3) = 5 | **(1, 0) = 1** |
+|x2 | **(3, 1) = 4** | (2, 2) = 4 |
+|x3 | **(0, 1) = 1** | (1, 2) = 3 |
+|x4 | **(0, 0) = 0** | (1, 3) = 4 |
+|x5 | **(0, 2) = 2** | (1, 1) = 2 |
+
+$μ_1 = $ ((4 + 1 + 1 + 1)/4, (2 + 2 + 1 + 3)/4) = **(1.75, 2)**
+$μ_2 = $ **(3, 4)**
+
+
+$x_1 = (3, 4),$ 
+$x_2 = (4, 2),$
+$x_3 = (1, 2),$
+$x_4 = (1, 1),$
+$x_5 = (1, 3)$
+
+**ITERATION 2**
+
+|node | d to $\mu_1$ | d to $\mu_2$ |
+|-|-|-|
+|x1 | (1.25, 2) = 3.25 | **(0, 0) = 0** |
+|x2 | **(2.25, 0) = 2.25** | (2, 2) = 4 |
+|x3 | **(0.75, 0) = 0.75** | (2, 2) = 2 |
+|x4 | **(0.75, 1) = 1.75** | (2, 2) = 4 |
+|x5 | (0.75, 1) = 1.75 | **(2, 1) = 1** |
+
+$μ_1 = $ ((4 + 1 + 1)/3, (2 + 2 + 1)/3) = **(2, 1.7)**
+$μ_2 = $ ((3 + 1)/2, (4 + 3)/2) = **(2, 3.5)**
+
+$x_1 = (3, 4),$ 
+$x_2 = (4, 2),$
+$x_3 = (1, 2),$
+$x_4 = (1, 1),$
+$x_5 = (1, 3)$
+
+
+**ITERATION 3**
+
+|node | d to $\mu_1$ | d to $\mu_2$ |
+|-|-|-|
+|x1 | (1, 2.3) = 3.3 | **(1, 0.5) = 1.5** |
+|x2 | **(2, 0.3) = 2.3** | (2, 1.5) = 3.5 |
+|x3 | **(1, 0.3) = 1.3** | (1, 1.5) = 2.5 |
+|x4 | **(1, 0.7) = 1.7** | (1, 2.5) = 3.5 |
+|x5 | (1, 1.3) = 2.3 | **(1, 0.5) = 1.5** |
+
+$μ_1 = $ ((4 + 1 + 1)/3, (2 + 2 + 1)/3) = **(2, 1.7)**
+$μ_2 = $ ((3 + 1)/2, (4 + 3)/2) = **(2, 3.5)**
+
+
+## 2. How would the first assignment and update step look if we used k-Means instead?
+
+**ITERATION 1**
+
+|node | d to $\mu_1$ | d to $\mu_2$ |
+|-|-|-|
+|x1 | (2, 3) = $\sqrt{10}$ | **(1, 0) = 1** |
+|x2 | (3, 1) = $\sqrt{10}$ | **(2, 2) = $\sqrt{8}$** |
+|x3 | **(0, 1) = 1** | (1, 2) = $\sqrt{5}$ |
+|x4 | **(0, 0) = 0** | (1, 3) = $\sqrt{10}$ |
+|x5 | (0, 2) = 2 | **(1, 1) = $\sqrt{2}$** |
+
+$μ_1 = $ ((1 + 1)/2, (2 + 1)/2) = **(1, 1.5)**
+$μ_2 = $ ((3 + 4 + 1)/3, (4 + 2 + 3)/3) = **(2.7, 3)**
+
+
+## 3. Perform complete linkage on the following similarity graph. 
+Note that the similarity of all edges that aren’t present is 0! Also note that 
+- sim(f, g) = 6,
+- sim(g, h) = 11 and 
+- sim(f, i) = 8.
+
+<img src="./img/7_tutorial.png">
+
+1. B + D => 1
+2. BD + A => 2
+3. BDA + C => 2
+4. H + I => 5
+5. F + G => 6
+6. FG + E => 7
+7. FGE + HI => 8
+8. ABCD + FGEHI => 9
 
 <br>
 <br>

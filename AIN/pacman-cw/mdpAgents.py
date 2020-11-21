@@ -37,42 +37,18 @@ import math
 import itertools
 import copy
 
+
 class MDPAgent(Agent):
 
-    # Constructor: this gets run when we first invoke pacman.py
-    def __init__(self):
-        print "Starting up MDPAgent!"
-        name = "Pacman"
+    MOVE_DEBUG = False
 
-    # Gets run after an MDPAgent object is created and once there is
-    # game state to access.
-    def registerInitialState(self, state):
-        print "Running registerInitialState for MDPAgent!"
-        print "I'm at:"
-        print api.whereAmI(state)
-        
-    # This is what gets run in between multiple games
-    def final(self, state):
-        print "Looks like the game just ended!"
+    GHOSTS_MAX_ALLOWED_DISTANCE = 8
+    EDIBLE_GHOSTS_MAX_ALLOWED_DISTANCE = 1 # None
 
-    # For now I just move randomly
-    def getAction(self, state):
-        # Get the actions we can try, and remove "STOP" if that is one of them.
-        legal = api.legalActions(state)
-        if Directions.STOP in legal:
-            legal.remove(Directions.STOP)
-        # Random choice between the legal options.
-        return api.makeMove(random.choice(legal), legal)
-
-
-
-
-
-
-
-
-
-class BetterHungryAgent(Agent):
+    GHOST_REWARD = -7.0
+    FOOD_REWARD = 1.0
+    MOVE_REWARD = -0.04
+    DISCOUNT_FACTOR = 0.9
 
     oppositeDirections = {
         Directions.SOUTH: Directions.NORTH,
@@ -103,180 +79,98 @@ class BetterHungryAgent(Agent):
         (0, 0)  : Directions.STOP
     }
 
-    # directionToMove = {
-    #     Directions.EAST : (1, 0),
-    #     Directions.WEST : (-1, 0),
-    #     Directions.NORTH : (0, 1),
-    #     Directions.SOUTH : (0, -1)
-    # }
-
     def __init__(self):
-
         self.firstIteration = True
+        self.requestedMove_operatedMove_pair = [] # (requested, operated)
+        self.previousPosition = None
         
         # STATIC ELEMENTS
+        # list of all the locations pacman has access to
         self.accessibleMap = []
-        # the type is { cell: moves[] }
+
+        # the type is { location: moves[] }
         self.movesMap = {}  
         self.walls = []
-        # this is an iterable used to iterate over ghosts and 
-        # see if changes happened such that the value iteration map
-        # has to be updated
-        self.ghostsRange = None
         
         # DYNAMIC ELEMENTS
         self.ghostsStates = []
+
         # includes capsules
         self.food = []
-        # the type is { cell: score }
+
+        # the type is { location: score }
         self.valueIterationMap = {} 
 
+        name = "Pacman"
 
-    def getAccessibleMap(self):
-        return self.accessibleMap
-    
-
-    def getMovesMap(self):
-        return self.movesMap
+    # Gets run after an MDPAgent object is created and once there is
+    # game state to access.
+    def registerInitialState(self, state):
+        print "Running registerInitialState for MDPAgent!"
+        print "I'm at:"
+        print api.whereAmI(state)
+        
+    # This is what gets run in between multiple games
+    def final(self, state):
+        print "Looks like the game just ended!"
 
 
     def getAction(self, state):
-        
-        updateValueIterationMap = False
 
         # One time operations
         if self.firstIteration:
-            self.firstIteration = False
-
             food = api.food(state)
             capsules = api.capsules(state)
             self.food = food + capsules
+            self.firstIteration = False
             self.walls = api.walls(state)
-            self.accessibleMap = getNonWallCells(self.walls, state)
-            self.ghostsRange = range(len(api.ghosts(state)))
-            self.ghostsStates = api.ghostStates(state)
+            self.accessibleMap = getNonWallLocations(self.walls, state)
             self.movesMap = getMapMoves(self.accessibleMap)
-            # print "$$$ ", self.movesMap
-            # raw_input()
-
+            self.isSmallGrid = len(capsules) == 0
             self.valueIterationMap = { location : 0 for location in self.accessibleMap }
-            updateValueIterationMap = True
+
 
         # Operations to be performed at every action iteration
-
+        food = api.food(state)
+        capsules = api.capsules(state)
+        self.food = food + capsules
 
         # Updates related to pacman
         pacman = api.whereAmI(state)
-        if pacman in self.food: 
-            self.food.remove(pacman)
-            updateValueIterationMap = True
+        self.distancesMap = getLocationsDistanceFromPacman(pacman, self.movesMap)
 
         # Ghosts related updates
-        ghostsStates = api.ghostStates(state)
-        for ghostIndex in self.ghostsRange:
-            # ghostsStates returns a tuple ((x,y), 1 or 0) where 1 indicates
-            # a scared ghost
-            if ghostsStates[ghostIndex][1] != self.ghostsStates[ghostIndex][1]:
-                updateValueIterationMap = True
-                break
-        self.ghostsStates = ghostsStates
+        self.ghostsStates = api.ghostStates(state)
 
 
-        # print "PERIMETER", getPerimeterOfUnvisitedAndFoodCells(self.accessibleMap, self.visitedCells, self.movesMap)
+        riskyGhosts = getRiskyGhostsGivenState2(self.ghostsStates, self.distancesMap)
 
-        # NO MORE FOOD nearby, looking for 
-        #   non eaten registered food first
-        #   and non visited locations second 
-
-        ######## THERE SHOULD ALWAYS BE FOOD ON THE MAP...
+        ghosts = map(lambda ghost: ghost[0], self.ghostsStates)
         
-        # if len(food) == 0:
-        #     message = "NO FOOD FOUND NEARBY, "
-        #     if len(self.uneatenFood) > 0:
-        #         print message, "reaching previously seen food"
-        #         food = [food for food in self.uneatenFood]
-        #     else:
-        #         print message, "reaching unvisited locations"
-        #         food = self.unvisitedCells
+        updateValueIterationMap(self.accessibleMap, 
+                                self.movesMap, 
+                                self.distancesMap,
+                                self.valueIterationMap, 
+                                pacman, 
+                                ghosts,
+                                self.food, 
+                                self.isSmallGrid,
+                                riskyGhosts=riskyGhosts)
+
+        bestMove = getBestNextMove(self.moves, 
+                                    pacman, 
+                                    self.valueIterationMap, 
+                                    self.movesMap, 
+                                    self.distancesMap, 
+                                    ghosts, 
+                                    self.isSmallGrid,
+                                    riskyGhosts,
+                                    maxAllowedSteps=MDPAgent.GHOSTS_MAX_ALLOWED_DISTANCE)
 
 
-        # CLOSEST TARGET
-        # foodDistances = [(manhattanDistance(pacman, point), index) for index, point in enumerate(food)]
-        # sortedFoodDistances = sorted(foodDistances)
-        # FOOD_INDEX = 1
+        bestDirection = self.moveToDirection[ bestMove ]
 
-        # firstFood = sortedFoodDistances[0]
-        # closestFood = food[firstFood[FOOD_INDEX]]
-        # xyDistanceToClosestFood = tupleDistance(closestFood, pacman)
-
-        # # UPDATE PACMAN TARGET Data
-        # self.lastBestFoodPosition = closestFood
-
-        if updateValueIterationMap:
-            # Do not count edible ghosts
-            ghosts = map(lambda ghost: ghost[0], 
-                        filter(lambda ghost: ghost[1] != 1, self.ghostsStates)
-                    )
-            # print "__________", self.accessibleMap
-            # print "__________", self.movesMap
-            # print "__________", self.valueIterationMap
-            # print "__________", self.food
-            # print "__________", ghosts
-            self.valueIterationMap = getNewValueIterationMap(self.accessibleMap, self.movesMap, self.valueIterationMap, self.food, ghosts)
-
-        # CALCULATE BEST MOVES
-        bestMove = self.moveToDirection[ getBestNextMove(self.moves, pacman, self.valueIterationMap, self.movesMap) ]
-
-
-        # print "PAC: ", pacman, "CLOSEST TARGET: ", closestFood, "  DISTANCE FROM IT: ", xyDistanceToClosestFood
-        # print "LAST POSITION: ", self.lastPosition
-        # print "LEGAL: ", legal
-        # print "BEST MOVES:", bestMoves
-
-        # # NO BEST MOVE, REVERT TO ALL POSSIBLE
-        # if len(bestMoves) == 0:
-        #     bestMoves = legal
-        # else:
-            
-        #     # IMMEDIATE BEST MOVE
-        #     if bestMoves[-1] is True:
-        #         bestMoves.pop(-1)
-        #     else:
-        #         # best move takes more than 3 steps, so
-        #         # prevent coming back (AVOID LOOP)
-        #         if self.lastPosition in bestMoves:
-        #             if len(bestMoves) > 1:
-        #                 print "== OLD BEST MOVES IS ====> ", bestMoves
-        #                 bestMoves.remove(self.lastPosition)
-        #                 print "== REMOVED LAST POSITION: ", self.lastPosition
-        #                 print "== NEW BEST MOVES: ", bestMoves
-        #             else:
-        #                 if len(legal) > 1:
-        #                     legal.remove(self.lastPosition)
-        #                     bestMoves = legal
-
-
-        # pick = random.choice(bestMoves)
-        # self.lastPosition = self.oppositeDirections[pick]
-        # print "SELECTED MOVE: ", pick
-        # raw_input()
-        # print "\n====================================\n"
-        legal = api.legalActions(state)
-        return api.makeMove(bestMove, legal)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return api.makeMove(bestDirection, api.legalActions(state))
 
 
 
@@ -297,133 +191,362 @@ class BetterHungryAgent(Agent):
 #  FUNCTIONS  #
 #             #   
 ###############
-
-def tupleDistance( xy1, xy2 ):
-    """
-    Returns the distance between points xy1 and xy2 as a tuple.
-    The order of the inputs matters as the values returned are not absolute.
-    e.g. 
-        xy1 = (1, 2)
-        xy2 = (0, -1)
-        return => (1, -3)
-    """
-    return ( xy1[0] - xy2[0], xy1[1] - xy2[1] )
-
-
-def manhattanDistance( xy1, xy2 ):
-    return abs( xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1] )
-
-
-def sumTuples(tuple1, tuple2):
+def sumTuples( tuple1, tuple2 ):
     return tuple([(i + j) for i, j in zip(tuple1, tuple2)])
 
 
-def getBestNextMove(moves, pacman, valueIterationMap, movesMap, minThreshold = -4, selectingProcess = "max"):
+def manhattanDistance( xy1, xy2 ):
     '''
-        Given the legal moves and the valueIterationMap,
-        Calculates and return the best moves in the for (x, y).
-        e.g. If the best move is go NORTH the function returns (0, 1)
+    Return the manhattan distance between two points
     '''
-    policies = [(getValuesFromMapGivenUndeterminism(pacman, move, valueIterationMap, movesMap), move) for move in moves]
-    
-    # include the option not to move
-    policies.append((valueIterationMap[pacman]), (0, 0))
+    return abs( xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1] )
 
-    # if selectingProcess != "max":
-    bestMove = sorted(policies)[0]
+
+def getRiskyGhostsGivenState2(ghostsStates, 
+                              distancesMap, 
+                              allowedDistanceForActiveGhosts=MDPAgent.GHOSTS_MAX_ALLOWED_DISTANCE,
+                              allowedDistanceForEdibleGhosts=MDPAgent.EDIBLE_GHOSTS_MAX_ALLOWED_DISTANCE
+                            ):
+    '''
+    Given the ghosts states and a distance map,
+    return a dict { ghostLocation: distanceFormPacman } of ghosts
+    which distanceFromPacman <= allowedDistance (varying based on the ghost state)
+    '''
+    riskyGhosts = { }
+    IS_EDIBLE = 1
+    # 1 -> ghost is edible
+    # 0 -> ghost is active
+
+    for ghostState in ghostsStates:
+        ghost = ghostState[0]
+        if ghostState[1] == IS_EDIBLE:
+            # As edible ghosts may have locations (a, b) as (x.5, y) 
+            # we consider both locations as x.5 + 0.5 and x.5 - 0.5.
+            adjacentGhostsLocations = getAdjacentGhostsLocationsIfLocationNotOnMap(ghost)
+            adjacentGhostsLocationsDistances = [distancesMap[ghost] for ghost in adjacentGhostsLocations] 
+
+            # Only the location which is closer to pacman is taken into account.
+            ghostDistance = min(adjacentGhostsLocationsDistances)
+            if ghostDistance <= allowedDistanceForEdibleGhosts:
+                riskyGhosts[ghost] = ghostDistance
+        else:
+            ghostDistance = distancesMap[ghost]
+            if ghostDistance <= allowedDistanceForActiveGhosts:
+                riskyGhosts[ghost] = ghostDistance
+
+    return riskyGhosts
+
+
+def findDistanceToClosestGhostWithinAllowedSteps(startingLocation, movesMap, ghosts, stepsLimit=5):
+    ''' 
+    Using Breadth First Search, decide if any of the given ghosts is reachable
+    within n steps from the starting location where n = stepsLimit.
+    The method returns -1 if none of the ghosts is reachable within 
+    the steps limit, otherwise it returns the distance to the closest ghost.
+    '''
+
+    NO_GHOST_FOUND = -1
+
+    # if a ghost is in the starting location its distance is 0
+    if startingLocation in ghosts: 
+        return 0 
+
+    visitedLocations = {startingLocation}    
+    unvisitedLocations = {startingLocation}
+
+    # iterate once for each step within the admissible distance
+    for step in range(1, stepsLimit + 1):
+        # find the locations reachable from the current unvisited locations
+        reachableLocations = map(lambda location: 
+                                map(lambda move: sumTuples(location, move), movesMap[location]),
+                             unvisitedLocations)
+
+        # transform into a set to remove duplicates
+        reachableLocations = { location for locations in reachableLocations for location in locations }
+
+        # remove locations already visited
+        newUnvisitedLocations = filter(lambda location: not location in visitedLocations, reachableLocations)
+
+        # check if a ghost is in any of the new unvisited locations
+        for ghost in ghosts:
+            if ghost in newUnvisitedLocations:
+                return step
+
+        visitedLocations.update(unvisitedLocations)
+        unvisitedLocations = newUnvisitedLocations
+    
+    # no ghost has been found within the steps limit
+    return NO_GHOST_FOUND
+        
+
+def getLocationsDistanceFromPacman(pacman, movesMap):
+    '''
+    Return the distance of each location from pacman
+    as a dict { location: distance }
+    '''
+
+    currentDistance = 0
+
+    visitedLocations = { pacman: currentDistance }
+
+    unvisitedLocations = { pacman }
+
+    while len(unvisitedLocations) > 0:
+        
+        currentDistance += 1
+
+        # find the locations reachable from the current unvisited locations
+        reachableLocations = map(lambda location: 
+                                map(lambda move: sumTuples(location, move), movesMap[location]),
+                             unvisitedLocations)
+
+        # transform into a set to remove duplicates
+        reachableLocations = { location for locations in reachableLocations for location in locations }
+
+        newUnvisitedLocations = filter(lambda location: not location in visitedLocations, reachableLocations)
+
+        # each new unvisited location must be 1 step away from the previous locations
+        for newLocation in newUnvisitedLocations:
+            visitedLocations[newLocation] = currentDistance
+
+        unvisitedLocations = newUnvisitedLocations
+    
+    return visitedLocations
+
+
+def getAdjacentGhostsLocationsIfLocationNotOnMap(ghost):
+    '''
+    As edible ghosts may have locations (a, b) as (x.5, y) 
+    this method returns both locations as x.5 + 0.5 and x.5 - 0.5
+    when the ghost is an mid state. If the ghost is at the centre
+    of a location, that location is returned as an array.
+    ( the same applies to y )
+    '''
+    x = ghost[0]
+    y = ghost[1]
+    xs = [x] if x % 1 == 0 else [x + 0.5, x - 0.5]
+    ys = [y] if y % 1 == 0 else [y + 0.5, y - 0.5]
+    return [location for location in itertools.product(xs, ys)]
+
+
+def getBestNextMove(moves, 
+                    pacman, 
+                    valueIterationMap, 
+                    movesMap,
+                    distancesMap, 
+                    ghosts, 
+                    isSmallGrid,
+                    riskyGhosts,
+                    maxAllowedSteps=MDPAgent.GHOSTS_MAX_ALLOWED_DISTANCE,
+                    ghostReward=MDPAgent.GHOST_REWARD,
+                    discountFactor=MDPAgent.DISCOUNT_FACTOR
+                  ):
+    '''
+    Given pacman's location and the valueIterationMap,
+    Calculates and return the best move for pacman.
+    If a given move gets pacman closer to a ghost, such a move is penalised
+    based on how close the ghost would be given that move.
+        e.g. If the best move is NORTH the function returns (0, 1)
+    '''
+
+    # This is a dict of the form 
+    # { pacmanAdjacentLocation: distanceToClosestGhost }.
+    # Pacman location itself can be included here if any risky ghosts
+    # can be reached from such a location.
+    # only risky ghosts appear here.
+    locationToGhostsDistances = {}
+
+    # If pacman is close enough to a ghost, add pacman's location 
+    # and that distance to the locationToGhostsDistances.
+    # If there are not risky ghosts, set the value to -1.
+    locationToGhostsDistances[pacman] = min(riskyGhosts.values()) if len(riskyGhosts) > 0 else -1
+
+    # This loop aim is to populate locationToGhostsDistances, hence, we only
+    # consider the moves that will get pacman to a different location
+    for move in movesMap[pacman]:
+        newLocation = sumTuples(pacman, move)
+        closestGhostDistance = findDistanceToClosestGhostWithinAllowedSteps(newLocation, movesMap, ghosts, maxAllowedSteps)
+        locationToGhostsDistances[newLocation] = closestGhostDistance
+    
+
+    # This is a list containing all the policies in the 
+    # form (score, (x, y))
+    policies = []
+
+    # This loop aim is to populate the policies list, as such, we consider all the moves
+    # here, even if they would result in pacman hitting the wall.
+    for move in moves:
+        expectedValue = getMoveUtility(pacman, move, valueIterationMap, movesMap)
+        newMoveLocation = sumTuples(pacman, move) if move in movesMap[pacman] else pacman
+        closestGhostDistance = locationToGhostsDistances[newMoveLocation]
+
+        # a move ending up in a ghost location is terrible
+        if closestGhostDistance == 0:
+            expectedValue += ghostReward * 2
+        # if the closest ghost is risky
+        elif closestGhostDistance != -1:
+            # the factor "2" is used to obtain 
+            # better results
+            delta = ghostReward * 2 / closestGhostDistance
+            expectedValue += delta
+
+        policies.append((expectedValue, move))
+
+    # get the first policy (the one with the best score), which is a 
+    # tuple (score, move), and from it get the second element, which 
+    # is the best move
+    bestMove = sorted(policies, reverse = True)[0][1]
+
     return bestMove
 
 
-def getNewValueIterationMap(accessibleMap,       movesMap,              oldValueIterationMap,     
-                            food,                ghosts = [],           movePenalty = 0.04,  
-                            foodReward = 2,      ghostPenalty = -5,      
-                            epsilon = 0.1,      discountFactor = 0.91
+def updateValueIterationMap(accessibleMap,        
+                            movesMap,
+                            distancesMap,              
+                            oldValueIterationMap, 
+                            pacman, 
+                            ghosts,             
+                            food,        
+                            isSmallGrid,        
+                            riskyGhosts = [], 
+                            foodReward = MDPAgent.FOOD_REWARD,   
+                            moveReward = MDPAgent.MOVE_REWARD,  
+                            ghostReward = MDPAgent.GHOST_REWARD,      
+                            discountFactor = MDPAgent.DISCOUNT_FACTOR,
+                            epsilon = 0.01       
                         ):
     '''
-        The input parameters are, (beside the obvious ones)
-        epsilon -> this is the value below which we stop iterating (to improve performance)
-        penalty -> the cost to make a move
-        discountFactor -> the lambda factor that reduces the value of further away elements
-        foodReward -> the reward for getting food
-        unvisitedReward -> the reward for getting on unvisited locations
-        ghostPenalty -> the reward (negative) for bumping into a ghost
+    Update the value iteration map. Epsilon is the threshold, if the max change in the map 
+    is below that number, we stop iterating (to improve performance).
     '''
 
-    # Step 1: remove the fixed object from the map. clone accessibleMap but filter food and ghost locations
+    # A list of locations with no initial score is created 
+    # removing the food and ghosts from the map.
     scoreableMap = [location for location in accessibleMap if not(location in food or location in ghosts)]
 
-    # Create the next value iteration map variable
+    # Create the next value iteration map
     newValueIterationMap = {}
+    
+    # Update the old map in food and ghosts locations
+    for foodLocation in food: oldValueIterationMap[foodLocation] = foodReward
+    for ghostLocation in ghosts: oldValueIterationMap[ghostLocation] = ghostReward
 
-    # Update the old one in food and ghosts cells
-    # drop the reward of food less than 2 steps away from ghosts
-    # TODO ...  
+    if isSmallGrid:
+        onePieceOfFoodLeft = not len(food) > 1
+        ghost = ghosts[0]
+        ghostIsTooCloseToPacman = len(riskyGhosts) > 0 and riskyGhosts[ghost] < 4
+        
+        # locations with no escapes are considered risky
+        noEscapeLocations = filter(lambda location: len(movesMap[location]) == 1, movesMap.keys())
+        
+        pacmanIsNextToANoEscapeLocation = any(map(lambda location: distancesMap[location] < 2, noEscapeLocations))
 
-    for foodCell in food: oldValueIterationMap[foodCell] = foodReward
+        # In the small grid, due to the stochasticism, dead end locations are
+        # very dangerous and pacman should avoid them if 
+        # these dead ends do not contain the last piece of food or 
+        if not (onePieceOfFoodLeft or 
+                # the ghost is far enough from pacman or 
+                ghostIsTooCloseToPacman or 
+                # the dead end is far enough from pacman
+                pacmanIsNextToANoEscapeLocation
+            ):
+            for noEscapeLocation in noEscapeLocations:
+                oldValueIterationMap[noEscapeLocation] = ghostReward
 
-    for ghostCell in ghosts: oldValueIterationMap[ghostCell] = ghostPenalty
+        # If pacman gets into a dead end location, not to have him stuck 
+        # there, we reduce the max allowed ghost distance so the ghosts
+        # do not affect the policies when they are far enough
+        if pacman in noEscapeLocations:
+            MDPAgent.GHOSTS_MAX_ALLOWED_DISTANCE = 4
 
-    # Step 2: Create a while that terminates when no change is bigger than epsilon
-    iterate = True
-    while iterate:
-        maxEpsilon = 0
-        iterate = False
-        # for each cell which can change value
-        for scoreableCell in scoreableMap:
-            score = []
-            for move in BetterHungryAgent.moves:
-                score.append(sum(getValuesFromMapGivenUndeterminism(scoreableCell, move, oldValueIterationMap, movesMap)))
-            
-            maxScore = max(score)
 
-            # At least one values has been updated enough to having to re-iterate
-            difference = abs(maxScore - oldValueIterationMap[scoreableCell])
-            maxEpsilon = max(maxEpsilon, difference)  
-            if difference > epsilon: iterate = True
+    # This is used to determine the end of the 
+    # value iteration loop
+    maxUpdate = epsilon + 1
 
-            print maxScore
-            # update value in the new map
-            newValueIterationMap[scoreableCell] = maxScore
+    while maxUpdate > epsilon:
+        maxUpdate = 0
+        
+        for scoreableLocation in scoreableMap:
+            locationValue = bellmanEquation(moveReward, scoreableLocation, oldValueIterationMap, movesMap, distancesMap)    
 
-        for newValue in newValueIterationMap:
-            print newValue, "  ", oldValueIterationMap[newValue], "  -  ",  newValueIterationMap[newValue]
-        raw_input()
+            locationValueUpdate = abs(locationValue - oldValueIterationMap[scoreableLocation])
 
+            maxUpdate = max(maxUpdate, locationValueUpdate)
+
+            # update the respective value in the new map
+            newValueIterationMap[scoreableLocation] = locationValue
+
+        # update old value iteration map
         for key, newValue in newValueIterationMap.items():
             oldValueIterationMap[key] = newValue
 
-        oldValueIterationMap = newValueIterationMap
         newValueIterationMap = {}
-        print(maxEpsilon)
-
-    # Step 4: Taking into account the .8 .1 .1 rule, calculate the outcome for each location [remember to take into account the Direction.STOP move]
-
-    # Step 5: update and return the value map
-    for foodCell in food: scoreableMap[foodCell] = foodReward 
-    for ghostCell in ghosts: scoreableMap[ghostCell] = ghostPenalty 
-
-    return scoreableMap
 
 
-## TODO TEST
-def getValuesFromMapGivenUndeterminism(location, move, valueIterationMap, movesMap):
+def bellmanEquation(reward, location, valueIterationMap, movesMap, distancesMap, moves=MDPAgent.moves, discountFactor=MDPAgent.DISCOUNT_FACTOR):
     '''
-        Given a location and a move, calculate the values you would obtain
-        trying to perform that move keeping into account that you only have 80%
-        of the chance to actually perform that move. 
-        The list returned is a 3-value vectors wherein the elements in order are:
-         1) 0.8 * expected value from making the decided move;
-         2 & 3) 0.1 * expected value from making a perpendicular move.
+    Return the result of Bellman's equation.
     '''
-    mainDirectionCell = sumTuples(location, move) 
-    values = [valueIterationMap[mainDirectionCell if move in movesMap[location] else location] * .8]
-    for traversalMove in BetterHungryAgent.traversalMoves[move]:
-        faultyDirectionCell = sumTuples(location, traversalMove)
-        values.append(valueIterationMap[faultyDirectionCell if traversalMove in movesMap[location] else location] * .1)
-    return values
+    utilities = []
+    for move in moves:
+        moveUtility = getMoveUtility(location, move, valueIterationMap, movesMap)
+        utilities.append(moveUtility)
+        
+    expectedUtility = max(utilities)
+    return reward + pow(discountFactor, distancesMap[location]) * expectedUtility
 
-# == TESTED BY getNonWallCells()
+
+def getMoveUtility(location, move, valueIterationMap, movesMap):
+    '''
+    Given a location and a move, calculate the values you would obtain
+    trying to perform that move keeping into account that you only have 80%
+    chance to actually perform that move, and return their sum. 
+    The list returned is a 3-value vectors wherein the elements in order are:
+        1) expected value from making the decided move;
+        2 & 3) expected values from making a traversal move.
+    '''
+    values = []
+
+    # main move value
+    values.append(getLocationUtility(location, move, valueIterationMap, movesMap) * .8)
+
+    for traversalMove in MDPAgent.traversalMoves[move]:
+        values.append(getLocationUtility(location, traversalMove, valueIterationMap, movesMap) * .1)
+
+    return sum(values)
+
+
+def getLocationUtility(startingLocation, 
+                       move,    
+                       valueIterationMap, 
+                       movesMap
+                    ):
+    '''
+    Given a location and a move, calculate the value you
+    would obtain performing that move from that location (which could result
+    in hitting the wall).
+    This value takes into account ghosts, which influence the score 
+    based on their distance from the landing location.
+    '''
+
+    NO_MOVE = (0, 0)
+
+    # find out the landinding location given the starting location and the move
+    operatedMove = move if move in movesMap[startingLocation] else NO_MOVE
+
+    landingLocation = sumTuples(startingLocation, operatedMove)
+
+    # sum the value of the location with the totalGhostsRewards and then
+    # multiply by the probability of landing on that location
+    return valueIterationMap[landingLocation]
+
+
 def getVisitbaleWidthAndHeight(state):
+    '''
+    Return a tuple (x, y) of the top-most right-most
+    location in the map
+    '''
     topRightCorner = max(api.walls(state))
 
     # the corners belong to the walls, so in a map 4 x 4
@@ -432,69 +555,39 @@ def getVisitbaleWidthAndHeight(state):
     return (topRightCorner[0] - 1, topRightCorner[1] - 1)
 
 
-# == TESTED BY getNonWallCells()
-def getMapCellsMatrix(mapWidth, mapHeight):
+def getMapLocations(mapWidth, mapHeight):
+    '''
+    Return a list of all the locations in the map
+    '''
     widthArray = range(1, mapWidth + 1)
     heightArray = range(1, mapHeight + 1)
     return [element for element in itertools.product(heightArray, widthArray)]
 
 
-# WORKING
-def getNonWallCells(walls, state):
+def getNonWallLocations(walls, state):
+    '''
+    Return a list of non-wall locations
+    '''
     width, height = getVisitbaleWidthAndHeight(state)
-    mapCellsMatrix = getMapCellsMatrix(height, width)
-    return [x for x in mapCellsMatrix if x not in walls]
+    mapLocationsMatrix = getMapLocations(height, width)
+    return [x for x in mapLocationsMatrix if x not in walls]
 
 
-# == TESTED BY getMapMoves()
 def getLegalMoves(accessibleMap, location):
     '''
-    Given a cell and the accessibleMap, 
+    Given a location and the accessibleMap, 
     Return the moves that can be made from there
-    e.g. [(1, 0), (-1, 0)]
-    Pacman can only move EAST or WEST
+        e.g. [(1, 0), (-1, 0)]
+        Pacman can only move EAST or WEST
     '''
-    ## TODO rename the class to use the correct one
-    return [move for move in BetterHungryAgent.moves if sumTuples(location, move) in accessibleMap]
+    return [move for move in MDPAgent.moves if sumTuples(location, move) in accessibleMap]
 
 
-# WORKING
 def getMapMoves(accessibleMap):
     '''
-    Return a dictionary in the form {cell: moves[]}
-    e.g. { (6, 5): [(1, 0), (-1, 0)]} 
-    the only moves are going either EAST or WEST
+    Return a dictionary of the possible moves for each location
+    in the form {location: moves[]}
+        e.g. { (6, 5): [(1, 0), (-1, 0)]} 
+        the only moves are going either EAST or WEST
     '''
     return {location: getLegalMoves(accessibleMap, location) for location in accessibleMap}
-
-
-# def getPerimeterOfUnvisitedAndFoodCells(accessibleMap, visitedCells, movesMap):
-#     '''
-#         Return the perimeter of the directly accessible map. This means
-#         that if to reach a food cell "x" you MUST first reach another location
-#         with a food "y" on it, "x" will not be included in the perimeter.
-#     '''
-#     perimeter = set()
-#     notVisitedCells = accessibleMap.difference(visitedCells)
-#     notVisitedCellsSurroundingCells = map(lambda cell: {cell: getSurroundingCells(cell, movesMap[cell], accessibleMap)}, notVisitedCells)
-
-#     reachablePerimeter = filter(lambda cellEntry: isFirstReachable(notVisitedCells[cellEntry], notVisitedCells))
-#     return set(reachablePerimeter.keys())
-
-
-# def isFirstReachable(surroundingCells, notVisitedCells):
-#     '''
-#         Return True if any of the surrounding cells has been visited.
-#         In other words, return True if the cell can be visited without passing
-#         on unvisited cells.
-#     '''
-#     return any(cell not in notVisitedCells for cell in surroundingCells) 
-
-
-# def getSurroundingCells(cell, cellMoves, accessibleMap):
-#     '''
-#         Given the accessible map, a cell position and the moves that can be taken
-#         from that cell, return the position of the surrounding cells.
-#     '''
-#     newCells = [sumTuples(move, cell) for move in cellMoves]
-#     return filter(lambda c: c in accessibleMap, newCells)

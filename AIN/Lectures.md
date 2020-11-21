@@ -274,7 +274,7 @@ Say for instance that both actions a1 and a2 have multiple outcomes like this:
 Now, there are 2 approaches to this problem:
 - you are optimistic, and you hope the result will be the best (**maximax**), so the output of a\* would be the max value among the best values for each s<sub>a</sub>;
     > in this case, argmax(5, 7);
-- or, if the there is a risk in getting the lowest score action (to say, the agent risks its life, or something very bad is related to it), you the best score among the worst ones for each action (**maximin**)
+- or, if the there is a risk in getting the lowest score action (to say, the agent risks its life, or something very bad is related to it), you pick the best score among the worst ones for each action (**maximin**)
     > in this case, argmax(4, 3); 
 
 <br>
@@ -580,6 +580,66 @@ So multiplying **M** by **v** would result in **v times an eigenvalue**.
    > $ \textbf C$ dimensions are $(n \times d)^T \times (n \times d) = (d \times n) \times (n \times d) = d \times d$
 6. (Using a software) Compute the $k$ largest eigenvector $\textbf{v}_1, \textbf{v}_2, ... , \textbf{v}_k$ of $\textbf{C}$. 
    > Each eigenvector has dimension $1 \times d$.
+
+
+# Week 7 - Clustering
+`!!!! Videos 1 and 3 are useless !!!!`
+
+**Video 2**
+Suppose you are using K-means with $k$ = 2 to find the centroids and at the end of the iterations you find the 2 clusters.
+Those 2 clusters can either be optimal or awful, look at this example:
+<img src="./img/7_unlucky_clustering.png">
+
+## k-means ++
+This happened because we randomly selected the 2 centroids $\mu$. To prevent this we use a technique called **k-means++** that goes as follow:
+
+1. Set the first centre to be one of the input points chosen uniformly at random, i.e., $µ_1 = uniform (x_1, x_2, . . . , x_n)$
+2. For datapoints $i_2$ to $k$:
+    2.1. For each point $x_j$ compute the distance to the nearest centre, i.e., calculate 
+    > **$d_j = $ min$_ld(x_j , µ_l)$**
+    That means, the minimum distance for each datapoint $x$ to a centroid 
+
+    2.2. Open a new centre at a point using the **weighted probability** distribution (so not automatically the most distant, but the most distant is the most likely to be choosen) that is proportional to $d_j^2
+    $ (you square the distances so that further points are more relevant). That is:
+    > <img src="./img/7_pr_km++.png">
+3. Continue with k-Means
+
+## k-Median
+**k-Median** is the same thing as k-means, but k-Median uses **L1** (manhattan distance) whereas k-means uses **L2** (euclidean distance)
+
+## Hierarchical clustering 
+**(video 4)**
+Clustering can also happen hierarchically, meaning that you either start having as many clusters as inputs and eventually reach 1 big cluster (Bottom up approach or **agglomerative clustering**), or, vice versa, by having 1 big cluster which you decompose into smaller one (top down approach or **divisive clustering**)
+
+### Agglomerative Clustering
+Clustering can start by considering each input as a cluster and then you combine these clusters until you have only $k$ clusters (if $k$=1 you are probably aiming at creating a **dendogram**). This type 
+<img src="./img/7_hierarchical_clustering.png">
+
+How do you decide hwo to combine clusters in agglomerative clustering?
+<img src="./img/7_agglomerative_clustering.png">
+
+> In this graphs, the edges are weighted and are called **similarities**, meaning that the higher the number on the edge, the more similar are two nodes. (the number can also indicate dissimilarities, but it is not our case)
+
+Example using **Single Linkage**
+<img src="./img/7_single_linkage1.png">
+<img src="./img/7_single_linkage2.png"> 
+
+### Divisive clustering
+
+Divisive clustering, instead, starts with one big cluster which can be divided in 2 ways (we will see the sparsest cut)
+<img src="./img/7_divisive_clustering1.png">
+
+<img src="./img/7_divisive_clustering2.png">
+
+In the previous example, the formula $\phi(S) = \dfrac{2}{4}$ where:
+- 2 is the sum of the edges you cut ( 1 + 1 ) and 
+- 4 is the minimum size of the clusters you create this way ( 5 the left one & 4 the right one )
+
+
+### Dasgupta Cost Function
+
+There used to exist valid Cost (or objective) functions for both k-Mean and k-Median, but not for hierarchical clustering until Dasgupta came up with one and now clusters obtained with hierarchical procedures can be compared.
+
 
 <br>
 <br>

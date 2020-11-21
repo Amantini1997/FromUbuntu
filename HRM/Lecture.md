@@ -1,4 +1,4 @@
-[TOC]
+u[TOC]
 
 
 <style>
@@ -482,7 +482,120 @@ We are not biased on purpose, it is an unconscious process.
 
 # Week 6 - Training
 
-# RITZ-CARLTON Case study
+
+## Training process
+<img src="./img/honey.png">
+
+> What Honey means by that is that **learning** and managing knowledge is the way to achieve innovation and to keep oneself different from the competitors; also that **being different is now more important than being better** with respects to your competitors.
+
+A **learning company** is one that seeks for new ideas, comes up with new ideas, moves them throughout the organisation, and *then* it actually **acts**, it takes the new knowledge as a basis for responding to a changing environment.
+
+This **learning process** is accompanied by a **learning environment** that makes this process possible, and the **leadership** that fosters (favorire) and inspires the learning processes and helps create this learning environment model.
+
+Products, services and even processes can be copied, to so stay ahead of the competition, **learning is the only sustainable competitive advantage you can have**.
+If your rate of learning is smaller than the rate of changing (of the world, the market, the sector etc.) you are gonna fall behind.
+
+Some companies believe they do good, but fall into common pitfalls:
+- They theoretically do it, but in practice do not implement and activate the learning process;
+- The learning is done, but only highest members in the hierarchy, such as CEOs and top managers, are instructed whereas line managers and normal workers, aka those doing the real work, are not;
+- Lack of standards to assess how well the organisation is doing
+
+When selecting the candidate, the company can:
+- Assume an experienced worker:
+  - who can bring a lot of experience and flexibility, but
+  - will require a higher salary and
+  - (being more employable) are at higher risk of a turnover
+- Assume an unexperienced person:
+  - who brings less benefit, 
+  - who can be trained (but then they turn into an experience worker) risking to invest on their learning and then they change company
+
+> Researches show that employees who feel more employable also report higher intentions to quit their organisations.
+> However, Nielson found that investment in learning makes the employer
+
+Empirical studies proof that investing in employee training and development is more strongly associated with **internal** rather than **external** employability, that means, they are not very likely to quit the job, but they are to seek a new position in the company.
+
+> Investing on the right employee is always a good decision. Investing on someone seeking a protean career, for example, helps the company retain such employee.
+
+Investment in **Career Development Practices** increases people's perceptions of their own employability (PEE) in the external market, and the effect is stronger on people who already feel employable to start with.
+
+**Higher perceptions of employability** are associated with **lower intention to quit** and **higher organisational commitment** among individuals who are more **proactive** in managing their careers (protean career).
+
+So, when people are expecting investments in their career (protean) and they do receive such training, they are more willing to stay with that company.
+
+## Training analysis
+
+Before doing any type of training, the company has to clear out the objectives of that process in 3 ways:
+
+> <img src="img/7_organisational_analysis.png">
+> <img src="img/7_task_analysis.png">
+> Critical tasks and tasks that add a lot of value to the company are the primary objective.
+
+> <img src="img/7_person_analysis.png">
+
+## Training methods
+
+There are 2 main types of training:
+
+### Presentation methods
+
+The trainee is passive recipients of information:
+
+- **<u>Classroom instruction</u>** 
+    - Typically we have a **lecturer** transmitting information to one group of trainees;
+    - **Inexpensive** way to transmit information to many trainees.
+
+- **<u>Distance learning</u>** 
+    - Trainees attend programs where they can communicate with the trainer and other trainees at other locations (eg. **Videoconferencing**)
+    - Useful for geographically dispersed companies.
+
+- **<u>Audiovisual technique</u>** 
+  - Useful for transmitting information and developing skills such as communication, interviewing, and customer-service skills (eg. **Training Videos**).
+
+### Hands-on methods
+
+The trainee is actively involved in learning:
+
+- **<u>On-the-job training</u>**
+Employees learn through observing peers or managers performing the job and trying to imitate their behavior (adequate for newly hired employees; low skilled workers)
+
+- **<u>Simulations</u>** 
+Represents real life situations and allows trainees to see the impact of their decisions in an artificial, risk-free environment (eg. Airplane pilots)
+
+- **<u>Business games and case studies</u>** 
+Trainees discuss cases relevant to better understand the complexity of their jobs and engage in games that stimulate acquiring relevant skills and knowledge.
+
+- **<u>E-learning</u>** 
+Training content usually delivered via web allowing trainees to have control over the learning process (when, where, at what speed)
+
+### Selecting the method
+
+- **<u>Who is it for?</u>**
+Methods such as on-the-job training may be more useful to train unskilled workers than managers
+
+- **<u>What is it for?</u>**
+Classroom training may be more adequate to transmit information on labor law than case studies or simulations.
+
+- **<u>What is the cost?</u>**
+Audiovisual techniques may be less expensive to transmit company policy on customer care to thousands of workers dispersed across a country than classroom training. However, if we are training a few dozen workers producing a video may be too expensive.
+
+### Method evaluation
+<img src="img/6_evaluate_training.png">
+
+## Employee Development Experiences
+<img src="img/6_Employee_development.png">
+
+- **Temporary assignments with another organization -** What Toyota does which makes an employee working with a partner group for the sake of both employer's development and building the relationship with the partner (understanding and helping them) 
+
+## Interpersonal Relationships
+<img src="img/6_Mentoring.png">
+<img src="img/6_Coaching
+.png">
+
+<br>
+<br>
+<br>
+
+## RITZ-CARLTON Case study
 The history of the Ritz-Carlton is the one of a luxury hotel which guests have always experience an amazing staying. Employees are perhaps the most important resource of the company and their training is fundamental. 
 
 Employees are treated as *ladies and gentlemen* so that the company can retain them and, most importantly, because if the hotel treats them this way, they will treat guest the same way in turn.
@@ -497,7 +610,7 @@ Candidates go through many interviews with different managers and they have to p
 
 The idea is that people can show no skills, but the training cab teach them. What the training cannot teach them is to be passionate about their job and to smile in every situation.
 
-## After being recruited
+### After being recruited
 
 **2 day orientation**
 After being recruited, the new employees undergo a 2 day orientation program. During this period they are treated like guests, they stay in the hotel rooms, eat at its restaurants, and a top managers welcome them with hand-written welcome cards. This is to ensure that they enjoy their job since day 1.
@@ -523,19 +636,40 @@ Employees were also encouraged to suggest ideas to cut costs down or improving q
 **Why employee prefer RC**
 Salaries are not higher than competitors, but employees are treated kindly and respectfully. Also the possibility of escalating the hierarchy lengthens job tenure.
 
-##
-Changes are bigger and are happening faster, and learning is the way to keep ahead, to maintain employability in an era when jobs have gone. It enables organizations to sustain their edge as global competition increases. Learning to learn is the ultimately life skill” (Honey, 1998)
+<hr>
 
-<img src="./img/honey.png">
+# Week 7
 
-> What Honey means by that is that **learning** and managing knowledge is the way to achieve innovation and to keep oneself different from the competitors; also that **being different is now more important than being better** with respects to your competitors.
+## Performance Management
+**(video 1)**
+If you want to manage the performance of your company there are 3 steps to follow:
 
-A **learning company** is one that seeks for new ideas, comes up with new ideas, moves them throughout the organisation, and *then* it actually **acts**, it takes the new knowledge as a basis for responding to a changing environment.
+- **Define performance**: not every employee can be judged based on the same criteria, as such you have to define what performance means (based on the job, on the role, etc.)
+- **Performance Appraisal (Evaluation)**: after defined performance, you need to define how and based on what you are going to assess the performance
+- **Feedback**: once you have assessed the performance of your employees, providing them with feedback is a good way to point out their weaknesses and have them improving.
 
-This **learning process** is accompanied by a **learning environment** that makes this processes possible, and the **leadership** that fosters and inspires the learning processes and helps create this learning environment model.
+## Aims of performance management
+**(video 2)**
 
-Product and services can be copied, so stay ahead of the competition, **learning is the only real competitive advantage you can have**.
-If your rate of learning is smaller than the rate of changing you are gonna fall behind
+**Strategic**
+The performance management system should **communicate** and reflect the company **strategy** in terms of expected employee results and **behaviours**, and skills to develop.
+
+**Administrative**
+The performance management system is useful (and should lead) xto **make decisions** regarding employee promotion/demotion, retention/termination, salary growth, etc.
+
+**Developmental (main point)**
+Feedback sessions are particularly important for employee development (analyse why employees are not performing; decide on training, job transfer, etc.). It easy to critic people, but instead of giving destructive criticisms, you should aim at developing them. 
+
+## Performance Appraisal
+A good performance appraisal system should be
+- **Focus**: evaluating too many aspects may put too many things on the same level, and everything would be relevant, and nothing would be important. So a good system should focus and the most important things.
+- 
+
+
+
+
+
+
 .
 .
 .

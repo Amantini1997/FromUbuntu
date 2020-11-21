@@ -822,14 +822,444 @@ Let's say you make an UP move and you observe that you have 1 and only 1 wall ne
 > b(X) indicate the belief vector
 
 
+# Week 7 - Temporal Planning
+**(video 1)**
+In **temporal planning** there are some differences from the standard PDDL notation:
+- **:action** is named **:durative-action**;
+- a new line called **:duration** indicates the duration of the actions;
+- the **:precondition** statement is replaced by **:condition**
+- conditions and effects are preceded by a temporal specifier such as: `over all`, `at start`, `at end`...
+
+<img src="./img/7_durative_action.png">
+
+## Overlapping
+When defining an action in the domain we may want to avoid **overlapping**, that is, prevent the same action to be achieved with different variables.
+> e.g. *parcel1* is at *location1*, *truck1* loads it, then a second truck should not be able to load the very same parcel.
+
+However, due to the temporal nature, when the conditions are specified in the wrong manner, this kind of issue may arise.
+Consider the previous image, if the effect `(not (at ?obj ?loc)` were written as `at end` instead of `at start`, another truck could have come and pick the same parcel, which is obviously wrong.
+
+Another thing to be aware of in temporal planning is that the effect part does not respect the order in which you write facts, rather, it first apply deletion and then additions.
+So say you write:
+> :condition (and
+> &nbsp; &nbsp; &nbsp; &nbsp; (at end (at ?obj ?loc))
+> &nbsp; &nbsp; &nbsp; &nbsp; (at end (not (at ?obj ?loc))) )
+
+In spite the last thing you specify is to remove the obj from the location, the planner would actually do that as first thing, so the obj will end up still being at the location.
+
+## Snap actions
+**(video 2)**
+
+So far we have have always assumed actions were **compressed**, so the start and the end of an action belong with the same block.
+
+What we do in temporal planning is to decompose a durative action into **snaps**:
+- **start snaps** $\vdash$;
+- **invariant snaps** $\lrArr$ (stand for the `overall`); and
+- **end snaps** $\dashv$.
+
+Invariant snaps, as the name suggests, cannot change throughout the execution of the action.
+
+In PDDL, a goal is satisfied when, <u>after the actions performed have accomplished their effect</u>, the goal still exists.
+
+In STRIPS, where the actions are sequential, this is easy to check, but in temporal planning you might have an action A which accomplishes a goal and while this performs, another action B starts which eventually deletes the goal reached by A. 
+
+Even if the goal have been achieved, this doesn't count as an action that already started (B) deleted this goal.
+<img src="img/7_interference.png">
+
+
+> In this picture, B started before reaching the end of A and eventually deletes the GOAL achieved by A.
+
+In the previous picture, invariants were not included for simplicity, but how do we add them?
+
+The idea is to create a sequential order:
+<img src="img/7_invariant.png">
+
+So that A_start (As) sets the preconditions for A_invariant as **As**, then A_invariant deletes As (**¬As**) and sets the preconditions for A_end (**Ai**), eventually A_end deletes Ai (**¬Ai**).
+
+Breaking down the problem this way creates an issue though, that is during the execution of an invariant, we could change some facts and have them returning as normal before the end of such invariant
+> e.g. the truck must be at location L overall, instead I drive it away and drive it back before the end of the temporal action.
+
+The solution is to say that, in every state where **As** is true, **inv_A** must also be true, and breaking this condition results in a **dead-end**.
+
+How do we tackle the temporal problem then? Well, there are some options:
+
+### 1. Decision Epoch Planning
+
+An approach to temporal planning could be as following:
+<br>
+<img src="img/7_decision_epoch_planning.png">
+
+What this means is we reason in terms of state $S_t$ where $t$ indicates the time stamp.
+After executing any actions snap_start, we insert the action snap_end in a priority queue $\textbf Q$ with key the time at which it will terminate: $t + duration(A)$;
+after starting an action, a minimum amount of time must elapse, we call that time $\varepsilon$ and we update the current time $t \larr t +\varepsilon$
+
+As an action reaches the end (and to do that it must be the first in queue), we set the current time to the action duration end ($t + duration(A)$) + $\varepsilon$.
+
+<div class="warning">
+    In order to do that, we must know the time required to complete an action beforehand. When we have a <b>inequality</b> in <b>:duration</b> we cannot operate this strategy.
+</div>
+
+Another issue with Decision Epoch Planners is that if we have 2 actions *(C [duration = 10, action = wall] and D [duration = 1, action = open barrier])* and we want to start D right before the end of C, we cannot have the time progress without taking actions. As a result, we are forced to call D at time $t_C + \varepsilon$ as $\varepsilon$ is the only elapsed time.
+<img src="img/7_CD_epoch.png">
+
+So, in general, Decision Epoch planner can deal only with actions performing with a time distance of $\varepsilon$ and not an arbitrary $n$.
+
+You could potentially tell the planner to have x times $\varepsilon$ elapsed, but this would hugely increase the search space and the overall performance would be very poor.
+
+You can change the value of $\varepsilon$ before the execution of the program, setting it to 1.01 instead of 0.01; this would reduce the search space drastically, but you can also overshoot and set it to 4 making it impossible to solve the problem.
+
+### 2. Simple Temporal Problem (STP)
+
+First off, the **constraints**:
+- $ε$ ≤ t(i+1) – t(i)      (c.f. **sequence constraints**)
+  > what this formula means is that an action happens at least after $ε$ time from the previous one
+- $dur_{min}$(A) ≤ t(A $\dashv$) – t(A $\vdash$) ≤ $dur_{max}$(A)
+  > this means that the total duration has to be more than a minimum duration and less than a maximum duration.
+  Respectively, they are called **minimum and maximum separation constraints**.
+  It is possible to leave **either** of these bounds out. 
+- Or, more generally, $lb ≤ t(j)$ – $t(i) ≤ ub$
+  > l/u b = lower/upper bound
+
+The positive thing about this approach is that it is **P TIME**
+
+These constraints must hold true at every state.
+
+#### How to solve a Simple Temporal Problem
+
+**MAX SEPARATION CONSTRAINT**
+> In this picture, Z is time 0, so the origin. Each arrow is the **Maximum Separation** and t(A) - t(Z) = 4 is to be read as "*A comes no more than 4 times units after Z*" so between Z and A there can be **at most** 4 time units.
+><img src="img/7_max_separation.png">
+
+Generally you do not happen to have the Max separation from time 0, rather you have it from another action.
+
+If you want to find the earliest possible time at which an action can occur, you simply need to find the **shortest path** in the graph from point 0 to that action.
+
+
+**MIN SEPARATION CONSTRAINT**
+
+<img src="img/7_min_separation.png">
+
+Conversely with the maximum separation, if you want to find the earliest possible time at which an action can occur, you need to find the **longest path** in the graph from point 0 to that action.
+
+So, the minimum time at which B can happen is not 4, but 5 (2 + 3).
+
+As looking for the longest path may be counterintuitive, you can multiply all the elements in the inequality by -1, so that 
+`2 <= t(A) – t(Z)` becomes `t(Z) - t(A) <= -2`
+and you end up looking for the shortest (negative) path
+
+<div class="warning">Note that the term Z comes now before the term A</div>
+
+Now that we have both the min and max separation constraints, we can draw this graph
+> <img src="img/7_minmax.png">
+
+and looking at it, if we find that the shortest (negative) path is longer than the shortest positive path, we have an inconsistency.
+
+### STN
+STPs can be converted into graphs called **Simple Temporal Networks** (or STN).
+
+Say we have 2 actions {A dur = 3, B dur = 5}
+
+<img src="img/7_AB_STP.png">
+
+As you can see, the MINIMUM separation is often given by $\varepsilon$ as this is the minimum time interweaving between the beginning(or end) of an action and another.
+
+Between the same action, instead, that time is given by the duration of the action itself.
+
+In the example, earliest B start is at $ε$ as the longest path is -$ε$ and can end earliest at (-5) + (-$ε$)
+
+<img src="img/7_cycles.png">
+
+A STN could present a **negative cycle**, meaning that the shortest past using lower bounds (the negative numbers) is greater than the shortest path using upper bounds.
+> in this case: (2 * ε + 5) > 3.
+
+A Negative cycle means that the minimum time is more than the maximum one in the formula $lb ≤ t(j)$ – $t(i) ≤ ub$
+
+As there is the chance to bump into a negative cycle, which would make the problem unsolvable, we have to use a proper algorithm when searching for the shortest path:
+ - Dijkstra is not good because doesn't tell you about cycles;
+ - Bellman-Ford (and Washley?) are good because, even if they can't deal with cycles either, they do tell you about them.
+
+
+## Crikey 3
+**Crikey 3** is a forward search planner which takes into account snaps start and end to represent its states:
+<img src="img/7_CRIKEY.png">
+
+In the example, the planner operates the green path:
+- starts with A_Start;
+- then goes B_Start;
+- then goes B_End; and this leads to
+- ABBA, which contains a negative cycle and has to be pruned.
+
+<div class="warning">
+    In the exam, if you have the adjacency matrix be careful on the <b>ORDER</b> of the actions (ABBA or ABAB)
+</div>
+
+So it tries again from AB, ending A first and then B.
+
+At every state the planner checks that all the constraints are not violated.
 
 
 
-.
-.
-.
-.
-.
-l
 
 
+
+### Memoization
+**Memoization** is a process that allows you to prune states with facts equal to one already visited (when applying costs, you can prune these states if the cost is the same or worse as equal one already visited).
+
+In temporal planning, this is not possible as two state (ABBA & ABAB) may in fact have the same facts, but as the order here matters, you could end up pruning a valid state (**permutations** matter here).
+
+
+## STP Heuristic
+**(video 4)**
+There are 3 main options:
+1. using the **RPG**
+  > It gives us an estimate of how many actions we shall take to achieve the goals, but does not tell us about the time; also, it may favor few longer actions to more smaller ones)
+1. Use a **temporal reachability analysis** (TRPG)
+  > This is basically an RPG with timestamped layers (used by CRIKEY)
+1. Approximate time as **action costs**
+  > If you already have a ***numeric relaxed plan*** (the one used in plans with cost actions), you can use that to find the heuristic. 
+  <div class="warning">
+    When you operate the same action twice in **parallel**, if you are operating with costs, then there is an **additive** property by which you just sum the cost of the fuel twice, but under a temporal perspective <b>the time doesn't double when you operate in parallel</b>. For this reason, this latter heuristic is <b>inadmissible</b>. 
+  </div>
+
+Let's focus on the 2<sup>nd</sup> solution for now.
+
+The first fact layer is at time 0.0, the rule for the action layers is that their timestamp is the same as the immediate preceding fact layer, so the first action layer is at time 0.0 too. 
+
+Now, due to the fact that, after an action, some time must elapse and we call that time $\varepsilon$ (= 0.01), the next fact layer will have a time stamp of 1.01.
+
+As this heuristic reasons with snaps, you can have an snap_start at any time $t_{start}$ (as long as the preconditions hold) but the time snap_end cannot happen before $t_{start} + dur$. Of course, if that snap_end has some preconditions, we must delay it until those preconditions are satisfied.
+
+Finally, we have to ensure that, when we start an action, not only snap_start preconditions exist, but also snap_invariant preconditions exist. However, we do not have to worry about the possibility of snap_variants to be deleted as in the RPG deletion effect are not taken into account.
+
+### Solution Extraction
+This works the same way as the normal RPG in the sense that you start from the goal layer, select the actions that achieve it, then look at the preconditions, select the actions that achieve them and so on.
+
+Keep in mind 2 thing though:
+- Given an action A, if we achieve A_start we must achieve A_end and vice versa.
+- We need to satisfy A_invariant preconditions (again do not worry about maintaining them).
+
+The advantage of using TRPG (which is the method we have just illustrated) is that the estimate we get is based on the time (due to the time stamps) rather than the actions; so the heuristic guides us to plans that are shorter in time rather than short in actions.
+
+**Is the relaxed plan length admissible?**
+> Like for the normal RPG, there is no guarantee that the number of actions is an underestimate. 
+ 
+**Can we get an admissible estimate of the time we can achieve a fact in the TRPG?**
+> Yes, the layer at which a fact appears is an admissible estimate of how soon we achieve that fact.
+
+**Is the relaxed plan makespan (he interval from the start to the end) admissible?**
+> Yes, it is. We can use this heuristic to prune states.
+
+
+<div class="warning"> 
+  The actual solution to the plan terminates with the achievement of the <b>end snap</b> of the last action and you do not have to add $\varepsilon$ to.
+  Say your final action is at t = 3.003, the next fact layer is t = 3.004, and if you are asked about the final solution, the goal is <b>USABLE</b> at 3.004, but <b>ACHIEVED</b> at 3.003 
+</div>
+
+
+# Week 8 - Temporal Planning (II)
+**(video 1)**
+## POPF
+POPF (Partial Order Planning Forwards) is an CRIKEY3 based temporal planner, but differently from CRIKEY3, POPF only adds constraints when necessary.
+It uses snaps (start and end action) to fragment temporal actions.
+A state S is a tuple $<F,V,P,T>$ of:
+- **F** Propositional Facts
+- $V$ Values of numeric task variables
+- The Plan to reach S
+- The Temporal Constraints on the steps in P
+
+To see how it works let's imagine this scenario:
+2 actions A and B with no interactions to one another, that is, neither sets the prerequisites for the other. 
+B takes longer than A but B┤ must precede A┤(this is a **total order constraint**). 
+<img src="img/8_POPF.png">
+
+Generally, total order constraints are good as may require some preconditions for B_start achieved by A_start. As in our example A_end relies on a precondition achieved by B_end, A_start cannot be achieved before B_end. 
+B is however longer than A, so the plan is temporally unacceptable. 
+Hence, we have to remove the constraint A_start before A_end. 
+
+To decide the necessary constraints we record additional information at each state concerning which steps **achieve** / **delete** / **depend on each fact**.
+
+If we are going to introduce an action the deletes a previously achieve fact, in traditional partial order planning we either **demote** or **promote** an action; here, as we are operating a forward search planning, we always do a promotion.
+
+Let's see how this works:
+
+<img src=".img/../img/8_POPF_promotion1.png">
+In our example we added the constraint that B_start must come after A_start, bu in reality:
+- neither B_start requires some preconditions achieved by A_start;
+- nor B_start deletes some preconditions necessary to achieve A_start.
+
+Hence, we remove that dependency:
+<img src=".img/../img/8_POPF_promotion2.png">
+The dependency to respect now is the one B_end before A_end, and this does not break any constraints.
+Next, keeping A_end after B_end, we see that A is shorter than B, so we end up having B_start before A_start:
+
+<img src=".img/../img/8_POPF_promotion3.png">
+
+And you can see that B starts at $t$ = 0.00, whereas A starts at $t$ = 3.01, that is:
+ $dur$(B) + $\varepsilon$ - $dur$(A)
+
+### POPF details
+**(video 2)**
+
+> For this section it can be useful to consider that **i** is the **state we are currently in**, so t(i) denotes its timestamp, and **j** indicates a **future state**; finally, **p** is a **fact**.
+
+To capture ordering information POPF considers:
+- The actions adding or deleting facts: **F+** and **F-**, where **F+(p)** *(F-(p))* is the index of the of the step that most recently **added** *(deleted)* p
+- The currently active facts: **FP**, where **FP(p)** is a set of pairs **<j,d>**:
+  - **<j,ε>** denotes that step j has an **instantaneous condition** on p (at **start** or at **end**)
+  - **<j,0>** denotes that step j marks the **end** of an action with an **over all condition** on p. 
+> The first one has ε because it happens after ε time from the action that achieves the precondition p, whereas <j, 0> denotes the end of an invariant, and as actions can achieve and deletes their own invariants, they do not require any further time to elapse.
+
+<div class="warning"> j itself is not the time stamp, rather, the index of the action.</div>
+
+> To better understand this concept imagine the barrier domain wherein there are 2 barriers and they have to be open, respectively, when the walk starts, and when it ends:
+> <img src="img/8_POPF_FP.png">
+
+For each `at start` condition p we enter an ordering constraint:
+> t(F+(p)) + ε ≤ t(i)
+
+The constraint says: “*this action comes after the most recent action that added P to the state, which is F+(p)*”
+If this fact (p) is true at the current state, then the last thing that happened to this fact was an add effect and not a delete one, and this fact must be true because we are considering an action with the precondition p applicable. As we know the fact must be true, we just have to make sure we come after what made it true.
+
+For each `overall` condition p we enter this constraint:
+> **if** F+(p) $\ne$ i **then** t(F+(p)) + ε ≤ t(i)
+
+The if it's important because, if this action itself adds p then we don't need to worry about ordering ourself after the previous thing to add p bc we are that previous thing, hence, we don't add the constraint.
+
+
+### POPF in action
+
+<img src="img/8_POPF_inAction1.png">
+
+> On the right hand side you can the domain map;
+> On the top left you can see the actions performed in order
+> On the bottom left you can see the temporal plan
+
+The first action operated is the **start working** and the second is **Load**. What is different here is that W_start and L_start are not sequential in the graph (aka, L_start doesn't happen ε after W_start) and the reason is that L_start does not needs preconditions achieved by W_start, nor it deletes any preconditions required from W_start (and the same is true for W_start about L_start).
+
+
+<img src="img/8_POPF_inAction2.png">
+
+Advancing with the planning you can see that both B_start and D_start depend on the preconditions achieved by W_start, hence we add a constraint in the form of an arrow.
+
+From the graph it is easy to see how [L_start, L_end] and [W_start, B_start, B_end, D_start] can happen in parallel. 
+
+This is a problem as D_start (Driving) should happen after Loading the parcel into the truck. So, we must add a constraint of the form D_start after L_end. 
+
+Beware not to add the the constraint from D_start to L_start, because this would break the Load invariant of having the truck at the same location throughout.
+
+### What happens when you delete effects
+
+<img src="img/8_POPF_formula.png">
+
+The first part says that if we are calling an `at start` action that deletes p, all the actions that require p as a precondition must happen before or at the same time as the action we are operating now that deletes p.
+
+The second bit says that, if we action we are in, that is t(i), in which we are deleting p, come after the last action to add p **F+(p)**, then p is false; conversely, if our action comes before the last action that added p, then p is True.
+
+Now, as we have deleted p, we set **F-(p) = i**, meaning that the last action to operate on P happened at time i (current time) and p was deleted. Also, we have to **clear** **FP(p)** as that is a "history" of the actions that required p to be True, but as the current state i comes after all of them (this was checked in the previous steps) we don;t have to worry about those actions anymore.
+
+### What happens when you add effects
+
+<img src="img/8_POPF_formula_add.png">
+
+Similar to the delete effect, but we add the if condition here.
+
+
+The main benefit of POPF is not the search time, which is the same as CRIKEY3, but **the makespan of the plan does improve**.
+Also, in domain with deadlines (that is, where we have to achieve an action by a certain time), POPF is more capable of finding a solution and does it more quickly. This is thanks to the removal of the ordering constraints.
+
+## Safety Compression
+**(video 3)**
+
+When we decompose durative actions in snap_start and snap_end we have an at least **twice** as big search space. 
+
+There are actions, like the *open-barrier* wherein we do not care about the final effect, rather the invariant, and other where the matters is the effect, like *load-truck*.
+
+The issue with load-truck is that, after we start the action, we have to consider the end of it in every state we search until we apply it. This is a waste of time searching. 
+
+So the intuition is that if the action does nothing bad, we can just **end it straight away**, just like *load* or *drive*. This thing is also called **compression**.
+
+For actions like the barrier one, instead, we cannot do the same reasoning.
+
+When can we apply compression? Given an action C we consider 2 rules:
+
+- **The end-effect rule**
+  - There must be no end-delete effects.
+  - Delete effects make preconditions false, which is bad:
+  if we immediately add C⊣ after Cⱶ in this case, then we might not be able to use a fact that C added, e.g. the match or the barrier.
+
+- **The end-precondition rule**
+  - If an action has end-preconditions that aren't also over all conditions, we can't just end it – maybe we have to do something first.
+  - Cⱶ requires p, adds q.  D requires q, adds r. C⊣ requires r.
+ pre (C⊣) might not be satisfied.
+ <img src="img/8_end_pre_rule.png">
+
+**Compression safe end preconditions**
+In general we can compress if:
+- once the start of an action (Cⱶ) has been applied, **invariants of C will be maintained until C⊣ is applied** (no action may be applied that violates them).
+- Pre (C⊣) ⊆ Pre(C↔) (**the invariant and the end actions share the same preconditions**), C⊣ is always applicable so we don’t need to worry about something deleting pre (C⊣).
+
+so, an action is compression safe if:
+- it has no end delete effects;
+- **and** no end preconditions that are not over all conditions.
+
+
+The main issue with this approach is that, in CRIKEY3, it prevents parallelism:
+
+<img src="img/8_POPF_Parallelism.png">
+
+However, POPF uses partial ordering and the efficiency is not compromised and automatic compression improves performances.
+
+## Deadlines
+**(video 4)**
+
+Deadlines can be of 2 type:
+- The ones we normally identify as such, that is, an action has to be achieved by a certain time;
+- The windows, that is, an action has to be achieved after a certain time, but before another one (dinner is served from 5 to 7)
+
+<img src="img/8_deadlines.png">
+The way you model deadlines is simply by using a "timer" of the form 
+
+> (**at** \<time> **(fact)**)
+> This predicate is actually called TIL (timed-initial literal)
+
+This can be a either an add or delete effect.
+As actions have a duration, it common sense to add the deadline as an `at end` constraint. (`at start` could be used instead, but you should tweak the time of the deadline)
+
+For time windows, the approach is pretty much the same, you use the **at** function to open and then close a time window. 
+
+Keep in mind that you can use `at end`, `at start` but also `overall` constraints (e.g. you have to go for shopping, the grocery is open from 8 AM to 8 PM, and overall the time you are walking around the aisles the grocery has to be open.)
+
+## Reasoning with TILs in Forward Search
+- Order the TILs chronologically;
+- At each state we have a choice:
+  - Apply an action that is applicable in that state;
+  - Apply the next Available TIL.
+  
+This allows us to leave the choice to search about whether the TIL will appear before or after a given action.
+
+POPF has some advantages in this situation: only necessary orderings are enforced.
+
+
+Imagine a problem with a bus driver working (W) and during the shift he has to drive the bus thru Route1 (R1) and Route2 (R2). There is a deadline Time Window (TW = (at 3.75 (due Route3)) (at 4 (not (due Route3))) ):
+
+<img src="img/8_Time_Windows.png">
+
+> This is The CRIKEY3 solution, in POPF the edge TW1 $\rarr$ R3_start would not be enforced.
+
+The plan, in order to ba valid, has to be valid on its own and has to keep being valid after applying the TILs.
+
+Beware, you can have negative cycles that include deadline/temporal window edges.
+
+Both POPF and CRIKEY can find the solution (if it exists) when you have these negative cycles, but the difference is that CRIKEY3 has to search again whereas POPF can easily solve the problem thanks to partial ordering.
+
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
