@@ -136,15 +136,15 @@ class MDPAgent(Agent):
         world, it is intended to be called only once not to waste 
         resources.
         '''        
-        food = api.food(state)
-        capsules = api.capsules(state)
-        self.food = food + capsules
         self.walls = api.walls(state)
         self.accessibleMap = getNonWallLocations(self.walls, state)
         self.movesMap = getMapMoves(self.accessibleMap)
-        capsules = api.capsules(state)
-        self.isSmallGrid = len(capsules) == 0
         self.deadEnds = getDeadEnds(self.accessibleMap, self.movesMap)
+
+        food = api.food(state)
+        capsules = api.capsules(state)
+        self.food = food + capsules
+        self.isSmallGrid = len(capsules) == 0
         self.initialFoodCount = len(self.food)
 
 
@@ -170,7 +170,7 @@ class MDPAgent(Agent):
 
         activeGhosts, edibleGhosts = getActiveAndEdibleGhostsLocations(self.ghostsStates, self.distancesMap)
 
-        riskyActiveGhosts, riskyEdibleGhosts = getRiskyGhosts(activeGhosts, edibleGhosts, self.distancesMap)
+        # riskyActiveGhosts, riskyEdibleGhosts = getRiskyGhosts(activeGhosts, edibleGhosts, self.distancesMap)
         
         self.valueIterationMap = getValueIterationMap(self.accessibleMap, 
                                                         self.movesMap, 
@@ -241,24 +241,24 @@ def getDeadEnds(accessibleMap, movesMap):
     return deadEnds
 
 
-def getRiskyGhosts(activeGhosts,
-                   edibleGhosts, 
-                   distancesMap, 
-                   allowedDistanceForActiveGhosts=MDPAgent.ACTIVE_GHOSTS_MAX_ALLOWED_DISTANCE,
-                   allowedDistanceForEdibleGhosts=MDPAgent.EDIBLE_GHOSTS_MAX_ALLOWED_DISTANCE
-                ):
-    '''
-    Given active and edible ghosts, and a distance map,
-    return a the ghosts considered risky, that is, too close
-    to pacman. The max allowed distance varies based on the ghost
-    state {active, edible}.
-    '''
-    # 1 -> ghost is edible
-    # 0 -> ghost is active
-    riskyActiveGhosts = filter(lambda ghost: distancesMap[ghost] <= allowedDistanceForActiveGhosts, activeGhosts) 
-    riskyEdibleGhosts = filter(lambda ghost: distancesMap[ghost] <= allowedDistanceForEdibleGhosts, edibleGhosts) 
+# def getRiskyGhosts(activeGhosts,
+#                    edibleGhosts, 
+#                    distancesMap, 
+#                    allowedDistanceForActiveGhosts=MDPAgent.ACTIVE_GHOSTS_MAX_ALLOWED_DISTANCE,
+#                    allowedDistanceForEdibleGhosts=MDPAgent.EDIBLE_GHOSTS_MAX_ALLOWED_DISTANCE
+#                 ):
+#     '''
+#     Given active and edible ghosts, and a distance map,
+#     return a the ghosts considered risky, that is, too close
+#     to pacman. The max allowed distance varies based on the ghost
+#     state {active, edible}.
+#     '''
+#     # 1 -> ghost is edible
+#     # 0 -> ghost is active
+#     riskyActiveGhosts = filter(lambda ghost: distancesMap[ghost] <= allowedDistanceForActiveGhosts, activeGhosts) 
+#     riskyEdibleGhosts = filter(lambda ghost: distancesMap[ghost] <= allowedDistanceForEdibleGhosts, edibleGhosts) 
 
-    return riskyActiveGhosts, riskyEdibleGhosts
+#     return riskyActiveGhosts, riskyEdibleGhosts
 
 
 def getActiveAndEdibleGhostsLocations(ghostsStates, distancesMap):
@@ -404,15 +404,15 @@ def getValueIterationMap(accessibleMap,
                             initialFoodCount,
                             allowedDistanceForActiveGhosts=MDPAgent.ACTIVE_GHOSTS_MAX_ALLOWED_DISTANCE,
                             allowedDistanceForEdibleGhosts=MDPAgent.EDIBLE_GHOSTS_MAX_ALLOWED_DISTANCE,
-                            foodReward = MDPAgent.FOOD_REWARD,   
-                            moveReward = MDPAgent.MOVE_REWARD,  
-                            activeGhostReward = MDPAgent.ACTIVE_GHOST_REWARD,
-                            edibleGhostReward = MDPAgent.EDIBLE_GHOST_REWARD,
-                            pacmanReward = MDPAgent.PACMAN_REWARD,      
-                            deadEndReward = MDPAgent.DEAD_END_REWARD,
-                            noFoodReward = MDPAgent.NO_FOOD_REWARD,
-                            discountFactor = MDPAgent.DISCOUNT_FACTOR,
-                            epsilon = 0.1
+                            foodReward=MDPAgent.FOOD_REWARD,   
+                            moveReward=MDPAgent.MOVE_REWARD,  
+                            activeGhostReward=MDPAgent.ACTIVE_GHOST_REWARD,
+                            edibleGhostReward=MDPAgent.EDIBLE_GHOST_REWARD,
+                            pacmanReward=MDPAgent.PACMAN_REWARD,      
+                            deadEndReward=MDPAgent.DEAD_END_REWARD,
+                            noFoodReward=MDPAgent.NO_FOOD_REWARD,
+                            discountFactor=MDPAgent.DISCOUNT_FACTOR,
+                            epsilon=0.1
                         ):
     '''
     Return the value iteration map. Epsilon is the threshold, if the max change in the map 
@@ -423,21 +423,19 @@ def getValueIterationMap(accessibleMap,
     # initialise value iteration map
     oldValueIterationMap = { location : noFoodReward for location in accessibleMap }
 
-    # A list of locations with variable score is created 
+    # a list of locations with variable score is created 
     # removing the food and ghosts from the map.
     ## MEDIUM CLASSIC SETTINGS
-    nonScoreableObjects = edibleGhosts + activeGhosts
-    scoreableMap = [ location for location in accessibleMap if location not in nonScoreableObjects ]
+    nonScoreableLocations = edibleGhosts + activeGhosts
+    scoreableLocations = [ location for location in accessibleMap if location not in nonScoreableLocations ]
     # nonScoreableObjects = edibleGhosts + activeGhosts if isSmallGrid else []
 
-    # The value of food increase as less food remains
+    # the value of food increase as less food remains
     ## MEDIUM GRID SETTINGS
     foodReward *= initialFoodCount / (len(food) + 0.0)
 
-    # Create the next value iteration map
-    newValueIterationMap = {}
     
-    # Update the old map in food and ghosts locations
+    # update the old map in food and ghosts locations
     for foodLocation in food: oldValueIterationMap[foodLocation] += foodReward
     for ghostLocation in activeGhosts: oldValueIterationMap[ghostLocation] += activeGhostReward
     for ghostLocation in edibleGhosts: oldValueIterationMap[ghostLocation] += edibleGhostReward
@@ -459,17 +457,20 @@ def getValueIterationMap(accessibleMap,
         oldValueIterationMap[newLocation] += lowestGhostReward
 
     ## MEDIUM CLASSIC SETTINGS
-    # pacman should try to always change location
+    # Pacman should try to always change location
     oldValueIterationMap[pacman] = pacmanReward 
 
-    # This is used to determine the end of the 
+    # this is used to determine the end of the 
     # value iteration loop
     maxUpdate = epsilon + 1
 
     while maxUpdate > epsilon:
+        # initialise the next value iteration map
+        newValueIterationMap = {}
+
         maxUpdate = 0
         
-        for scoreableLocation in scoreableMap:
+        for scoreableLocation in scoreableLocations:
 
             locationValue = bellmanEquation(moveReward, scoreableLocation, oldValueIterationMap, movesMap, distancesMap)    
 
@@ -493,8 +494,6 @@ def getValueIterationMap(accessibleMap,
         # update old value iteration map
         for key, newValue in newValueIterationMap.items():
             oldValueIterationMap[key] = newValue
-
-        newValueIterationMap = {}
 
     ## MEDIUM GRID SETTINGS
     # pacman should try to always chenage location
@@ -527,8 +526,7 @@ def getBestNextMove(moves,
                     valueIterationMap, 
                     movesMap,
                     distancesMap, 
-                    isSmallGrid,
-                    discountFactor=MDPAgent.DISCOUNT_FACTOR
+                    isSmallGrid
                   ):
     '''
     Given pacman's location and the valueIterationMap,
@@ -669,23 +667,28 @@ def getLocationUtility(startingLocation,
     return valueIterationMap[landingLocation]
 
 
-def getVisitbaleWidthAndHeight(state):
+def getVisitableWidthAndHeight(state):
     '''
-    Return a tuple (x, y) of the top-most right-most
-    location in the map
+    Return a tuple (x, y) where x and y are, respectively,
+    the width and the height of the map.
     '''
     topRightCorner = max(api.walls(state))
-
-    # the corners belong to the walls, so in a map 4 x 4
-    # the top right corner is (3, 3), but it's a wall, so the map is
-    # 2 x 2 from the agent perspective, so the width is 3 - 1
+    # Corners belong to the perimeter wall. As the program uses
+    # an array index notation to indicate the position of cells,
+    # in a 4 x 8 map the top-right corner is (3, 7).
+    # If (3, 7) is the top-right corner, the most right accessible
+    # cell is 3 - 1, and the top most accessible cell is 7 - 1 
     return (topRightCorner[0] - 1, topRightCorner[1] - 1)
 
 
-def getMapLocations(mapWidth, mapHeight):
+def getNonPerimeterLocations(mapWidth, mapHeight):
     '''
     Return a list of all the locations in the map
+    which do not belong to the perimeter wall
     '''
+    # using the array notation, a cell (x, y) with x = 0
+    # or y = 0 belongs to the perimeter wall, so we start 
+    # from 1. 
     widthArray = range(1, mapWidth + 1)
     heightArray = range(1, mapHeight + 1)
     return [element for element in itertools.product(heightArray, widthArray)]
@@ -695,15 +698,16 @@ def getNonWallLocations(walls, state):
     '''
     Return a list of non-wall locations
     '''
-    width, height = getVisitbaleWidthAndHeight(state)
-    mapLocationsMatrix = getMapLocations(height, width)
-    return [x for x in mapLocationsMatrix if x not in walls]
+    width, height = getVisitableWidthAndHeight(state)
+    nonPerimeterLocations = getNonPerimeterLocations(height, width)
+    return [x for x in nonPerimeterLocations if x not in walls]
 
 
 def getLegalMoves(accessibleMap, location):
     '''
     Given a location and the accessibleMap, 
-    Return the moves that can be made from there
+    Return the moves that can be performed from 
+    that location
         e.g. [(1, 0), (-1, 0)]
         Pacman can only move EAST or WEST
     '''
@@ -712,8 +716,8 @@ def getLegalMoves(accessibleMap, location):
 
 def getMapMoves(accessibleMap):
     '''
-    Return a dictionary of the possible moves for each location
-    in the form {location: moves[]}
+    Return a dict of the possible moves for each location
+    in the form { location: moves[] }
         e.g. { (6, 5): [(1, 0), (-1, 0)]} 
         the only moves are going either EAST or WEST
     '''
