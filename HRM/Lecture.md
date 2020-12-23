@@ -1,4 +1,4 @@
-u[TOC]
+[TOC]
 
 
 <style>
@@ -32,15 +32,17 @@ u[TOC]
         color: rgb(220, 0, 0);
     }
 
-    .definition {
+    .definition, definition {
         background: rgba(80, 80, 255, .2); 
         padding: 5px; 
         padding-left: 10px;
         margin: 20px 0; 
         border-left: solid 3px rgb(80, 80, 255);
+        display: block;
     }
 
-    .definition::before {
+    .definition::before,
+    definition::before {
         content: "DEFINITION: ";
         font-weight: bold;
         color: rgb(80, 80, 255); 
@@ -70,7 +72,7 @@ What is distinctive about HRM (as compared to traditional personnel management)?
 
 ## PART 2
 
-####Strategic HRM (SHRM) = Strategic Management + HRM
+#### Strategic HRM (SHRM) = Strategic Management + HRM
 The idea derived from 2 main points:
 - Different [business] strategies require different HR practices;
 - Higher performance is the result of alignment between HR strategies and HR strategies and their (business) practices (in the lecture he said HR practices instead).
@@ -470,6 +472,7 @@ The difference with the behavioural is that here you suppose a scenario whereas 
 
 ## Bias in selection
 <img src="./img/bias.png">
+
 Obese people (especially women) are way less likely to be hired.
 
 > the first impression an interviewer perceives of the candidate happens between the first **4 minutes**, and then the rest of the time, the interviewers tries to confirm their impression.
@@ -642,6 +645,7 @@ Salaries are not higher than competitors, but employees are treated kindly and r
 
 ## Performance Management
 **(video 1)**
+
 If you want to manage the performance of your company there are 3 steps to follow:
 
 - **Define performance**: not every employee can be judged based on the same criteria, as such you have to define what performance means (based on the job, on the role, etc.)
@@ -651,45 +655,432 @@ If you want to manage the performance of your company there are 3 steps to follo
 ## Aims of performance management
 **(video 2)**
 
-**Strategic**
-The performance management system should **communicate** and reflect the company **strategy** in terms of expected employee results and **behaviours**, and skills to develop.
+**Strategic** <u>(align the employee to the company's mission)</u>
+The performance management system should **communicate** and reflect the company **strategy** in terms of expected employee results and **behaviours**, and **skills** to develop.
 
-**Administrative**
-The performance management system is useful (and should lead) xto **make decisions** regarding employee promotion/demotion, retention/termination, salary growth, etc.
+**Administrative** <u>(allow the company to make decisions)</u>
+The performance management system is useful (and should lead) to **make decisions** regarding employee promotion/demotion, retention/termination, salary growth, etc.
 
-**Developmental (main point)**
+**Developmental** <u>(main point of perf. manag. - should help employee develop and improve)</u>
 Feedback sessions are particularly important for employee development (analyse why employees are not performing; decide on training, job transfer, etc.). It easy to critic people, but instead of giving destructive criticisms, you should aim at developing them. 
 
 ## Performance Appraisal
 A good performance appraisal system should be
 - **Focus**: evaluating too many aspects may put too many things on the same level, and everything would be relevant, and nothing would be important. So a good system should focus and the most important things.
-- 
+- **Fair**: individual should participate in developing the appraisal method and the should be given clear feedback.
+- **Clear**: a performance appraisal system that people do not understand is strongly not recommended. The system should make clear how employee should perform and what distinguishes a poor performance from a good one.
+
+## Designing Performance Appraisal System
+
+<img src="img/7_designing_system_appraisal.png">
+
+Others may include external sources
+
+### What to Evaluate
+
+---
+
+**Behaviour**
+---
+
+Organisations define the expected behaviours employees should exhibit and managers should evaluate to what extent employees exhibit these expected behaviours;
+  
+The most typical way to assess behaviours is via **critical incidents**, that is evaluating the behaviours in specific events that occurred.
+    <br>
+  - **Behaviorally anchored rating scales (BARS)**
+    BARS identify a number of performance dimensions (e.g. Interaction with customers) and typify **grades of performance levels** corresponding to the exhibition of behaviors critical to success or failure on the job (e.g. 1-9). The rater should then grade employees according to the type of behavior that best describes their performance and to what extent they exhibit that behaviour. 
+    The behaviours to be looked at are those **typically associated with either good or poor performance**. 
+    > e.g. 9 = good, 1 = poor <img src="img/7_BARS_ex.png">
+
+    **PROS**:
+    - It offers **clear feedback to employees**: people understand how they should behave and offering them feedback helps them understand to what extent they are adhering to these behaviours.
+    - It easy to associate this to **potential training** and contribute to their **development**.
+    - Can be effective in linking the **company strategy** to specific behaviors that facilitate strategy implementation.
+
+    **CONS**:
+    - It requires constant **monitoring**.
+    - It is often not clear the association between individual behaviour and company performance. (people may behave in a certain way and not achieve the desired output)
+    - People tend to behave better when the appraisal is coming, and managers tend to focus more on the more recent behaviours, instead, they should note down everything at any time.
+
+---
+**Attributes:** 
+---
+Focuses on the extent to which individuals have certain characteristics or traits considered relevant for the performance of their and job and to the performance of the organization (company’s success)
+
+Some of the attributes usually used are:
+- Communication skills;
+- Managerial skills;
+- Interpersonal skills;
+- Problem solving skills. 
+	
+<img src="img/7_graphic_rating_scale.png">
+
+>e.g.
+<img src="img/7_graphic_rating_scale_ex.png">
+
+**PROS**:
+- easy to evaluate;
+- the same scale could be used across the company for different roles.
+
+**CONS**:
+- **Highly subjective**;
+- Competences are hard to link to performance (someone with a competence may not display it via behaviour or performance);
+- Does not offer ways to improve a skill.
+
+
+
+
+
+---
+Results:
+---
+
+1. the company establishes measurable performance targets and objectives
+2. managers judge the extent to which the employee (or the team or whatever) achieved them over a specific amount of time.
+
+
+**PROS**:
+- subjectivity is reduced;
+- it is easy to link individual performance to company's performance and that the link between employee performance and company's strategy is clear;
+- managers have to deal with their employees on a daily basis and they have feelings, so assessing them negatively on behaviours is hard, but on achieved results is not.
+
+**CONS**:
+- Performance may be affected by factors out of employee's control (economic recession, or think of salespeople during COVID);
+- individuals may end up focusing only on benchmarked aspects of their job;
+- Employees' behaviours in achieving these results are not taking into consideration and they may have bad impacts on the team.
+
+
+<br>
+
+## Comparing Performance Between Employees
+ 
+Often companies compare employees' performances with one another. 
+They can either go from the best employee to the worst (**Simple Ranking**), or more generally divide them into groups (**Forced Distributions**) like top 10%(best), 11 to 20%, ... , 91+%(worst).
+
+**PROS**
+- Differentiate employees and helps decide about promotions or pay raises;
+- Some managers may always rate their employees top performers, other may rate them always average performers. This approach eliminates this kind judgment.
+
+**CONS**
+- Someone allocates in the bottom 10% may be not far from someone in the mid 50%;
+- Prone to suffer from “office politics”;
+- Does not relate performance to objective employee outcomes;
+- Does not relate performance appraisal to company strategy.
+
+## Information sources
+
+Information about the individual may come from:
+**managers**
+<img src="img/7_source_managers.png">
+
+**peers**
+<img src="img/7_source_peers.png">
+
+**subordinates**
+<img src="img/7_source_subordinates.png">
+
+**self** (the subject **themselves**)
+<img src="img/7_source_self.png">
+
+**clients** (or **external sources**)
+<img src="img/7_source_clients.png">
+
+The sum of all (or some) of these sources is called **360 degree evaluation**
+<img src="img/7_source_360.png">
+
+**REMEMBER** the point of evaluating employees is mainly to provide them with feedback in order to improve their performances and to citicise them.
+
+
+
+# Week 8 - Reward Management
+
+**Reward** is a “bundle of returns offered in exchange for a cluster of employee contributions” <cite>(Bloom & Milkovitch, 1996)</cite>
+
+“**Reward management** is concerned with the formulation and implementation of strategies and policies in order **to reward people fairly, equitably and consistently** in accordance with **their value to the organization**”. <cite>(Armstrong, 2010)</cite>
+
+> For the next part, the lecturer used the  CIPD (2019) report for the data.
+
+**Fair**
+- People should be treated justly in accordance with what is due to them because of their value to the organization. 
+- People should be rewarded for the value they create.
+
+> If you ask employees, their wage is not fair.
+
+**Equitable**
+People should be rewarded appropriately in relation to others within the organization and others doing similar work in other organizations.
+
+We tend to compare our wage to those of other people covering similar roles inside and outside the organisation, and we expect to have a similar pay with respect to our contribution.
+
+**Consistent**
+Decisions on pay should not vary arbitrarily and without due cause between different people or at different times.
+
+We want our salary to be stable.
+- Rewards shape attitudes and behaviour in employees. An organisation that keeps changing is considered not stable
+- This organisation is also likely to change the way they reward people or the standard use to judge who to reward, and those who joined the organisation based on some "rules", seeing them vanishing may decide to leave.
+
+
+**Strategic** 
+- People should be rewarded according to what the organization values and wants to pay for.
+- The reward system should help to attract and retain high quality people.
+
+This basically means that the reward strategy should be in line with the organisation strategy and proposition.
+
+
+## Do rewards incentive people?
+An MIT study case, with higher rewards for better performance, and lower, or no reward, for worse performance found out that:
+- on jobs requiring mechanical skills, better rewards incentive people to work better, and their overall performance is good.
+- on work that required even a little of cognitive skills (above rudimentary cognitive skills), the higher reward led to poorer performance.
+
+A Little pay would not motivate people to work, so that is not a good idea, but overpaying them is not good either, in fact, as the many tests proofed, people perform worse.
+
+This is because people have a purpose that motivates them which is not money. Atlassian gave their employee a whole free day to work on whatever they wanted. No bonuses were given to them whatsoever for their job, yet they came out with amazing ideas and work. Again, people need to feel self realised, and when they are paid the feel like they are not.
+
+In essence, money should not be the only reward.
+
+
+## Transactional Reward
+<div class="definition">
+<b>Transactional reward</b> (or total remuneration) is the value of all cash payments and benefits received by employees such as base pay or salary, contingent pay, cash bonuses, long-term incentives, shares, profit sharing and employee benefits which include pensions, holidays, health care,
+</div>
+
+**Base Pay**
+It depends on different factors like:
+- the importance of that role inside the company;
+- the skills required for that job;
+- market factors like supply and demand for that job; and so on.
+
+The base salary is the starting point for deciding rewards, for example overtime work, sick pay, etc.
+
+## Determining the base pay
+The base salary can be defined base on:
+- **Market factors** (external to the company)
+  - **Extreme market pricing** -> market rates are the only thing taken into consideration;
+  - **Market pricing** -> the job size is considered along side the market rate.
+- **Internal focus** looks how jobs compare with each other in terms of value for the organisation.
+
+
+## Pay determination
+<img src="img/8_pay_determination.png">
+<img src="img/8_issues_with_surveys.png">
+
+## Internal focus - Job Evaluation
+Evaluating the size of a job by looking only at internal factors.
+This methodology has been highly criticised as it is bureaucratic, 
+time-consuming and irrelevant in a market economy where **market rates dictate internal rates of pay**, however, it is still widely practiced.
+
+<img src="img/8_job_evaluation.png">
+
+To mitigate bias, many people score the employee altogether.
+ 
+## Contingent Pay
+<img src="img/8_contingent_pay.png">
+
+Pay increases are related to the achievement of agreed **results** defined as **targets** or **outcomes**.
+
+Contingent pay is good to tell employees how they are performing, what the company is expecting from them, and also to motivate and retain them.
+
+However, these benefits are normally small and do not impact significantly on the motivation. This system can also generate the opposite effect, i.e. dissatisfaction, if the criteria are not well specified.
+Also, sometimes achieving results does not depend on the employee but on some environmental factors.
+
+**Team-based pay** can also be considered:
+- It would enforce the team spirit,
+- But people may not feel as gratified as they should, or they may receive a lot of pressure from the teammates.
+
+**Organisation wide bonuses**
+<img src="img/8_organisation-wide_bonus.png">
+
+
+## Benefits
+Benefits are **non-monetary** bonuses with financial value, yet **very expensive**.
+
+<img src="img/8_benefits.png">
+Their aim is not to directly motivate employees, but to create a working experience, to attract and retain.
+
+<img src="img/8_benefits2.png">
+
+Employee may be able to decide their benefits to some extent. 
+Degrees of employee freedom:
+- Fixed menu (choice from a fixed list of benefits)
+- Flexible menu (choice from a core list plus a wider list of other benefits - so-called core plus schemes)
+- Total freedom (employees are free to choose up to their points/cash limit)
+
+
+## Relative Rewards (non-financial)
+Employees feel like bonuses are ought to them at some point, and cutting them could be bad. As financial benefits can be very expensive, consider about non financial ones:
+<img src="img/8_non_financial_benefit.png">
 
 
 
 
 
 
-.
-.
-.
-.
-.
-.
-.
-..
-.
-.
-.
-.
-.
-.
-.
-.
-.
-...
-.
-.
-.
-.
-.
+
+
+
+
+
+
+
+# Week 9 - Turnovers
+
+<definition>
+    <b>Employee Turnover</b> is the rate at which employee leave the company.  
+</definition>
+
+A turnover can be either:
+- **Voluntary:** e.g. the employee wants to retire or change job; or
+- **Involuntary:** the company fires the employee
+
+Turnovers are generally associated with the **economy**: 
+- During **recessions** voluntary turnover diminish and the involuntary ones increase.
+- During **good times** the opposite holds true.
+
+The turnover rate is not consistent across different types of job, for example **seasonal job** or hospitality display higher turnovers rate.
+
+The formula for the turnover is simply
+(# people who left during the year / avg. # of employee durint the year) x 100
+
+This formula is however misleading as it does not consider what sector are leaving people from (HRM, salespeople, devops etc.)
+
+---
+**What do HR managers think about turnovers?**
+Apparently, turnover is not seen as having meaningful negative impacts by HR managers, as the graph shows:
+
+<img src="img/9_HR_Managers_on_turnover.png">
+
+And, actually, managers are quite satisfied with the turnover rate:
+
+<img src="img/9_HR_Turnover_satissfaction.png">
+
+In fact, 43% of them are ok with that rate and 14% would like to see an increase in this number.    
+
+## Is turnover a bad thing?
+
+**Thesis 1: No, it is not and it as actually a good thing**
+
+1. As mentioned before, some sectors see a higher rate of turnovers, however, they still manage to be profitable. <br>
+  Think about McDonald's or Burger king (which has a turnover rate of over 300%), they are incredibly profitable, yet employee leave and join steadily.<br>
+  This businesses are called **businesses of numbers**.
+<br>
+
+2. There are plenty of jobs with **high retention rate** which offer poor services (e.g some **public sector organisation**)
+<br>
+
+3. High levels of turnover mean new employee with new ideas that can stimulate the company to come up with new products. (e.g companies in the Silicon Valley)
+<br>
+
+4. It allows to have control over the payrolls, in facts, laying off people allows companies to save money.
+
+
+**Thesis 2: Yes, it is bad**
+
+1. Is it **expensive** as you have to go through the recruitment and selection process, the induction (this refers to learning about the company structure and how things work), and the training again; also, consider the loss in productivity.
+<br>
+
+2. Turnovers are a **loss in human capital**. Consider that your employee may be skilled and hard to replace, or they may join your competitors benefitting them and, indirectly or directly, have a negative impact on your company.
+<br>
+
+3. loosing an employee may **put a lot of pressure on their teammates** who now have higher work loads. Some may argue that finding a replacement is a quick process, but still, the new employee may be "inept" and it takes them time become proficient.
+<br>
+
+4. High turnover rates reflect negatively on the company’s **reputation** with potential future employees and customers
+
+**Conclusion**
+High levels of turnover create instability and are expensive, but low levels of turnover are not desired either are the company does not get to recycle the skills, the mindset and the ideas.
+So ideally, you should have reasonable turnover levels.
+
+How do you decide the right amount?
+This depends on several things like:
+- the **sector**: you may look at your competitors to benchmark it;
+- the **job category**, so are devOps leaving? and HR managers? etc.
+- the **cost of replacing the leavers**, actual cost of recruitment process as well as the human cost -> are they available on the market?
+- how **expensive is the training**, e.g. McDonald's has low training costs as compared to a hostess.
+  
+
+## Leaving Factors:
+
+### Pull factors (it's not you, it's me)
+- **Better Pay**;
+- **Better Career opportunities**
+- **Better work-life balance**
+
+A company should not remain indifferent to these kind o turnovers and should diagnose the quality of their policies and practices:
+- [Better payoff and opportunities] The organisation should **revise performance and reward management**: Are we paying the employees the right amount? How do we compare with our competitors? Shall we provide different rewards? What kind of rewards do our competitors offer?
+- **Are we hiring the right people**? Are we making promises we cannot keep? Are turnovers a consequence of a poor recruitment process? Do we make promises we do not maintain? Are we looking for the wrong people or do we offer them the wrong tools?
+- **Are we not investing enough (training and development) on them**?
+
+> Turnovers are a good way to assess HR practices.
+
+### Push factor (it IS you!!)
+Employees are dissatisfied with the organisation culture, with their policies or their practices, etc.
+
+The company should again come up with the same questions as before.
+
+### Unavoidable turnover
+People retire because they are too old, or ill or anything else that is entirely outside of the company control.
+
+The company expects these turnovers to some extents and there is not much it can do.
+
+### Involuntary turnover
+The company is pushing its employee in to the market by reducing wages, terminating contracts etc. This generally happens during economic crisis.
+
+In this cases, again, HR should questions the techniques used:
+Did we make the right decision to hire people? Can we prevent this situation?
+
+## Exit surveys
+Right after an employee declares their intention to quit, or at least before they leave, the company should conduct an exit survey or interview. This survey should not be conducted by the line manager, rather, an external consultant or an HR manager should be in charge.
+
+The information should be systematically gathered and used to diagnose HR policies
+
+There are some issues though:
+- Are the interviewees honest? Generally not, especially if the problem is their manager.
+- People prefer to mention social reasons for leaving, like better pays or personal circumstances.
+- Finally, people like to "leave the door open" even if they are joining another company as you never know whether you may want to come back. Even if this is not the case, people may not be brutally honest.
+
+
+## Why do people stay?
+It may be the case that the individual perceives to fit in the job, believes in the company's mission. 
+Because leaving the company involves costs, job research and sacrifices, risking mobility for example.
+
+It may also be that they feel they belong with the organisation community.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
