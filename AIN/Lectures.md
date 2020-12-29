@@ -68,12 +68,7 @@ These percepts are elaborated, help generate new states which, in turn, help dec
 
 ## Environment Characteristics
 <img src="img/Agent_characteristics">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 # Week 2
 
 ## Observability
@@ -88,7 +83,7 @@ These percepts are elaborated, help generate new states which, in turn, help dec
 ### Partial observability causes
 Partial observability may depend on different things:
 - The agent may **lack of some sensors**, or they are not powerful enough (physic limitations like atoms);
-- There may be **noise** interferring with the sensors;
+- There may be **noise** interfering with the sensors;
 - **Computational complexity**;
 - **World structure**.
 
@@ -98,44 +93,45 @@ Partial observability may depend on different things:
 <img src="img/uncertainty.png">
 
 
+
 ### Handling Uncertainty
-- Using **probability** (given the available evidences); probabilistic assertions summerise the effects of:
+Uncertainty should be addressed in order to reach better solutions in problems. It can be handled in 3 ways:
+- Using **probability** (given the available evidences); probabilistic assertions summarise the effects of:
     - **laziness**: failing to enumerate exceptions, qualifications, etc.;
     - **ignorance**: lack of relevant facts, initial conditions etc. (we tend to ignore these).
     
     Nonetheless, probabilistic assumptions come with issues such as computational complexities, obtaining values, semantics etc.
-
-> <img src="img/fuzzy_logic.png">
-> **Fuzzy logic** might look like probabilistic, but it's completely deterministic
-
-- Using **utility theory**, used to represent and infer preferences;
+- Using **utility theory**, used to represent and infer preferences (assigning scores to events);
 - Using **decision theory** (utility theory + probabilistic theory).
 
+### Fuzzy Logic
+
+> <img src="img/fuzzy_logic.png">
+> 
+> **Fuzzy logic** might look like a probabilistic process, but it's completely deterministic, do not confuse it.
 
 ## Probabilistic basis
 
->**Notion** -> P(*h* | *e*) is the probability of the hypothesis *h* given the event *e*
+In probability, the space of possible outcomes is denoted by $\Omega$. Any subset of $\Omega$ is called **event**, and $\omega \in \Omega$ is an **atomic event** (there can't be two of these events at the same time)).
 
-**sample space** (denoted as Big-Omega) -> indicates all the possible outcomes
-*small-omega belongs to Big-omega* is a simple point, atomic event (it can't be two of these events at the same time)
 
-An **event** is a set of sample points
+>**$P(h | e)$** is the probability of the hypothesis **$h$** given the event **$e$**.
 
-**Probability space** (or **model**) is a sample space with an assignment P(*w*) for every *w* *belongs to* *Big-omega* (which sum has to be 1)
+**Probability space** (or **model**) is a sample space with an assignment $P(\omega)$ for every $\omega \in \Omega$ (which sum has to be 1)
 
-**Proposition**: mathematical statements which are true or false like (Cavity = True)
+## Proposition
+Propositions are the way we define the world, or mathematical statements which are true or false. You can think of them as events where the proposition is true.
     
     You can use Boolean logic operators (AND, OR ...) as well as mathematical (<, >, != ...)
 
 P(a OR b) = P(a) + P(b) - P(a AND b) 
-    
-    (a AND b is basically already calculated in P(a), so P(b) calculates it again)
 
-**Prior or unconditional probabilites** happens when two probabilities are not related to to each other. Like having a cavity (Carie) and a sunny weather.
+**Prior or unconditional probabilities** happens when two probabilities are not related to to each other. Like having a cavity.
 
-**Posterior probabilities** happens when we have additional evidences affecting the probability fo something:
+**Posterior probabilities** happens when we have additional evidences affecting the probability fo something.
 
->e.g. P( cavity = true ) = 0.1  . . . . . P( cavity | toothache ) = 0.2
+> **PRIOR**  **$ \rArr P(Cavity = True)$** = 0.1  . . . . .
+> **POSTERIOR** **$ \rArr P(Cavity$  | $toothache )$** = 0.2
 
 A nice to remember formula is:
 > P(a | b) = P(a AND b) / P(b)
@@ -148,7 +144,7 @@ Probability distribution can be represented as a vector which has to be exhausti
 A subtle notation to look at is P() which generates a number and **P()** (bold) which generates a vector.
 In the case the formula is **P**(H | e), the resulting vector is <P(H | e), (¬H | e)>
 
-When looking at the `given clause` (in P(a | b) b is the given clause), some components can be removed. For instance, if a: *Cavity = TRUE* and b: *Toothache & Cavity*, of course P(a | b) = 1, and the Tootache part can be removed as its contribution is less than the other or, like in other cases, meaningless (suppose rather than tootache I had *Curtains Blue = True*).
+When looking at the `given clause` (in P(a | b) b is the given clause), some components can be removed. For instance, if a: *Cavity = TRUE* and b: *Toothache & Cavity*, of course P(a | b) = 1, and the Toothache part can be removed as its contribution is less than the other or, like in other cases, meaningless (suppose rather than toothache I had *Curtains Blue = True*).
 <ht</ht>
 > P(a AND b) = P(a | b)`*`P(b) = p(b | a)`*`P(a)
 
@@ -163,7 +159,7 @@ Comma `,` is often used in place of `AND`, so `P(a,b) = P(a AND b)`
 where *alpha* = 1 / P(b)
 
 ### Independence
-When you create a matrix of the possibilities say of **P**(Cavity, Weather), the two of them are not related, so **P**(Cavity, Weather) = **P**(Cavity)\***P**(Weather). Suppose both of them have 100 possible outcomes, the matrxi resulting would be 100 * 100, but being **independent**, you can store them as 100 + 100. Furthermore, as the sum of the events always adds up to 1, you can store them as 99 + 99.
+When you create a matrix of the possibilities say of **P**(Cavity, Weather), the two of them are not related, so **P**(Cavity, Weather) = **P**(Cavity)\***P**(Weather). Suppose both of them have 100 possible outcomes, the matrix resulting would be 100 * 100, but being **independent**, you can store them as 100 + 100. Furthermore, as the sum of the events always adds up to 1, you can store them as 99 + 99.
 
 
 ### Conditional Independence
@@ -181,20 +177,22 @@ Absolute independence is amazing, but rare. It formulates like
 **Naive Bayes** means that you naively assume there's no correlation between 2 events.
 > <img src="img/Bayesian_Independency.png" style="border: solid 2px">
 > 
-> **Bayesian networks** are a xvay to represent these dependences
+> **Bayesian networks** are a way to represent these dependencies
 
-> **CPT** (conditional probability table) are boolean table showing probabilites
+> **CPT** (conditional probability table) are boolean tables showing probabilities
 > <img src="./img/CPT.png">
+> **Note**: that it is not the sum of the column that should add up to 1, rather, 
+> $P(\textbf{C}| A, B) + P(\textbf{¬C} | A, B) = 1$
 
 <img src="img/Bayesian_networks.png" style="border: solid 2px">
 
 
 I AM NOT SURE WHICH IS THE CORRECT ONE *****
 --
-- A further way to reduce the storage is that to scompose a random variable, and then remove one of them
+- A further way to reduce the storage is that to decompose a random variable, and then remove one of them
 > e.g. **North America** <=> **Mexico** V **USA** V **Canada** (one of them can go)
 
-- If there is a boolean random variable which is implied by other variables, this one can be omited
+- If there is a boolean random variable which is implied by other variables, this one can be omitted
 > e.g. **North America** <=> **Mexico** V **USA** V **Canada**, North America is already specified by the others, hence, we can omit it
 
 ## Markov Blanket
@@ -211,11 +209,28 @@ Among all the inferences, this is the only one that is **deterministic** as oppo
 
 When sampling, you can just take whatever sample you get, you can **reject** your samples if they are not efficient, or, as opposed to the latter, you can **weight** your samples, so you don't have to throw them away.
 
+### Samplings
+Given a list of random values $v$ between 0 and 1:
+- **Prior Sampling**: 
+  for each variable use the values $v$ in order and get the result;
+<br>
+
+- **Rejection Sampling**:
+  Same as prior, but in the clause $P(h | e)$ reject the sample if $e$ is not obtained as defined in the clause.
+<br>
+
+- **Importance sampling**:
+  For the clause $P(h|e_1, e_2 ...)$ compute value for all the variables in the network but the events $e_n$. Given the obtained configuration, consider the the probability of obtaining $e_n$ as defined in the clause and multiply these results. 
+
+  > For example, you start with the clause where $a$ and $b$ are both true, and both depend on $x$.
+  What you are interested in is $P(a | x) \cdot P(b | x)$
+
+
 ### Importance Sampling
 Like for sampling, you may want to calculate a probability P(h | s, t).
 The difference with normal sampling is that, since you want to calculate h given **s** and **t**, you assume that **s** and **t** are both true.
 
-However, this will make the final result (probability) falsish. To fix this, you weight the samples that are taken for granted in the $given$ clause.
+However, this will make the final result (probability) falsie. To fix this, you weight the samples that are taken for granted in the $given$ clause.
 
 Suppose you have this network:
 <img src="./img/network_for_weighting_likelihood.png">
@@ -227,7 +242,7 @@ Say, using sampling, that **M = m (so m = True)**, in that case **s** is still T
 The value (in this case **weight**) is given in the CPT and it's `0.20`.
 Then we do the same for **t**, and the weight for $P(t | m)$, which is `0.70`.
 
-Now, whatever is the probability we obtain using sampling, we wight it taking into account the given clause events weights.
+Now, whatever is the probability we obtain using sampling, we weight it taking into account the given clause events weights.
 $<m, c, h, s, t* 0.20 * 0.70$ 
 
     [always keeping in mind that we don't sample s and t] 
@@ -245,13 +260,13 @@ The so called **Expected value**(**E[X]**) is the sum of the probabilities of ea
 > - loose **2\$** if the result is **odd**,
 > - loose **1\$** if anything else.
 > 
-> $P(winning 10\$) = 1/6, P(loosing 2\$) = 3/6, P(loosing 1\$) = 2/6$  
+> $P($winning 10\$$) = 1/6, P($loosing 2\$$) = 3/6, P($loosing 1\$$) = 2/6$  
 > E[X] = 1/6 \* 10 + 3/6 \* -2 + 2/6 \* -1 = 1/3
 > as E[X] is positive, you should take the risk.
 
 ### Linearity of expectation formula
 In the example, if you play 10 times, expected value doesn't change for each game, and the total is multiplied by 10. There's a rule called Linearity of expectation which is describes as:
-> **E[a\*X + Y] &nbsp; = &nbsp; E[a*X] + E[Y] &nbsp; = &nbsp; aE[X] + E[Y]**
+> **E[$\alpha$\*X + Y] &nbsp; = &nbsp; E[$\alpha$\*X] + E[Y] &nbsp; = &nbsp; $\alpha$E[X] + E[Y]**
 
 ### a* Function
 We want our agent to be rational, so, given:
@@ -277,6 +292,8 @@ Now, there are 2 approaches to this problem:
 - or, if the there is a risk in getting the lowest score action (to say, the agent risks its life, or something very bad is related to it), you pick the best score among the worst ones for each action (**maximin**)
     > in this case, argmax(4, 3); 
 
+> **NOTE:** in case a probability is assigned to each output, you do not consider it for the maximin (and maximax) function.
+
 <br>
 
 ## Markov Decision Process (MDP)
@@ -297,12 +314,12 @@ This leads to a process called **Markov Decision Process (or MDP)**:
 ### Policy
 Denoted as $\pi$, a **policy is a solution**, that is, a choice of action for every state. 
 In any state $s$, $\pi(s)$ identifies what action to take.
-> e.g. **$\pi$**: $\pi(s$<sub>0</sub>$)$ = left, $\pi(s$<sub>1</sub>$)$ = left, $\pi(s$<sub>2</sub>$)$ = right, etc....
+> e.g. **$\pi$**: $\pi(s_0)$ = left, $\pi(s_1)$ = left, $\pi(s_2)$ = right, etc....
 
 Naturally we’d prefer not just any policy but the **optimum** policy which we found comparing policies by the **reward** they generate.
 
-The optimum policy **$\pi$<sup>*</sup>** (Pi star) is the policy with the highest expected value.
-At every stage the agent should perform **$\pi$<sup>*</sup>$(s$<sub>0</sub>$)$**
+The optimum policy **$\pi$\*** (Pi star) is the policy with the highest expected value.
+At every stage the agent should perform **$\pi$\*$(s_0)$**
 
 
 ###### video 3
@@ -313,14 +330,14 @@ We denote this function as
 > **$U$<sub>r</sub>([s<sub>0</sub>, s<sub>1</sub>, s<sub>2</sub>, ...., s<sub>n</sub>])**
 
 Different type of utilty functions can be distinguished:
-- based on the **horizon: finite or infinite** (how many state you consider, I think);
+- based on the **horizon: finite or infinite** (if the number of states is infinite or there is a limit defined by terminals states);
 - based on the **reward: stationary (fixed) or non-stationary(it can change)**;
 - based on **how later the agent gets the reward: additive or discounted**
   >**Additive:** R(s0, s1, ..., sn) = R(s0) + R(s1) + ... + R(sn)
   >**Discounted:** R(s0, s1, ..., sn) = R(s0) + $\gamma$ R(s0) + ... + $\gamma$<sup>n</sup> R(sn) ***[0 <= $\gamma$ < 1]***
-  > What this means for discounted utilities is that, since action far away from our current state may include random factors and noise, we diminish their values.
+  > What this means for discounted utilities is that, since actions far away from our current state may include random factors and noise, we diminish their values.
 
-In a "world" where utilities functions are infinite and additive, the are nou bounds on the min/max score of the function, and the output may be useless. To solve this problem there are 3 solutions:
+In a "world" where utilities functions are infinite and additive, the are no bounds on the min/max score of the function, and the output may be useless. To solve this problem there are 3 solutions:
 
 ### Proper policies
 Always end up in a terminal state, so a **finite** expected utilities. A PAC-MAN whose only aim is to stay alive does not operate a proper policies as the steps can be infinite.
@@ -337,8 +354,9 @@ Scale the the reward based on the number of steps required to reach a state. Eve
 
 ## Bellman Equation
 
-The formula to calculate $U(s) = R(s) + \gamma*max \sum P(s' | s, a) U(s')$. 
-What this formula means, is that given a state, to calculate its utility, when to know the reward you obtain from that state + a $\gamma$ factor times the best E[X] obtained from the following states reachable from the current state. 
+> $U(s) = R(s) + \gamma*max \sum P(s' | s, a) U(s')$. 
+
+What this formula means is that, given a state, to calculate its utility, you have to sum the reward you obtain from that state + a $\gamma$ factor times the best E[X] obtained from the following states reachable from the current state. 
 
 In the pacman example, R(s) is the cost of the action (0.04), whereas the remaining component is taken from the utility score of each possible next state. 
 
@@ -352,7 +370,7 @@ This process is called **value iteration** and is described by this pseudo-code:
 <img src="./img/value-iteration.png">
 > [LOOK AT THE .XLS FILE TO FIGURE OUT THE ALGORITHM]
 
-Another thing to mention is the fact that a reward is not always positive. In the case of PACMAN, for example, making a move might have a good utility score, but if no food is eaten, the moves has a cost of .4, which is in fact the reward.
+Another thing to mention is the fact that a reward is not always positive. In the case of PACMAN, for example, making a move might have a good utility score, but if no food is eaten, the moves has a cost of .04, which is in fact the reward.
 
 This is the updated formula of Bellman
 <img src="./img/Bellman-w-reward.png">
@@ -361,15 +379,20 @@ This is the updated formula of Bellman
  
 ## Policy Iteration
 
+A similar approach to the value iteration is the policy iteration (it is on average faster than value iteration, but it is not guaranteed to be). It is composed by 2 steps:
 
 ### Policy Evaluation 
- 
+Update the utility of all the states given teh current policy. 
+
 ### Policy Improvement
+Update the policy of each state given the current utility function.
+
 Just look at one step ahead and take the best policy according to the scores given by policy evaluation.
 
 The policy iteration process $O(n^3)$ is way faster the value iteration one $O(n^n)$, especially when using an approximation.
 However, it is not guaranteed to converge. For this reason, it may be a good idea to create a first schema using `Policy `Iteration, and then converge using `Value Iteration`
 
+The **approximation** for the policy iteration is faster as is can be performed in parallel, but the issue is that it does not wait wait for the policy evaluation/improvement to be performed on each state, hence, some states may look at the past states (correct) whereas other may see the current states already (wrong).
 
 # Week 5 
 
@@ -464,6 +487,17 @@ This is a special type of constant game where the sum is always **0**
 >$u_i(a) + u_j(a) = 0$ for all $a \in A_i$ X $A_j$.
 
 The toss a coin game where the payoff is $\pm 1$ would result in a sum payoff of 0 all the times. Another example is rock, paper, scissor
+
+## Mixed Strategy
+<div style="display: flex">
+    <img src="img/mixed_Strategy0.png" style="width: 40%">
+    <img src="img/mixed_Strategy1.png" style="width: 50%">
+</div>
+
+Consider the payoff matrix on the left.
+On the right we draw the graph given **j** plays a fixed strategy. 
+> (note that the right outcome is **1**, so when the **j** does play that action, and the left one is **0**, that is when **j** does NOT play it).
+The intersection means that, at that point, **i** gets the same output regardless with the choice it makes.
 
 # Week 6 
 ## PCA (video 1)
@@ -639,6 +673,231 @@ In the previous example, the formula $\phi(S) = \dfrac{2}{4}$ where:
 ### Dasgupta Cost Function
 
 There used to exist valid Cost (or objective) functions for both k-Mean and k-Median, but not for hierarchical clustering until Dasgupta came up with one and now clusters obtained with hierarchical procedures can be compared.
+
+
+
+
+# Week 8 - Argumentation
+Argumentation theory is concerned with **acceptability** conditions for arguments in relation to other arguments.
+We assume that these arguments are in contrast with each other, some may support a particular claim whereas others may confute it.
+If I take all of these arguments my reasoning would be based on **inconsistency**, so I should take a subset of them only,  but which ones?
+The point of argumentation is to define this question.
+
+> Arguments can **attack** one another, when this happens we say that an argument **rebuts**(confuta).
+
+You generally represents arguments in a directed Graph:
+<img src="img/8_attack_relations.png">
+
+As you see, nothing attacks A3;
+A1 counter attacks to A2, as does A2 to A1, but A2 does not counter attack A3.
+
+## Abstract argumentation
+**Abstract argumentation** disregards the internal structure of arguments (what an argument says) and focusses instead on acceptability conditions that allow certain sets of arguments to co-exist in a rational manner (it considers the graph only). 
+
+An **abstract argumentation framework** is a tuple ⟨𝑆, 𝑅⟩ where 𝑆 is a set of arguments (S is a node) and $𝑅 ⊆ 𝑆 × 𝑆$ is an (so R is an) **attack relation**.
+
+For arguments $𝑎, 𝑏 ∈ 𝑆$, $(𝑎, 𝑏) ∈ 𝑅$ means that argument 𝑎 attacks argument 𝑏.
+
+The abstract argumentation framework $⟨𝑆, 𝑅⟩$ from the previous example would look like this 
+𝑆= {𝑎1, 𝑎2, 𝑎3} 
+and 
+𝑅= {(𝑎1, 𝑎2), (𝑎2, 𝑎1), (𝑎3, 𝑎2)} 
+
+## Argumentation semantics
+A **semantics** for something is a “meaning” for it.
+
+A **non-monotonic conclusion** is a conclusion that may change over time. For example, I believe it is going to rain, but then I see the forecast and it says it will not rain, so I change my mind. 
+
+
+The semantics can be defined through different approaches:
+- Via **extensions** (subsets of 𝑆 with special properties) [this is the only one we will look at];
+- Via **labels** (labelling functions on 𝑆 with special properties);
+- Via **equations** (solutions to a system of equations describing the interactions in the argumentation framework ⟨𝑆, 𝑅⟩).
+
+An **extension** is a set of arguments that are **jointly “acceptable”**.
+
+In the previous example, as both a1 and a3 attack a2 (and do not attack each other) the set {a1, a3} is **jointly acceptable**.
+
+## Conflict-freedom
+<img src="img/8_conflict_free.png">
+
+> **Note:** the empty set is included as well.
+
+## Argument Defence
+<img src="img/8_argument_defence.png">
+Also {a1} defends a1.
+
+<div class="warning">
+    If an argument A attacks an argument B, there is no way such that A also defends B. For example (a4 -> a5), (a5 -> a5), a4 does not defend a5 as it also attacks it.
+</div>
+
+> **Note:** any argument which has not attackers is **defended** by the empty set as for a3.
+
+## Admissibility
+<img src="img/8_admissibility.png">
+
+## Complete Extention
+<img src="img/8_complete_extention.png">
+
+> The empty set is complete only if there are no
+unattacked arguments
+
+<div class="warning"> The difference from an admissible set is that, if you defend a node, you must include it in the set. Be careful with the empty set because whatever node they defend, that node is not included in the empty set by definition, hence the empty set in not a complete extension in that case, but say we have (a1, a2), (a2, a3), (a3, a1) , so a cycle, in that case we consider the empty set.</div>
+
+<img src="img/8_complete_extention_ex.png">
+
+<div class="info">
+    <b>QUESTION:</b> a3 defends a5, since a5 cannot be included in any complete extensions, {a1, a3} is not valid. Also, a4 defends a2, which is not defended from the a1 attack, {a1, a4} should not be valid either, am I right?
+    <br>
+    <b>ANSWER:</b> a3 does not defend a5 as it does defend it from a4, from not from a5 itself. Not being a complete defense it does not count and {a1, a3} is valid.
+    
+</div>
+
+## Maximal and Minimal subsets
+
+Given a subset $C \subseteq 2^S$, a **maximal subset** of $S$ in $C$ is a set $T \in C$ which **length** is the **highest** as possible, vice versa, the minimal subset is the set $T$ with the **smallest length**.
+
+> e.g. <img src="img/8_max_subset_ex.png">
+
+## Ground and Preferred semantics
+
+> The **grounded semantics** aims to be cautious (**minimise**) in the acceptance of
+arguments.
+You can think of it as: “Accept only what is not controversial”.
+
+<img src="img/8_ground_semantics.png">
+
+The grounded extension always exists and it is unique.
+The grounded extension could be empty.
+
+> The **preferred semantics** tries to **maximise** the acceptance of
+arguments.
+You can think of it as: “Accept as much as you can defend”.
+
+A **preferred extension** is a complete extension that is **maximal**
+with respect to set inclusion (ie, a maximal subset of the set of all
+complete extensions). 
+
+## Stable Extension
+
+<img src="img/8_stable_Extension.png">
+
+Stable extensions do not always exist. Imagine a 3 nodes cyclic graph (rock-paper-scissor)
+
+<div class="info">
+    <b>Question:</b> why is {a3} not included in the complete extensions?
+    <img src="img/8_preferred_example.png">
+    <b>ANSWER:</b> the empty set {}, which is by default included in all the admissible sets, defends all the sets with no attacks. In this graph you can see that a1 has no attacks, meaning that {} is defending it, and so every complete extension should include a1.
+    
+</div>
+
+## Credulous and Skeptical Acceptance
+
+<img src="img/8_credulous.png">
+<img src="img/8_skeptical.png">
+
+<div class="info">
+    <b>Question:</b> Why {}, {a1, a4} and {a2, a3} are not included in the complete extension?  
+    <img src="img/8_exercise.png">
+</div>
+
+
+
+# Week 10 - Ethics in AI
+
+## Part 1
+
+## Part 2
+Bias can occur at any steps of a machine learning algorithm:
+- Historical data (input data set), train, validation, or test data, plu new data to test the final model;
+- Generated by the learning process;
+- Monitoring & Feedback.
+
+ML and DL are **usually data-driven**
+> Patterns are found with no explanation as to why or what these
+mean
+
+In **model-driven approaches**, the AI system has a model of the
+application domain
+> For example, a causal model connecting causes with effects (causal graph).
+> Since Windows95, every version of Windows OS has a Bayesian
+Belief Network linking causes with effects in printer operations,
+to help diagnose the causes of printer problems. 
+
+### Identifying bias is difficult in data-driven systems.      
+
+We don’t know what factors were used to make the decisions or
+recommendations.
+- If the program undergoes evolution or learning, then the developers may not know what code results.
+- Are the software developers responsible for the code in this case?
+- Since we cannot control the output, we focus on what we can control the production process
+  - Looking for bias in the input, training and test data
+  - Testing the algorithm for correctness (if we can)
+  - Looking at flows of data BETWEEN different AI systems
+  - Ensuring good AI Governance
+- What comprises good governance for AI systems?
+
+In Model-driven system, you can explain what the system is doing by looking at the IF-THEN statements, whereas in Data-driven models the program does not know what is going in, it may identify a chin and not realise that, nor how it got that do that.
+
+
+**ML has some major weaknesses**
+
+- Small changes in the input data may highly affect the output;
+- The data required to efficiently accomplish the training is a lot, and often not available;
+
+
+### AI Governance
+
+Companies are starting to put in place processes to govern the creation
+and deployment of AI systems.
+
+Typically, this will involve a special internal AI Governance committee:
+– With representatives of different departments (eg, IT, Operations, Legal);
+– In the best case, including 1-2 outsiders (to avoid “group think”, i.e., some things are given for granted);
+– To vet potential AI projects and to oversee their deployment.
+
+Modeled on the Pharmaceutical industry, where these committees are
+standard.
+
+Companies are also adopting company-wide policies for use of AI.
+
+
+## PDPC
+
+The Singapore Personal Data Protection Commission (PDPC) released the Model **AI Governance Framework**. The framework is a voluntary set of compliance and ethical principles and governance considerations and recommendations that can be
+adopted by organisations when deploying AI technologies at scale. It is
+not legally binding.
+
+The Model Framework is based on **two high-level guiding principles**:
+– Organisations using AI in decision-making should ensure that the decision-making process is **explainable, transparent and fair**; and
+– AI solutions should be **human-centric** (that is, not aimed at increase profit, or business performance, but good for humans).
+
+The 2020 edition of the Framework includes real-life industry case studies demonstrating effective implementation of the AI Framework by organisations.
+
+### Human in the loop
+
+This refers to how much human takes part into the decision process when paired with a machine algorithm.
+
+Sometimes there's low human-in-the-loop involvement, like recommendation engine, other times it must be high, like medical operations.
+
+Having a human supervising a machine, but not being able to change the flow of the events means the human in not part of the selection process at all, in spite of the supervising.
+
+### Softdev ethics
+
+Building a malicious or biased software, the developer cannot just defend themselves saying "I was following orders" as they would still be responsible for that. They should question what they are doing, talk about it to a supervisor, and then act consequently.
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <br>

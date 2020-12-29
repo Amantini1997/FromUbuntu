@@ -1047,12 +1047,141 @@ It may also be that they feel they belong with the organisation community.
 
 
 
+# Week 10 - Managing International Assignment (IA)
+Multinational Companies send employees from their home country to a different country for business operations at overseas offices or subsidiaries. This practice is known as **International Assignment** and these employees are called **expatriates**.
+
+There are different reasons behind this choice:
+- there is a shortage of talents, which mainly happens in developing countries;
+- expatriation allows for the development of a talent, in particular, their leadership skills;
+- to integrate a subsidiary, and make sure that they are all aligned (adhere to standards).
+
+There exist 2 types of assignment:
+- **Learning-driven** where the employee is sent to develop themselves;
+  > The assignee is expected to adapt to the new context and the new requirements to absorb it.
+- **Demand-driven** where the employee is sent to control a subsidiary.
+  > The assignee is expected not to change, rather the subsidiary should adapt to the expatriate.
+
+IA can be:
+- **self-initiated**, where the employee themselves is willing to move abroad; or
+- **company backed**, where the company wants the employee to move.  
+
+Expatriates may be self-driven, that is, they are the ones who want to change country, 
+and companies may see a risk in that.
+
+Sometimes, when expatriates come back, they may have integrated what are regarded as 
+negative attitudes that the company may not like.
+
+**Why do people take IA?**
+- Career development: they see an opportunity to progress in the company. This is generally the case of company backed expatriates.
+- Personal development: including the adventure of living off in a different country.
+- Financial incentives: not as attractive as it used to be.
+  
+## Why do IA fail?
+There is a very high rate of IA failing, that is, not completing their assignment and coming back home before the end of it.
+They generally fail due to problems of living or working in the host country.
+
+There are also people who complete their assignment, but without achieving the expected results, and this is also considered a failure.
+
+### Language Issues
+The language is often the main barrier to overcome as it makes it hard to communicate both at work and outside of it.
+
+### Family Issues
+People neglect the fact they may not be able to work after moving, but statistics show how about 66% of the people with a job who move abroad, end up being only 20% (of the 100% from the 60%) having a job.
+
+People also have families and they have to keep that in mind too. 
+
+### Keeping ties with the Head Quarter (HQ)
+Some expatriates expect to escalate the rankings by taking an IA, but the truth is that is slows it down, and many of them are, in fact, worried about it: they lose their social network, the contacts with their colleagues.
+
+Chines expatriates are very concerned with this issue. [Yao et al 2014]
+
+### Expatriate Adjustment
+Finally, some people cannot adapt to the new lifestyle:
+- **Work Adjustment**, that is adjust to the new responsibilities, supervision and job expectations.
+- **Interaction Adjustment**, socialising and speaking with nationals of the host country.
+- **General Living Adjustment**, housing, food, shopping etc.
+
+The quality of expat (and their families)'s adjustment is significantly associated with  the success of IA.
 
 
 
+---
 
+IA is very expensive for MNCs, but necessary to expand to other countries and/or control subsidiaries. The failure rate is however very high, so here is how to mitigate it. 
 
+## Selecting the assignees
+- Who to target?
+  - Depending on the company strategy, for example the type of relationship the company want to build with the subsidiaries.
+  - Talent availability.
+  - Depending on the nature of the assignment, whether it is demanding or learning driven.
 
+  <img src="img/10_choosing_employee.png">
+
+  <br>
+- What to tell them? (being realistic about what is expecting them)
+  <img src="img/10_selecting_expatriates.png">
+- What criteria should the assignee meet?
+  - competences,
+  - skills,
+  - personality.
+  
+  The selection process should not be much different from the normal hiring process, however, there are some critical elements to consider such as:
+  - Personality characteristics
+  - Language skills
+  - Family circumstances
+  - Prior International Experience
+
+<img src="img/10_personality.png">
+
+Language knowledge is fundamental, yet not necessarily sufficient to adjust and succeed.
+
+Past international experience, on the other hand, would favour integration and adjustment.
+
+Finally, family has to be taken into account as it can hinder or facilitate adjustment. In countries like UK it is illegal to ask about family circumstances for selection. 
+The issue about family can be addressed by offering pre-departure training to family members.
+
+## Key cross-cultural training interventions
+Before leaving, there is a basic training provided:
+
+### cross-cultural orientation
+Aims to help an international assignee learn the ba sics to live and work comfortably in the host country: currency, working hours, public transports etc.
+
+### Cultural awareness 
+Expatriates gain awareness of their own culture as a means of helping them gain appreciation for the cultural differences they will face in the host country.
+
+### Diversity training
+Expatriates understand the different issues they are more likely to face.
+
+### Traditional education in international management
+Teaching people how to do business in other countries.
+
+### Cross-national coaching or mentoring
+A coach that assists you in order to help you adjust in the new cultural context. They provide help for general settlement as well as specific tasks work related.
+
+### Language Training
+
+## International Compensation
+Benefits from IA are:
+- **moeny** based rewards;
+- **allowences**:
+  - cost of living;
+  - exchange rate protection programmes;
+  - housing, education, relocation allowances etc.
+- **benefits** like vacation and special leaves;
+- **Foreign service inducement(incentivi)/ hardship premium (premi di disagio)** like increase of base salary.
+
+### Hardship premium (premi di disagio)
+1. **Remoteness** – geographical isolation, travel difficulties, lack of cultural and recreation facilities, unavailability and poor quality of food and other essentials;
+
+2. **Climate and geophysical conditions** – extreme weather conditions, risk of natural disaster, pollution;
+
+3. **Health risks** - lack or poor standard of medical facilities, risk of disease, poor infrastructure (e,g, provision of water, sanitation etc.);
+
+4. **Political concerns** - government activities, terrorism, corruption, human rights infractions, scarce availability of home-country representation;
+
+5. **Crime** - risk to individuals or property, quality of policing;
+
+6. **Family-unfriendly conditions** - poor educational facilities, poor housing quality, poor communications infrastructure.
 
 
 

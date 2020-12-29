@@ -1,0 +1,106 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrapherJs</title>
+    <!-- Font for the code -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@405&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- Monaco Code Editor -->
+    <link rel="stylesheet" data-name="vs/editor/editor.main" href="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/editor/editor.main.min.css">
+    
+    <script src="//d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <div id="code-input">
+            
+            <!-- Monaco Code Editor -->
+            <div id="js-code-editor"></div>
+
+            <!-- Code to be disaplyed -->
+            <div id="display-code">
+                <div id="lines-table">
+                    
+                    <div id="lines-table__head">
+                        <div class="raw-line">
+                            <div class="counter">&nbsp;#&nbsp;</div>
+                            <div class="code-comment-ctn">
+                                <div class="line-code">Code</div>
+                                <div class="line-comment">Comment</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="lines-table__body">
+                        <template id="line-template">
+                            <div class="raw-line">
+                                <div class="counter"></div>
+                                <div class="code-comment-ctn">
+                                    <div class="line-code" contenteditable data-placeholder="insert code here" onkeydown="parseEscapeChars()"></div>
+                                    <div class="line-comment" contenteditable data-placeholder="insert comment here"></div>
+                                </div>
+                                <div class="bin" onclick="deleteLineFromDeleteButton(this)">
+                                    <img src="./bin.png" style="cursor: pointer; width: 15px; height: 17px;"></img>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+
+                    <div id="lines-table__btn" >
+                        <button onclick="addCodeCommentLine()">+</button>
+                    </div>
+                </div>       
+                <button id="display-code__btn" onclick="generateCode(),generateJsFunctionFromCodeEditor()">Generate</button>
+            </div>
+
+        </div>
+        
+        <!-- CODE  -->
+        <div id="code-output">
+            <div id="code-highlighter">
+            </div>
+
+            <!-- PLOTTER -->
+            <div id="plotter">
+                <!-- <select>
+                    <option value="chart">Chart</option>
+                    <option value="graph">Graph</option>
+                    <option value="plot">plot</option>
+                    <option value="barplot">Bar Plot</option>
+                </select> -->
+                <svg class="graph"></svg>
+            </div>
+        </div>
+
+        
+        
+        <div id="code-player">
+            
+            <!-- PLAYER  -->
+            <div id="player">
+                <label for="highlighting-delayer"></label>
+                <input type="range" name="highlighting-delayer" id="highlighting-delayer" 
+                min="100" max="10000" onchange="updateDelay(this)">
+                <button id="player__btn" onclick="play()">Run</button>
+                <button id="stop__btn" onclick="stop()">Stop</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monaco Code Editor -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.20.0/min/vs/loader.min.js"></script>
+    <script src="jsCodeEditor.js"></script>
+
+    <!-- Syntax highlighter -->
+    <script src="grapher.js"></script>
+
+    <!-- D3.js -->
+    <script src="//d3js.org/d3.v6.min.js"></script>
+    <script src="plotter.js"></script>
+
+    <!-- Player -->
+    <script src="player.js"></script>
+</body>
+</html>

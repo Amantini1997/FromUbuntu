@@ -40,8 +40,6 @@ import copy
 
 class MDPAgent(Agent):
 
-    MOVE_DEBUG = False
-
     GHOSTS_MAX_ALLOWED_DISTANCE = 8
     EDIBLE_GHOSTS_MAX_ALLOWED_DISTANCE = 1 # None
 

@@ -12,8 +12,10 @@
             "console": "integratedTerminal",
             "args": [
                 "-p", "MDPAgent",
-                // "-l", "smallGrid",
-                "-l", "mediumClassic",
+                // "-l", "smallGridTest",
+                "-l", "smallGrid",
+                // "-l", "mediumClassic",
+                // "-l", "mediumClassicTest",
                 // "-q",
                 "-n 25"
             ],

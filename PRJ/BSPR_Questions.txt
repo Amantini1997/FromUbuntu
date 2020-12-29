@@ -1,0 +1,8 @@
+- How can I link websites into my LaTeX file?
+
+- Data structures and algorithms are pretty hard, I know this because I have 
+seen many people expressing this idea in forums. Do I need to cite the forums
+and/or the link to the topic for all of them?
+
+- What format shall I use for the BSPR? I am using the one with chapters which 
+leaves a lot of blank space, is that fine?

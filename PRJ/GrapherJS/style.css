@@ -1,0 +1,181 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.flex-row, body, .layout > *, #lines-table__head, #lines-table .raw-line, #lines-table .raw-line .counter,
+#lines-table .raw-line .bin, #lines-table .raw-line .code-comment-ctn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+body > * {
+  width: 100%;
+  height: 100%;
+}
+
+.layout {
+  width: 100%;
+}
+
+.layout > * {
+  height: 400px;
+}
+
+.layout > * > * {
+  width: 50vw;
+}
+
+#code-input > #js-code-editor {
+  height: 100%;
+  width: 100%;
+  border: 1px solid black;
+  grid-area: editor;
+}
+
+#display-code {
+  border: solid 2px blue;
+  grid-area: display-code;
+  width: 100%;
+}
+
+#lines-table {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  border: solid 2px black;
+  background-color: gray;
+  padding: 2px;
+  padding-bottom: 0;
+}
+
+#lines-table__head {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  width: 100%;
+  background-color: #e0e0e0;
+}
+
+#lines-table__head .code-comment-ctn > * {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+#lines-table__body {
+  background-color: #fff;
+  width: 100%;
+}
+
+#lines-table__body > .raw-line:nth-of-type(even) {
+  background-color: #dbdbdb;
+}
+
+#lines-table .raw-line {
+  width: 100%;
+}
+
+#lines-table .raw-line .counter,
+#lines-table .raw-line .bin {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#lines-table .raw-line .counter::before,
+#lines-table .raw-line .counter::after {
+  content: " ";
+}
+
+#lines-table .raw-line .code-comment-ctn {
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+
+#lines-table .raw-line .code-comment-ctn > * {
+  width: 100%;
+  padding-left: 2px;
+}
+
+#lines-table__btn {
+  width: 100%;
+  padding: 10px;
+}
+
+#lines-table__btn > button {
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  padding: 3px;
+  font-size: larger;
+}
+
+#plotter {
+  grid-area: plotter;
+}
+
+#code-player {
+  grid-area: code-player;
+}
+
+#code-output #code-highlighter {
+  border: solid 2px purple;
+  font-family: 'Fira Code', monospace;
+}
+
+#code-output #code-highlighter [class^="code-line"] {
+  background-color: #424242;
+  color: #fff;
+  border: solid 1px #fff;
+  height: 30px;
+  padding-left: 5px;
+}
+
+#code-output #code-highlighter [class^="code-line"].highlight {
+  background-color: #419c88;
+  color: #fff;
+}
+
+#code-output #code-highlighter #player {
+  border: solid 2px yellow;
+}
+/*# sourceMappingURL=style.css.map */
