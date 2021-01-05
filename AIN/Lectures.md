@@ -570,6 +570,25 @@ Using Matrix multiplication, you can change the aspect of this image in many way
 **Image Rotation**
 <img src="./img/matrix_rotation.png">
 
+### Rotations ClockWise:
+**90 deg:** $\begin{pmatrix}
+0 & 1\\
+-1 & 0
+\end{pmatrix}$
+
+**180 deg:** $\begin{pmatrix}
+0 & -1\\
+-1 & 0
+\end{pmatrix}$ or $\begin{pmatrix}
+0 & 1\\
+1 & 0
+\end{pmatrix}$
+
+**-90 deg:** $\begin{pmatrix}
+0 & -1\\
+1 & 0
+\end{pmatrix}$
+
 **Image Skewing (Shear mapping)**
 <img src="./img/matrix_skewing.png">
 
@@ -612,8 +631,13 @@ So multiplying **M** by **v** would result in **v times an eigenvalue**.
    > $\textbf B$ dimensions are $n \times d$
 5. Given $B$ we want to calculate the **covariance matrix $\textbf C$** we just multiply the values of $B$ by themselves as $\textbf C = B^TB$;
    > $ \textbf C$ dimensions are $(n \times d)^T \times (n \times d) = (d \times n) \times (n \times d) = d \times d$
-6. (Using a software) Compute the $k$ largest eigenvector $\textbf{v}_1, \textbf{v}_2, ... , \textbf{v}_k$ of $\textbf{C}$. 
+6. (Using a software) Compute matrix $\textbf{W}$ the $k$ largest eigenvectors $\textbf{v}_1, \textbf{v}_2, ... , \textbf{v}_k$ of $\textbf{C}$. 
    > Each eigenvector has dimension $1 \times d$.
+
+<img src="img/PCA_W.png">
+
+> check the steps in the [tutorial](https://keats.kcl.ac.uk/pluginfile.php/6394700/mod_resource/content/3/tutorial_06_answers.pdf).
+
 
 
 # Week 7 - Clustering
@@ -638,6 +662,13 @@ This happened because we randomly selected the 2 centroids $\mu$. To prevent thi
     > <img src="./img/7_pr_km++.png">
 3. Continue with k-Means
 
+> ex. there are 3 data points {a, b, c} with distances:
+>  - $d_a$ = 1,  so $d_a^2$ = 1
+>  - $d_b$ = 10, so $d_b^2$ = 100
+>  - $d_c$ = 15, so $d_c^2$ = 125
+> As a result, the probability of choosing **b** as the next centroid is
+> 100 / (1 + 100 + 125) 
+
 ## k-Median
 **k-Median** is the same thing as k-means, but k-Median uses **L1** (manhattan distance) whereas k-means uses **L2** (euclidean distance)
 
@@ -645,11 +676,17 @@ This happened because we randomly selected the 2 centroids $\mu$. To prevent thi
 **(video 4)**
 Clustering can also happen hierarchically, meaning that you either start having as many clusters as inputs and eventually reach 1 big cluster (Bottom up approach or **agglomerative clustering**), or, vice versa, by having 1 big cluster which you decompose into smaller one (top down approach or **divisive clustering**)
 
+<div class="warning">
+    In <b>Complete Linkage</b> exercises, when you merge 2 clusters, if some nodes are not linked, there exist one edge with weight 0, as such, you do not want to link them.
+    <img src="img/7_complete_linkage.png">
+    In this example, you merge <b>a-b first</b>, as all the other clusters have a 0-edge, then, as all the remaining clusters have at least one 0-edge, you merge them alphabetically.
+</div>
+
 ### Agglomerative Clustering
 Clustering can start by considering each input as a cluster and then you combine these clusters until you have only $k$ clusters (if $k$=1 you are probably aiming at creating a **dendogram**). This type 
 <img src="./img/7_hierarchical_clustering.png">
 
-How do you decide hwo to combine clusters in agglomerative clustering?
+How do you decide how to combine clusters in agglomerative clustering?
 <img src="./img/7_agglomerative_clustering.png">
 
 > In this graphs, the edges are weighted and are called **similarities**, meaning that the higher the number on the edge, the more similar are two nodes. (the number can also indicate dissimilarities, but it is not our case)
@@ -694,7 +731,7 @@ A1 counter attacks to A2, as does A2 to A1, but A2 does not counter attack A3.
 ## Abstract argumentation
 **Abstract argumentation** disregards the internal structure of arguments (what an argument says) and focusses instead on acceptability conditions that allow certain sets of arguments to co-exist in a rational manner (it considers the graph only). 
 
-An **abstract argumentation framework** is a tuple ⟨𝑆, 𝑅⟩ where 𝑆 is a set of arguments (S is a node) and $𝑅 ⊆ 𝑆 × 𝑆$ is an (so R is an) **attack relation**.
+An **abstract argumentation framework** is a tuple ⟨𝑆, 𝑅⟩ where 𝑆 is a set of arguments (S is a node) and $𝑅 ⊆ 𝑆 × 𝑆$ is an **attack relation**.
 
 For arguments $𝑎, 𝑏 ∈ 𝑆$, $(𝑎, 𝑏) ∈ 𝑅$ means that argument 𝑎 attacks argument 𝑏.
 
@@ -739,8 +776,7 @@ Also {a1} defends a1.
 ## Complete Extention
 <img src="img/8_complete_extention.png">
 
-> The empty set is complete only if there are no
-unattacked arguments
+> The empty set is complete only if there aren't unattacked arguments
 
 <div class="warning"> The difference from an admissible set is that, if you defend a node, you must include it in the set. Be careful with the empty set because whatever node they defend, that node is not included in the empty set by definition, hence the empty set in not a complete extension in that case, but say we have (a1, a2), (a2, a3), (a3, a1) , so a cycle, in that case we consider the empty set.</div>
 
@@ -749,8 +785,7 @@ unattacked arguments
 <div class="info">
     <b>QUESTION:</b> a3 defends a5, since a5 cannot be included in any complete extensions, {a1, a3} is not valid. Also, a4 defends a2, which is not defended from the a1 attack, {a1, a4} should not be valid either, am I right?
     <br>
-    <b>ANSWER:</b> a3 does not defend a5 as it does defend it from a4, from not from a5 itself. Not being a complete defense it does not count and {a1, a3} is valid.
-    
+    <b>ANSWER:</b> a3 does not defend a5 because it does not defend it from itself (a5 attacking itself). Not being a complete defense it does not count and {a1, a3} is valid.
 </div>
 
 ## Maximal and Minimal subsets
@@ -779,9 +814,11 @@ with respect to set inclusion (ie, a maximal subset of the set of all
 complete extensions). 
 
 ## Stable Extension
+> all the elements not in the set are attacked by the elements in the set. (it has to be a preferred extension)
 
 <img src="img/8_stable_Extension.png">
 
+Basically, a set $P$ such that all the arguments not in $P$ are attacked by $P$.
 Stable extensions do not always exist. Imagine a 3 nodes cyclic graph (rock-paper-scissor)
 
 <div class="info">
@@ -796,16 +833,106 @@ Stable extensions do not always exist. Imagine a 3 nodes cyclic graph (rock-pape
 <img src="img/8_credulous.png">
 <img src="img/8_skeptical.png">
 
+> **Note** it says argument, hence, the empty set {} is not included.
+
 <div class="info">
     <b>Question:</b> Why {}, {a1, a4} and {a2, a3} are not included in the complete extension?  
     <img src="img/8_exercise.png">
+    <b>Answer:</b> The empty set defends all the arguments that are not attacked, as such, it defends a5. As the empty set is always included in all the sets, so has to be a5.
 </div>
 
+
+# Week 9 - Consensus
+Imagine a set of agents:
+- We assume each agent can take a finite number of states (often called **“colours”**). 
+- Agents can see or communicate with other agents within their "**neighbourhood**".
+- Interactions proceed in a series of rounds (or **editions**)
+- All agents are using the same algorithm.
+- We assume the agents share a common goal to achieve an overall configuration of states
+
+Given the nodes have either state blue or red, and we want to achieve a common state, which one is the most likely to be?
+What counts for an opinion’s advantage is **the sum of degrees of nodes with a given colour**.
+<img src="img/9_consensus_theorem.png">
 
 
 # Week 10 - Ethics in AI
 
 ## Part 1
+
+With AI, there are particular aspects we need to consider
+- Algorithms may be learnt, so that even the software developers do not know what they do or how;
+- Many machine learning methods are “black boxes”;
+- Data may be biased;
+- There may be significant legal consequences to our design decisions.
+
+### The trolley problem
+Is a type of problem wherein you have to make a choice, and both the alternatives bring bad outcomes.
+
+### Norms
+Consider a self driving car, there are rules that the car should respect, like to use the right lane. However, there are cases that would lead us to drive in the opposite lane in order to prevent something, such as investing a pedestrian. 
+
+Hence, we cannot enforce these rules in such a way that forbids the car to do what is wrong, rather, we recommend the system not to do it. These are called **norms**.
+
+
+### Regulatory focus
+
+**Fairness (and elimination of bias)**
+- Systems should not be biased against particular groups or
+- People with protected characteristics (age, gender, religion, ethnicity, etc)
+
+**Transparency**
+- Stakeholders should be able to see what input data is used, what processes or algorithms are used, what output data results, and what the intended and realized purposes are
+
+**Explainability**
+- Automated decision-making systems should be able to explain their decisions in a way that humans can understand
+
+**Rectification**
+- Automated decisions should be able to be reversed
+
+**Human involvement**
+- Are decisions mediated by humans in the loop
+
+**Governance of AI systems**
+- Singapore Government Personal Data Protection Commission (PDPC) Model AI Governance Framework (Second Edition), released January 2020. 
+
+### Responsabilities
+- AI has no separate legal personality and cannot be an inventor for patents 
+
+- England: an automated system is not an agent, as “only a person with a mind can be an agent at law” 
+
+- USA: “**a robot cannot be sued**”
+
+- Germany: machines and software cannot declare intent for purposes of contracting
+
+
+### Judging AI
+- **Deterministic systems**: Systems that may be automated but are not
+autonomous;
+- **Autonomous systems:** Would a court look to the opaque subroutines
+of the algorithm during subsequent system operation to determine
+knowledge?
+- **Probabilistic computing:** Computing that is neither deterministic nor
+autonomous, but based on a probability that something is the correct
+answer. Quantum computing is an example. How would a court deal
+with probability outcomes?
+
+### AI Car Accident
+**The court will not accept a statement that the car made the decision in
+the spur of the moment**
+- Because the s/w developers had time to decide what to do in this situation
+
+The court will examine several layers down to find who or what was
+responsible, eg:
+- How did the car-control program decide what to do?
+- How did the s/w developers decide how to program the control software?
+- What ethical principles did the s/w developers adhere to (explicit or
+implicit)?
+- What ethical training had the s/w developers been given?
+- What ethical policies had the car manufacturer or the company employing
+the developers had in place?
+- Etc.
+
+
 
 ## Part 2
 Bias can occur at any steps of a machine learning algorithm:
@@ -848,32 +975,28 @@ In Model-driven system, you can explain what the system is doing by looking at t
 
 ### AI Governance
 
-Companies are starting to put in place processes to govern the creation
-and deployment of AI systems.
+Companies are starting to put in place processes to govern the creation and deployment of AI systems.
 
 Typically, this will involve a special internal AI Governance committee:
 – With representatives of different departments (eg, IT, Operations, Legal);
 – In the best case, including 1-2 outsiders (to avoid “group think”, i.e., some things are given for granted);
 – To vet potential AI projects and to oversee their deployment.
 
-Modeled on the Pharmaceutical industry, where these committees are
-standard.
+Modeled on the Pharmaceutical industry, where these committees are standard.
 
 Companies are also adopting company-wide policies for use of AI.
 
 
 ## PDPC
 
-The Singapore Personal Data Protection Commission (PDPC) released the Model **AI Governance Framework**. The framework is a voluntary set of compliance and ethical principles and governance considerations and recommendations that can be
-adopted by organisations when deploying AI technologies at scale. It is
-not legally binding.
+The Singapore Personal Data Protection Commission (PDPC) released the Model **AI Governance Framework**. The framework is a voluntary set of compliance and ethical principles and governance considerations and recommendations that can be adopted by organisations when deploying AI technologies at scale. It is not legally binding.
 
 The Model Framework is based on **two high-level guiding principles**:
 – Organisations using AI in decision-making should ensure that the decision-making process is **explainable, transparent and fair**; and
 – AI solutions should be **human-centric** (that is, not aimed at increase profit, or business performance, but good for humans).
 
 The 2020 edition of the Framework includes real-life industry case studies demonstrating effective implementation of the AI Framework by organisations.
-
+s
 ### Human in the loop
 
 This refers to how much human takes part into the decision process when paired with a machine algorithm.

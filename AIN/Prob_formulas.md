@@ -47,3 +47,16 @@ In a Bayesian network where $m$ is the root, aka independent variable, and you w
 <br>
 
 > In this case, you have to compute the formula for the combinations of $t$ and $c$, so $(t, c), (t, ¬c), (¬t, c), (¬t, ¬c)$ 
+
+
+
+
+## TEST & VIRUS CASE:
+We perform two tests $a, b$ given a the probability of having a virus:
+$P(v)=0.01$ so 
+$P(¬v)=0.99$
+
+What is the probability of having the virus, given the tests results positive?
+> $P(v | a)?$
+
+<img src="img/virus_test.png">

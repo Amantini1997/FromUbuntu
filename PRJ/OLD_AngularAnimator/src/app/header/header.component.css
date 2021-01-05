@@ -1,0 +1,119 @@
+.flew-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.flew-col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.note {
+  background-color: rgba(40, 185, 142, 0.2);
+  border-left: solid 10px #28b98e;
+  margin: 15px 0;
+  padding: 5px;
+}
+
+.note.no-pad {
+  padding: 0;
+}
+
+.collapsible {
+  background-color: black;
+  color: #28b98e;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:hover {
+  background-color: #2ef0b6;
+}
+
+.collapsible:focus + .content {
+  display: block;
+}
+
+.collapsible + .content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: rgba(40, 185, 142, 0.2);
+}
+
+:host > nav {
+  background-color: #28b98e;
+  color: black;
+  width: 100%;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+:host > nav > div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+:host > nav > div > div {
+  height: 10px;
+  background-color: #28b98e;
+  width: 10px;
+  -ms-flex-item-align: start;
+      -ms-grid-row-align: start;
+      align-self: start;
+}
+
+:host > nav > div:hover > div {
+  width: 100%;
+}
+
+a:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  color: white;
+}
+
+a, a:visited, a:active {
+  font-size: 1.3rem;
+  -webkit-transition: all .5s;
+  transition: all .5s;
+  color: inherit;
+  text-decoration: none;
+}
+/*# sourceMappingURL=header.component.css.map */

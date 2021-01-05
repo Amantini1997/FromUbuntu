@@ -1,0 +1,15 @@
+:host {
+  padding: 20px;
+}
+
+.reason {
+  border-radius: 20px;
+  padding: 20px;
+  background-color: #ececec;
+}
+
+.reason > .reason__title {
+  font-size: large;
+  font-weight: bold;
+}
+/*# sourceMappingURL=main.component.css.map */

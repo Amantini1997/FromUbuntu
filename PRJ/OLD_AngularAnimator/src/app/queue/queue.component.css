@@ -1,0 +1,306 @@
+.flew-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.flew-col {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.note {
+  background-color: rgba(40, 185, 142, 0.2);
+  border-left: solid 10px #28b98e;
+  margin: 15px 0;
+  padding: 5px;
+}
+
+.note.no-pad {
+  padding: 0;
+}
+
+.collapsible {
+  background-color: black;
+  color: #28b98e;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:hover {
+  background-color: #2ef0b6;
+}
+
+.collapsible:focus + .content {
+  display: block;
+}
+
+.collapsible + .content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: rgba(40, 185, 142, 0.2);
+}
+
+:host {
+  padding: 30px;
+}
+
+.explanation {
+  padding: 0 80px;
+}
+
+.btn-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 20px;
+  height: 120px;
+}
+
+.btn-list > button {
+  background-color: #28b98e;
+  color: black;
+  border-radius: 20px;
+  border: none;
+  margin: 0 0 0 20px;
+  width: 120px;
+  -webkit-box-shadow: 0px 5px 22px -3px rgba(0, 0, 0, 0.87);
+  box-shadow: 0px 5px 22px -3px rgba(0, 0, 0, 0.87);
+  font-size: medium;
+  font-weight: 600;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.btn-list > button:first-of-type {
+  border-radius: 20px 0 0 20px;
+}
+
+.btn-list > button:first-of-type + input {
+  border-radius: 0 20px 20px 0;
+  border: solid 1px gray;
+}
+
+.btn-list > button:hover {
+  background-color: #2ef0b6;
+}
+
+.output {
+  z-index: 1;
+  width: 400px;
+  margin: auto;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: solid 1px gray;
+  border-radius: 20px;
+  background-color: white;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.output > .output__placeholder {
+  color: gray;
+}
+
+.queue {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-animation: all 1s;
+          animation: all 1s;
+  overflow-x: scroll;
+}
+
+.queue .queue__ctn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.queue .shop,
+.queue .queue__element {
+  width: 140px;
+  height: 150px;
+}
+
+.queue .queue__element {
+  -webkit-transition: opacity 1s, margin-left 1s;
+  transition: opacity 1s, margin-left 1s;
+}
+
+.queue .queue__element.person {
+  -webkit-animation: enqueue 1s forwards;
+          animation: enqueue 1s forwards;
+  border-radius: 10px;
+}
+
+.queue .queue__element.person:first-of-type:hover {
+  background-color: #28b98e;
+}
+
+.queue .queue__element.person:first-of-type:hover + .tooltip {
+  visibility: visible;
+}
+
+.queue .queue__element.person:not(:first-of-type):hover {
+  background-color: red;
+}
+
+.queue .queue__element.person.popped {
+  -webkit-animation: dequeue-first 1s;
+          animation: dequeue-first 1s;
+}
+
+.queue .queue__ctn.active {
+  -webkit-animation: slide-queue 1s forwards;
+          animation: slide-queue 1s forwards;
+}
+
+@-webkit-keyframes enqueue {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes enqueue {
+  from {
+    opacity: 0;
+    -webkit-transform: translateX(50px);
+            transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@-webkit-keyframes dequeue-first {
+  from {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateX(-140px);
+            transform: translateX(-140px);
+  }
+}
+
+@keyframes dequeue-first {
+  from {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translateX(-140px);
+            transform: translateX(-140px);
+  }
+}
+
+@-webkit-keyframes slide-queue {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-140px);
+            transform: translateX(-140px);
+  }
+}
+
+@keyframes slide-queue {
+  from {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  to {
+    -webkit-transform: translateX(-140px);
+            transform: translateX(-140px);
+  }
+}
+
+.flex-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
+  min-width: 140px;
+  height: 25px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #2e2e2e;
+  color: white;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+.tooltip::after {
+  content: "";
+  background-color: #2e2e2e;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+/*# sourceMappingURL=queue.component.css.map */

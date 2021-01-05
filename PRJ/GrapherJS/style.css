@@ -4,8 +4,8 @@
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.flex-row, body, .layout > *, #lines-table__head, #lines-table .raw-line, #lines-table .raw-line .counter,
-#lines-table .raw-line .bin, #lines-table .raw-line .code-comment-ctn {
+.flex-row, body, .layout > *, #code-input > #display-code #lines-table__head, #code-input > #display-code #lines-table .raw-line, #code-input > #display-code #lines-table .raw-line .counter,
+#code-input > #display-code #lines-table .raw-line .bin, #code-input > #display-code #lines-table .raw-line .code-comment-ctn {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -52,13 +52,13 @@ body > * {
   grid-area: editor;
 }
 
-#display-code {
+#code-input > #display-code {
   border: solid 2px blue;
   grid-area: display-code;
   width: 100%;
 }
 
-#lines-table {
+#code-input > #display-code #lines-table {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -79,7 +79,7 @@ body > * {
   padding-bottom: 0;
 }
 
-#lines-table__head {
+#code-input > #display-code #lines-table__head {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -87,27 +87,27 @@ body > * {
   background-color: #e0e0e0;
 }
 
-#lines-table__head .code-comment-ctn > * {
+#code-input > #display-code #lines-table__head .code-comment-ctn > * {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-#lines-table__body {
+#code-input > #display-code #lines-table__body {
   background-color: #fff;
   width: 100%;
 }
 
-#lines-table__body > .raw-line:nth-of-type(even) {
+#code-input > #display-code #lines-table__body > .raw-line:nth-of-type(even) {
   background-color: #dbdbdb;
 }
 
-#lines-table .raw-line {
+#code-input > #display-code #lines-table .raw-line {
   width: 100%;
 }
 
-#lines-table .raw-line .counter,
-#lines-table .raw-line .bin {
+#code-input > #display-code #lines-table .raw-line .counter,
+#code-input > #display-code #lines-table .raw-line .bin {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
@@ -116,12 +116,12 @@ body > * {
           align-items: center;
 }
 
-#lines-table .raw-line .counter::before,
-#lines-table .raw-line .counter::after {
+#code-input > #display-code #lines-table .raw-line .counter::before,
+#code-input > #display-code #lines-table .raw-line .counter::after {
   content: " ";
 }
 
-#lines-table .raw-line .code-comment-ctn {
+#code-input > #display-code #lines-table .raw-line .code-comment-ctn {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
@@ -131,17 +131,17 @@ body > * {
   width: 100%;
 }
 
-#lines-table .raw-line .code-comment-ctn > * {
+#code-input > #display-code #lines-table .raw-line .code-comment-ctn > * {
   width: 100%;
   padding-left: 2px;
 }
 
-#lines-table__btn {
+#code-input > #display-code #lines-table__btn {
   width: 100%;
   padding: 10px;
 }
 
-#lines-table__btn > button {
+#code-input > #display-code #lines-table__btn > button {
   border-radius: 10px;
   border: none;
   width: 100%;

@@ -174,6 +174,11 @@ Some of these constraints can be denoted as **landmarks** of the solution.
 
 >**PROBLEM:** Finding landmarks, however, can be demonstrated to be as hard a the problem itself, aka, **PSPACE complex**.
 
+**Landmarks can be used as:**
+- Landmarks as Planning Subgoals
+- Landmarks as Heuristic Estimates
+- Admissible Landmark Heuristics
+
 
 <br>
 
@@ -201,13 +206,15 @@ This approach can be improved by checking whether is needed to achieve B for the
 ### RPG propagation
 Consider an RPG and:
 - each **action** takes into account **the union** of all the preconditions (even not from the very previous state) into account;
-  > e.g suppose action **5** requires facts **C {A}** and **D {A}**, which are both achieved from a state **A**. In this case, action **5** considers the union $\{A, C\} \cap \{A, D\}$ = **{A, C, D}**.
+  > e.g suppose action **5** requires facts **C {A}** and **D {A}**, which are both achieved from a state **A**. In this case, action **5** considers the union $\{A, C\} \cup \{A, D\}$ = **{A, C, D}**.
 - each **fact** takes into account **the intersection** of the actions.
   >  e.g. actions **4 {A, B}** and **6 {A, D}** are both necessary to achieve fact **G**, the intersection $\{A, B, G\} \cap \{A, D, G\}$ = **{A, G}**
 
 <img src="./img/RPG_Landmarks.png">
 
-In the example above, you can see that **G** is a goal state and that, to achieve it, **A** is the only fact necessary as it appears in all the actions required (intersection)
+In the example above, you can see that **G** is a goal state and that, to achieve it, **A** is the only fact necessary as it appears in all the actions required (intersection). As you can see, **each action generates a new node in the fact layer with its own facts**.
+
+> **NOTE:** you do not stop after achieving all the goal state but when, after achieving them, the fact layers does not change anymore.
 
 ---
 <br>
@@ -262,6 +269,24 @@ Landmarks can be used in 3 different ways:
 LM heuristic value`h(s,p) where s is the state and p the path` is given by the union of incomplete landmarks with the ones required again.
 <img src="./img/LM_Count.png">
 
+The formula to count the heuristic score for landmarks is:
+
+> $H(s,p) = ( L - $ Accepted $(s,p) )$ $\cup$ ReqAgain$(s,p)$ 
+
+- **L** = set of all landmarks discovered for the problem;
+- **Accepted (s,p)**: Accepted landmarks:
+  Landmark is accepted if it’s true in $s$ and all its predecessors in the landmark graph are accepted.
+- **ReqAgain(s,p):** Landmarks that we’ve seen but know we need to see again.   
+  L is required again if:
+  - Landmarks is false and it is a goal;
+  - Landmarks is false in $s$ and is a greedy-necessary predecessor of landmark $m$ (must be true the step before $m$), which is not accepted.
+
+For example:
+<img src="img/LM_count_example.png">
+
+> the initial landmark count is 8, but we o-in-B is already accepted, and the required again are 0, so:
+> (8 - 1) $\cup$ {} = 7
+
 ## Double Heuristic
 
 Having 2 heuristic functions might be very good:
@@ -283,7 +308,7 @@ Having 2 heuristic functions might be very good:
 
 ##  Problems With EHC
 
-- Can lead to a dead end and not find a soltuion;
+- Can lead to a dead end and not find a solution;
 - If FF fails, resort to systematic Best first search from the START!!;
 - Searching on a plateau is expensive.
 
@@ -296,6 +321,11 @@ Alternative to EHC, it uses what are know as **RESTARTS**
 - If it doesn't find an optimal solution, RESTART from the original node.
 > If no good state is found at depth **d** , then **increase d** (d += 1)
 
+Identidem  select successor states using a "wheel" selection, wherein the chance of being picked is proportional to the heuristic score.
+In case of plateau it uses the last "best" state found and searches again.
+
+## LAMA
+LAMA is planner that employs the LM Count heuristic. Although it may be very good, it is also inadmissible as one action can achieve more than one landmark.
 
 
 # Week 4 - Numerical Values in Planning 
@@ -304,16 +334,16 @@ Alternative to EHC, it uses what are know as **RESTARTS**
 Many planners allow for numerical values defined as functions
 >e.g. **(:functions (total-cost))**
 
-This values can be used for logical comparisons `<, <=, =, =>, >`, and mathematical operations `-, +, /, *`
+These values can be used for logical comparisons `<, <=, =, =>, >`, and mathematical operations `-, +, /, *`
 > e.g. **(< (height truck) (height barrier))** or
 > &nbsp;&nbsp; &nbsp; &nbsp; **(> (fuel) (\* 2 (distance ?from ?to)))**
 
-It also possible to update values of functions with operators like `decrease, increase, assign`
->e.g. **(assign (battery-charge) (max-charge))** or
+It is also possible to update values of functions with operators like `decrease, increase, assign`
+> e.g. **(assign (battery-charge) (max-charge))** or
 > &nbsp;&nbsp; &nbsp; &nbsp; **(decrease (fuel) (\* 2 (distance ?from ?to)))**
 
 In the goal state, it is possible to ask the planner to either **maximise** or **minimise** one or a set of functions.
->e.g. **(minize (total-cost))**
+>e.g. **(minimize (total-cost))**
 
 ## RPG
 To calculate the RPG is bit trickier. Actions with the effect of decreasing, which can be seen as a delete effect (you delete a unit), according to the normal RPG solution, should be ignored, but this might be misleading to the solution of the problem or, even worse, make it impossible to solve. The solution is to use **bounds**.
@@ -338,7 +368,7 @@ The reason behind this is that if an action requires **money > 100**, or **money
 <div class="definition"><b>Oversubscription:</b> when a planner has too many goals, and can only achieve some of them.</div>
 
 ## Preferences
-Preferences are condition we want to be true:
+Preferences are conditions we want to be true:
 
 - **Simple Preferences**: soft goal and preconditions
 > (p0 (**at end** (at rover waypoint3)))
@@ -351,15 +381,30 @@ Preferences are condition we want to be true:
 > - **sometime-after** (at B'ham) (at Glasgow)
 > - **sometime-before** (at B'ham) (at Glasgow)
 
-These are known as **soft constraints**, which means the program can **violate** them, however, a cost is associated with the violation of them. This cost is calculated via the **metric function** in the formula of minimize/maximize (is-violeted p2).
+These are known as **soft constraints**, which means the program can **violate** them, however, a cost is associated with the violation of them. This cost is calculated via the **metric function** in the formula of minimize/maximize **(is-violeted p2)**.
 
-> is-violated is a special function that triggers automatically at the end of the problem if a preference has not been satisfied
+### Notation is-violated
+**is-violated** is a special function that triggers automatically at the end of the problem if a preference has not been satisfied. The structure should look like:
+> (:metric minimize
+$\qquad$(+ (**\* (is-violated p0) 4**)
+$\qquad\quad$(**\* (is-violated p1) 3**)
+$\qquad$)
+)
 
-Preferences are written in the in the problem file rather than the domain, and the formula is like this: 
+Trajectory preferences are written in the problem file rather than the domain, and the formula is like this: 
 > e.g. (**:constraints** (and
 > &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;**(preference p0 (sometime (at amanda work)))**
 > &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;**(preference p1 (sometime (at amanda piano)))**
 > &nbsp;&nbsp; &nbsp; &nbsp; ))
+
+### Notation at-end
+Whereas trajectory preferences are expressed in the **:constraint** block, soft goals (or **at end** preferences) are expressed in **:goal** this way:
+> (**:goal** (and
+ $\qquad$(communicated_soil_data waypoint2)
+ $\qquad$**(preference g0** (communicated_image_data objective1 colour))
+)
+
+
 
 ### Sometimes-before vs. Sometimes-after
 First of all, the way you read these preferences is different from other actions/preconditions:
@@ -391,8 +436,8 @@ Create an automaton for each preference
 
 The way to operate is:
 1. Set the best cost to ± $\infty$ (depending on the minimize/maximize metric)
-2. Find a solution plan, aka, a plan that achieves all the at-end goals;
-3. If the PVC(new solution) > cost of the best plan so far, update the best cost; else, prune the plan and start again. **REMEMBER:** PVC is based only on E-Vio, not on unsatisfied preferences.
+2. Find a solution plan, aka, a plan that achieves all the hard goals;
+3. If the PVC(new solution) is better than the cost of the best plan so far, update the best cost; else, prune the plan and start again. **REMEMBER:** PVC is based only on E-Vio, not on unsatisfied preferences.
 4. Stop when it's clear that no more preferences can be achieved.
 
 One thing to mention is that, conversely to what said before, the **sometime-after** preference can be violated iff the after-action/fact is no longer achievable.
@@ -404,18 +449,45 @@ In a plan with no hard goals (at-end), but only soft-goals, the heuristic is 0 f
 
 When creating the RPG, beside keeping track of true facts, we also consider the set of preferences violated by achieving this fact at this layer.
 
-###### The preferences violation set of a subsequently appearing fact is the violation set of the action that achieved that fact and the Union of the violation set for the precondition of that action.
+> The preferences violation set of a subsequently appearing fact is the violation set of the action that achieved that fact and the Union of the violation set for the precondition of that action, or
+> $new \ Vio \ Cost = current\ state\ Vio \ \cup Vio \ achieved \ with\ the\ action$
 
 After achieving a fact, if we can find another path which preferences violation set has a lower cost, we use that set instead.
+
+The final RPG will be the similar to the normal one (plus **it keeps track of the violations by storing the automaton for each preference**), but two notions are important:
+- *cost*: the sum of the cost of all the violated preferences;
+- *distance*: like the heuristic, is total number of actions required to achieve the goals; 
+
+### Collect and Forgo actions of Keyder and Geffner
+A way to force the preferences is to use a mode: set the mode to **normal** and add it to the preconditions of all the actions.
+At the end of the plan, set the mode to **end**, so that no normal actions can be performed any longer. Now there are 2 more actions "unlocked" (or having mode = end as precondition). These actions are 
+- **forgo(p)**;
+- **collect(p)**;
+
+where **p** denotes a preference.
+So, let's say I have a preference p0 (at pkg0 loc3), then:
+> collect p0:
+> $\quad$:precondition (and (**end-mode**)
+> $\quad\quad\quad\qquad\qquad\quad$(**at pkg0 loc3**)
+> $\quad$)
+> $\quad$:effect (p' pkg0)
+
+> forgo ¬p0:
+> $\quad$:precondition (and (**end-mode**)
+> $\quad\quad\quad\qquad\qquad\quad$(**not** (**at pkg0 loc3**))
+> $\quad$)
+> $\quad$:effect (p' pkg0)
+> $\quad\quad\quad$(**increase (total-cost) 1**)
+
 
 
 # Week 5 - Optimal Planning (first part is continuous of Week 3)
 
 ## The Perils of Expressivity (video 6 from week 3)
 
-**Introducing more variables, predicates and actions exponentially increases in the number of possible states**, so the complexity of a problem grows exponentially.
+**Introducing more variables, predicates and actions exponentially increases the number of possible states**, so the complexity of a problem grows exponentially.
 
-Consider the **Block world** with 3 block (A, B, C), and all the possible predicates:
+Consider the **Blocks world** with 3 blocks (A, B, C), and all the possible predicates:
 > A-On-B, B-On-Table, Clear-C, etc.
 
 There are **12 predicates** that can be **either True or False**, for a total of **$12^2$ combinations**. 
@@ -424,7 +496,7 @@ This meticulous description, which counts so many permutations, is known as the 
 
 ### - Mutex (Invariants)
 For example, for a object it (should be) impossible to be in 2 places at the same time, so say there are 2 places **home** and **Uni**, then
-> $¬ (at-Home \enspace \bigwedge \enspace at-Uni )$ 
+> $¬ (at-Home \enspace \land \enspace at-Uni )$ 
 
 The above formula is an **INVARIANT**, that is something that has to hold True throughout the execution of the problem. 
 Beware, finding Invariants might be as hard as solving the problem.
@@ -444,39 +516,32 @@ Given an FDR encoding you can always switch back to the normal propositions.
 
 ## SAS+
 A famous planner called **SAS+** uses FDR. 
-We can express our SAS+ planning problem as a 4-tuple of $Π = <𝑉, 𝑂, 𝒔0, 𝒔∗>$ comprised of…
+We can express our SAS+ planning problem as a 4-tuple of $Π = <𝑉, 𝑂, 𝒔_0, 𝒔∗>$ comprised of…
 
 - The **set of all state variables** **$V$** (which can also be fluent or numeric values), each with their own associated domain of possible values.
   
     Any assignment of those variables to a value in their domain is known as an atom.
-- The **set of all operators**, effectively replacing the actions.
+- The **set of all operators $O$**, effectively replacing the actions.
 This includes the name of the operator, and the partial variable assignments covering the preconditions and effects.
-    An operator is a triple **\<𝑛𝑎𝑚𝑒, 𝑝𝑟𝑒, 𝑒𝑓𝑓\>**
+    An operator is a triple **\<name, pre, eff\>**
     - **Name** of the operator
     - **Pre** and **eff** are partial variable assignments (preconditions and effects).
   
-- $S_0$ which is the **initial state** and $S$* which is the **goal state**.  In the goal state definition and the preconditions and effects, we provide partial variable assignments.  
+- $𝒔_0$ which is the **initial state** and $𝒔$* which is the **goal state**.  In the goal state definition and the preconditions and effects, we provide partial variable assignments.  
   
-Given we are only interested in a given action in changing specific variables in the current collection of assignments V.  While also in the goal we’re only interested in whether certain conditions are true, much like before in PDDL where we’re not listing the entire state that we expect to happen.
+Given we are only interested in a given action in changing specific variables in the current collection of assignments $V$.  While also in the goal we’re only interested in whether certain conditions are true, much like before in PDDL where we’re not listing the entire state that we expect to happen.
 
 
 ### SAS+ Operations Conditions
 In SAS there are 2 types of operation condition:
 - **prevail conditions**: 
     The value of a variable stays the same;
-    When loading a package p1 onto a truck t1 at location l1:  <t1,at-l1>
+    When loading a package p1 onto a truck t1 at location l1: **truck** $\rarr$ \<t1, at-l1\>
 
 - **pre_post conditions:** 
     The value of a variable changes from one value to another:
-    When loading a package p1 onto a truck t1 at location l1: <p1,at-l1,in-t1>
+    When loading a package p1 onto a truck t1 at location l1: **package** $\rarr$ \<p1, at-l1, in-t1\>
 
-### Data Transition Graph (DTG)
-
-It's just a graph of nodes and directed edges. Each node is a state and each edge is an action. 
-<div class="question"><br>What is the difference between that and a normal graph?<br>
-Why is this relevant to SAS+?<br> 
-<b>Answer:</b> This is a way of representing the problem from the perspective of just one variable.
-</div>
 
 ## Pattern Databases (PDB) (video 1 from week 5)
 
@@ -508,7 +573,12 @@ In this diagram, $<x_1, x_2, x_3>$
 
 Applying an **abstraction formula $\alpha$** we can abstract this problem into a simpler one. 
 For example, we may only consider the problem from the point of view of the package, so **we group the states** based on the location of the package:
+
+
 <img src="./img/Abstraction_2.png">
+
+> ### Data Transition Graph (DTG)
+>This is a particular graph which considers all the possible values that ONE variable can assume, as such, the nodes represents its values and the edges are the possible transitions. The following one is a **DTG** over the previous abstraction.
 
 The obtained heuristic value (given $\alpha$) $h^\alpha()$ from the initial state $s_0$ is 
 > $h^{\alpha}(s_0)$ = 2
@@ -517,7 +587,7 @@ The obtained heuristic value (given $\alpha$) $h^\alpha()$ from the initial stat
 Let's see another case now, which is pretty similar to the one just mentioned, but where the packages are 2 and the truck is just 1. How would we abstract this problem?
 Well, a possible way would be to create 2 abstraction functions, one taking into account one package and the second one taking into account only the other one. The result would be like this:
 <img src="./img/Abstraction2.png">
-<div style="width: 100vw; display: flex; flex-direction: row"> 
+<div style="display: flex; flex-direction: row"> 
     <img src="./img/Abstraction2_p1.png" style="max-width: 50%">
     <img src="./img/Abstraction2_p2.png" style="max-width: 50%">
 </div>
@@ -538,15 +608,15 @@ Well, a possible way would be to create 2 abstraction functions, one taking into
 
 ## Cost Partitioning (video 2 from week 5)
 
-Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be chosen. We denote this heuristic with 
+Given a problem, we can create multiple abstractions, each, perhaps, producing different heuristics. These heuristics can be compared, and the best one can be chosen. We denote this heuristics with:
 > $h^{max}(s_i)$
-> **Max** in this case is referred to the one with the maximum score, which in fact is the best. Why? As we are assuming all the heuristic are admissable, we want to take the one with the highest score as it better represent the actual possible strategy.
+> **Max** in this case is referred to the one with the maximum score, which in fact is the best. Why? As we are assuming all the heuristics are admissable, we want to take the one with the highest score as it better represents the actual possible strategy.
 
 Another way of taking into account all the possible solutions is **adding the different heuristics** $h^{add}(s_i)$. However, even if both the $h^{max}(s_i)$ functions are admissible, their sum is **very likely not to be admissible, and hence not additive**.
 
-The best way to deal with this addition issue is given by the **COST PARTITIONING**
+The best way to deal with this addition issue is given by the **COST PARTITIONING**.
 
-Here we are hoping to **split the action costs** – or more appropriately, partition them - **among the heuristics** in such a way that the total cost implied by the heuristic does not exceed the original action cost, thus **ensuring it remains admissible**. 
+Here we are hoping to **split the action costs** – or more appropriately, to partition them - **among the heuristics** in such a way that the total cost implied by the heuristic does not exceed the original action cost, thus **ensuring it remains admissible**. 
 
 So in essence, we’re trying to ensure our suite of available heuristics is additive, such that we can ensure the summation of these heuristics is still admissible. 
 
@@ -561,7 +631,7 @@ Here is an example:
 <img src="./img/Optimal_Cost_Partitioning.png">
 As you can see, the final heuristic $h^{max}(s_0)$ = 8, which is admissible.
 
-<div class="question"><b>QUESTIONS:</b>
+<div class="question">
 <br>
 Is there a way to decide how to split the cost between the 2 graphs?
 <br>
@@ -643,7 +713,11 @@ The preconditions of these actions become the goals at level i.
 Build the action subset by iterating over goals, choosing an action that has the goal as an effect. 
 Use an action that was already selected if possible. Do forward checking on remaining goals.
 
-> The actual plan generation process is pretty much what we saw with the RPG heuristic: iterate backwards finding actions that at first satisfy the goals at the final fact layer, then add those preconditions to the goal layer as we iterate backwards. Again we’re capable of picking any non-mutex subset of actions.  Hence in this example, we can safely load or unload both packages at the same time.  Given, when we execute it, we’re just going to pick one of them in an arbitrary fashion, it doesn’t matter which one we pick.  Provided they are both executed before the next set of actions, then everything will be valid.
+> The actual plan generation process is pretty much what we saw with the RPG heuristic: 
+> - iterate backwards finding actions that at first satisfy the goals at the final fact layer, 
+> - then add those preconditions to the goal layer as we iterate backwards. 
+> 
+> Again we’re capable of picking any non-mutex subset of actions.  Hence in this example, we can safely load or unload both packages at the same time.  Given, when we execute it, we’re just going to pick one of them in an arbitrary fashion, it doesn’t matter which one we pick.  Provided they are both executed before the next set of actions, then everything will be valid.
 
 <img src="./img/GraphPlan_Summary.png">
 
@@ -653,13 +727,13 @@ Use an action that was already selected if possible. Do forward checking on rema
 CSPs (constraints satisfaction problems) are easily convertible to one another and the solution to one can be, in turn, converted into the solution of another. 
 The idea here is to convert the problem of planning into a SAT problem.
 
-In the context of planning, we’re trying to find a valid configuration of variables at different stages of the planning process such that it yields a true outcome, meaning that there is a combination of states, when put in the right order satisfy the constraints of the actions in the planning domain and enable us to transition from the initial state of the problem to the goal.
+In the context of planning, we’re trying to find a valid configuration of variables at different stages of the planning process such that it yields a true outcome, meaning that there is a combination of states, that when put in the right order satisfy the constraints of the actions in the planning domain and enable us to transition from the initial state of the problem to the goal.
 
 **How do we convert planning to SAT?**
 <br>
 Our problem can be expressed as 
 
-> 𝝆 = (𝜮, 𝒔𝒊, 𝒔𝒈) 
+> 𝝆 = (𝜮, 𝒔~𝒊~, 𝒔~𝒈~) 
 
 Then we create clauses that describe how the variables can possibly change (actions). Denoting how a given variable will change between two time points **t** and **t+1**.
 Once we have these clauses, the trick is to find a SAT formula phi 𝝓 and we then aim to satisfy it.
@@ -676,24 +750,39 @@ The time steps go from
 How do we know how much to set $T$ to?
 > we don't, it's a **trial and error process** wherein you keep pushing up the value for **T**
 
-Part on which I explain how to write in SAT preconditions and effects
+### Writing SAT actions
+𝑓𝑜𝑟 0 ≤ 𝑖 ≤(𝑇−1)
+> for each time steps from $0$ to horizon $T$
+
+𝒂^𝒊^⟹ {∧ 𝒇 ∈ 𝒑𝒓𝒆𝒄𝒐𝒏𝒅(𝒂) 𝒇^𝒊^} ∧ {∧ 𝒇 ∈ 𝒆𝒇𝒇𝒆𝒄𝒕𝑨𝒅𝒅(𝒂)𝒇^𝒊+𝟏^} ∧ {∧ 𝒇 ∈ 𝒆𝒇𝒇𝒆𝒄𝒕𝑫𝒆𝒍(𝒂) ¬𝒇^𝒊+𝟏^}
+> Union (AND) of:
+> - **preconditions** that have to be true at time steps **$i$**
+> - **addEffects** that will become true at time **$i+1$**
+> - **deleteEffect** that will become true at time **$i+1$**
+
+Example of gripper domain:
+
+𝑚𝑜𝑣𝑒(𝑟1, 𝑙𝑜𝑐𝐴, 𝑙𝑜𝑐𝐵, 0) ⟹ 𝑎𝑡(𝑟1, 𝑙𝑜𝑐𝐴,0) ∧ 𝑎𝑡(𝑟1,𝑙𝑜𝑐𝐵, 1) ∧ ¬𝑎𝑡(𝑟1, 𝑙𝑜𝑐𝐴, 1)
+
+
 
 ### Framing
-When writing the problem in the form of SAT, you have to write also what changes, but also **what does not change** as a result of the action, and this part is known as **FRAMING**.
+When writing the problem in the form of SAT, you have to write not only what changes, but also **what does not change** as a result of the action, and this part is known as **FRAMING**.
 Two types of framing exist:
 
 - **Classical Frame Axioms**
     - State which facts are not effected for each action.
-    - Must enumerate for all fact/action pairs where no the fact is not affected by the action.
+    **problem:**
+    - Must enumerate for all fact/action pairs where the fact is not affected by the action.
     - Relies on one action being executed per time-step so axioms can be applied.
 
 
 - **Explanatory Frame Axioms**
   - Instead of listing what facts are not changed, explain why a fact might have changed between two time steps.
     i.e. if a fact changes between 𝒊 and 𝒊+𝟏, then an action at step 𝒊 must have caused it. 
-    > Given the effects, you have to find out the action basically
+    > Given the difference of the state between time $i$ and $i + 1$, you have to find out the action that has been performed (and more than one action could lead to that result). This approach allows for **parallelism**.
 
-So **(if I got this right)**, in the first approach you write down what **has not changes** whereas in the second you you write down **what did change**x
+So **(if I got this right)**, in the first approach you write down what **has not changed** whereas in the second you you write down **what did change**.
 
 #### Explanatory Frame Axioms
 Consider the Robot problem
@@ -705,9 +794,7 @@ Following are a couple of example of **Explanatory Frame Axios**
 
 In this case if we look at the actions from the example, we identify that in order for the fact that r1 is not a location B on time step 0, but then is in the location at time step 1, then that must mean that the robot was part of a move action at time step 0.  Specifically the move action with r1 going from loc A to loc B.
 
-We still need to list all of the possibilities that could emerge at a given time step. Hence we're going to have a lot of facts changing between time steps, especially as the branching factor of the state space increases.
-
-However, this approach actually enables for parallelism in the planning process, given two actions could be executed in parallel if they have the same preconditions at time step t and their effects don’t conflict. You can spot parallelism is happening because there are other effects beside the ones of the action you are executing. 
+However, this approach actually enables for parallelism in the planning process, given two actions could be executed in parallel if they have the same preconditions at time step $t$ and their effects don’t conflict. You can spot parallelism is happening because there are other effects beside the ones of the action you are executing. 
 [*"You can more easily identify this by catching whether or not an effect of one action appears within one of the explanatory frame axioms for an action that isn’t the action you’re running against."*]
 
 #### Exclusion Axioms
@@ -720,8 +807,7 @@ As some actions may be conflicting, we have to enforce again the concept of **mu
     > ¬ 𝑚𝑜𝑣𝑒(𝑟1, 𝑙𝑜𝑐𝐴, 𝑙𝑜𝑐𝐵, 0)  ∨ ¬ 𝑚𝑜𝑣𝑒(𝑟1, 𝑙𝑜𝑐𝐵, 𝑙𝑜𝑐𝐴, 0)
 
 - **Conflict Exclusion Axiom**: prevents invalid actions on the same timestep.
-Two actions conflict if either **their preconditions contradict or their preconditions are not consistent with their effects**. This would allow us to solve plans with in a ***partial order*** fashion, which is a topic of a later chapter 
-More on this topic partial order planning in another chapter.
+Two actions conflict if either **their preconditions contradict or their preconditions are not consistent with their effects**. This would allow us to solve plans with in a ***partial order*** fashion, which is a topic of a later chapter.
 
 # Week 6 
 ## Partial Ordering Planning - POP (video 1)
@@ -729,7 +815,7 @@ More on this topic partial order planning in another chapter.
 So far we have seen all the plan as starting from the initial state and moving towards the goal state. This is known as **forward search** or progression search. 
 There are however some planners that start from the goal state and move backwards; this planners operate a **regression search**.
 
-The idea behind this planners is to consider what actions could have lead to that state.
+The idea behind this planners is to consider what actions could have led to that state.
 > In the example of the amazon driver that delivers a dvd to myHome, the goal state is (at myHome dvd).
 > If we were to identify this a 3-tuple state $<dvd-loc, truck-loc, driver-loc>$
 > As I do not care of the truck and the driver location, I write this predicates as <b>"?"
@@ -1007,7 +1093,7 @@ At every state the planner checks that all the constraints are not violated.
 
 
 ### Memoization
-**Memoization** is a process that allows you to prune states with facts equal to one already visited (when applying costs, you can prune these states if the cost is the same or worse as equal one already visited).
+**Memoization** is a process that allows you to prune states with facts equal to one already visited (when applying costs, you can prune these states if the cost is the same or worse as one already visited).
 
 In temporal planning, this is not possible as two state (ABBA & ABAB) may in fact have the same facts, but as the order here matters, you could end up pruning a valid state (**permutations** matter here).
 
@@ -1055,8 +1141,9 @@ The advantage of using TRPG (which is the method we have just illustrated) is th
 
 
 <div class="warning"> 
-  The actual solution to the plan terminates with the achievement of the <b>end snap</b> of the last action and you do not have to add $\varepsilon$ to.
-  Say your final action is at t = 3.003, the next fact layer is t = 3.004, and if you are asked about the final solution, the goal is <b>USABLE</b> at 3.004, but <b>ACHIEVED</b> at 3.003 
+  The actual solution to the plan terminates with the achievement of the <b>end snap</b> of the last action and you do not have to add ε to it.
+  Say your final action is at t = 3.003, the next fact layer is t = 3.004, and if you are asked about the final solution, the goal is <b>USABLE</b> at 3.004, but <b>ACHIEVED</b> at 3.003.
+  Also, the notion that the fact can only be used epsilon later shouldn't be included in the makespan.
 </div>
 
 
@@ -1292,7 +1379,7 @@ The highlighted lines are the constraints.
 
 > Note 2 things:
 1. there are 2 Bs: B and B$'$ where B denotes the normal battery and B$'$ denotes the derived of the battery during the execution of an action. In other words, B is the value of right before the start of an action and B$'$ is the value right after the start.
-2. the constraint B >= 10 is as a precondition of the invariant, not of the start action, this is because the invariant could be achieved by the start action itself and, when that's the case, you would be saying that "I dont care if the start action achieves it, i do not allow it", which is wrong.
+2. the constraint B >= 10 is as a precondition of the invariant, not of the start action, this is because the invariant could be achieved by the start action itself and, when that's the case, you would be saying that "I don't care if the start action achieves it, i do not allow it", which is wrong.
 
 Point 1 of the above list can be genaralised as follows:
 > For each (snap) action (start, instantaneous or end), **Ai**, in the (partial) plan create the following LP (linear program, meaning that δv increases or diminishes by a constant factor c) variables for each numeric variable in the problem:
@@ -1456,7 +1543,49 @@ Shows how to use PDDL+ to model the rover domain
 
 
 
+# Recap
+## Temporal Planners comparison
+### Decision Epoch Planner:
+Actions start at time $t$ and their snap_end is put into a priority queue $Q$ with key = $t + duration(action)$
+$\varepsilon$ time elapses between an action an the other.
 
+**Issues:**
+The time elapsed between 2 actions must be $\varepsilon$, hence, if you want to perform an action B right before the end of an action A which lasts for 3 seconds, you can't.
+Also, the duration must be defined, inequalities cannot be used 
+(as in 3 < cooking duration < 5).
+
+<style>
+  .small {
+    max-width: 600px;
+    margin: auto;
+    display: block;
+    text-align: center;
+  }
+</style>
+### Simple Temporal Problem (STP):
+Actions time is defined within the MIN and MAX duration, allowing for actions to be variable in length, and not necessarily happening $\varepsilon$ time after one another.
+
+<img class="small" src="img/recap.png">
+
+Upper arrows are **MAX** durations.
+Lower arrows are **MIN** durations.
+
+The **shortest path** in both (keep in mind that lower arrows are negative, so -5 is the minimum from {-5, -2}) tells what is the minimum time at which an action can occur.
+
+
+### STN
+STPs can be converted into graphs called Simple Temporal Networks (or STN).
+<img class="small" src="img/7_AB_STP.png">
+
+Time between the start and the end of the same action is given by the action itself, whereas the time between two snap actions of different actions is $\varepsilon$.
+
+Find a cycle, if it is negative, the plan is temporally inconsistent.
+
+### Crikey 3
+This is a planner that uses the STN.
+At every state the planner checks that all the constraints are not violated.
+
+To calculate the heuristic, the planner uses the TRPG, which is the RPG with layers labelled by the timesteps. The notion that the fact can only be used epsilon later shouldn't be included in the makespan.
 
 &nbsp;
 &nbsp;
