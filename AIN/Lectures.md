@@ -776,7 +776,9 @@ Also {a1} defends a1.
 ## Complete Extention
 <img src="img/8_complete_extention.png">
 
-> The empty set is complete only if there aren't unattacked arguments
+<div class="definition">if an argument is unattacked, it must be part of all complete extensions</div>
+
+> The empty set is complete iff all the arguments are attacked.
 
 <div class="warning"> The difference from an admissible set is that, if you defend a node, you must include it in the set. Be careful with the empty set because whatever node they defend, that node is not included in the empty set by definition, hence the empty set in not a complete extension in that case, but say we have (a1, a2), (a2, a3), (a3, a1) , so a cycle, in that case we consider the empty set.</div>
 

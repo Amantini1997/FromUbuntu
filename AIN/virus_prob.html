@@ -1,0 +1,120 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virus Prob</title>
+</head>
+<body><style type="text/css">
+    .tg  {border-collapse:collapse;border-spacing:0;}
+    .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+      font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+    .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+    
+    #formulas {
+        display: grid;
+        grid-template-columns: 100px auto;
+    }
+
+    #formulas>div {
+        display: inline;
+        margin-bottom: 5px;
+    }
+    </style>
+    <div id="tabler">
+
+    </div>
+    <br>
+    <br>
+    <label for="virus">Virus probability <b>P(v)</b>:</label>
+    <input id="virus" type="number" value="0.005">
+    <br>
+    <label for="tp">True positive <b>P(t|v)</b>:</label>
+    <input id="tp" type="number" value="0.95">
+    <br>
+    <label for="fp">False positive <b>P(t|¬v)</b>:</label>
+    <input id="fp" type="number" value="0.1">
+    <br>
+    <button onclick="calculate()"> Calculate </button>
+    <div id="formulas">
+
+    </div>
+    <script>
+        function calculate() {
+            virus = +document.querySelector("#virus").value
+            nonVirus = 1 - virus;
+            
+            tp = +document.querySelector("#tp").value * virus
+            fn = 1 - tp * nonVirus
+
+            fp = +document.querySelector("#fp").value * nonVirus
+            tn = 1 - fp * virus
+
+            tabler = document.querySelector("#tabler")
+            tabler.innerHTML = 
+            `
+
+            <table class="tg">
+    <thead>
+      <tr>
+        <th class="tg-0pky"></th>
+        <th class="tg-0pky"></th>
+        <th class="tg-0pky">Test</th>
+        <th class="tg-0pky"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="tg-0pky"></td>
+        <td class="tg-0pky"></td>
+        <td class="tg-0pky">t</td>
+        <td class="tg-0pky">¬t</td>
+      </tr>
+      <tr>
+        <td class="tg-0pky">Virus</td>
+        <td class="tg-0pky">v</td>
+        <td class="tg-0pky">${tp}</td>
+        <td class="tg-0pky">${fn}</td>
+      </tr>
+      <tr>
+        <td class="tg-0pky"></td>
+        <td class="tg-0pky">¬v</td>
+        <td class="tg-0pky">${fp}</td>
+        <td class="tg-0pky">${tn}</td>
+      </tr>
+    </tbody>
+    </table>            
+            `
+
+        formulas = document.querySelector("#formulas")
+        formulas.innerHTML = `
+
+<div>P(t) =</div> <div>${(tp + fp)}</div>       
+
+<div>P(<b>¬t</b>) =</div> <div>${1 - (tp + fp)}</div>       
+
+<div>P(v) =</div> <div>${virus}</div>       
+
+<div>P(<b>¬v</b>) =</div> <div>${nonVirus}</div>       
+
+<div>P(t | v) =</div> <div>${tp / (tp + fn)}</div>       
+
+<div>P(t | <b>¬v</b>) =</div> <div>${fp / (tn + fp)}</div>       
+
+<div>P(<b>¬t</b> | v) =</div> <div>${fn / (tp + fn)}</div>       
+
+<div>P(<b>¬t</b> | <b>¬v</b>) =</div> <div>${fp/ (tn + fp)}</div>       
+
+<div>P(v | t) =</div> <div>${tp / (tp + fp)}</div>       
+
+<div>P(v | <b>¬t</b>) =</div> <div>${fn / (tn + fn)}</div>        
+
+<div>P(<b>¬v</b> | t) =</div> <div>${fp / (tp + fp)}</div>       
+
+<div>P(<b>¬v</b> | <b>¬t</b>) =</div> <div>${tn / (tn + fn)}</div>       
+        `
+        }
+    </script>
+</body>
+</html>
