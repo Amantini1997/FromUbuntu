@@ -1,0 +1,1651 @@
+<!DOCTYPE html><html><head>
+      <title>Lecture</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\artig\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.15\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <ul>
+<li><a href="#week-1-hrm-first-lecture">Week 1 - HRM First lecture</a>
+<ul>
+<li><a href="#part-1">PART 1</a>
+<ul>
+<li><a href="#the-development-of-contemporary-hrm-also-benefits-from">The development of contemporary HRM also benefits from:</a></li>
+</ul>
+</li>
+<li><a href="#part-2">PART 2</a>
+<ul>
+<li><a href="#strategic-hrm-shrm-strategic-management-hrm">Strategic HRM (SHRM) = Strategic Management + HRM</a></li>
+</ul>
+</li>
+<li><a href="#there-are-3-types-of-shrm">There are 3 types of SHRM</a>
+<ul>
+<li><a href="#universalist-perspective-best-practices">Universalist Perspective (Best practices)</a></li>
+<li><a href="#contingency-perspective-best-fit">Contingency Perspective (Best Fit)</a></li>
+<li><a href="#configurational-perspective-bundle">Configurational Perspective (Bundle)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#week-2">Week 2</a>
+<ul>
+<li><a href="#the-ibm-case-a-few-years-ago">The IBM Case (a few years ago)</a></li>
+<li><a href="#globalisation-for-sociologists">Globalisation for sociologists</a></li>
+<li><a href="#globalisation-for-economists">Globalisation for economists</a></li>
+</ul>
+</li>
+<li><a href="#week-3">Week 3</a>
+<ul>
+<li><a href="#skills-that-will-be-demanded-in-future">Skills that will be demanded in future</a></li>
+<li><a href="#talents">Talents</a></li>
+<li><a href="#old-vs-new-deal">Old vs. New Deal</a></li>
+<li><a href="#psychological-contract">Psychological contract</a></li>
+<li><a href="#protean-and-boundaryless-careers">Protean and Boundaryless careers</a>
+<ul>
+<li><a href="#satisfactions-and-proficiency-with-protean-and-boundaryless-attitudes">Satisfactions and proficiency with protean and boundaryless attitudes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#week-4-attracting-and-retaining-talents">Week 4 - Attracting and Retaining Talents</a><br>
+- <a href="#video-1">video 1</a>
+<ul>
+<li><a href="#techniques-to-attract-talents">Techniques to attract talents</a></li>
+<li><a href="#scheins-research">Schein&apos;s research</a><br>
+- <a href="#video-2">video 2</a></li>
+<li><a href="#before-the-recruitment-process">Before the recruitment process</a></li>
+<li><a href="#signaling-the-job-market-who-you-are-as-an-employer">Signaling the job market WHO YOU ARE as an employer</a></li>
+<li><a href="#employee-value-proposition-evp">Employee Value Proposition (EVP)</a>
+<ul>
+<li><a href="#hospital-1">Hospital 1</a></li>
+<li><a href="#hospital-2">Hospital 2</a><br>
+- <a href="#video-3">video 3</a></li>
+</ul>
+</li>
+<li><a href="#recruitment">Recruitment</a>
+<ul>
+<li><a href="#key-recruitment-decisions">Key recruitment decisions</a></li>
+<li><a href="#filling-a-vacancy">Filling a vacancy</a></li>
+<li><a href="#where-to-search">Where to search</a></li>
+<li><a href="#defining-the-person-requirements">Defining the person requirements</a></li>
+<li><a href="#what-you-should-tell-to-applicants">What you should tell to applicants</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#week-5-recruiting-the-right-talents">Week 5 - Recruiting the right talents</a>
+<ul>
+<li><a href="#the-selection-process">The selection process</a>
+<ul>
+<li><a href="#background-factors">Background Factors</a></li>
+<li><a href="#personal-factors">Personal Factors</a></li>
+</ul>
+</li>
+<li><a href="#selection-process">Selection process</a>
+<ul>
+<li><a href="#decide-the-prerequisites">Decide the prerequisites</a><br>
+- <a href="#video-2-1">video 2</a></li>
+</ul>
+</li>
+<li><a href="#assessment-centres">Assessment Centres</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#selection-interviews">Selection Interviews</a>
+<ul>
+<li><a href="#how-to-prepare-for-a-interview">How to prepare for a interview</a></li>
+</ul>
+</li>
+<li><a href="#structured-interview-important">Structured interview (IMPORTANT!)</a>
+<ul>
+<li><a href="#researches-on-structured-interviews">Researches on structured interviews</a></li>
+</ul>
+</li>
+<li><a href="#biographical-interviews">Biographical Interviews</a></li>
+<li><a href="#behavioral-interviews">Behavioral interviews</a></li>
+<li><a href="#situational-interviews">Situational Interviews</a></li>
+<li><a href="#bias-in-selection">Bias in selection</a></li>
+</ul>
+</li>
+<li><a href="#week-6-training">Week 6 - Training</a>
+<ul>
+<li><a href="#training-process">Training process</a></li>
+<li><a href="#training-analysis">Training analysis</a></li>
+<li><a href="#training-methods">Training methods</a>
+<ul>
+<li><a href="#presentation-methods">Presentation methods</a></li>
+<li><a href="#hands-on-methods">Hands-on methods</a></li>
+<li><a href="#selecting-the-method">Selecting the method</a></li>
+<li><a href="#method-evaluation">Method evaluation</a></li>
+</ul>
+</li>
+<li><a href="#employee-development-experiences">Employee Development Experiences</a></li>
+<li><a href="#interpersonal-relationships">Interpersonal Relationships</a></li>
+<li><a href="#ritz-carlton-case-study">RITZ-CARLTON Case study</a>
+<ul>
+<li><a href="#after-being-recruited">After being recruited</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#week-7">Week 7</a>
+<ul>
+<li><a href="#performance-management">Performance Management</a></li>
+<li><a href="#aims-of-performance-management">Aims of performance management</a></li>
+<li><a href="#performance-appraisal">Performance Appraisal</a></li>
+<li><a href="#designing-performance-appraisal-system">Designing Performance Appraisal System</a>
+<ul>
+<li><a href="#what-to-evaluate">What to Evaluate</a></li>
+</ul>
+</li>
+<li><a href="#comparing-performance-between-employees">Comparing Performance Between Employees</a></li>
+<li><a href="#information-sources">Information sources</a></li>
+</ul>
+</li>
+<li><a href="#week-8-reward-management">Week 8 - Reward Management</a>
+<ul>
+<li><a href="#do-rewards-incentive-people">Do rewards incentive people?</a></li>
+<li><a href="#transactional-reward">Transactional Reward</a></li>
+<li><a href="#determining-the-base-pay">Determining the base pay</a></li>
+<li><a href="#pay-determination">Pay determination</a></li>
+<li><a href="#internal-focus-job-evaluation">Internal focus - Job Evaluation</a></li>
+<li><a href="#contingent-pay">Contingent Pay</a></li>
+<li><a href="#benefits">Benefits</a></li>
+<li><a href="#relative-rewards-non-financial">Relative Rewards (non-financial)</a></li>
+</ul>
+</li>
+<li><a href="#week-9-turnovers">Week 9 - Turnovers</a>
+<ul>
+<li><a href="#is-turnover-a-bad-thing">Is turnover a bad thing?</a></li>
+<li><a href="#leaving-factors">Leaving Factors:</a>
+<ul>
+<li><a href="#pull-factors-its-not-you-its-me">Pull factors (it&apos;s not you, it&apos;s me)</a></li>
+<li><a href="#push-factor-it-is-you">Push factor (it IS you!!)</a></li>
+<li><a href="#unavoidable-turnover">Unavoidable turnover</a></li>
+<li><a href="#involuntary-turnover">Involuntary turnover</a></li>
+</ul>
+</li>
+<li><a href="#exit-surveys">Exit surveys</a></li>
+<li><a href="#why-do-people-stay">Why do people stay?</a></li>
+</ul>
+</li>
+<li><a href="#week-10-managing-international-assignment-ia">Week 10 - Managing International Assignment (IA)</a>
+<ul>
+<li><a href="#why-do-ia-fail">Why do IA fail?</a>
+<ul>
+<li><a href="#language-issues">Language Issues</a></li>
+<li><a href="#family-issues">Family Issues</a></li>
+<li><a href="#keeping-ties-with-the-head-quarter-hq">Keeping ties with the Head Quarter (HQ)</a></li>
+<li><a href="#expatriate-adjustment">Expatriate Adjustment</a></li>
+</ul>
+</li>
+<li><a href="#selecting-the-assignees">Selecting the assignees</a></li>
+<li><a href="#key-cross-cultural-training-interventions">Key cross-cultural training interventions</a>
+<ul>
+<li><a href="#cross-cultural-orientation">cross-cultural orientation</a></li>
+<li><a href="#cultural-awareness">Cultural awareness</a></li>
+<li><a href="#diversity-training">Diversity training</a></li>
+<li><a href="#traditional-education-in-international-management">Traditional education in international management</a></li>
+<li><a href="#cross-national-coaching-or-mentoring">Cross-national coaching or mentoring</a></li>
+<li><a href="#language-training">Language Training</a></li>
+</ul>
+</li>
+<li><a href="#international-compensation">International Compensation</a>
+<ul>
+<li><a href="#hardship-premium-premi-di-disagio">Hardship premium (premi di disagio)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<style>
+    img {
+        border: solid;
+        margin: 3px;
+    }
+        
+    h1:not(:first-of-type)::before {
+        content: "";
+        height: 100px;
+        padding: 100px;
+        display: block;
+    }
+
+    .no-mt {
+        margin-top: -16px;
+    }
+
+    .warning {
+        background: rgba(255, 0, 0, .3); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(220, 0, 0);
+    }
+
+    .warning::before {
+        content: "WARNING: ";
+        font-weight: bold;
+        color: rgb(220, 0, 0);
+    }
+
+    .definition, 
+    definition {
+        background: rgba(80, 80, 255, .2); 
+        padding: 5px; 
+        padding-left: 10px;
+        margin: 20px 0; 
+        border-left: solid 3px rgb(80, 80, 255);
+        display: block;
+    }
+
+    .definition::before,
+    definition::before {
+        content: "DEFINITION: ";
+        font-weight: bold;
+        color: rgb(80, 80, 255); 
+}
+</style>
+<h1 class="mume-header" id="week-1-hrm-first-lecture">Week 1 - HRM First lecture</h1>
+
+<hr>
+<h2 class="mume-header" id="part-1">PART 1</h2>
+
+<p>The main idea of HRM is that organizations can boost productivity and performance by designing and managing work so that they take into account <strong>employees&apos; psychological and social needs and aspirations</strong></p>
+<blockquote>
+<p>people don&apos;t react to work based only on the physical conditions and the characteristics of the technological system. Organizations are social systems, people like to feel that they matter</p>
+</blockquote>
+<p>What is distinctive about HRM (as compared to traditional personnel management)?</p>
+<ul>
+<li>companies can obtain higher performances through the application of HR practices;</li>
+<li>practices need to be seen as bundles: they need to fit together and to fit with the strategy of the organization;</li>
+<li>line managers need to cooperate with the HR rules, by committing to and applying them.</li>
+</ul>
+<h3 class="mume-header" id="the-development-of-contemporary-hrm-also-benefits-from">The development of contemporary HRM also benefits from:</h3>
+
+<ul>
+<li>the decline of union memberships and union influence (probably it means the HR theory is <strong>widespread across the world</strong> and everyone can bring new features and techniques in);</li>
+<li>the Japanese model (Toyota and Honda mainly) highlighted the importance of managing people by focusing a lot on the importance of <strong>social aspects</strong> in organizations and things like <strong>teamwork</strong></li>
+</ul>
+<hr>
+<h2 class="mume-header" id="part-2">PART 2</h2>
+
+<h4 class="mume-header" id="strategic-hrm-shrm-strategic-management-hrm">Strategic HRM (SHRM) = Strategic Management + HRM</h4>
+
+<p>The idea derived from 2 main points:</p>
+<ul>
+<li>Different [business] strategies require different HR practices;</li>
+<li>Higher performance is the result of alignment between HR strategies and HR strategies and their (business) practices (in the lecture he said HR practices instead).</li>
+</ul>
+<h2 class="mume-header" id="there-are-3-types-of-shrm">There are 3 types of SHRM</h2>
+
+<h3 class="mume-header" id="universalist-perspective-best-practices">Universalist Perspective (Best practices)</h3>
+
+<p><em>&quot;There exists a set of best HR practices that, if applied, lead to higher organizational performance&quot;</em>.</p>
+<p>Some of these practices include promotions from within, high wages, incentives, information sharing, employment security, job rotation etc.</p>
+<p>The theory says that the more of these practices are applied, the more engaged and satisfied the employee is, and the higher is the employee outcome and the organizational performance.<br>
+It also states thats these practices are equally applicable to each organization regardless of the nature of unique aspects organizations might have; like if this approach could be &quot;<strong>universal</strong>&quot;.</p>
+<p><strong>The argument</strong> is that many companies in different sectors managed to be successful using different <strong>sets of management practices</strong>. Furthermore, applying all of these practices is expensive.<br>
+<strong>The evidence</strong>, however, came from many (empirical) studies and stated that the more of these techniques are applied, the betters is the outcome.</p>
+<h3 class="mume-header" id="contingency-perspective-best-fit">Contingency Perspective (Best Fit)</h3>
+
+<p><em>&quot;Specific business strategies and goals require specific HR techniques&quot;</em>.</p>
+<p><strong>The argument</strong> is that you might fall into the trap of <strong>contingency determinism</strong>, which means that the environment is defined as absolute and the solution to that is, in turn, absolute. (i.e. the context absolutely determines the strategy)</p>
+<blockquote>
+<p><strong>why is this wrong?</strong></p>
+</blockquote>
+<p><strong>The evidence</strong> There is some, not too wide, support for this thesis. Huselid (1995) found out that those organizations that link HRM practices to strategy report higher financial performance outcomes.</p>
+<h3 class="mume-header" id="configurational-perspective-bundle">Configurational Perspective (Bundle)</h3>
+
+<p><em>&quot;There are configurations or patterns of practices - called <strong>bundles</strong> - and the key is to find the most effective one&quot;</em>.</p>
+<p>Bundles are <strong>interrelated</strong> and they mutually reinforce the effect of the others. It is implicit in this that &quot;more is better&quot;.</p>
+<p><strong>The argument</strong> is that finding the right bundle is difficult, and it&apos;s hard to prove that a bundle is better than another.</p>
+<p><strong>The evidence</strong> Some tests have failed to prove that specific combinations of practices are better than the total number of HR practices applicable. However, other tests have found support for this approach in the banking sector.</p>
+<blockquote>
+<p>a key thing to point out is about the changes a Company makes:</p>
+<ul>
+<li>when these changes are aimed at improving the working space and the employee benefits, the latter is more committed to work and, of course, happier;</li>
+<li>vice versa, when the changes are made to cut costs down, or employees are worried about being fired, the commitment levels drop down</li>
+</ul>
+</blockquote>
+<h1 class="mume-header" id="week-2">Week 2</h1>
+
+<h3 class="mume-header" id="the-ibm-case-a-few-years-ago">The IBM Case (a few years ago)</h3>
+
+<p>Looking at the competitive landscape, IBM realised 3 main things:</p>
+<ul>
+<li>Thanks to globalisation, communication and international trading barriers we&apos;re breaking down, which favored trades and investment flows across the countries;</li>
+<li>Protectionism in most countries was reducing;</li>
+<li>There were huge technological advances in communications which, to some extent, greatly favored the way work could be structured and the way people could be managed.</li>
+</ul>
+<p>This brought significant opportunities and changes:</p>
+<ul>
+<li>The production of goods and services flowed globally to places where it was more efficient and most benefit could be created, at the lowest cost (China exploitation);</li>
+<li>Looking at themselves, they figured they had to evolve <strong>from</strong> a traditional &apos;<em>multinational</em>&apos; approach, in which production is organised state by state, market by market, region by region (traditional boundaries of the nation-state) <strong>to</strong> Globally integrated Organisations to keep their competitiveness. (fully globalised and integrated organisation)</li>
+</ul>
+<p>Hence, they had to remove redundancy and integrate operations both horizontally and globally.</p>
+<img src="./img/IBM_7.png">
+<p>So the focus was on:</p>
+<ul>
+<li>understanding the people working in the organisation, what their environment is like, who are the talent to invest one etc.</li>
+<li>how to attract the right people and develop them internally, and how to deploy the workforce across cultural and geographical boundaries.</li>
+</ul>
+<h2 class="mume-header" id="globalisation-for-sociologists">Globalisation for sociologists</h2>
+
+<p>Globalisation can be seen in many ways, for example:</p>
+<ul>
+<li>The <strong>intensification of social relations which links together distant localities</strong>, making an event happening somewhere in the world, relevant to shape the life of a place located on the other side of the world;</li>
+<li>The creation of a big, <strong>heterogeneous culture spread across the world</strong>, but also the <strong>annihilation of small cultures</strong>.</li>
+</ul>
+<p>From the sociologists POV these are the key ideas:</p>
+<ul>
+<li>globalising values and views of the world, meaning tha there is a culture that we all share;</li>
+<li>interdependence between societies, that can lead to culture enrichment as well as cultural annihilation;</li>
+<li>globalisation is seen as an irreversible trend.</li>
+</ul>
+<h2 class="mume-header" id="globalisation-for-economists">Globalisation for economists</h2>
+
+<p>&quot;Globalisation is the <strong>increasing interdependence between countries</strong> which inevitably leads to <strong>increasing volume and varieties of cross-border transactions</strong> (also the increase of technology is part of this phenomenon)&quot;</p>
+<p>&quot;<strong>Integration of markets, nation-states and technologies</strong> to a degree that we have never seen before, allowing to <strong>reach for places farther, faster, deeper and cheaper.</strong> It also includes the <strong>spread of free-market capitalism to virtually every country of the world</strong>&quot;</p>
+<p>From the economists POV these are the key ideas:</p>
+<ul>
+<li>there is a growing internationalisation dynamic of our economy;</li>
+<li>it is dominated by uncontrollable market forces;</li>
+<li>the main actors agents of change are truly <strong>transnational corporations</strong> located wherever on the global market advantage dictates.</li>
+</ul>
+<p>Drop in transports costs and increase in technology allowed richer countries to exploit developing countries for production, however, <em>premium skills</em> like R&amp;D are still done in rich countries.</p>
+<img src="./img/Fully_globalised.png">
+<p><strong>Globalisation in not inexorably expanding</strong> (think of Covid or WW)</p>
+<h1 class="mume-header" id="week-3">Week 3</h1>
+
+<h2 class="mume-header" id="skills-that-will-be-demanded-in-future">Skills that will be demanded in future</h2>
+
+<ul>
+<li><strong>Digital skills</strong>: knowing how to use a computer, how to surf the web, being able to work remotely and to use software like MS Office;</li>
+<li><strong>Agile thinking skills</strong>: ability to work and adapt to different scenarios, to complexity and ambiguity, to innovation;</li>
+<li><strong>Interpersonal and communicational skills</strong>: collaborative people, able to efficiently communicate to customers and other team members, with good oral and written communication skills, people who can brain storm.</li>
+<li><strong>Global operating skills</strong>: (particularly important for multinationals and big corporations) people speaking different languages, people sensitive to different cultures and traditions, people who understand international markets and can work (and manage) diverse people.</li>
+</ul>
+<h2 class="mume-header" id="talents">Talents</h2>
+
+<p>Back in the past (2010), <strong>talents were primarily in developed countries</strong> like US, UK, Germany and so on, and there was a <strong>lack of them in developing countries</strong> like China, India, Brazil etc. As the projection proved, <strong>the situation has become the opposite in our days</strong>, having developing countries with a surplus of talents, and with developed countries having shortages.</p>
+<blockquote>
+<p>talent here is meant as analytical, digital, agile etc. skills.</p>
+</blockquote>
+<p>The reason behind this shift in talents is that those developing countries, as they were facing deficits, <strong>invested on new workforce growth, training more college graduates and post grads</strong> per capita.</p>
+<p>A quick solution would be <strong>to import talents</strong> from other countries, but these people <strong>hardly understand</strong> the language, the culture, and even less, <strong>the market</strong>. Furthermore you have to retain and engage people from your local market, by expanding to other markets and teaching them the fundamentals of your nation.</p>
+<h2 class="mume-header" id="old-vs-new-deal">Old vs. New Deal</h2>
+
+<img src="./img/OldVNewDeal1.png">
+<img src="./img/OldVNewDeal2.png">
+<h2 class="mume-header" id="psychological-contract">Psychological contract</h2>
+
+<p>It is a set of unwritten reciprocal <strong>expectations</strong> between the individual employee and the organisation. But of course it can be subjective, that is, the perceptions of both parts of the employment relationship of the <strong>reciprocal promises and obligations</strong> implied by that relationship.</p>
+<blockquote>
+<p>During an interview the company promises you great stuff, and you promise to help them fulfill their mission.</p>
+</blockquote>
+<h2 class="mume-header" id="protean-and-boundaryless-careers">Protean and Boundaryless careers</h2>
+
+<img src="./img/careers.png"> 
+In spite of being different, these careers types are not opposite; the opposite might be (I am not sure) organisational career.
+A protean career attitude implies that a person strives towards a developmental progression and self-fulfillment; a boundaryless career attitude is characterized by a high physical and/or psychological mobility.
+<p>The latter concept is very linked to the fact that long term careers do not exist anymore.</p>
+<blockquote>
+<p><strong>Job tenure:</strong> the average years a person spend with the same company.</p>
+</blockquote>
+<p>Although researches have demonstrated a slight increase in job tenure over the years, there&apos;s the chance that careers are getting more boundaryless and highly protean.</p>
+<h3 class="mume-header" id="satisfactions-and-proficiency-with-protean-and-boundaryless-attitudes">Satisfactions and proficiency with protean and boundaryless attitudes</h3>
+
+<p><strong>Some studies coducted at Kings</strong> show that people taking boundaryless careers have lower job, life and career satisfactions than other workers.<br>
+From a organisation POV, they have less commitment to work and are more willing to leave the company.</p>
+<p>Opposed to that, people taking protean careers tend to be happier than other workers. Also, they have better job performances, and better CB (Citizenship behaviour).</p>
+<p>As protean attitude leads people to proactivity and better performance, organisations seeks to retain these employees.</p>
+<p>Boundaryless people are instead retained when they have high human capital and high turnover.<br>
+Low boundaryless careers tend to appreciate High HRM commitment, whereas high boundaryless careers seem to prefer not to have HRM investing too much on them. This counts for OCB, OCBI and Job Performance.</p>
+<p><strong>To conclude</strong>:</p>
+<ul>
+<li>Protean Careers are a WIN-WIN, the employee is happy and the job performance is good;</li>
+<li>Boundaryless Careers are a LOSE-LOSE, their general dissatisfaction leads them to less commitment and lower performance at work. Furthermore, HR has little impact on them.</li>
+</ul>
+<h1 class="mume-header" id="week-4-attracting-and-retaining-talents">Week 4 - Attracting and Retaining Talents</h1>
+
+<h6 class="mume-header" id="video-1">video 1</h6>
+
+<p>60 % of companies reported problems to attract talents and 55 % to retain them.</p>
+<h2 class="mume-header" id="techniques-to-attract-talents">Techniques to attract talents</h2>
+
+<ul>
+<li>Understand <strong>what people</strong> - the ones the company wants to attract - <strong>want from work and career</strong></li>
+<li>Communicate who they are to current and prospective employees</li>
+<li>Translate their EVP (Employee Value Proposition) into a strong employer brand</li>
+<li>Invest in recruitment</li>
+<li>Very selective in hiring</li>
+</ul>
+<h2 class="mume-header" id="scheins-research">Schein&apos;s research</h2>
+
+<p>According to this guy who studied alumni for 10/12 years, people do not know what they want from a job at the beginning<br>
+of their career. They generally develop an identity within the first 5 to 7 years and that tends to remain stable throughout their lives.<br>
+Schein Identified 8 types of people:<br>
+<img src="./img/selection_process.png"><br>
+The technical one aims to become a GURU and to be seen as a master in what they do.</p>
+<h6 class="mume-header" id="video-2">video 2</h6>
+
+<h2 class="mume-header" id="before-the-recruitment-process">Before the recruitment process</h2>
+
+<p>Companies should wonder</p>
+<ul>
+<li>what distinguishes them from the competition,</li>
+<li>what they can offer to prospective employees and</li>
+<li>what people they want to attract</li>
+</ul>
+<h2 class="mume-header" id="signaling-the-job-market-who-you-are-as-an-employer">Signaling the job market WHO YOU ARE as an employer</h2>
+
+<p>Before applying for a job, people may know what leaks out of the company (<em>outside</em>) such as their product, their reputation, the salary and the job offer you<br>
+can get, but they know <strong>little about the working environment</strong> (<em>inside</em>) and this unbalanced knowledge is know as <strong>INFORMATION ASYMMETRY</strong>.</p>
+<p>Signalling the market about the job is you offer is very important to</p>
+<ul>
+<li>the company: because you want to recruit the right people, because the recruiting process is very expensive and time consuming,</li>
+<li>but also for candidates who, just like you, do not want to waste time after a job which does not suit them. (both of the parties want to lessen the problem <strong>adverse selcection</strong>)</li>
+</ul>
+<p>So the company want to signal the market with the quality of the work they offer.</p>
+<h2 class="mume-header" id="employee-value-proposition-evp">Employee Value Proposition (EVP)</h2>
+
+<p>What the company stands for and what it represents, what an employer has to offer in terms of salary, benefits, social responsibility etc.<br>
+<img src="./img/EVP.png"></p>
+<p>To be effective, an EVP has to be:</p>
+<ul>
+<li><strong>formalised</strong>: the company has to be conscious of what they have to offer and communicate it very clearly;</li>
+<li><strong>effectively communicate to both prospective employees and current employees</strong> via ads, website, during the interviews etc.;</li>
+<li><strong>aligned</strong> with the mission of the company;</li>
+<li><strong>different</strong> from other to distinguish them from competitors;</li>
+</ul>
+<p>EVP has to reflect in the employees&apos;:<br>
+<img src="./img/evp2.png"><br>
+Rewards = salaries and how people are managed</p>
+<h3 class="mume-header" id="hospital-1">Hospital 1</h3>
+
+<p>Life balance, challenge, strong city community, high salary, life amid the nature, &quot;adventure&quot;.</p>
+<p>Looking to be rich and leave amid the nature.</p>
+<h3 class="mume-header" id="hospital-2">Hospital 2</h3>
+
+<p>Serenity, calm, Christian values, strong inner community, strong proposition of curing people to make some good, &quot;spiritual environment&quot;, child support</p>
+<p>Looking to fulfill the hospital mission to help other people and commit to the Christianity community, great for people with kids, stability, possibility of making career and to use state-of-art machines</p>
+<h6 class="mume-header" id="video-3">video 3</h6>
+
+<h2 class="mume-header" id="recruitment">Recruitment</h2>
+
+<p>A company shoudl attract as many candidates as possible in order to have a big pool to choose from.</p>
+<h3 class="mume-header" id="key-recruitment-decisions">Key recruitment decisions</h3>
+
+<ul>
+<li>Should we fill a vacancy internally or search for candidates in the external market?</li>
+<li>Where to look for applicants?</li>
+<li>The content of the job and the type of person required</li>
+<li>What to tell applicants? What do we tell them about the company, especially about the <strong>downsides</strong>?</li>
+</ul>
+<h3 class="mume-header" id="filling-a-vacancy">Filling a vacancy</h3>
+
+<p>This is not a mutual exclusive process, you can look into both external and internal candidates<br>
+<img src="./img/vacancy.png"></p>
+<h3 class="mume-header" id="where-to-search">Where to search</h3>
+
+<ul>
+<li>
+<p>Direct applicants</p>
+</li>
+<li>
+<p>Referrals</p>
+</li>
+<li>
+<p>Local/national (?) newspaper (Gardian? FT? Daily Telegraph? Professional journals? e.g. Nursing Times or the Journal of Pharmacy)</p>
+</li>
+<li>
+<p>E-recruitment (<a href="http://jobs.ac.uk">jobs.ac.uk</a>; facebook; linkedin; company websites; etc.)</p>
+<blockquote>
+<p><strong>BEWARE</strong> that you do not really know what kind of people you may attract via social networks</p>
+</blockquote>
+</li>
+<li>
+<p>Employment agencies</p>
+<ul>
+<li>Public (Job Centre)</li>
+<li>Temporary employment agencies</li>
+<li>Recruitment Consultants</li>
+<li>Headhunters/Executive Search Consultants</li>
+</ul>
+</li>
+<li>
+<p>University &#x201C;milk-round&#x201D; (Key for attracting high potential employees)</p>
+</li>
+</ul>
+<h3 class="mume-header" id="defining-the-person-requirements">Defining the person requirements</h3>
+
+<img src="./img/competency.png">
+<h3 class="mume-header" id="what-you-should-tell-to-applicants">What you should tell to applicants</h3>
+
+<p>Every job comes with some downsides, and the recruiter has to give a good dose of realism to the candidate.<br>
+This will prevent a turnover as the candidates are aware of them (and the employer will not have to repeat the recruiting process again in case) and the employee will be more committed.<br>
+Put it in a nice way of course, for instance, during the interviewing for healthcare assistant, ask the candidate how they would feel about cleaning the vomit, which smells terrible, as it will happen very often. This will give them a chance to reflect on whether or not they really want that job and are ok with that.</p>
+<h1 class="mume-header" id="week-5-recruiting-the-right-talents">Week 5 - Recruiting the right talents</h1>
+
+<p>Is recruiting a fair process?</p>
+<blockquote>
+<p>No, the examiner may be <strong>biased</strong> or they might trust their <strong>gut</strong> over non quantifiable matters like <strong>level of confidence</strong> or <strong>how much a candidate talks confidently</strong> or <strong>the energy</strong>.</p>
+</blockquote>
+<h2 class="mume-header" id="the-selection-process">The selection process</h2>
+
+<p>The selection is a set of specifications, that you should think thoroughly, about how the candidate should be, that is, you should seek a candidate that fits the criteria you define.</p>
+<p>A candidate features belong with 2 types:</p>
+<ul>
+<li><strong>Background Factors</strong>: education, experience, etc.</li>
+<li><strong>Personal Factors</strong>: intellectual ability, personality, motivation etc.</li>
+</ul>
+<h3 class="mume-header" id="background-factors">Background Factors</h3>
+
+<p>Background factors can in turn be divided into sub categories:</p>
+<p><strong>Education</strong><br>
+Is the educational background mandatory, or is it more of a tradional standard? Also, if you require someone to have a PhD, think of how big is the pool you can draw from when looking for candidate: surely the candidates will be very prepared, but they are also a very small amount.</p>
+<p><strong>Experience</strong><br>
+Experience is required very often too, but, again, it is important to be precise on the type of experience required:</p>
+<ul>
+<li><strong>Industry Exp</strong>: you may need an expert in a field, but that person should be able to talk to costumer rather than working on internal stuff</li>
+<li><strong>Function Exp</strong>: experience in the sector or in specific tasks, but this kinds of requirements may be misleading. Suppose you are a multinational company counting thousands of employees, and are looking for someone with 2 years of experience in HR: a candidate comes up with 3 (even more than what you asked for) years of experience, but in a small company counting 500 people at most.</li>
+<li><strong>Company Exp</strong>: some companies heavily invest in the employee training and formation, so a candidate coming from there may be more interesting than someone caming from a &quot;lazy&quot; company that produces paper pushers.</li>
+</ul>
+<h3 class="mume-header" id="personal-factors">Personal Factors</h3>
+
+<p><strong>Intellectual ability</strong></p>
+<ul>
+<li>
+<p><strong>Analytical ability</strong> &#x2013; Ability to take a complex problem, define it, break it down in pieces to understand it better and then put the pieces back together and come up with a solution</p>
+</li>
+<li>
+<p><strong>Creative ability</strong> &#x2013; This may encompass the ability to generate strategic options, come up with new product/service ideas, etc.</p>
+</li>
+<li>
+<p><strong>Decision-making Style</strong> &#x2013;  Some people are extremely analytical, fact-based and structured. Others rely more on gut and intuition. Which style best fits the job/company?</p>
+</li>
+</ul>
+<p><strong>Motivation</strong> (How much effort is the individual willing to make in his/her job?)</p>
+<blockquote>
+<p>Beware, if you promise something to the employee and do not fulfill the commitment, there will probably be a turnover and they will leave.</p>
+</blockquote>
+<ul>
+<li>
+<p><strong>Goals</strong> &#x2013; Does the work fit with people&#x2019;s own goals and ambitions?</p>
+</li>
+<li>
+<p><strong>Interests</strong>  - Does the work fit with people&#x2019;s interests (a salesperson who does not like to talk to people is not likely to be successful) (see career orientations).</p>
+</li>
+</ul>
+<h2 class="mume-header" id="selection-process">Selection process</h2>
+
+<h3 class="mume-header" id="decide-the-prerequisites">Decide the prerequisites</h3>
+
+<p>This will already skim a lot of candidates</p>
+<blockquote>
+<h4>PICTURE TO BE ADDED</h4>
+</blockquote>
+<p>Candidates may have to meet some prerequisites that could be:</p>
+<ul>
+<li><strong>Job wise</strong>: the preparation for a specific job or role;</li>
+<li><strong>Person wise</strong>: background, experience, character, relationship capabilities</li>
+</ul>
+<p>There are several ways to test these characteristics, for example an interview reveals the person, how they speak etc. whereas a test shows their technical skills. The best idea would be to use multiple testing techniques (interviews, test, assestment centres, references, etc.) to better understand all the aspects you are interested in.</p>
+<p><strong>Characteristics of a good test</strong></p>
+<img src="./img/selection_process.png" alt="Testing procedure">
+<p><strong>standardised</strong> means that a person&apos;s score has to be contextualised. A score of x has a different meaning if executed by a graduate rather than a worker (perhaps in the sense that a grad student, who has no practical experience, may be disadvantaged, yet prove to have a great potentiality)</p>
+<img src="./img/shortlisting.png">
+<img src="./img/tests.png">
+<img src="./img/5Personality.png">
+<h6 class="mume-header" id="video-2-1">video 2</h6>
+
+<h2 class="mume-header" id="assessment-centres">Assessment Centres</h2>
+
+<p>Assesment Centres are very important in the process of selecting new candidates. People taking part to this (on avg 1 assessor per 2 candidates) can give different opinions on the same candidate and, if the criteria are well defined, the <strong>bias</strong> can be removed.</p>
+<h2 class="mume-header" id="references">References</h2>
+
+<p>Very required, can be important to know the responsabilities and the professionality of a candidate, but they don&apos;t help much when it comes to character as the person on the other side will probably not talk trash about them. So be careful about it.</p>
+<h2 class="mume-header" id="selection-interviews">Selection Interviews</h2>
+
+<p>Useful to find out about the candidate skills, competences, knowledge, qualifications, training etc.<br>
+But also to find out how much they are motivated and if they (values and horientations) would fit in the organisation (also, for example, can they travel or come to work on short notice, can they work on social hours)</p>
+<h3 class="mume-header" id="how-to-prepare-for-a-interview">How to prepare for a interview</h3>
+
+<ul>
+<li>Clearly define the requirements and the criteria necessary for a candidate to achieve them (study degree, experience, knowledge and skills);</li>
+<li>Decide what else to judge the candidate on beside the competences and the behaviour (for example being able to work on social hours, having a car etc.)</li>
+<li>Will you have a structured or unstructured interview.</li>
+</ul>
+<h2 class="mume-header" id="structured-interview-important">Structured interview (IMPORTANT!)</h2>
+
+<p>Super <strong>standardised</strong>, questions are defined and asked in a specific order; these questions are very tied to specific role criteria.<br>
+The answers are rated based on a <strong>pre-formatted scale</strong>.<br>
+The advantages of structured interviews are that they are <strong>less prone to bias</strong>, so they are more reliable predictors of future job performance and person job fit.</p>
+<h3 class="mume-header" id="researches-on-structured-interviews">Researches on structured interviews</h3>
+
+<ul>
+<li>Interviewers tend to agree more on candidates.</li>
+<li>They have proven to be more reliable.</li>
+<li>Candidates chosen via this process are associated with better job performances, tenure and promotions.</li>
+</ul>
+<h2 class="mume-header" id="biographical-interviews">Biographical Interviews</h2>
+
+<p>A <strong>Biographical interview</strong> is one where the interviewer looks at the past experiences of the candidate, from the most recent to the oldest one.</p>
+<h2 class="mume-header" id="behavioral-interviews">Behavioral interviews</h2>
+
+<p>In <strong>Behavioural interviews</strong>, instead, the candidate is asked how they behave in specific occasion like &quot;how do you deal with a type of client&quot; or &quot;how do you respond when you are under pressure&quot; and so on.</p>
+<p><strong>Pro</strong></p>
+<ul>
+<li>Past performances are the best predictor of future behaviour.</li>
+</ul>
+<p><strong>Con</strong></p>
+<ul>
+<li>Some candidates may not have experience and this makes it harder to compare them. Also, some of them might have had different experiences than others.</li>
+</ul>
+<h2 class="mume-header" id="situational-interviews">Situational Interviews</h2>
+
+<p>Look at the behaviour in very specific scenarios such as a difficult client you have to deal with.</p>
+<p>The difference with the behavioural is that here you suppose a scenario whereas in the previous one it refers to something that has happened already.</p>
+<p><strong>Pro</strong></p>
+<ul>
+<li>Easy to compare candidates as the example is the same for all, and even candidates with no experience can answer.</li>
+</ul>
+<p><strong>Con</strong></p>
+<ul>
+<li>People may say &quot;I would do this&quot; but then, in practice, they would not act that way.</li>
+</ul>
+<h2 class="mume-header" id="bias-in-selection">Bias in selection</h2>
+
+<img src="./img/bias.png">
+<p>Obese people (especially women) are way less likely to be hired.</p>
+<blockquote>
+<p>the first impression an interviewer perceives of the candidate happens between the first <strong>4 minutes</strong>, and then the rest of the time, the interviewers tries to confirm their impression.</p>
+</blockquote>
+<p>Being aware of the fact that we are often biased is the best way to mitigate it.</p>
+<p>We are not biased on purpose, it is an unconscious process.</p>
+<h1 class="mume-header" id="week-6-training">Week 6 - Training</h1>
+
+<h2 class="mume-header" id="training-process">Training process</h2>
+
+<img src="./img/honey.png">
+<blockquote>
+<p>What Honey means by that is that <strong>learning</strong> and managing knowledge is the way to achieve innovation and to keep oneself different from the competitors; also that <strong>being different is now more important than being better</strong> with respects to your competitors.</p>
+</blockquote>
+<p>A <strong>learning company</strong> is one that seeks for new ideas, comes up with new ideas, moves them throughout the organisation, and <em>then</em> it actually <strong>acts</strong>, it takes the new knowledge as a basis for responding to a changing environment.</p>
+<p>This <strong>learning process</strong> is accompanied by a <strong>learning environment</strong> that makes this process possible, and the <strong>leadership</strong> that fosters (favorire) and inspires the learning processes and helps create this learning environment model.</p>
+<p>Products, services and even processes can be copied, to so stay ahead of the competition, <strong>learning is the only sustainable competitive advantage you can have</strong>.<br>
+If your rate of learning is smaller than the rate of changing (of the world, the market, the sector etc.) you are gonna fall behind.</p>
+<p>Some companies believe they do good, but fall into common pitfalls:</p>
+<ul>
+<li>They theoretically do it, but in practice do not implement and activate the learning process;</li>
+<li>The learning is done, but only highest members in the hierarchy, such as CEOs and top managers, are instructed whereas line managers and normal workers, aka those doing the real work, are not;</li>
+<li>Lack of standards to assess how well the organisation is doing</li>
+</ul>
+<p>When selecting the candidate, the company can:</p>
+<ul>
+<li>Assume an experienced worker:
+<ul>
+<li>who can bring a lot of experience and flexibility, but</li>
+<li>will require a higher salary and</li>
+<li>(being more employable) are at higher risk of a turnover</li>
+</ul>
+</li>
+<li>Assume an unexperienced person:
+<ul>
+<li>who brings less benefit,</li>
+<li>who can be trained (but then they turn into an experience worker) risking to invest on their learning and then they change company</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>Researches show that employees who feel more employable also report higher intentions to quit their organisations.<br>
+However, Nielson found that investment in learning makes the employer</p>
+</blockquote>
+<p>Empirical studies proof that investing in employee training and development is more strongly associated with <strong>internal</strong> rather than <strong>external</strong> employability, that means, they are not very likely to quit the job, but they are to seek a new position in the company.</p>
+<blockquote>
+<p>Investing on the right employee is always a good decision. Investing on someone seeking a protean career, for example, helps the company retain such employee.</p>
+</blockquote>
+<p>Investment in <strong>Career Development Practices</strong> increases people&apos;s perceptions of their own employability (PEE) in the external market, and the effect is stronger on people who already feel employable to start with.</p>
+<p><strong>Higher perceptions of employability</strong> are associated with <strong>lower intention to quit</strong> and <strong>higher organisational commitment</strong> among individuals who are more <strong>proactive</strong> in managing their careers (protean career).</p>
+<p>So, when people are expecting investments in their career (protean) and they do receive such training, they are more willing to stay with that company.</p>
+<h2 class="mume-header" id="training-analysis">Training analysis</h2>
+
+<p>Before doing any type of training, the company has to clear out the objectives of that process in 3 ways:</p>
+<blockquote>
+<img src="img/7_organisational_analysis.png">
+<img src="img/7_task_analysis.png">
+Critical tasks and tasks that add a lot of value to the company are the primary objective.
+</blockquote>
+<blockquote>
+<img src="img/7_person_analysis.png">
+</blockquote>
+<h2 class="mume-header" id="training-methods">Training methods</h2>
+
+<p>There are 2 main types of training:</p>
+<h3 class="mume-header" id="presentation-methods">Presentation methods</h3>
+
+<p>The trainee is passive recipients of information:</p>
+<ul>
+<li>
+<p><strong><u>Classroom instruction</u></strong></p>
+<ul>
+<li>Typically we have a <strong>lecturer</strong> transmitting information to one group of trainees;</li>
+<li><strong>Inexpensive</strong> way to transmit information to many trainees.</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Distance learning</u></strong></p>
+<ul>
+<li>Trainees attend programs where they can communicate with the trainer and other trainees at other locations (eg. <strong>Videoconferencing</strong>)</li>
+<li>Useful for geographically dispersed companies.</li>
+</ul>
+</li>
+<li>
+<p><strong><u>Audiovisual technique</u></strong></p>
+<ul>
+<li>Useful for transmitting information and developing skills such as communication, interviewing, and customer-service skills (eg. <strong>Training Videos</strong>).</li>
+</ul>
+</li>
+</ul>
+<h3 class="mume-header" id="hands-on-methods">Hands-on methods</h3>
+
+<p>The trainee is actively involved in learning:</p>
+<ul>
+<li>
+<p><strong><u>On-the-job training</u></strong><br>
+Employees learn through observing peers or managers performing the job and trying to imitate their behavior (adequate for newly hired employees; low skilled workers)</p>
+</li>
+<li>
+<p><strong><u>Simulations</u></strong><br>
+Represents real life situations and allows trainees to see the impact of their decisions in an artificial, risk-free environment (eg. Airplane pilots)</p>
+</li>
+<li>
+<p><strong><u>Business games and case studies</u></strong><br>
+Trainees discuss cases relevant to better understand the complexity of their jobs and engage in games that stimulate acquiring relevant skills and knowledge.</p>
+</li>
+<li>
+<p><strong><u>E-learning</u></strong><br>
+Training content usually delivered via web allowing trainees to have control over the learning process (when, where, at what speed)</p>
+</li>
+</ul>
+<h3 class="mume-header" id="selecting-the-method">Selecting the method</h3>
+
+<ul>
+<li>
+<p><strong><u>Who is it for?</u></strong><br>
+Methods such as on-the-job training may be more useful to train unskilled workers than managers</p>
+</li>
+<li>
+<p><strong><u>What is it for?</u></strong><br>
+Classroom training may be more adequate to transmit information on labor law than case studies or simulations.</p>
+</li>
+<li>
+<p><strong><u>What is the cost?</u></strong><br>
+Audiovisual techniques may be less expensive to transmit company policy on customer care to thousands of workers dispersed across a country than classroom training. However, if we are training a few dozen workers producing a video may be too expensive.</p>
+</li>
+</ul>
+<h3 class="mume-header" id="method-evaluation">Method evaluation</h3>
+
+<img src="img/6_evaluate_training.png">
+<h2 class="mume-header" id="employee-development-experiences">Employee Development Experiences</h2>
+
+<img src="img/6_Employee_development.png">
+<ul>
+<li><strong>Temporary assignments with another organization -</strong> What Toyota does which makes an employee working with a partner group for the sake of both employer&apos;s development and building the relationship with the partner (understanding and helping them)</li>
+</ul>
+<h2 class="mume-header" id="interpersonal-relationships">Interpersonal Relationships</h2>
+
+<img src="img/6_Mentoring.png">
+<img src="img/6_Coaching
+.png">
+<br>
+<br>
+<br>
+<h2 class="mume-header" id="ritz-carlton-case-study">RITZ-CARLTON Case study</h2>
+
+<p>The history of the Ritz-Carlton is the one of a luxury hotel which guests have always experience an amazing staying. Employees are perhaps the most important resource of the company and their training is fundamental.</p>
+<p>Employees are treated as <em>ladies and gentlemen</em> so that the company can retain them and, most importantly, because if the hotel treats them this way, they will treat guest the same way in turn.</p>
+<p>The voluntary attrition (abbandono) rate is only 18%, which is well below the industry standard.</p>
+<p>Ritz-Carlton realised that the quality of its end products was only as good as the people providing it. They do not &quot;<em>hire</em>&quot; people, they &quot;<em>select</em>&quot; them. As every employee has to take care of just one task, but they have to do it very well, the company prepared the ideal profile, job description, and quality recruitment based on the top performers from its hotel chain and the other comparable organisations.</p>
+<p>Candidates go through many interviews with different managers and they have to prove worthy of the job and full of empathy, kindness, passion for the job, and the ability to smile naturally.</p>
+<blockquote>
+<p>Technical skills can be taught, a change in the attitude is instead harder to achieve.</p>
+</blockquote>
+<p>The idea is that people can show no skills, but the training cab teach them. What the training cannot teach them is to be passionate about their job and to smile in every situation.</p>
+<h3 class="mume-header" id="after-being-recruited">After being recruited</h3>
+
+<p><strong>2 day orientation</strong><br>
+After being recruited, the new employees undergo a 2 day orientation program. During this period they are treated like guests, they stay in the hotel rooms, eat at its restaurants, and a top managers welcome them with hand-written welcome cards. This is to ensure that they enjoy their job since day 1.</p>
+<p><strong>21 day training</strong><br>
+After the initial orientation, each new recruit is assigned to and experience employee for 3 weeks of training. The 3 week the recruit performs the job and the actual employees gives feedback on his performance.<br>
+Recruits are instructed on the kind of language to use, omn dressing and appearance, and the behaviour with customers.<br>
+After this period, the top managers listens to the employee and the feedback; this allows him to check that the behaviour of employees is in line with the Ritz-Carlton philosophy and that the training is good enough.</p>
+<p>At the end of the period, the employee takes a test to gauge(valutare) their technical skills and to demonstrate they have learnt the company philosophy. If not, the employee is offer the possibility to either leave or to join a department more suited to them.</p>
+<p><strong>365 Certificate</strong><br>
+The training does not stop after those 21 days and employees are trained until day 365. Here they are tested again and certified.</p>
+<p><strong>On going training</strong><br>
+The training does not stop after the first year and employees keep learning by doing and via courses</p>
+<p>Each employee was given $2,000 a day to spend in assisting and helping guests. This gave them a lot of freedom as they did not have to ask for approval from managers, but also great responsibility (you consider them like valuable resources who can handle valuable resources).</p>
+<p>Employees were also encouraged to suggest ideas to cut costs down or improving quality. Worthwhile ideas were awarded with cash bonuses. &quot;employees have to feel part of the Ritz-Carlton&quot;.</p>
+<p><strong>Why employee prefer RC</strong><br>
+Salaries are not higher than competitors, but employees are treated kindly and respectfully. Also the possibility of escalating the hierarchy lengthens job tenure.</p>
+<hr>
+<h1 class="mume-header" id="week-7">Week 7</h1>
+
+<h2 class="mume-header" id="performance-management">Performance Management</h2>
+
+<p><strong>(video 1)</strong></p>
+<p>If you want to manage the performance of your company there are 3 steps to follow:</p>
+<ul>
+<li><strong>Define performance</strong>: not every employee can be judged based on the same criteria, as such you have to define what performance means (based on the job, on the role, etc.)</li>
+<li><strong>Performance Appraisal (Evaluation)</strong>: after defined performance, you need to define how and based on what you are going to assess the performance</li>
+<li><strong>Feedback</strong>: once you have assessed the performance of your employees, providing them with feedback is a good way to point out their weaknesses and have them improving.</li>
+</ul>
+<h2 class="mume-header" id="aims-of-performance-management">Aims of performance management</h2>
+
+<p><strong>(video 2)</strong></p>
+<p><strong>Strategic</strong> <u>(align the employee to the company&apos;s mission)</u><br>
+The performance management system should <strong>communicate</strong> and reflect the company <strong>strategy</strong> in terms of expected employee results and <strong>behaviours</strong>, and <strong>skills</strong> to develop.</p>
+<p><strong>Administrative</strong> <u>(allow the company to make decisions)</u><br>
+The performance management system is useful (and should lead) to <strong>make decisions</strong> regarding employee promotion/demotion, retention/termination, salary growth, etc.</p>
+<p><strong>Developmental</strong> <u>(main point of perf. manag. - should help employee develop and improve)</u><br>
+Feedback sessions are particularly important for employee development (analyse why employees are not performing; decide on training, job transfer, etc.). It easy to critic people, but instead of giving destructive criticisms, you should aim at developing them.</p>
+<h2 class="mume-header" id="performance-appraisal">Performance Appraisal</h2>
+
+<p>A good performance appraisal system should be</p>
+<ul>
+<li><strong>Focus</strong>: evaluating too many aspects may put too many things on the same level, and everything would be relevant, and nothing would be important. So a good system should focus and the most important things.</li>
+<li><strong>Fair</strong>: individual should participate in developing the appraisal method and the should be given clear feedback.</li>
+<li><strong>Clear</strong>: a performance appraisal system that people do not understand is strongly not recommended. The system should make clear how employee should perform and what distinguishes a poor performance from a good one.</li>
+</ul>
+<h2 class="mume-header" id="designing-performance-appraisal-system">Designing Performance Appraisal System</h2>
+
+<img src="img/7_designing_system_appraisal.png">
+<p>Others may include external sources</p>
+<h3 class="mume-header" id="what-to-evaluate">What to Evaluate</h3>
+
+<hr>
+<h2><strong>Behaviour</strong></h2>
+<p>Organisations define the expected behaviours employees should exhibit and managers should evaluate to what extent employees exhibit these expected behaviours;</p>
+<p>The most typical way to assess behaviours is via <strong>critical incidents</strong>, that is evaluating the behaviours in specific events that occurred.<br>
+<br></p>
+<ul>
+<li>
+<p><strong>Behaviorally anchored rating scales (BARS)</strong><br>
+BARS identify a number of performance dimensions (e.g. Interaction with customers) and typify <strong>grades of performance levels</strong> corresponding to the exhibition of behaviors critical to success or failure on the job (e.g. 1-9). The rater should then grade employees according to the type of behavior that best describes their performance and to what extent they exhibit that behaviour.<br>
+The behaviours to be looked at are those <strong>typically associated with either good or poor performance</strong>.</p>
+<blockquote>
+<p>e.g. 9 = good, 1 = poor <img src="img/7_BARS_ex.png"></p>
+</blockquote>
+<p><strong>PROS</strong>:</p>
+<ul>
+<li>It offers <strong>clear feedback to employees</strong>: people understand how they should behave and offering them feedback helps them understand to what extent they are adhering to these behaviours.</li>
+<li>It easy to associate this to <strong>potential training</strong> and contribute to their <strong>development</strong>.</li>
+<li>Can be effective in linking the <strong>company strategy</strong> to specific behaviors that facilitate strategy implementation.</li>
+</ul>
+<p><strong>CONS</strong>:</p>
+<ul>
+<li>It requires constant <strong>monitoring</strong>.</li>
+<li>It is often not clear the association between individual behaviour and company performance. (people may behave in a certain way and not achieve the desired output)</li>
+<li>People tend to behave better when the appraisal is coming, and managers tend to focus more on the more recent behaviours, instead, they should note down everything at any time.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2><strong>Attributes:</strong></h2>
+<p>Focuses on the extent to which individuals have certain characteristics or traits considered relevant for the performance of their and job and to the performance of the organization (company&#x2019;s success)</p>
+<p>Some of the attributes usually used are:</p>
+<ul>
+<li>Communication skills;</li>
+<li>Managerial skills;</li>
+<li>Interpersonal skills;</li>
+<li>Problem solving skills.</li>
+</ul>
+<img src="img/7_graphic_rating_scale.png">
+<blockquote>
+<p>e.g.<br>
+<img src="img/7_graphic_rating_scale_ex.png"></p>
+</blockquote>
+<p><strong>PROS</strong>:</p>
+<ul>
+<li>easy to evaluate;</li>
+<li>the same scale could be used across the company for different roles.</li>
+</ul>
+<p><strong>CONS</strong>:</p>
+<ul>
+<li><strong>Highly subjective</strong>;</li>
+<li>Competences are hard to link to performance (someone with a competence may not display it via behaviour or performance);</li>
+<li>Does not offer ways to improve a skill.</li>
+</ul>
+<hr>
+<h2>Results:</h2>
+<ol>
+<li>the company establishes measurable performance targets and objectives</li>
+<li>managers judge the extent to which the employee (or the team or whatever) achieved them over a specific amount of time.</li>
+</ol>
+<p><strong>PROS</strong>:</p>
+<ul>
+<li>subjectivity is reduced;</li>
+<li>it is easy to link individual performance to company&apos;s performance and that the link between employee performance and company&apos;s strategy is clear;</li>
+<li>managers have to deal with their employees on a daily basis and they have feelings, so assessing them negatively on behaviours is hard, but on achieved results is not.</li>
+</ul>
+<p><strong>CONS</strong>:</p>
+<ul>
+<li>Performance may be affected by factors out of employee&apos;s control (economic recession, or think of salespeople during COVID);</li>
+<li>individuals may end up focusing only on benchmarked aspects of their job;</li>
+<li>Employees&apos; behaviours in achieving these results are not taking into consideration and they may have bad impacts on the team.</li>
+</ul>
+<br>
+<h2 class="mume-header" id="comparing-performance-between-employees">Comparing Performance Between Employees</h2>
+
+<p>Often companies compare employees&apos; performances with one another.<br>
+They can either go from the best employee to the worst (<strong>Simple Ranking</strong>), or more generally divide them into groups (<strong>Forced Distributions</strong>) like top 10%(best), 11 to 20%, ... , 91+%(worst).</p>
+<p><strong>PROS</strong></p>
+<ul>
+<li>Differentiate employees and helps decide about promotions or pay raises;</li>
+<li>Some managers may always rate their employees top performers, other may rate them always average performers. This approach eliminates this kind judgment.</li>
+</ul>
+<p><strong>CONS</strong></p>
+<ul>
+<li>Someone allocates in the bottom 10% may be not far from someone in the mid 50%;</li>
+<li>Prone to suffer from &#x201C;office politics&#x201D;;</li>
+<li>Does not relate performance to objective employee outcomes;</li>
+<li>Does not relate performance appraisal to company strategy.</li>
+</ul>
+<h2 class="mume-header" id="information-sources">Information sources</h2>
+
+<p>Information about the individual may come from:<br>
+<strong>managers</strong><br>
+<img src="img/7_source_managers.png"></p>
+<p><strong>peers</strong><br>
+<img src="img/7_source_peers.png"></p>
+<p><strong>subordinates</strong><br>
+<img src="img/7_source_subordinates.png"></p>
+<p><strong>self</strong> (the subject <strong>themselves</strong>)<br>
+<img src="img/7_source_self.png"></p>
+<p><strong>clients</strong> (or <strong>external sources</strong>)<br>
+<img src="img/7_source_clients.png"></p>
+<p>The sum of all (or some) of these sources is called <strong>360 degree evaluation</strong><br>
+<img src="img/7_source_360.png"></p>
+<p><strong>REMEMBER</strong> the point of evaluating employees is mainly to provide them with feedback in order to improve their performances and to citicise them.</p>
+<h1 class="mume-header" id="week-8-reward-management">Week 8 - Reward Management</h1>
+
+<p><strong>Reward</strong> is a &#x201C;bundle of returns offered in exchange for a cluster of employee contributions&#x201D; <cite>(Bloom &amp; Milkovitch, 1996)</cite></p>
+<p>&#x201C;<strong>Reward management</strong> is concerned with the formulation and implementation of strategies and policies in order <strong>to reward people fairly, equitably and consistently</strong> in accordance with <strong>their value to the organization</strong>&#x201D;. <cite>(Armstrong, 2010)</cite></p>
+<blockquote>
+<p>For the next part, the lecturer used the  CIPD (2019) report for the data.</p>
+</blockquote>
+<p><strong>Fair</strong></p>
+<ul>
+<li>People should be treated justly in accordance with what is due to them because of their value to the organization.</li>
+<li>People should be rewarded for the value they create.</li>
+</ul>
+<blockquote>
+<p>If you ask employees, their wage is not fair.</p>
+</blockquote>
+<p><strong>Equitable</strong><br>
+People should be rewarded appropriately in relation to others within the organization and others doing similar work in other organizations.</p>
+<p>We tend to compare our wage to those of other people covering similar roles inside and outside the organisation, and we expect to have a similar pay with respect to our contribution.</p>
+<p><strong>Consistent</strong><br>
+Decisions on pay should not vary arbitrarily and without due cause between different people or at different times.</p>
+<p>We want our salary to be stable.</p>
+<ul>
+<li>Rewards shape attitudes and behaviour in employees. An organisation that keeps changing is considered not stable</li>
+<li>This organisation is also likely to change the way they reward people or the standard use to judge who to reward, and those who joined the organisation based on some &quot;rules&quot;, seeing them vanishing may decide to leave.</li>
+</ul>
+<p><strong>Strategic</strong></p>
+<ul>
+<li>People should be rewarded according to what the organization values and wants to pay for.</li>
+<li>The reward system should help to attract and retain high quality people.</li>
+</ul>
+<p>This basically means that the reward strategy should be in line with the organisation strategy and proposition.</p>
+<h2 class="mume-header" id="do-rewards-incentive-people">Do rewards incentive people?</h2>
+
+<p>An MIT study case, with higher rewards for better performance, and lower, or no reward, for worse performance found out that:</p>
+<ul>
+<li>on jobs requiring mechanical skills, better rewards incentive people to work better, and their overall performance is good.</li>
+<li>on work that required even a little of cognitive skills (above rudimentary cognitive skills), the higher reward led to poorer performance.</li>
+</ul>
+<p>A Little pay would not motivate people to work, so that is not a good idea, but overpaying them is not good either, in fact, as the many tests proofed, people perform worse.</p>
+<p>This is because people have a purpose that motivates them which is not money. Atlassian gave their employee a whole free day to work on whatever they wanted. No bonuses were given to them whatsoever for their job, yet they came out with amazing ideas and work. Again, people need to feel self realised, and when they are paid the feel like they are not.</p>
+<p>In essence, money should not be the only reward.</p>
+<h2 class="mume-header" id="transactional-reward">Transactional Reward</h2>
+
+<div class="definition">
+<b>Transactional reward</b> (or total remuneration) is the value of all cash payments and benefits received by employees such as base pay or salary, contingent pay, cash bonuses, long-term incentives, shares, profit sharing and employee benefits which include pensions, holidays, health care,
+</div>
+<p><strong>Base Pay</strong><br>
+It depends on different factors like:</p>
+<ul>
+<li>the importance of that role inside the company;</li>
+<li>the skills required for that job;</li>
+<li>market factors like supply and demand for that job; and so on.</li>
+</ul>
+<p>The base salary is the starting point for deciding rewards, for example overtime work, sick pay, etc.</p>
+<h2 class="mume-header" id="determining-the-base-pay">Determining the base pay</h2>
+
+<p>The base salary can be defined base on:</p>
+<ul>
+<li><strong>Market factors</strong> (external to the company)
+<ul>
+<li><strong>Extreme market pricing</strong> -&gt; market rates are the only thing taken into consideration;</li>
+<li><strong>Market pricing</strong> -&gt; the job size is considered along side the market rate.</li>
+</ul>
+</li>
+<li><strong>Internal focus</strong> looks how jobs compare with each other in terms of value for the organisation.</li>
+</ul>
+<h2 class="mume-header" id="pay-determination">Pay determination</h2>
+
+<img src="img/8_pay_determination.png">
+<img src="img/8_issues_with_surveys.png">
+<h2 class="mume-header" id="internal-focus-job-evaluation">Internal focus - Job Evaluation</h2>
+
+<p>Evaluating the size of a job by looking only at internal factors.<br>
+This methodology has been highly criticised as it is bureaucratic,<br>
+time-consuming and irrelevant in a market economy where <strong>market rates dictate internal rates of pay</strong>, however, it is still widely practiced.</p>
+<img src="img/8_job_evaluation.png">
+<p>To mitigate bias, many people score the employee altogether.</p>
+<h2 class="mume-header" id="contingent-pay">Contingent Pay</h2>
+
+<img src="img/8_contingent_pay.png">
+<p>Pay increases are related to the achievement of agreed <strong>results</strong> defined as <strong>targets</strong> or <strong>outcomes</strong>.</p>
+<p>Contingent pay is good to tell employees how they are performing, what the company is expecting from them, and also to motivate and retain them.</p>
+<p>However, these benefits are normally small and do not impact significantly on the motivation. This system can also generate the opposite effect, i.e. dissatisfaction, if the criteria are not well specified.<br>
+Also, sometimes achieving results does not depend on the employee but on some environmental factors.</p>
+<p><strong>Team-based pay</strong> can also be considered:</p>
+<ul>
+<li>It would enforce the team spirit,</li>
+<li>But people may not feel as gratified as they should, or they may receive a lot of pressure from the teammates.</li>
+</ul>
+<p><strong>Organisation wide bonuses</strong><br>
+<img src="img/8_organisation-wide_bonus.png"></p>
+<h2 class="mume-header" id="benefits">Benefits</h2>
+
+<p>Benefits are <strong>non-monetary</strong> bonuses with financial value, yet <strong>very expensive</strong>.</p>
+<img src="img/8_benefits.png">
+Their aim is not to directly motivate employees, but to create a working experience, to attract and retain.
+<img src="img/8_benefits2.png">
+<p>Employee may be able to decide their benefits to some extent.<br>
+Degrees of employee freedom:</p>
+<ul>
+<li>Fixed menu (choice from a fixed list of benefits)</li>
+<li>Flexible menu (choice from a core list plus a wider list of other benefits - so-called core plus schemes)</li>
+<li>Total freedom (employees are free to choose up to their points/cash limit)</li>
+</ul>
+<h2 class="mume-header" id="relative-rewards-non-financial">Relative Rewards (non-financial)</h2>
+
+<p>Employees feel like bonuses are ought to them at some point, and cutting them could be bad. As financial benefits can be very expensive, consider about non financial ones:<br>
+<img src="img/8_non_financial_benefit.png"></p>
+<h1 class="mume-header" id="week-9-turnovers">Week 9 - Turnovers</h1>
+
+<definition>
+    <b>Employee Turnover</b> is the rate at which employee leave the company.  
+</definition>
+<p>A turnover can be either:</p>
+<ul>
+<li><strong>Voluntary:</strong> e.g. the employee wants to retire or change job; or</li>
+<li><strong>Involuntary:</strong> the company fires the employee</li>
+</ul>
+<p>Turnovers are generally associated with the <strong>economy</strong>:</p>
+<ul>
+<li>During <strong>recessions</strong> voluntary turnover diminish and the involuntary ones increase.</li>
+<li>During <strong>good times</strong> the opposite holds true.</li>
+</ul>
+<p>The turnover rate is not consistent across different types of job, for example <strong>seasonal job</strong> or hospitality display higher turnovers rate.</p>
+<p>The formula for the turnover is simply<br>
+(# people who left during the year / avg. # of employee durint the year) x 100</p>
+<p>This formula is however misleading as it does not consider what sector are leaving people from (HRM, salespeople, devops etc.)</p>
+<hr>
+<p><strong>What do HR managers think about turnovers?</strong><br>
+Apparently, turnover is not seen as having meaningful negative impacts by HR managers, as the graph shows:</p>
+<img src="img/9_HR_Managers_on_turnover.png">
+<p>And, actually, managers are quite satisfied with the turnover rate:</p>
+<img src="img/9_HR_Turnover_satissfaction.png">
+<p>In fact, 43% of them are ok with that rate and 14% would like to see an increase in this number.</p>
+<h2 class="mume-header" id="is-turnover-a-bad-thing">Is turnover a bad thing?</h2>
+
+<p><strong>Thesis 1: No, it is not and it as actually a good thing</strong></p>
+<ol>
+<li>
+<p>As mentioned before, some sectors see a higher rate of turnovers, however, they still manage to be profitable. <br><br>
+Think about McDonald&apos;s or Burger king (which has a turnover rate of over 300%), they are incredibly profitable, yet employee leave and join steadily.<br><br>
+This businesses are called <strong>businesses of numbers</strong>.<br>
+<br></p>
+</li>
+<li>
+<p>There are plenty of jobs with <strong>high retention rate</strong> which offer poor services (e.g some <strong>public sector organisation</strong>)<br>
+<br></p>
+</li>
+<li>
+<p>High levels of turnover mean new employee with new ideas that can stimulate the company to come up with new products. (e.g companies in the Silicon Valley)<br>
+<br></p>
+</li>
+<li>
+<p>It allows to have control over the payrolls, in facts, laying off people allows companies to save money.</p>
+</li>
+</ol>
+<p><strong>Thesis 2: Yes, it is bad</strong></p>
+<ol>
+<li>
+<p>Is it <strong>expensive</strong> as you have to go through the recruitment and selection process, the induction (this refers to learning about the company structure and how things work), and the training again; also, consider the loss in productivity.<br>
+<br></p>
+</li>
+<li>
+<p>Turnovers are a <strong>loss in human capital</strong>. Consider that your employee may be skilled and hard to replace, or they may join your competitors benefitting them and, indirectly or directly, have a negative impact on your company.<br>
+<br></p>
+</li>
+<li>
+<p>loosing an employee may <strong>put a lot of pressure on their teammates</strong> who now have higher work loads. Some may argue that finding a replacement is a quick process, but still, the new employee may be &quot;inept&quot; and it takes them time become proficient.<br>
+<br></p>
+</li>
+<li>
+<p>High turnover rates reflect negatively on the company&#x2019;s <strong>reputation</strong> with potential future employees and customers</p>
+</li>
+</ol>
+<p><strong>Conclusion</strong><br>
+High levels of turnover create instability and are expensive, but low levels of turnover are not desired either are the company does not get to recycle the skills, the mindset and the ideas.<br>
+So ideally, you should have reasonable turnover levels.</p>
+<p>How do you decide the right amount?<br>
+This depends on several things like:</p>
+<ul>
+<li>the <strong>sector</strong>: you may look at your competitors to benchmark it;</li>
+<li>the <strong>job category</strong>, so are devOps leaving? and HR managers? etc.</li>
+<li>the <strong>cost of replacing the leavers</strong>, actual cost of recruitment process as well as the human cost -&gt; are they available on the market?</li>
+<li>how <strong>expensive is the training</strong>, e.g. McDonald&apos;s has low training costs as compared to a hostess.</li>
+</ul>
+<h2 class="mume-header" id="leaving-factors">Leaving Factors:</h2>
+
+<h3 class="mume-header" id="pull-factors-its-not-you-its-me">Pull factors (it&apos;s not you, it&apos;s me)</h3>
+
+<ul>
+<li><strong>Better Pay</strong>;</li>
+<li><strong>Better Career opportunities</strong></li>
+<li><strong>Better work-life balance</strong></li>
+</ul>
+<p>A company should not remain indifferent to these kind o turnovers and should diagnose the quality of their policies and practices:</p>
+<ul>
+<li>[Better payoff and opportunities] The organisation should <strong>revise performance and reward management</strong>: Are we paying the employees the right amount? How do we compare with our competitors? Shall we provide different rewards? What kind of rewards do our competitors offer?</li>
+<li><strong>Are we hiring the right people</strong>? Are we making promises we cannot keep? Are turnovers a consequence of a poor recruitment process? Do we make promises we do not maintain? Are we looking for the wrong people or do we offer them the wrong tools?</li>
+<li><strong>Are we not investing enough (training and development) on them</strong>?</li>
+</ul>
+<blockquote>
+<p>Turnovers are a good way to assess HR practices.</p>
+</blockquote>
+<h3 class="mume-header" id="push-factor-it-is-you">Push factor (it IS you!!)</h3>
+
+<p>Employees are dissatisfied with the organisation culture, with their policies or their practices, etc.</p>
+<p>The company should again come up with the same questions as before.</p>
+<h3 class="mume-header" id="unavoidable-turnover">Unavoidable turnover</h3>
+
+<p>People retire because they are too old, or ill or anything else that is entirely outside of the company control.</p>
+<p>The company expects these turnovers to some extents and there is not much it can do.</p>
+<h3 class="mume-header" id="involuntary-turnover">Involuntary turnover</h3>
+
+<p>The company is pushing its employee in to the market by reducing wages, terminating contracts etc. This generally happens during economic crisis.</p>
+<p>In this cases, again, HR should questions the techniques used:<br>
+Did we make the right decision to hire people? Can we prevent this situation?</p>
+<h2 class="mume-header" id="exit-surveys">Exit surveys</h2>
+
+<p>Right after an employee declares their intention to quit, or at least before they leave, the company should conduct an exit survey or interview. This survey should not be conducted by the line manager, rather, an external consultant or an HR manager should be in charge.</p>
+<p>The information should be systematically gathered and used to diagnose HR policies</p>
+<p>There are some issues though:</p>
+<ul>
+<li>Are the interviewees honest? Generally not, especially if the problem is their manager.</li>
+<li>People prefer to mention social reasons for leaving, like better pays or personal circumstances.</li>
+<li>Finally, people like to &quot;leave the door open&quot; even if they are joining another company as you never know whether you may want to come back. Even if this is not the case, people may not be brutally honest.</li>
+</ul>
+<h2 class="mume-header" id="why-do-people-stay">Why do people stay?</h2>
+
+<p>It may be the case that the individual perceives to fit in the job, believes in the company&apos;s mission.<br>
+Because leaving the company involves costs, job research and sacrifices, risking mobility for example.</p>
+<p>It may also be that they feel they belong with the organisation community.</p>
+<h1 class="mume-header" id="week-10-managing-international-assignment-ia">Week 10 - Managing International Assignment (IA)</h1>
+
+<p>Multinational Companies send employees from their home country to a different country for business operations at overseas offices or subsidiaries. This practice is known as <strong>International Assignment</strong> and these employees are called <strong>expatriates</strong>.</p>
+<p>There are different reasons behind this choice:</p>
+<ul>
+<li>there is a shortage of talents, which mainly happens in developing countries;</li>
+<li>expatriation allows for the development of a talent, in particular, their leadership skills;</li>
+<li>to integrate a subsidiary, and make sure that they are all aligned (adhere to standards).</li>
+</ul>
+<p>There exist 2 types of assignment:</p>
+<ul>
+<li><strong>Learning-driven</strong> where the employee is sent to develop themselves;
+<blockquote>
+<p>The assignee is expected to adapt to the new context and the new requirements to absorb it.</p>
+</blockquote>
+</li>
+<li><strong>Demand-driven</strong> where the employee is sent to control a subsidiary.
+<blockquote>
+<p>The assignee is expected not to change, rather the subsidiary should adapt to the expatriate.</p>
+</blockquote>
+</li>
+</ul>
+<p>IA can be:</p>
+<ul>
+<li><strong>self-initiated</strong>, where the employee themselves is willing to move abroad; or</li>
+<li><strong>company backed</strong>, where the company wants the employee to move.</li>
+</ul>
+<p>Expatriates may be self-driven, that is, they are the ones who want to change country,<br>
+and companies may see a risk in that.</p>
+<p>Sometimes, when expatriates come back, they may have integrated what are regarded as<br>
+negative attitudes that the company may not like.</p>
+<p><strong>Why do people take IA?</strong></p>
+<ul>
+<li>Career development: they see an opportunity to progress in the company. This is generally the case of company backed expatriates.</li>
+<li>Personal development: including the adventure of living off in a different country.</li>
+<li>Financial incentives: not as attractive as it used to be.</li>
+</ul>
+<h2 class="mume-header" id="why-do-ia-fail">Why do IA fail?</h2>
+
+<p>There is a very high rate of IA failing, that is, not completing their assignment and coming back home before the end of it.<br>
+They generally fail due to problems of living or working in the host country.</p>
+<p>There are also people who complete their assignment, but without achieving the expected results, and this is also considered a failure.</p>
+<h3 class="mume-header" id="language-issues">Language Issues</h3>
+
+<p>The language is often the main barrier to overcome as it makes it hard to communicate both at work and outside of it.</p>
+<h3 class="mume-header" id="family-issues">Family Issues</h3>
+
+<p>People neglect the fact they may not be able to work after moving, but statistics show how about 66% of the people with a job who move abroad, end up being only 20% (of the 100% from the 60%) having a job.</p>
+<p>People also have families and they have to keep that in mind too.</p>
+<h3 class="mume-header" id="keeping-ties-with-the-head-quarter-hq">Keeping ties with the Head Quarter (HQ)</h3>
+
+<p>Some expatriates expect to escalate the rankings by taking an IA, but the truth is that is slows it down, and many of them are, in fact, worried about it: they lose their social network, the contacts with their colleagues.</p>
+<p>Chines expatriates are very concerned with this issue. [Yao et al 2014]</p>
+<h3 class="mume-header" id="expatriate-adjustment">Expatriate Adjustment</h3>
+
+<p>Finally, some people cannot adapt to the new lifestyle:</p>
+<ul>
+<li><strong>Work Adjustment</strong>, that is adjust to the new responsibilities, supervision and job expectations.</li>
+<li><strong>Interaction Adjustment</strong>, socialising and speaking with nationals of the host country.</li>
+<li><strong>General Living Adjustment</strong>, housing, food, shopping etc.</li>
+</ul>
+<p>The quality of expat (and their families)&apos;s adjustment is significantly associated with  the success of IA.</p>
+<hr>
+<p>IA is very expensive for MNCs, but necessary to expand to other countries and/or control subsidiaries. The failure rate is however very high, so here is how to mitigate it.</p>
+<h2 class="mume-header" id="selecting-the-assignees">Selecting the assignees</h2>
+
+<ul>
+<li>
+<p>Who to target?</p>
+<ul>
+<li>Depending on the company strategy, for example the type of relationship the company want to build with the subsidiaries.</li>
+<li>Talent availability.</li>
+<li>Depending on the nature of the assignment, whether it is demanding or learning driven.</li>
+</ul>
+<img src="img/10_choosing_employee.png">
+<br>
+</li>
+<li>
+<p>What to tell them? (being realistic about what is expecting them)<br>
+<img src="img/10_selecting_expatriates.png"></p>
+</li>
+<li>
+<p>What criteria should the assignee meet?</p>
+<ul>
+<li>competences,</li>
+<li>skills,</li>
+<li>personality.</li>
+</ul>
+<p>The selection process should not be much different from the normal hiring process, however, there are some critical elements to consider such as:</p>
+<ul>
+<li>Personality characteristics</li>
+<li>Language skills</li>
+<li>Family circumstances</li>
+<li>Prior International Experience</li>
+</ul>
+</li>
+</ul>
+<img src="img/10_personality.png">
+<p>Language knowledge is fundamental, yet not necessarily sufficient to adjust and succeed.</p>
+<p>Past international experience, on the other hand, would favour integration and adjustment.</p>
+<p>Finally, family has to be taken into account as it can hinder or facilitate adjustment. In countries like UK it is illegal to ask about family circumstances for selection.<br>
+The issue about family can be addressed by offering pre-departure training to family members.</p>
+<h2 class="mume-header" id="key-cross-cultural-training-interventions">Key cross-cultural training interventions</h2>
+
+<p>Before leaving, there is a basic training provided:</p>
+<h3 class="mume-header" id="cross-cultural-orientation">cross-cultural orientation</h3>
+
+<p>Aims to help an international assignee learn the ba sics to live and work comfortably in the host country: currency, working hours, public transports etc.</p>
+<h3 class="mume-header" id="cultural-awareness">Cultural awareness</h3>
+
+<p>Expatriates gain awareness of their own culture as a means of helping them gain appreciation for the cultural differences they will face in the host country.</p>
+<h3 class="mume-header" id="diversity-training">Diversity training</h3>
+
+<p>Expatriates understand the different issues they are more likely to face.</p>
+<h3 class="mume-header" id="traditional-education-in-international-management">Traditional education in international management</h3>
+
+<p>Teaching people how to do business in other countries.</p>
+<h3 class="mume-header" id="cross-national-coaching-or-mentoring">Cross-national coaching or mentoring</h3>
+
+<p>A coach that assists you in order to help you adjust in the new cultural context. They provide help for general settlement as well as specific tasks work related.</p>
+<h3 class="mume-header" id="language-training">Language Training</h3>
+
+<h2 class="mume-header" id="international-compensation">International Compensation</h2>
+
+<p>Benefits from IA are:</p>
+<ul>
+<li><strong>moeny</strong> based rewards;</li>
+<li><strong>allowences</strong>:
+<ul>
+<li>cost of living;</li>
+<li>exchange rate protection programmes;</li>
+<li>housing, education, relocation allowances etc.</li>
+</ul>
+</li>
+<li><strong>benefits</strong> like vacation and special leaves;</li>
+<li><strong>Foreign service inducement(incentivi)/ hardship premium (premi di disagio)</strong> like increase of base salary.</li>
+</ul>
+<h3 class="mume-header" id="hardship-premium-premi-di-disagio">Hardship premium (premi di disagio)</h3>
+
+<ol>
+<li>
+<p><strong>Remoteness</strong> &#x2013; geographical isolation, travel difficulties, lack of cultural and recreation facilities, unavailability and poor quality of food and other essentials;</p>
+</li>
+<li>
+<p><strong>Climate and geophysical conditions</strong> &#x2013; extreme weather conditions, risk of natural disaster, pollution;</p>
+</li>
+<li>
+<p><strong>Health risks</strong> - lack or poor standard of medical facilities, risk of disease, poor infrastructure (e,g, provision of water, sanitation etc.);</p>
+</li>
+<li>
+<p><strong>Political concerns</strong> - government activities, terrorism, corruption, human rights infractions, scarce availability of home-country representation;</p>
+</li>
+<li>
+<p><strong>Crime</strong> - risk to individuals or property, quality of policing;</p>
+</li>
+<li>
+<p><strong>Family-unfriendly conditions</strong> - poor educational facilities, poor housing quality, poor communications infrastructure.</p>
+</li>
+</ol>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

@@ -1,0 +1,25 @@
+Achievements for this meeting:
+    - Created an environment with automated scripts and have it run on Microsoft Azure;
+    - Gathered our hypothesis on a variety of domains;
+    - Ran some tests, collected data and inspected it (dead ends, time-out etc.);
+    - Started to write the report in LaTeX format with Overleaf.
+
+For next meeting:
+    - Create a script to plot and visualise data;
+    - Keep coming up with hypothesis to compare the heuristics.
+
+
+
+
+
+
+Achieved before this meeting:
+    - Checked progress since last meeting
+    - Choose possible domains to analyse based on work done in the last week
+    - Plans for next meeting
+
+Plan how to run tests:
+    - Create VMs on Azure for testing
+    - Write script to automate docker calls for all problems
+    - Start processes for analysis to be brought to next meeting
+    - Assign roles for data analysis
