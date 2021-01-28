@@ -131,6 +131,24 @@ v::before {
 v::after {
     content:")";
 }
+
+.s {
+    max-width: 30%;
+}
+
+.m {
+    max-width: 50%;
+}
+
+.l {
+    max-width: 70%;
+}
+
+.c {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 [TOC]
 # 1 - Shortest Path
@@ -249,6 +267,119 @@ If there are no negative cycles, the first loop (`1:`) achieves the shortest pat
 If the SP of any children decreases this way (and that node is not in the Queue already), add that child to the queue.
 In case of negative cycle, the queue is never empty and the loop goes forever. To prevent this, check periodically if there are cycles in the PARENT array.
 Even this approach runs in $\Theta(m\cdot n)$
+
+
+# 2 - Dijkstra
+
+<v>1</v>
+
+## Dijkstra Algo
+
+**Crucial assumptions**: all edge weights are ***non-negative***.
+> For convenience, assume that all nodes are reachable from $s$.
+
+Dijkstra algorithm deals with directed acyclic graphs (DAG), more specifically, there are no negative edges.
+
+For all graphs where Dijkstra can be used, Belmann-Ford algo may also be used, but it would be slower.
+
+**Process:**
+1. Create a ***priority queue*** where the key is the estimate distance (0 for $s$, $\infty$ for the other nodes).
+2. Create the shortest path tree $S$, which is originally empty. 
+3. pop the first element $u$;
+4. if $u$ is not in $S$, add it;
+5. using relaxation, update the shortest path to all the nodes reachable from $u$;
+6. if the Queue is not empty, repeat from **3**.
+
+At any point:
+- the nodes already popped are in $S$;
+- the nodes reachable from any nodes in $S$ have distance < $\infty$.
+
+An algorithm to find the shortest path is said to be **correct** when all the shortest path estimates at the end are equal to the shortest paths, and the parent subgraph is the *shortest path tree*.
+
+
+### Proving Dijkstra's Algo
+The prof is from induction
+
+**Inductive hypothesis**
+All the nodes in $S$ are shortest path
+
+**Inductive Base**
+Node $s$, which is first added to $S$, is the shortest path to itself
+
+**Inductive Step**
+<img class="l" src="img/2_Dijkstra_induction_graph.jpg">
+
+The next element we would add to $S$ is $u$.
+Because of our hypothesis, we know the $d(x)$ already is the shortest path since it is in $S$.
+
+We need to prove that $d(x) + w(x, u)$ is shorter than any path $R$ we can find that goes from $s$ to $u$.
+
+As any alternative path to $u$ having the same length as $s\rarr x\rarr u$, but heavier weight, would be discarded as we only take the shortest path, in order to exist $R$, it has to be longer, that is, passing by a node ($z$) which is reachable from $S$, and from such a node we reach $u$. 
+
+We have that $R = R_1 \rarr y \rarr z \rarr R_2$, so
+
+> $w(R) = w(R_1) + w(y, z) + w(R_2)$
+
+By our inductive hypothesis, the path $R_1$ cannot be shorter than $d[y]$, ( **R~1~ ≥ d[y]** ) so
+
+> $w(R_1) + w(y, z) + w(R_2) \ge d[y] + w(y, z) + w(R_2)$
+
+The path $y \rarr z$ has to be shortest path connecting R~1~ to R~2~, ( **d[y] + w(y, z) ≥ d[z]** )
+
+> $d[y] + w(y, z) + w(R_2) \ge d[z] + w(R_2)$
+
+<img src="img/2_Dijkstra_induction_formula.jpg">
+
+<v>2</v>
+
+Dijkstra's algo can be implemented as a priority queue using either:
+- **unordered list** $O(n^2)$ 
+- **heap** $O(m$ log $n)$
+    > Note that $n -1 \le m \le n (n - 1)$, so 
+    $O(m) \gt O(n)$  
+
+When the graph is **dense**, that is 
+> $m = \Omega(n^2/$ log $n)$ 
+
+the unordered list performs better than the heap in the worst case.
+> This is because the heap has $\Omega(n^2)$, whereas the unordered list has $O(n^2)$.
+
+When the graph is not dense, the heap performs better in the worst case.
+
+As in most of the applications using Dijkstra's algo, the graph is not dense, the heap is preferred.
+
+When using the heap, it can be implemented as an array (which explain why the initialisation is $\Theta(n)$ rather then $O(n$ log $n)$).
+
+The array contains pairs $(u, d[u])$ (node, and its estimates), but we also need a parallel array:
+
+<img src="img/2_heap.jpg">
+
+<question> Why do we need a second array?</question> 
+
+
+> **Writing down the heap property for which none of the descendant of a node can have higher values**: $A[i] > A[2i]\quad$and $\ A[i] > A[2i + 1]$.
+
+<v>3</v>
+In a DAG, Bellman-Ford algo runs in $O(n^2)$, but given the acyclic property, a better algo running in $O(n + m)$ can be used.
+
+Imagine a temporal problem where all the tasks come some time (weight) after another one.
+
+These tasks can be displayed in topological order (all the arrow pointing to the same direction).
+
+
+<question>
+    <b>Why is it O(m + n) rather than O(n * m)?</b>
+    The pseudo code repeats the relaxation O(1) for each edge O(m), and does is for each node O(n), so it should be O(1 * m * n) = O(m n)
+</question>
+
+
+
+
+
+
+
+
+
 
 
 <br>

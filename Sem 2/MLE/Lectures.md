@@ -122,6 +122,24 @@ v::before {
 v::after {
     content:")";
 }
+
+.s {
+    max-width: 30%;
+}
+
+.m {
+    max-width: 50%;
+}
+
+.l {
+    max-width: 70%;
+}
+
+.c {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 </style>
 
 [TOC]
@@ -213,7 +231,10 @@ We plot pairs of TP and FP (as we vary the threshold)
 - For a good system, the graph climbs steeply on the left side.
 - Area under the curve is related to the probability that the classifier will correctly classify a randomly chosen example
 
+If the data is **unbalanced**, you may want to replace the *Specificity* with the *Precision*
 
+
+As data is often unbalanced in the real world, we prefer Precision and Recall to Accuracy
 
 
 # 2 - Decision Trees
@@ -237,7 +258,7 @@ To measure the impurity of a state $S$ there exist different techniques/
 ### Entropy
 
 The formula 
-> $H(S) = H(\braket{P_1, ...\ , P_n}) = \sum^{n}_{i=1} − P_i \cdot log_2(P_i)$
+> $H(S) = H(\braket{P_1, ...\ , P_n}) = - \sum^{n}_{i=1} P_i \cdot log_2(P_i)$
 
 expresses the entropy of a state. It ranges **from 0** *(heterogeneous)* **to 1** *(homogenous)*.
 
@@ -263,7 +284,7 @@ Now, we can calculate the final formula that we use:
 Gini impurity is the probability of this classification mislabelling
 a randomly selected example.
 
-It ranges **from 0** *(homogenous)* **to 1** *(heterogeneous)*.
+It ranges **from 0** *(homogenous)* **to 0.5** *(heterogeneous)*.
 
 Given a set of classes $c$, Gini index is given by the probability that a random example belongs to class $i$ ($\sum^c p_i$)
 times the probability it would be misclassified ($1 - p_i$)
@@ -296,6 +317,104 @@ Stop this process when no improvements can be made.
 In case you have a small dataset, you want to approach the problem differently. The **rule post-pruning** considers each node as a logical comparison (WEATHER = {Sunny, cloudy, rainy}) and for node different from the root, these comparison are joint together using AND logical operators.
 This comparisons are eventually called **rules** and the tree can prune them instead of branches.
 
+
+## Linear Regression
+<v>4</v>
+
+$\omega_i \larr \omega_i - \alpha \dfrac{\delta}{\delta \omega_i} Loss(\omega)$
+
+The derivative indicates the slop:
+- if the slop is negative, the converge comes by increasing $\omega$
+
+
+> <img src="img/2_linear_Regression.jpg">
+> J(w) indicates the Error.
+> 
+> In this case, when $\omega$ = A, the derivative has a negative slop, so we increase $\omega$. 
+
+
+There exist 2 gradient descent algorithms:
+
+- **batch gradient descent**: 
+guaranteed to converge, but slow as it computes the error on all the inputs together.
+<img src="img/2_batch_gradient_descent.jpg">
+
+- **stochastic gradient descente**
+much faster, but updates $\omega$ on one input at the time, hence, if learning rate is constant, may not converge. Can often be made to converge by decreasing the learning
+rate over time.
+<img src="img/2_stochastic_gradient_descente.jpg">
+
+> note that, for both the approaches (in the pics) the first formula updates w$_0$, hence there is no $x$ involved. However, having x~0~ = 1 creates 2 parallel vectors **w, x** of equal length. 
+
+<warning>
+    The gradient descent always updates the parameters <b>simultaneously</b>.
+</warning>
+
+The final function, the one that will map the input x to a predicted y is:
+$h_w(x) = w_1x + w_0$
+
+This function is called **univariate** as there is just one input variable (x).
+
+
+<v>5</v>
+
+## Logistic Regression
+
+Suppose that instead of a function which predicts the output, you use a **discriminant function** (classes are supposed to be linearly separable).
+
+The result is a inequality such as:
+> $w_0 + w_1\cdot x_1 + w_2\cdot x_2 > \theta$
+>
+> [ **Note** that x~2~ is not x^2^, rather, the feature no 2. ]
+> or 
+> 
+> <img src="img/2_linear_classifier.jpg">
+
+To update **w** we use the same technique of updating the wights based on the error, and it is common to use the stochastic gradient descent (which explains why error is so unstable during the learning process).
+
+> <img class="l" src="img/2_linear_classifier_error.jpg">
+
+This boundary is very hard, and an input is labelled either classes with confidence = 100%. 
+The logistic curve, instead, assign a percentage score which is not that drastic.
+<img class="l c" src="img/2_linear_vs_logistic.jpg">
+
+**Logistic Function**:
+> $h_w(x) = \dfrac{1}{1+e^{−w·x}}$
+
+<v>6</v>
+
+## Ensembling
+
+A single predictor model could present some error. To reduce it, we can combine multiple predictor models (using different techniques of course) so that each of them "votes", and the prediction is equal to the majority of the votes.
+
+### Boosting
+**Boosting** is a type of ensembling. Samples come with a weight, and the higher the weight, the more important is the sample during training.
+
+It works this way:
+- Starts with all examples of equal weight, and learn a **classifier h1**.
+- Test it.
+- Increase the weights of the misclassified examples and learn a new **classifier h2**.
+- Repeat.
+- Final ensemble is the combination of all the classifiers, weighted by how well they perform on the training set.
+
+### AdaBoosting
+A commonly used boosting algorithm is the **AdaBoosting**.
+Given an initial classifier that is slightly better than random (weak model), AdaBoost can generate an ensemble that will perfectly classify the training set.
+
+### Bagging
+**Bagging** create multiple training sets from the original training set and uses them to generate multiple classifiers that are ensembled together.
+
+<question> Is the splitting the same as the K-fold cross validation?</question>
+
+Ensembling results can be combined using voting, or averaging, or weighting.
+
+### Random Forest
+Makes use of *bagging* applied to decision trees (using bagged training subsets). PLUS, a random selection of features is used for each tree in order to push decision boundaries away from each other.
+
+### Random sub-space method
+Is the technique used to split the training set into multiple subsets by using random features. This technique is used for Random Forests, but other algorithms make us of it as well.
+
+> In essence, you do not just split the training set X_train, but you also split the features that compose it, leaving some of them out. [If I got this right]. 
 
 
 
