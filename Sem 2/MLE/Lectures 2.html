@@ -1,0 +1,1383 @@
+<!DOCTYPE html><html><head>
+      <title>Lectures 2</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:///c:\Users\artig\.vscode\extensions\shd101wyy.markdown-preview-enhanced-0.5.18\node_modules\@shd101wyy\mume\dependencies\katex\katex.min.css">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <style>
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}
+
+/* highlight */
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
+}
+pre[data-line] .line-highlight-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: transparent;
+  display: block;
+  width: 100%;
+}
+
+pre[data-line] .line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em;
+  background: hsla(24, 20%, 50%,.08);
+  background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  pointer-events: none;
+  line-height: inherit;
+  white-space: pre;
+}
+
+pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-start);
+  position: absolute;
+  top: .4em;
+  left: .6em;
+  min-width: 1em;
+  padding: 0 .5em;
+  background-color: hsla(24, 20%, 50%,.4);
+  color: hsl(24, 20%, 95%);
+  font: bold 65%/1.5 sans-serif;
+  text-align: center;
+  vertical-align: .3em;
+  border-radius: 999px;
+  text-shadow: none;
+  box-shadow: 0 1px white;
+}
+
+pre[data-line] .line-highlight[data-end]:after {
+  content: attr(data-end);
+  top: auto;
+  bottom: .4em;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview  ">
+      <style>
+img {
+  border: solid 1px black;
+}
+
+.nob {
+    border: none;
+}
+
+h1:not(:first-of-type)::before {
+    content: "";
+    height: 100px;
+    padding: 100px;
+    display: block;
+}
+
+h2:not(:first-child)::before {
+    content: "";
+    height: 60px;
+    padding: 0px;
+    display: block;
+}
+
+h2:not(:first-child)::before {
+    content: "";
+    height: 30px;
+    padding: 0px;
+    display: block;
+}
+
+.no-mt {
+    margin-top: -16px;
+}
+
+.warning,
+warning {
+    display: block;
+    background: rgba(255, 0, 0, .3); 
+    padding: 5px; 
+    padding-left: 10px;
+    margin: 20px 0; 
+    border-left: solid 3px rgb(220, 0, 0);
+}
+
+.warning::before {
+    content: "WARNING: ";
+    font-weight: bold;
+    color: rgb(220, 0, 0);
+}
+
+.definition,
+definition {
+    display: block;
+    background: rgba(80, 80, 255, .2); 
+    padding: 5px; 
+    padding-left: 10px;
+    margin: 20px 0; 
+    border-left: solid 3px rgb(80, 80, 255);
+}
+
+.definition::before,
+definition::before {
+    /* content: "DEFINITION: "; */
+    font-weight: bold;
+    color: rgb(80, 80, 255); 
+}
+
+.question,
+question {
+    display: block;
+    background: rgba(200, 200, 0, .2); 
+    padding: 5px; 
+    padding-left: 10px;
+    margin: 20px 0; 
+    border-left: solid 3px rgb(200, 200, 0);
+}
+
+.question::before,
+question::before {
+    content: "QUESTION: ";
+    font-weight: bold;
+    color: rgb(200, 200, 0); 
+}
+
+
+
+.info,
+info {
+    display: block;
+    background: rgba(0, 200, 0, .2); 
+    padding: 5px; 
+    padding-left: 15px;
+    margin: 20px 0; 
+    border-left: solid 3px rgb(0, 200, 0);
+}
+
+b {
+    color: black;
+}
+
+yhat::before {
+    content: "y";
+}
+
+yhat::after {
+    content: "^";
+    display: inline-block;
+    position: relative;
+    top: -8px;
+    left: -9px;
+    font-size: large;
+    transform: rotateX(60deg);
+    margin-right: -7px;
+}
+
+fhat::before {
+    content: "f";
+}
+
+fhat::after {
+    content: "^";
+    display: inline-block;
+    position: relative;
+    top: -8px;
+    left: -6px;
+    font-size: large;
+    transform: rotateX(60deg);
+    margin-right: -7px;
+}
+
+v {
+    color: gray;
+}
+
+v::before {
+    content: "(video ";
+}
+
+v::after {
+    content:")";
+}
+
+.s {
+    max-width: 30%;
+}
+
+.m {
+    max-width: 50%;
+}
+
+.l {
+    max-width: 70%;
+}
+
+.c {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+[frm],
+.frm {
+    display: flex; 
+    text-align: center; 
+    justify-content: center; 
+    margin: auto; 
+    width: 100%;
+}
+</style>
+<ul>
+<li><a href="#6-neural-nets">6 - Neural Nets</a>
+<ul>
+<li><a href="#error-correction-method">Error correction method</a></li>
+<li><a href="#delta-rule">Delta Rule</a></li>
+<li><a href="#generalised-delta-rule">Generalised Delta Rule</a></li>
+<li><a href="#universal-function-approximator-theorem">Universal function approximator theorem</a></li>
+<li><a href="#backpropagation">Backpropagation</a>
+<ul>
+<li><a href="#momentum">Momentum</a></li>
+</ul>
+</li>
+<li><a href="#generalisation">Generalisation</a></li>
+<li><a href="#dnn">DNN</a>
+<ul>
+<li><a href="#cnn">CNN</a></li>
+<li><a href="#rnn">RNN</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#7-reinforcement-learningrl">7 - Reinforcement Learning(RL)</a>
+<ul>
+<li><a href="#feedback">Feedback</a></li>
+<li><a href="#learning">Learning</a></li>
+<li><a href="#n-armed-bandits"><em>N</em>-armed bandits</a>
+<ul>
+<li><a href="#epsilon-greedy"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span>-greedy</a></li>
+<li><a href="#gibbs-formula">Gibbs formula</a></li>
+</ul>
+</li>
+<li><a href="#reinforcement-learning">Reinforcement Learning</a>
+<ul>
+<li><a href="#value-iteration">Value Iteration</a></li>
+</ul>
+</li>
+<li><a href="#passive-learning">Passive Learning</a>
+<ul>
+<li><a href="#direct-utility-estimation">Direct Utility Estimation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#8-reinforcement-learning-2">8 - Reinforcement learning 2</a>
+<ul>
+<li><a href="#temporal-difference-learning-td">Temporal difference learning (TD)</a></li>
+</ul>
+</li>
+<li><a href="#10-genetic-algorithms">10 - Genetic Algorithms</a>
+<ul>
+<li><a href="#evolutionary-algorithm-ea">Evolutionary Algorithm (EA)</a></li>
+<li><a href="#genetic-algorithm-ga">Genetic Algorithm (GA)</a></li>
+<li><a href="#representation">Representation</a>
+<ul>
+<li><a href="#selection">Selection</a></li>
+<li><a href="#reproduction-crossover">Reproduction - Crossover</a></li>
+<li><a href="#reproduction-mutation">Reproduction - Mutation</a></li>
+<li><a href="#trade-offs">Trade-offs</a></li>
+</ul>
+</li>
+<li><a href="#genetic-algorithms-vs-genetic-programming-gp">Genetic Algorithms vs Genetic Programming (GP)</a></li>
+<li><a href="#co-evolution">Co-evolution</a></li>
+</ul>
+</li>
+<li><a href="#11-learning-from-demonstrationlfd-ethics">11 - Learning from Demonstration(LfD) &amp; Ethics</a>
+<ul>
+<li><a href="#formal-definition">Formal Definition</a></li>
+<li><a href="#process">Process</a></li>
+<li><a href="#demonstration">Demonstration</a></li>
+<li><a href="#imitation">Imitation</a></li>
+<li><a href="#deriving-policy">Deriving Policy</a></li>
+<li><a href="#confidence-based-autonomy">Confidence Based Autonomy</a></li>
+<li><a href="#ethics">Ethics</a></li>
+</ul>
+</li>
+</ul>
+<h1 class="mume-header" id="6-neural-nets">6 - Neural Nets</h1>
+
+<p><v>2</v></p>
+<p>The <strong>activation function</strong> (also called <em>transfer</em> or <em>threshold</em> function) is referred to as <strong>g(x)</strong>.</p>
+<p>The <strong>threshold</strong> is weight <strong>w<sub>0</sub></strong>, that is the weight of x<sub>0</sub> (bias).</p>
+<p>The dot product of <strong>w<sup>T</sup> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x22C5;</mo></mrow><annotation encoding="application/x-tex">\cdot</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44445em;vertical-align:0em;"></span><span class="mord">&#x22C5;</span></span></span></span> x</strong> is called <strong>s</strong>, so</p>
+<blockquote>
+<p>g(s) = the activation function which takes as input the weighted sum of the input values<br>
+<img src="img/7_s_g.jpg" class="c l"></p>
+</blockquote>
+<p>The output of the activation function ranges from -1 to 1 (or 0 and 1) and may be hard or soft.<br>
+<strong>NOTE</strong> that soft functions are derivable, and this is useful as we will see later.</p>
+<img src="img/7_activation_functions.jpg" class="c xl nob">
+<p><strong>Perceptrons</strong> are the most basic form of NN (single-layer single-unit NN) and can only deal with linear separable data.</p>
+<blockquote>
+<p>If layers have more than one perceptron, we call them multi-unit perceptron</p>
+</blockquote>
+<img src="img/7_perceptron.jpg" class="nob">
+<p>To train a single-layer network there are 3 methods:</p>
+<ul>
+<li>Error correction method;
+<blockquote>
+<p>It may only deal with linearly separable data and so finds the boundary if it exists;</p>
+</blockquote>
+</li>
+<li>Delta rule;
+<blockquote>
+<p>It can find a linear boundary that approximates a non-linear boundary.</p>
+</blockquote>
+</li>
+<li>Generalised delta rule.
+<blockquote>
+<p>Same as delta rule, but it finds a soft boundary.</p>
+</blockquote>
+</li>
+</ul>
+<h3 class="mume-header" id="error-correction-method">Error correction method</h3>
+
+<p>If data is linearly separable, the <strong>error correction</strong> method (which is the same as the gradient descent) is able to find the solution. Remember that correction happens for a single-unit at a time.</p>
+<p>The formula (<strong>perceptron rule</strong>) is written as:</p>
+<blockquote>
+<p>w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span></span></span></span> w<sub>i</sub></p>
+</blockquote>
+<p>where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span></span></span></span> w<sub>i</sub> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span>( t - <strong>g</strong>(s) ) x<sub>i</sub></p>
+<ul>
+<li><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span></strong> is the learning rate</li>
+<li><strong>t</strong> is the target output for the network</li>
+<li><strong>g(s)</strong> is the prediction produced by the neural network</li>
+</ul>
+<h3 class="mume-header" id="delta-rule">Delta Rule</h3>
+
+<p><v>3</v><br>
+The delta rule is a way to update the weights for perceptrons in a single-layer NN. It is a special case of the backpropagation.</p>
+<p>If the boundary between classes is non-linear, the error correction method can fail to find (an approximation to) it because no linear hyperplane can separate the data perfectly.</p>
+<p>The <strong>delta rule</strong> can overcome this, by producing a boundary that approximates the non-linear decision boundary.</p>
+<p>Let&apos;s consider an unthresholded perceptron (<strong>linear unit</strong>).</p>
+<p>We define an error function E = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>&#x2211;</mo><mi>j</mi><mi>M</mi></munderover><mo stretchy="false">(</mo><msub><mi>t</mi><mi>j</mi></msub><mo>&#x2212;</mo><msub><mi>s</mi><mi>j</mi></msub><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \dfrac{1}{2} \sum^M_j (t_j - s_j)^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.2421130000000007em;vertical-align:-1.4137769999999998em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000006em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">&#x2211;</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.4137769999999998em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.150216em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641079999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span></p>
+<ul>
+<li>M = number of outputs</li>
+<li>t<sub>j</sub> = target for x<sub>j</sub></li>
+<li>s<sub>j</sub> = prediction for x<sub>j</sub></li>
+</ul>
+<warning>
+we do not consider <b>g(s)</b>, but <b>s</b>.
+</warning>
+<p>This error function can be derived with respect to w<sub>i</sub> to find the minimum, obtaining the formula:</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><munderover><mo>&#x2211;</mo><mi>j</mi><mi>M</mi></munderover><mo stretchy="false">(</mo><msub><mi>t</mi><mi>j</mi></msub><mo>&#x2212;</mo><msub><mi>s</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mo>&#x2212;</mo><msub><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub><mo stretchy="false">)</mo></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \sum_j^M (t_j - s_j)(- x_{i,j})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.2421130000000007em;vertical-align:-1.4137769999999998em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000006em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">&#x2211;</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.4137769999999998em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">&#x2212;</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<p>so</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span></span></span></span> w<sub>i</sub> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2212;</mo><mi>&#x3B1;</mi><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mtext mathvariant="sans-serif">w</mtext></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">- \alpha \dfrac{&#x2202; E}{&#x2202; \textsf{w}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord">&#x2212;</span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord text"><span class="mord textsf">w</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+</ul>
+<p>i.e.</p>
+<ul>
+<li>w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2211;</mo><mo stretchy="false">(</mo><msub><mi>t</mi><mi>j</mi></msub><mo>&#x2212;</mo><msub><mi>s</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum (t_j - s_j)(x_{i,j})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+</ul>
+<p>Here again we use the batch or the stochastic gradient descent options. When the batch gradient descent is used, after the update has been performed on all the training data, we call that an <strong>epoch</strong>.</p>
+<p>Using the delta rule, the model learns without the need for an activation function (aka a regression). By adding g() back into the equation, we return to a classification function.</p>
+<ul>
+<li>The perceptron rule (<em>Error correction</em>) converges perfectly if the data is linearly separable,</li>
+<li>The delta rule converges (asymptotically) even if the data is not linearly separable as the error function has a global minimum.</li>
+</ul>
+<p>The delta rule updates the weight without considering the activation function.</p>
+<h3 class="mume-header" id="generalised-delta-rule">Generalised Delta Rule</h3>
+
+<p>The <strong>generalised delta</strong> rule is the same as the normal delta rule but it includes the transfer function. Such function has to be differentiable (e.g. sigmoid, tanh). As such it creates soft margins.</p>
+<p>Suppose for instance we use the sigmoid function as the activation function.</p>
+<p>We want to minimise the error with respect to the single weights <strong>w<sub>i</sub></strong> to update each of them, so:</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><msub><mtext mathvariant="sans-serif">w</mtext><mi>i</mi></msub></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{\partial E}{\partial \textsf w_i}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.20744em;vertical-align:-0.8360000000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord"><span class="mord text"><span class="mord textsf">w</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>s</mi></mrow></mfrac></mstyle><msub><mtext mathvariant="sans-serif">x</mtext><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\dfrac{\partial E}{\partial  s} \textsf x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mord text"><span class="mord textsf">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+<p>The error function (E) is <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mn>1</mn><mn>2</mn></mfrac></mstyle><mo stretchy="false">(</mo><mi>t</mi><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><msup><mo stretchy="false">)</mo><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\dfrac{1}{2}(t - g(s))^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.00744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.32144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.064108em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span></span> so its partial derivatives becomes:</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>s</mi></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{\partial E}{\partial s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.05744em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mfrac></mstyle><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>s</mi></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{\partial E}{\partial g(s)} \dfrac{\partial g(s)}{\partial s}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+</ul>
+<p>now:</p>
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow></mfrac></mstyle><mo>=</mo><mo>&#x2212;</mo><mo stretchy="false">(</mo><mi>t</mi><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\dfrac{\partial E}{\partial g(s)} = - (t - g(s))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.30744em;vertical-align:-0.936em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&#x2212;</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span></span></span></span><br><br></li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><mi>s</mi></mrow></mfrac></mstyle><mo>=</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\dfrac{\partial g(s)}{\partial s} = g(s)(1 - g(s))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.113em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal">s</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span></span></span></span></li>
+</ul>
+<p>so, the <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span></span></span></span> that we end up plugging in the formula w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2212;</mo><mi>&#x3B1;</mi><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">- \alpha \Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord">&#x2212;</span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span><span class="mord">&#x394;</span></span></span></span> is:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi mathvariant="normal">&#x394;</mi><mo>=</mo><mfrac><mrow><mi mathvariant="normal">&#x2202;</mi><mi>E</mi></mrow><mrow><mi mathvariant="normal">&#x2202;</mi><msub><mtext mathvariant="sans-serif">w</mtext><mi>i</mi></msub></mrow></mfrac><mo>=</mo><mo>&#x2212;</mo><mo stretchy="false">(</mo><mi>t</mi><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mtext mathvariant="sans-serif">x</mtext><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\Delta = \dfrac{\partial E}{\partial \textsf w_i} = - (t - g(s))g(s)(1 - g(s)) \textsf x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.20744em;vertical-align:-0.8360000000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.37144em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord"><span class="mord text"><span class="mord textsf">w</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord" style="margin-right:0.05556em;">&#x2202;</span><span class="mord mathnormal" style="margin-right:0.05764em;">E</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">&#x2212;</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span><span class="mord"><span class="mord text"><span class="mord textsf">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></span></p>
+<p>So, the update formulas are:</p>
+<ul>
+<li>
+<p><strong>error correction</strong></p>
+<ul>
+<li>w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span>( t - <strong>g</strong>(s) ) x<sub>i</sub><br>
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>delta rule (batch and stochastic)</strong></p>
+<ul>
+<li>w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi><mstyle scriptlevel="0" displaystyle="true"><munderover><mo>&#x2211;</mo><mi>j</mi><mi>M</mi></munderover><mo stretchy="false">(</mo><msub><mi>t</mi><mi>j</mi></msub><mo>&#x2212;</mo><msub><mi>s</mi><mi>j</mi></msub><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub><mo stretchy="false">)</mo></mstyle></mrow><annotation encoding="application/x-tex">\alpha \displaystyle \sum_j^M (t_j - s_j)(x_{i,j})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.2421130000000007em;vertical-align:-1.4137769999999998em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.8283360000000006em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">&#x2211;</span></span></span><span style="top:-4.3000050000000005em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.10903em;">M</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.4137769999999998em;"><span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></li>
+<li>w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi><mo stretchy="false">(</mo><mi>t</mi><mo>&#x2212;</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\alpha (t - s)(x_{i})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span><br>
+<br></li>
+</ul>
+</li>
+<li>
+<p><strong>generalised delta rule</strong></p>
+<ul>
+<li>w<sub>i</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> w<sub>i</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>t</mi><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>g</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msub><mtext mathvariant="sans-serif">x</mtext><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">(t - g(s))g(s)(1 - g(s)) \textsf x_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span><span class="mord"><span class="mord text"><span class="mord textsf">x</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span></li>
+</ul>
+</li>
+</ul>
+<p><v>4</v></p>
+<definition>
+<p>a <strong>feed-forward</strong> NN is made of hidden layers that pass the outputs only to the next hidden layer (or output layer) and not nack or to other layers from the same network.</p>
+</definition>
+<p>A network made up only of linear functions is able to create non-linear boundaries, but not as a smooth function. Rather, it aggregates pieces of linear functions.</p>
+<img src="img/7_piece-wise%20.jpg" class="nob c">
+<p>&quot;<em>A multi-layer network of linear functions creates a piece-wise linear boundary.&quot;</em></p>
+<blockquote>
+<p><strong>NOTE:</strong> a single-layer network (with enough perceptron) can replace a multilayer one.</p>
+</blockquote>
+<h3 class="mume-header" id="universal-function-approximator-theorem">Universal function approximator theorem</h3>
+
+<p>A feed-forward neural network with at least one hidden layer (and sufficient number of hidden units) can approximate almost any continuous function.</p>
+<p>The input of an activation function is (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2211;</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span></span></span></span> <strong>w<sup>T</sup>x</strong>). Sometimes this is accompanied with a <strong>bias</strong> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> (b + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2211;</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span></span></span></span> <strong>w<sup>T</sup>x</strong>)</p>
+<hr>
+<h2 class="mume-header" id="backpropagation">Backpropagation</h2>
+
+<p>This term refers to the update of the weights of the perceptrons.</p>
+<p>The idea is to update the weights starting from the perceptrons that output to the output layers, back to the ones which receive the input from the input layer.</p>
+<p>Consider the network:<br>
+<img src="img/7_hj.jpg" class="nob c l"></p>
+<p>To update the weights, we start from the weights outgoing the perceptrons in the last hidden layer.</p>
+<p>The update rule for a single hidden perceptron is the following:<br>
+<img src="img/7_update_rule.jpg" class="nob c xl"></p>
+<blockquote>
+<p>Remember:</p>
+<ul>
+<li><strong>E = <em>y &#x2212; g(s)</em></strong></li>
+<li><strong>s = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2211;</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span></span></span></span> h<sub>j</sub>w<sub>j</sub></strong></li>
+<li><strong>w<sub>j</sub> &#x2190; w<sub>j</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">&#x3B1;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span>h<sub>j</sub><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>&#x2206;</mtext></mrow><annotation encoding="application/x-tex">&#x2206;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord">&#x2206;</span></span></span></span></strong> (update rule)</li>
+</ul>
+</blockquote>
+<p>However, h<sub>j</sub> is responsible for some fraction of the error <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>&#x2206;</mtext></mrow><annotation encoding="application/x-tex">&#x2206;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord">&#x2206;</span></span></span></span> in every input node it is connected to. Hence, we weight each h accordingly:<br>
+<img src="img/7_update_rule1.5.jpg" class="nob c l"></p>
+<blockquote>
+<p>The Update rule changes as follow:</p>
+<ul>
+<li><strong>w<sub>i,j</sub> &#x2190; w<sub>i,j</sub> + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">&#x3B1;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span>x<sub>i</sub><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>&#x2206;</mtext></mrow><annotation encoding="application/x-tex">&#x2206;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord">&#x2206;</span></span></span></span><sub>j</sub></strong> (update rule)</li>
+</ul>
+<p>Note that x refers to <strong>i</strong> and not <strong>j</strong></p>
+</blockquote>
+<p>In reality, NN are more complex that the one represented above, and the formula can be written in general as:<br>
+<img src="img/7_update_rule2.jpg" class="nob c l"></p>
+<p>where <em>o</em> denotes the input of each hidden unit <em>j</em>.</p>
+<p>Note that also <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span></span></span></span> changes, but the update rule stays the same as before:</p>
+<blockquote>
+<p><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>&#x2206;</mtext></mrow><annotation encoding="application/x-tex">&#x2206;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0em;vertical-align:0em;"></span><span class="mord">&#x2206;</span></span></span></span><sub>j</sub> = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><munder><mo>&#x2211;</mo><mi>o</mi></munder><mi>&#x3B4;</mi></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \sum_{o} &#x3B4;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.3000100000000003em;vertical-align:-1.250005em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.8999949999999999em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">o</span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">&#x2211;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.250005em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.03785em;">&#x3B4;</span></span></span></span><sub>j,o</sub></strong></p>
+</blockquote>
+<p>A NN update rule is a very good approximation, but may fall in the trap of local minima. Several approaches exist to fix it, but we will look only at the <strong>momentum</strong>.</p>
+<h3 class="mume-header" id="momentum">Momentum</h3>
+
+<p><definition>Keep track of the weight updates in the previous iteration and make the weight update in the nth iteration depend on the update in the (n &#x2212; 1)th iteration</definition></p>
+<p>The idea is the following:</p>
+<ul>
+<li>A too small learning rate (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span>) would be slow and fall into the a local minima;</li>
+<li>A too high learning rate may avoid local minima, but would be unstable;</li>
+<li>considering both the current and the previous update is fast and finds a good solution</li>
+</ul>
+<img src="img/7_momentum.jpg" class="xl c">
+<p>The <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">&#x394;</mi></mrow><annotation encoding="application/x-tex">\Delta</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord">&#x394;</span></span></span></span> function will now consider a new element (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3BC;</mi></mrow><annotation encoding="application/x-tex">\mu</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal">&#x3BC;</span></span></span></span>) which is the momentum:</p>
+<p><strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext>&#x2206;</mtext><msub><mi>w</mi><mi>j</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo><mo>=</mo><mi>&#x3B1;</mi><msub><mi>h</mi><mi>j</mi></msub><mtext>&#x2206;</mtext><mo>+</mo><mi>&#x3BC;</mi><mtext>&#x2206;</mtext><msub><mi>w</mi><mi>j</mi></msub><mo stretchy="false">(</mo><mi>n</mi><mtext>&#x2212;</mtext><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">&#x2206; w_j(n) =  &#x3B1;  h_j  &#x2206;  +  \mu&#x2206; w_j(n &#x2212; 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord">&#x2206;</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span><span class="mord"><span class="mord mathnormal">h</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mord">&#x2206;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord mathnormal">&#x3BC;</span><span class="mord">&#x2206;</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02691em;">w</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.02691em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mord">&#x2212;1</span><span class="mclose">)</span></span></span></span></strong></p>
+<h2 class="mume-header" id="generalisation">Generalisation</h2>
+
+<p><v>5</v></p>
+<p>To avoid overfitting, data can be split in training, <strong>validation</strong>, and test set. The model is trained on the training set and checked against the validation data to keep the set of weights that performs best on the validation data. In the end, return the set of weights that did best on the validation set.</p>
+<p>The <strong>generalisation accuracy</strong> is a measure of how well a network generalises the data outside the training set.</p>
+<p>Another thing to avoid overfitting is <strong>early stopping</strong>.</p>
+<ul>
+<li>Evaluate on validation data after each epoch and stop training when the performance of the model has not improved for several epochs.</li>
+<li>Or if we see that the error on the training set drops, but that on the validation set increases.</li>
+</ul>
+<blockquote>
+<p>Other options:</p>
+<ul>
+<li>limit the number of hidden nodes or connections</li>
+<li>limit the training time, using a validation set</li>
+<li>weight decay (decrease each weight by some small factor<br>
+during each iteration)</li>
+<li>you can adjust the learning rate and the momentum to suit a specific task.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>NOTE:</strong> the structure of a NN is not necessarily fixed. More hidden layers and perceptrons may be added or removed dynamically.</p>
+</blockquote>
+<p>When may NN be used over other ML algorithms?</p>
+<ul>
+<li>Input is high-dimensional discrete or real-valued &amp; output is discrete, real valued or vector of values.</li>
+<li>Data is possibly noisy. <strong>ANNs are quite robust to noise</strong> in the training data.</li>
+<li>Form of target function is unknown.</li>
+<li>Long training times are acceptable. However, evaluating a new instance is quite fast.</li>
+<li>Human readability of result is not important.</li>
+</ul>
+<h2 class="mume-header" id="dnn">DNN</h2>
+
+<p><v>6</v></p>
+<p>DNN (Deep NN) are NN with many layers.<br>
+When there are many layers, the network may struggle to update the weights as the amount of error drastically reduces at each layer and eventually vanishes (<strong>vanishing gradient problem</strong>).</p>
+<p>For these NN a better activation function should be used. A good example is the ReLU. However, the ReLU is not differentiable, hence, we pick the softplus which is a smooth (differentiable) version of the former.</p>
+<h3 class="mume-header" id="cnn">CNN</h3>
+
+<p>In CNN, images are exposed to 3 processes in different order:</p>
+<ul>
+<li><strong>Filtering</strong>: a filter (which is a matrix) is overlapped over a portion of the image of equal size and the most important features are captured. The filter is then shifted by an amount of cells denoted as <strong>stride</strong></li>
+<li>Apply the <strong>ReLU</strong>.</li>
+<li><strong>Pooling</strong>: this is used to reduce the dimension by grouping together adjacent groups of values (for instance, we consider a 2x2 portion and we pick the highest value)</li>
+</ul>
+<p>Eventually you do the <strong>flattening</strong>, i.e. you convert the image into a 1D array, and input it to the NN.</p>
+<h3 class="mume-header" id="rnn">RNN</h3>
+
+<p>We what we want to analyse is a series (time-series, sequence of words/pictures), we can rely on Recurrent NN where the output of a neuron is project back into the same neuron.</p>
+<h1 class="mume-header" id="7-reinforcement-learningrl">7 - Reinforcement Learning(RL)</h1>
+
+<p><strong>Un/Supervised vs. RL</strong></p>
+<ul>
+<li>In <strong>supervised</strong> and <strong>unsupervised</strong> learning, the goal is to correctly identify the label of unseen data.</li>
+<li>In <strong>Reinforcement</strong> Learning, the goal is to map states to actions (learning what to do to maximise a numerical reward signal).</li>
+</ul>
+<p>A RL problem is composed by:</p>
+<ul>
+<li>an <strong>environment</strong>;</li>
+<li>(current) <strong>states</strong>: an agent occupies a given state at a given time;</li>
+<li><strong>actions</strong>: move an agent from one state to another;</li>
+<li><strong>rewards</strong>.</li>
+</ul>
+<img src="img/7_TTT.jpg">
+<p>RL models improve via experience, and at the end of simulation, the model should receive a feedback which tells it whether it performed good or bad called <strong>reward</strong> (or <strong>reinforcement</strong>);</p>
+<p>As there is no interaction with humans, the model should decide on its own what action to take next, even if it does not know the rules.<br>
+This process is, in fact, a <strong>trial-and-error</strong>.</p>
+<p>Just like in real life, the agent may perform some actions that sacrifice short-term rewards in favour of greater, long-term gains.</p>
+<p>Two concepts of RL are:</p>
+<ul>
+<li><strong>Exploration</strong>: the agent finds more information about the environment and might enable higher future reward (present in other ML models too).</li>
+<li><strong>Exploitation</strong>: the agent exploits known information to maximise reward, leading to an immediate reward (extraneous to other ML models).</li>
+</ul>
+<p>The problem that arises with RL models is that other than <strong>exploration</strong>, the agent should perform <strong>exploitation</strong>.</p>
+<p>As we cannot solely explore, neither exploit, without failing other tasks, there has to be a trade-off between them.</p>
+<h3 class="mume-header" id="feedback">Feedback</h3>
+
+<p>There exist 2 types of feedback:</p>
+<ul>
+<li><strong>Evaluative feedback</strong>: tells how  good was the action, but does not say whether that was the best thing to do.</li>
+<li><strong>Instructive feedback</strong>: tells what was the best action, but does not rate the action taken.</li>
+</ul>
+<blockquote>
+<p>RL works with Evaluative learning</p>
+</blockquote>
+<h3 class="mume-header" id="learning">Learning</h3>
+
+<p>There exist 2 types of learning:</p>
+<ul>
+<li><strong>Assocative learning</strong>: maps inputs to outputs and learns the best output for each input.</li>
+<li><strong>Non-associative learning</strong>: learns the one best output.</li>
+</ul>
+<h2 class="mume-header" id="n-armed-bandits"><em>N</em>-armed bandits</h2>
+
+<p><v>2</v></p>
+<p>The bandit model is a scenario where the agent is always in the same state.</p>
+<p>At each time step <strong>t</strong>, the agent may perform some actions <em>a<sub>t</sub></em>, producing some reward <em>r<sub>t</sub></em>.</p>
+<p>Choosing the action to perform is called <strong>play</strong>.</p>
+<div class="frm">
+<p><strong><em>E</em><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&lt;</mo></mrow><annotation encoding="application/x-tex">&lt;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&lt;</span></span></span></span> r<sub>t</sub> | a<sub>t</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&gt;</mo></mrow><annotation encoding="application/x-tex">&gt;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&gt;</span></span></span></span> = Q*(a)</strong></p>
+</div>
+<blockquote></blockquote>
+<p>where the distribution of <em>r<sub>t</sub></em> depends only on <em>a<sub>t</sub></em>.</p>
+<p>Q is the <strong>action-value</strong> function, so the output is the <strong>action value</strong>.</p>
+<p><strong>Q*(a)</strong> refers to the general reward obtained by performing action <em>a</em>. However, Q* is not known at the beginning and we try to estimate it writing <strong>Q(a)</strong>. As this estimate changes over time (possibly converging to Q*) <strong>Q<sub>t</sub>(a)</strong> is used to denote the value of the action <em>a</em> at time step <em>t</em>.</p>
+<p>The idea is to keep an estimate for each action, i.e. we want to have a value Q(a) for every <em>a</em>.</p>
+<p>As all the actions have an estimated reward, if you select the action that the highest estimated reward (greedy action) to perform the next move, you are being <strong>greedy</strong> , and the formula is:</p>
+<div class="frm">
+<p><strong>a*<sub>t</sub> = arg max Q<sub>t</sub>(a)</strong></p>
+</div> 
+<p>If we were to choose always the best action (<em>a<sub>t</sub></em> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> <em>a*<sub>t</sub></em>), we would only perform exploitation.<br>
+If we alternate the best action with a random one (which may as well be the best action), we have a trade off between exploration and exploitation.</p>
+<p>The same action is performed several times over the time. At time <em>t</em> (<strong>t-th play</strong>), action <em>a</em> has been performed <em>k<sub>a</sub></em> times prior to <em>t</em>, yielding rewards</p>
+<div class="frm">
+<p>r<sub>1</sub>, r<sub>2</sub>, ... , r<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mrow></mrow><msub><mi>k</mi><mi>a</mi></msub></msub></mrow><annotation encoding="application/x-tex">_{k_{a}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.586208em;vertical-align:-0.2501em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:-0.03148em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span></span></span></span></p>
+</div>
+so 
+<div class="frm">
+<p>Q<sub>t</sub> (a) = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><msub><mi>r</mi><mn>1</mn></msub><mo>+</mo><msub><mi>r</mi><mn>2</mn></msub><mo>+</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo>+</mo><msub><mi>r</mi><msub><mi>k</mi><mi>a</mi></msub></msub></mrow><msub><mi>k</mi><mi>a</mi></msub></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{r_1 + r_2 + ... + r_{k_{a}}}{k_a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.09633em;vertical-align:-0.8360000000000001em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2603300000000002em;"><span style="top:-2.3139999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.03148em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.6769999999999996em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord">...</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:-0.03148em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">a</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.2501em;"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.8360000000000001em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+</div>
+<blockquote>
+<p>k<sub>a</sub> = 0, then set Q<sub>t</sub> (a) to some default value. e.g. Q<sub>1</sub> (a) = 0</p>
+</blockquote>
+<p>When action <em>a</em> has been performed a consistent number of times:</p>
+<div frm>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><munder><mrow><mi>lim</mi><mo>&#x2061;</mo></mrow><mrow><msub><mi>k</mi><mi>a</mi></msub><mo>&#x2192;</mo><mi mathvariant="normal">&#x221E;</mi></mrow></munder><msub><mi>Q</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo><mo>=</mo><msup><mi>Q</mi><mo>&#x2217;</mo></msup><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\lim_{k_a\to\infty} Q_t (a) = Q^* (a)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.602208em;vertical-align:-0.852208em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-2.347892em;margin-left:0em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:-0.03148em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathnormal mtight">a</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mrel mtight">&#x2192;</span><span class="mord mtight">&#x221E;</span></span></span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span><span class="mop">lim</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.852208em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">t</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal">Q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.738696em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mbin mtight">&#x2217;</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">a</span><span class="mclose">)</span></span></span></span></span></p>
+</div>
+<p>Storing all the rewards obtained over time, however, takes up a lot of memory, so a better way is store the current avg value and the number of times such action was performed (k<sub>a</sub>), and when the action is performed again we just do:</p>
+<div frm>
+<p>Q<sub>k+1</sub> = (Q<sub>k</sub> * k + r <sub>k+1</sub>) / (k + 1)</p>
+</div>
+<h3 class="mume-header" id="epsilon-greedy"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span>-greedy</h3>
+
+<p>In a greedy approach, exploitation is always favoured to exploration, so we introduce the variable <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span> which is a very small number (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span> &lt;&lt; 1).<br>
+Now, we select:</p>
+<ul>
+<li>[<strong>exploitation</strong>] a <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo></mrow><annotation encoding="application/x-tex">=</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span></span></span></span> a* with probability 1 - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span>, and</li>
+<li>[<strong>exploration</strong>] any action (including a*) with probability <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span></li>
+</ul>
+<blockquote>
+<p>e.g. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span> = 0.1, a<sub>1</sub> = 9 (a*), a<sub>2</sub> = 3</p>
+<ul>
+<li>P(a<sub>1</sub>) = 1 - <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span> + (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span> / n of actions) = 9.5</li>
+<li>P(a<sub>2</sub>) = (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3F5;</mi></mrow><annotation encoding="application/x-tex">\epsilon</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">&#x3F5;</span></span></span></span> / n of actions) = 0.5</li>
+</ul>
+</blockquote>
+<h3 class="mume-header" id="gibbs-formula">Gibbs formula</h3>
+
+<p>An alternative to force the model to do exploration is to use Gibbs formula:</p>
+<div style="font-size:xx-large">
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mfrac><msup><mtext mathvariant="sans-serif">e</mtext><mfrac><mrow><msub><mi>Q</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><mi>&#x3C4;</mi></mfrac></msup><mrow><munderover><mo>&#x2211;</mo><mrow><mi>b</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msup><mtext mathvariant="sans-serif">e</mtext><mfrac><mrow><msub><mi>Q</mi><mi>t</mi></msub><mo stretchy="false">(</mo><mi>b</mi><mo stretchy="false">)</mo></mrow><mi>&#x3C4;</mi></mfrac></msup></mrow></mfrac></mrow><annotation encoding="application/x-tex">\dfrac {\textsf{e}^{  \frac{Q_t(a)} {\tau}  }}  {\sum_{b=1}^n \textsf{e}^{  \frac{Q_t(b)} {\tau}  }}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:3.0514400000000004em;vertical-align:-1.27485em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.7765900000000001em;"><span style="top:-2.12445em;"><span class="pstrut" style="height:3.09959em;"></span><span class="mord"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">b</span><span class="mrel mtight">=</span><span class="mord mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord text"><span class="mord textsf">e</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.08514em;"><span style="top:-3.3485500000000004em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0522714285714285em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.516557142857143em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3447999999999998em;margin-left:0em;margin-right:0.1em;"><span class="pstrut" style="height:2.61508em;"></span><span class="mord mathnormal mtight">t</span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.27027999999999996em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">b</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.32959em;"><span class="pstrut" style="height:3.09959em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.77659em;"><span class="pstrut" style="height:3.09959em;"></span><span class="mord"><span class="mord"><span class="mord text"><span class="mord textsf">e</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.09959em;"><span style="top:-3.363em;margin-right:0.05em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mopen nulldelimiter sizing reset-size3 size6"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0522714285714285em;"><span style="top:-2.656em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span><span style="top:-3.2255000000000003em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line mtight" style="border-bottom-width:0.049em;"></span></span><span style="top:-3.516557142857143em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">Q</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3447999999999998em;margin-left:0em;margin-right:0.1em;"><span class="pstrut" style="height:2.61508em;"></span><span class="mord mathnormal mtight">t</span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.27027999999999996em;"><span></span></span></span></span></span></span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">a</span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.344em;"><span></span></span></span></span></span><span class="mclose nulldelimiter sizing reset-size3 size6"></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.27485em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+</div>
+<p>where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C4;</mi></mrow><annotation encoding="application/x-tex">\tau</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.1132em;">&#x3C4;</span></span></span></span> is the <strong>temperature</strong>.</p>
+<ul>
+<li>When temperature is high, all actions are approximately equally likely.</li>
+<li>when temperature tends to 0, action selection tends to greedy selection.</li>
+</ul>
+<p>It is possible to vary the temperature over time &#x2014; high to start, low as the agent thinks it is converging.</p>
+<blockquote>
+<p>kind of like gradient ascent/descent.</p>
+</blockquote>
+<h2 class="mume-header" id="reinforcement-learning">Reinforcement Learning</h2>
+
+<p><v>3</v></p>
+<p>Consider an agent with a set of possible actions A.</p>
+<ul>
+<li>Each a <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2208;</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&#x2208;</span></span></span></span> A has a set of possible outcomes s<sub>a</sub>.</li>
+<li>Each state s<sub>a</sub> has an associated value called <strong>utility</strong> u(s<sub>a</sub>).</li>
+</ul>
+<p>The best action a* is</p>
+<div frm>
+<p>a* d= arg max u(s<sub>a</sub>)</p>
+</div>
+<p>but since s<sub>a</sub> may result in many different state (robot moves up 80% times), we need to consider all the possible outputs:</p>
+<div frm>
+<p>EU(a<sub>i</sub>) = <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2211;</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span></span></span></span> u(s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span>) P(s<sub>ai</sub> = s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span>)</p>
+</div>
+<p><strong>Transition model</strong>: P(s&apos; |  s, a)<br>
+<strong>MPD</strong>:</p>
+<ul>
+<li>a set of states s <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2208;</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&#x2208;</span></span></span></span> S with an initial state s<sub>0</sub></li>
+<li>a set of actions A(s) in each state</li>
+<li>a transition model P(s&apos; | s, a)</li>
+<li>a reward function R(s).</li>
+</ul>
+<p><strong>Policy</strong>: a function mapping a state to an action</p>
+<ul>
+<li>
+<p>In any state s, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">&#x3C0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>(s) identifies what action to take.</p>
+</li>
+<li>
+<p>In any state s, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">&#x3C0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>*(s) identifies the policy with the highest expected utility.</p>
+</li>
+<li>
+<p>The values of states obtained if the agent executes an optimal policy every time is called U<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mrow><mi>&#x3C0;</mi><mo>&#x2217;</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{&#x3C0;*}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord mtight">&#x2217;</span></span></span></span></span></span></span></span></span></span></span></span>(s).<br>
+If we have these values, the best policy is easy to decide as:</p>
+<div frm>
+<p><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi><mo>&#x2217;</mo></mrow><annotation encoding="application/x-tex">\pi *</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.46528em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord">&#x2217;</span></span></span></span>(s) = arg max<sub>a</sub> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2211;</mo></mrow><annotation encoding="application/x-tex">\sum</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.00001em;vertical-align:-0.25001em;"></span><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span></span></span></span> P(s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span> | s, a) U<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mrow><mi>&#x3C0;</mi><mo>&#x2217;</mo></mrow></msup></mrow><annotation encoding="application/x-tex">^{&#x3C0;*}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.688696em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.688696em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span><span class="mord mtight">&#x2217;</span></span></span></span></span></span></span></span></span></span></span></span>(s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span>)</p>
+</div>
+</li>
+</ul>
+<h3 class="mume-header" id="value-iteration">Value Iteration</h3>
+
+<p>The formula to calculate the best values in the map is the value iteration:</p>
+<div frm>
+<p>U<sub>i+1</sub>(s) <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2190;</mo></mrow><annotation encoding="application/x-tex">\larr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2190;</span></span></span></span> R(s) + <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B3;</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">&#x3B3;</span></span></span></span> max<sub>a</sub> ( <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle scriptlevel="0" displaystyle="true"><munder><mo>&#x2211;</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></munder></mstyle></mrow><annotation encoding="application/x-tex">\displaystyle \sum_{s&apos;}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.3439900000000002em;vertical-align:-1.2939850000000002em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.050005em;"><span style="top:-1.8560149999999997em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6828285714285715em;"><span style="top:-2.786em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span><span style="top:-3.0500049999999996em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">&#x2211;</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:1.2939850000000002em;"><span></span></span></span></span></span></span></span></span> P(s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span> | s, a) U<sub>i</sub>(s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span>) )</p>
+</div>
+<h2 class="mume-header" id="passive-learning">Passive Learning</h2>
+
+<p><v>4</v></p>
+<p>In <strong>passive RL</strong> you do not know the Reward for each state, nor the transition model P(s&apos; | s, a)</p>
+<p>Utilities of state U<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mi>&#x3C0;</mi></msup></mrow><annotation encoding="application/x-tex">^\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span></span></span></span></span></span></span></span>(s) are learnt through several runs in the environment. In <strong>passive reinforcement learning</strong> we assume that the agent already has a policy <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span> (e.g. assigning random actions to state is a plausible policy)</p>
+<p>The policy in passive RL is fixed.</p>
+<p>Remember: the policy is indeed fixed, but the environment is stochastic, meaning the same action on a state could result in different outcomes. This is the reason why having more than one run is meaningful.</p>
+<h3 class="mume-header" id="direct-utility-estimation">Direct Utility Estimation</h3>
+
+<p><strong>Direct Utility Estimation</strong> is a way to estimate the utility of a state by the rewards generated along the run from that state.</p>
+<p>Each run gives us one or more samples for the reward from a state.</p>
+<p>Imagine the agent follows the path:<br>
+<strong>A</strong> &#x2192; B &#x2192; C &#x2192; D &#x2192; B &#x2192; C &#x2192; <strong>F<sub>inal</sub></strong></p>
+<ul>
+<li>we have one sample for A, but</li>
+<li>2 samples for B as we landed there twice.</li>
+</ul>
+<p>In the case of the canonical robot example:<br>
+<img src="img/7_samples_eun.jpg"></p>
+<p>The issues with this approach are:</p>
+<ul>
+<li>the agent needs to reach a state with a high utility (+1) in order to tell that the states that lead to such a state should also have a high utility.</li>
+<li>Direct utility estimation treats each state as independent, which is wrong as they are markovian.
+<blockquote>
+<img frm src="img/7_DUE.jpg">
+As you see, U(s) depends on U(s&apos;), so state are Markovian and not independent.
+</blockquote>
+</li>
+</ul>
+<p>In passive RL, the model does not know the transition model, but it can calculate a sample estimate:</p>
+<div frm>
+<p>P(s<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span> | s, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>(s))</p>
+</div>
+<img src="img/7_samples_eun2.jpg">
+<p>Over time, collecting more sample, we can generate a model which tends to the transition model (similar to the Maximum Likelihood expectation)</p>
+<p>Given all these notions, Passive RL (both direct utility estimation and ADP which will explained later) can be described as:</p>
+<ul>
+<li>A list of states s<sub>1</sub>, ... s<sub>n</sub>.</li>
+<li>Each state has a utility estimate associated with it: U(s).</li>
+<li>Each state has a set of actions associated with it: a<sub>1</sub>, ... a<sub>m</sub>.</li>
+<li>Each state/action pair has a probability distribution: <strong>P</strong>( S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span> | s, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">&#x3C0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>(s) ) over the states S<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mrow></mrow><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup></mrow><annotation encoding="application/x-tex">&apos;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.751892em;vertical-align:0em;"></span><span class="mord"><span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span></span></span></span> that it gets to from s by doing <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">&#x3C0;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>(s).</li>
+</ul>
+<p><warning> An agent may not encounter every state </warning></p>
+<p>To explore more states, the agent may change the policy over time to create different samples, but is it worth it?</p>
+<h1 class="mume-header" id="8-reinforcement-learning-2">8 - Reinforcement learning 2</h1>
+
+<p>Direct Utility estimation has its cons. An alternative way to do passive RL is to use the <strong>Adaptive Dynamic Programming (ADP)</strong> which relies on the Bellman equation.<br>
+The formula changes from<br>
+<img src="img/7_DUE.jpg" frm><br>
+to<br>
+<img src="img/8_ADP.jpg" frm></p>
+<blockquote>
+<p>We convert the update rule into an assignment, and we remove the max bc we know that the policy is decided already, i.e. we do not have to find the optimal one.</p>
+</blockquote>
+<question>
+She says &quot;note that this is not an update rule, but an equality.&quot;
+In a following slide she says that we are updating the utility
+<img src="img/8_question.jpg">
+Is this an update or not?
+<p>Also, what does it mean that the estimates are not better than the estimated values of utility and probability?</p>
+</question>
+<p>In ADP we can then proceed with 2 ways:</p>
+<p><strong>Solving the Bellman equations</strong><br>
+The fixed policy version of the Bellman equation is:<br>
+<img src="img/8_ADP.jpg" frm></p>
+<p>This is just a set of simultaneous equations that can be solved with a Linear Programming solver.</p>
+<p><strong>Value Iteration</strong><br>
+<img src="img/8_value_iteration.jpg" frm></p>
+<p>In both cases, the results are still estimates, and no better than the<br>
+estimates we got from direct estimation or from each alternative approach.</p>
+<p>To sum up, we have seen 3 way to solve passive RL:</p>
+<ol>
+<li>Direct utility estimation (typically slower than ADP)</li>
+<li>ADP: solving Bellman equations</li>
+<li>ADP: applying value iteration
+<blockquote>
+<p>(same as DUE, but since we have <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>(s) which is dictated, we do not have the arg max for a <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2208;</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&#x2208;</span></span></span></span> A)</p>
+</blockquote>
+</li>
+</ol>
+<p>the quality of the utility estimates will depend on how well we have explored the space. Roughly, this is how many times we have encountered each state.</p>
+<p>The transition model is a maximum likelihood estimate (just the sample average), that is passive RL models tend to overfit.</p>
+<p>To solve this issue you can:</p>
+<ul>
+<li>assign a prior non-zero value to the transition probabilities</li>
+<li>ensure the agent explores widely (although it can be hard in big environments)</li>
+<li>learn the probability that a particular model (a set of probability and utility values) is true and make decisions based on either:
+<ul>
+<li>the expected value of actions across all models; or</li>
+<li>the worst case outcome across the models.</li>
+</ul>
+</li>
+</ul>
+<p>(the last option is generally discarded bc computationally expensive)</p>
+<h2 class="mume-header" id="temporal-difference-learning-td">Temporal difference learning (TD)</h2>
+
+<img src="img/8_temporal_dl.jpg">
+<p>However, the reward to land on each state is -0.04, the discount factor is 1, and from (1, 3) we can reach (2, 3).<br>
+So maybe the current estimate for (1,3) is too low.</p>
+<p><strong>Temporal difference learning</strong> tries to fill this gap using a Bellman-like equation:</p>
+<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msup><mi>U</mi><mi>&#x3C0;</mi></msup><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>&#x2190;</mo><msup><mi>U</mi><mi>&#x3C0;</mi></msup><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>+</mo><mi>&#x3B1;</mi><mo stretchy="false">(</mo><mi>R</mi><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo>+</mo><mi>&#x3B3;</mi><msup><mi>U</mi><mi>&#x3C0;</mi></msup><mo stretchy="false">(</mo><msup><mi>s</mi><mo mathvariant="normal" lspace="0em" rspace="0em">&#x2032;</mo></msup><mo stretchy="false">)</mo><mo>&#x2212;</mo><msup><mi>U</mi><mi>&#x3C0;</mi></msup><mo stretchy="false">(</mo><mi>s</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">U^\pi(s) \larr U^\pi(s) + \alpha(R(s) + \gamma U^\pi(s&apos;) - U^\pi(s))</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&#x2190;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.051892em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05556em;">&#x3B3;</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal">s</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.801892em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">&#x2032;</span></span></span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x2212;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7143919999999999em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal">s</span><span class="mclose">))</span></span></span></span></span></p>
+<p>where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3B1;</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.0037em;">&#x3B1;</span></span></span></span> is the learning rate.</p>
+<p>In ADP, we look at the utility of the states s&apos; the agent may move to from s, and any could potentially alter the utility value (the best one only is chosen tho).</p>
+<p>In TP, the agent moves to state s&apos; and then updates the utility of the previous state s. Only one state is considered to update the utility value (the previous state s). <strong>This approach removes the need for a model (<em>transition model</em>)</strong> because, in the long run, the agent will have moved from each state s to their states s&apos; with the same probability as described by the transition model (it is a statistical inference)</p>
+<p>In the long run, TD and ADP produce the same values</p>
+<question>
+How?
+<img src="img/8_question2.jpg">
+<p>Also, why here in Q-learning the formula uses a&apos; and s&apos;? If a&apos; refers to the actions in s&apos;, how do I know which one is s&apos;?</p>
+</question>
+<h1 class="mume-header" id="10-genetic-algorithms">10 - Genetic Algorithms</h1>
+
+<h2 class="mume-header" id="evolutionary-algorithm-ea">Evolutionary Algorithm (EA)</h2>
+
+<p>EA is like <strong>searching</strong>, which is the same as in ML. in ML you want to tune the parameters to optimise predictions.<br>
+The way you do it is by searching through the space of all the possible parameters.</p>
+<p>In EA We have a <em>population</em> of individuals where each <em>individual</em> is a representation of a solution to a problem.</p>
+<blockquote>
+<p>individuals are also called hypotheses</p>
+</blockquote>
+<p>The way EA work is via 5 steps:</p>
+<img src="img/9_EA.jpg">
+<p>fitness stands for fitness function which evaluates how good the candidate did.</p>
+<p>So we start by evaluating each individual, then we select the best fit, we have them reproducing (mixing genes to create new individuals), and then repeat until a stopping condition.</p>
+<h2 class="mume-header" id="genetic-algorithm-ga">Genetic Algorithm (GA)</h2>
+
+<p>GA is a type of EA which can be summed up into a function.</p>
+<p>The function takes in 5 parameters:</p>
+<ul>
+<li>a <strong>Fitness</strong> function which evaluates the individual</li>
+<li>a <strong>Fitness_threshold</strong> which determines when the algorithm stops</li>
+<li><strong>p</strong>: the number of hypotheses to be included in the population.</li>
+<li><strong>r</strong>: the fraction of the population to be replaced by Crossover at each step.</li>
+<li><strong>m</strong>: the mutation rate</li>
+</ul>
+<p>The pseudo-code is as following:</p>
+<ol>
+<li>
+<p><strong>initialise</strong> P: some individuals h are randomly created. There exist some features which compose the individuals, and these are what is actually randomised.</p>
+</li>
+<li>
+<p><strong>evaluate</strong>: for each h in P we compute fitness(h).</p>
+</li>
+<li>
+<p><strong>Reproduction</strong>: While  [max<sub>h</sub> Fitness(h)] &lt; Fitness threshold:</p>
+<ol>
+<li>Select: The individuals are selected with a probabilistic function based on the fitness score. This means that the best fit are most likely to select, but they may end up not. This method is called <strong>fitness proportion selection</strong> or <strong>roulette wheel selection</strong> (<a href="#selections">other selection methods exist</a>).<br>
+The function is simply <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mtext mathvariant="sans-serif">fitness</mtext><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo></mrow><mrow><mo>&#x2211;</mo><mtext mathvariant="sans-serif">fitness</mtext><mo stretchy="false">(</mo><mi>h</mi><mo stretchy="false">)</mo></mrow></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{\textsf{fitness}(h)}{\sum \textsf{fitness}(h)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.36301em;vertical-align:-0.93601em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">&#x2211;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord text"><span class="mord textsf">fitness</span></span><span class="mopen">(</span><span class="mord mathnormal">h</span><span class="mclose">)</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord text"><span class="mord textsf">fitness</span></span><span class="mopen">(</span><span class="mord mathnormal">h</span><span class="mclose">)</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.93601em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span><br>
+&#xA0;</li>
+<li>Crossover: Probabilistically select <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mstyle displaystyle="true" scriptlevel="0"><mfrac><mrow><mi>r</mi><mo>&#x22C5;</mo><mi>p</mi></mrow><mn>2</mn></mfrac></mstyle></mrow><annotation encoding="application/x-tex">\dfrac{r \cdot p}{2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.8074499999999998em;vertical-align:-0.686em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1214499999999998em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord">2</span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">&#x22C5;</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathnormal">p</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> pairs of hypotheses from P. For each pair of &quot;parents&quot; produce two offspring by applying the Crossover operator. Add all offspring to P<sub>s</sub>.</li>
+<li>Mutate: Choose <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal">m</span></span></span></span>% of the members of P<sub>s</sub>, with uniform<br>
+probability. For each, invert one randomly selected bit in its<br>
+representation.</li>
+<li>Update: P <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> P<sub>s</sub>.</li>
+<li>Evaluate each h in P.</li>
+</ol>
+</li>
+<li>
+<p>return the hypothesis from P with the highest fit.</p>
+</li>
+</ol>
+<p>The advantages of GA are:</p>
+<ul>
+<li>Good for situations where it is difficult to establish the impact of a particular partial solution to a problem.</li>
+<li>Easy to implement through parallel processing, because each candidate solution can be evaluated on its own.</li>
+<li>Can adapt easily in dynamic environments.</li>
+</ul>
+<h2 class="mume-header" id="representation">Representation</h2>
+
+<p>The representation refers to how individuals features are represented.<br>
+In GA, the classic representation is the <strong>binary string</strong> (i.e. an array of bits).</p>
+<p>The bit-string is called <strong>genotype</strong>, whereas each trait (i.e. feature) that it encodes is the <strong>phenotype</strong>.</p>
+<blockquote>
+<p><strong>Note</strong> that the representation (just like the fitness function) is domain dependent.</p>
+</blockquote>
+<p>When we do not have binary values for a given feature, but only enums (like for the weather) we use the one-hot encoding.</p>
+<p>In the canonical example of playing tennis, we can represent each individual as 10 bits (the first one representing weather or not playing tennis).</p>
+<img src="img/9_GA.jpg">
+<p>The bit string at the bottom is the genotype.</p>
+<p>In this context we can have multiple phenotypes. Consider the case<br>
+<img src="img/9_GA2.jpg" class="c l nob"></p>
+<p>Humidity has value <strong>1</strong> for both 8 and 9. This phenotype can be seen as:</p>
+<ul>
+<li><strong>Invalid phenotype</strong>: the rule is not valid. Humidity cannot both be high and normal at the same time. To deal with these individuals, you either prevent their generation, or assign the lowest fitness score.</li>
+<li><strong>Uncertain phenotype</strong>: the rule is uncertain. Humidity is either high or normal and we do not know it is (but don&#x2019;t play in either case).</li>
+<li><strong>Multiple phenotypes</strong>: the rule is certain. It applies to 2 cases: don&#x2019;t play (bit 0 is <strong>0</strong>) when humidity is either high or normal.</li>
+</ul>
+<h3 class="mume-header" id="selection">Selection</h3>
+
+<p><span id="selection"></span></p>
+<p>Other methods of selection are:</p>
+<ul>
+<li><strong>Tournament selection</strong>: samples from the population are randomly selected, and apply roulette wheel selection on them. This produces more diverse individuals as compared to plain roulette wheel selection.</li>
+<li><strong>Rank selection</strong>: sort candidates based on the fitness score. Now ignore the score and simply select them based on the ranking.</li>
+</ul>
+<p>These two selection methods plus roulette wheel selection are domain independent.</p>
+<p>The fitness threshold is normally fixed and domain dependent. The worst individuals, are discarded. The remaining ones (i.e. the best ones) are then used to create the new population.</p>
+<p>The ratio between the individuals are kept vs replaced is the <strong>exploration-exploitation</strong> trade-off</p>
+<h3 class="mume-header" id="reproduction-crossover">Reproduction - Crossover</h3>
+
+<p>This is a visual representation of Crossover and Mutation.<br>
+<img src="img/9_reproduction.jpg"></p>
+<p>In crossover, portions of genes are simply <strong>swapped</strong>. This may happen from one point to the end (like in the example above), or we may have many crossover points (<strong>n-point crossover</strong>).<br>
+When <em>n</em> is too high, the result is not that good as we may do too much crossover.</p>
+<p>Remember than n shall always be &#x2264; the length of the genotype, and both <em>r</em> (crossover rate) and <em>m</em> (mutation rate) have values between 0 and 1 included.</p>
+<p>In later iterations, when individuals are similar, crossover has less effect.</p>
+<p>A common way to indicate the crossover is using a <strong>crossover mask</strong>, where each bit <strong>0</strong> means swap.</p>
+<p><strong>Uniform crossover</strong> is a way of doing crossover where bits are randomly select from either parent using a uniform distribution.</p>
+<p>Another crossover option is to weight the features.</p>
+<h3 class="mume-header" id="reproduction-mutation">Reproduction - Mutation</h3>
+
+<p>In mutation, we still use the <em>n</em>-point notation, but this time <em>n</em> refers to the numbers of mutated bits: <strong>1-point mutation</strong> mutates only one bit.<br>
+When a bit is mutated you simply convert 0 to 1 (or 1 to 0).</p>
+<h3 class="mume-header" id="trade-offs">Trade-offs</h3>
+
+<p><strong>population size</strong>:</p>
+<ul>
+<li>Smaller populations take less to evaluate, but more generations to be good.</li>
+<li>Conversely, large populations take less generations, but take longer to evaluate.</li>
+</ul>
+<p><strong>exploitation vs exploration</strong>:<br>
+A higher exploitation ratio means that the set of candidates moves around the solution space (also called landscape) more slowly, more smoothly (without jumping around too much from one generation to the next).</p>
+<ul>
+<li>Solutions in a narrower search space are considered.</li>
+<li>Search is conducted at a finer resolution.</li>
+</ul>
+<p>A higher exploration ratio means that the set of candidates jumps around the solution space.</p>
+<ul>
+<li>Solutions at more disparate points in the search space are considered.</li>
+<li>Search is conducted at a rawer resolution</li>
+</ul>
+<p><strong>nature vs nurture</strong>:<br>
+This refers to whether or not experience should be passed along. In real nature it is not, however, individuals may generate new traits (for example, fear to something), and that may be passed along</p>
+<hr>
+<p>To conclude, we have seen genotypes only of the form of bit strings, but they may include real values as well (<strong>real-value GA</strong>). For them, mutations just select a new value at random.</p>
+<h2 class="mume-header" id="genetic-algorithms-vs-genetic-programming-gp">Genetic Algorithms vs Genetic Programming (GP)</h2>
+
+<p><v>2</v></p>
+<p>In GA we have binary strings of fixed size, in GP we have trees that can modify their structures. All the internal nodes are operators which take as input one or more parameters (defined by the leaves). The leaves are parameters which may be fixed or not.<br>
+The final formula is a <strong>LISP s-expression</strong></p>
+<img src="img/9_GP.jpg">
+<p>GA, swapping is not limited to nodes, but it swaps subtrees.</p>
+<img src="img/9_GP_xover.jpg">
+<p>One issue with this approach is <strong>code bloat</strong>.<br>
+The size of evolving programs grows extremely large (i.e., the length of the s-expression or tree).</p>
+<p>Possible solution: limit the maximum length of an s-expression that results from crossover.</p>
+<h2 class="mume-header" id="co-evolution">Co-evolution</h2>
+
+<p>So far, there was just one population with a <strong>fixed fitness function</strong>. It may happen tho that <strong>2 populations</strong> are racing for the same thing, and fitness function should be measured with respect to the other population. A situation where individuals are compared against individuals from other populations, and push each other to be best is called <strong>co-evolution</strong>. In co-evolution, the fitness function varies with the populations.</p>
+<img src="img/9_coevolution.jpg">
+<p>Co-evolution is normally used when a fixed fitness function is hard or impossible to define.</p>
+<p>There still has to be a way to compare two solutions and decide between them which is better.</p>
+<p>A good example is <strong>game playing</strong>, where two candidate solutions play games against each other and the candidate that wins more games is declared the fittest.</p>
+<p>The basic elements are the same as for plain Evolutionary Algorithms:</p>
+<ul>
+<li><strong>Representation</strong>: could be a GA or a GP.</li>
+<li><strong>Fitness</strong>: members of opposing populations are compared against each other.</li>
+<li><strong>Selection</strong>: same as evolution.</li>
+<li><strong>Reproduction</strong>: same as evolution, but parents are chosen within the same population.</li>
+</ul>
+<p>Co-evolution has 2 main issues:</p>
+<p><strong>Collusion</strong></p>
+<ul>
+<li>When members of a population &#x201C;live and let live&#x201D;.</li>
+<li>Effectively: nobody tries to win.</li>
+<li>So each keeps getting better, but nobody becomes the best.</li>
+</ul>
+<p><strong>Mediocre Stable State (MSS)</strong></p>
+<ul>
+<li>Also called suboptimal equilibria.</li>
+<li>Where the populations settle into a portion of the landscape and do not change the convergence. The issue is that this may not be the optimal portion of the landscape (stuck into a local minimum or a plateau).</li>
+</ul>
+<h1 class="mume-header" id="11-learning-from-demonstrationlfd-ethics">11 - Learning from Demonstration(LfD) &amp; Ethics</h1>
+
+<p>Learning from demonstration means that the model is trained with examples. There is no direct experience from the model. Each sample used for the training is like a policy, that is, it contains a state and an action. So it a <strong>supervised learning</strong> of policies, which is <strong>model-free</strong>.</p>
+<p>The policy is derived only for the encountered states, so it is called <strong>partial</strong>. This also means that the world is <strong>partially observable</strong>.</p>
+<img src="img/11_lfd.jpg">
+<p>In this diagram we observe that the teacher provides examples (<strong>D</strong>), then we derive a policy (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>).</p>
+<p>Now that we have the policy we perform an action. This action results in a state which we can get the observation of. Such observation is called <strong>z</strong>.</p>
+<h3 class="mume-header" id="formal-definition">Formal Definition</h3>
+
+<p>We have:</p>
+<ul>
+<li>the set of states <strong>S</strong>;</li>
+<li>the set of actions <strong>A</strong>;</li>
+<li>the (probabilistic) transition function T such that T(s&apos; | s, a): S x A x S</li>
+</ul>
+<p>As we said before, the model knows about the observations of the states, not the actual states (POMDP).</p>
+<p>We denote this as M: S <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> Z</p>
+<blockquote>
+<p>That is, M is the function that maps the state into the observation</p>
+</blockquote>
+<p>Based on the observations, the policy decides the action to take.<br>
+So <strong><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>&#x3C0;</mi></mrow><annotation encoding="application/x-tex">\pi</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">&#x3C0;</span></span></span></span>: Z <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> A</strong></p>
+<p>When the world is fully observable, M is an identity function (I) and S = Z</p>
+<p>We define the demonstration as the set of observations and actions pairs:<br>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>d</mi><mi>j</mi></msub><mo>=</mo><mo stretchy="false">{</mo><mo stretchy="false">(</mo><msubsup><mi>z</mi><mi>j</mi><mi>i</mi></msubsup><mo separator="true">,</mo><msubsup><mi>a</mi><mi>j</mi><mi>i</mi></msubsup><mo stretchy="false">)</mo><mo stretchy="false">}</mo></mrow><annotation encoding="application/x-tex">d_j = \{(z_j^i, a_j^i)\}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.2577720000000001em;vertical-align:-0.383108em;"></span><span class="mopen">{(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.874664em;"><span style="top:-2.4530000000000003em;margin-left:-0.04398em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.383108em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.874664em;"><span style="top:-2.4530000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.05724em;">j</span></span></span><span style="top:-3.1130000000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">&#x200B;</span></span><span class="vlist-r"><span class="vlist" style="height:0.383108em;"><span></span></span></span></span></span></span><span class="mclose">)}</span></span></span></span></span></p>
+<p>Demonstrations are actually a sequence of z,a pairs, so the <em>i</em> denotes the point of the demonstration we are at.</p>
+<h3 class="mume-header" id="process">Process</h3>
+
+<p>To use LfD you need to</p>
+<ul>
+<li>Make design choices
+<ol>
+<li>Demonstration approach.</li>
+<li>Problem space representation</li>
+<li>Policy derivation</li>
+</ol>
+</li>
+<li>Execution
+<ol>
+<li>Gathering examples</li>
+<li>Deriving policy</li>
+</ol>
+</li>
+</ul>
+<p><strong>Demonstration approach</strong></p>
+<ul>
+<li>Choice of demonstration : Who demonstrates?
+<blockquote>
+<p>This happens normally with a human which is either observed by the robot, or who has the robot performing under his command (more common)</p>
+</blockquote>
+</li>
+<li>Demonstration technique : when does learning start?
+<blockquote>
+<p><strong>batch learning</strong>: the policy is learnt once after passed in before training; or <strong>interactive learning</strong>: the policy is learnt as data is gathered incrementally.</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>Problem space representation</strong><br>
+This refers to the continuity of the world: discrete vs continuous.<br>
+This choice is often dictated by the environment, but the scope of the model can also influence it.</p>
+<p><strong>Policy derivation</strong><br>
+<img src="img/11_policyDerivation.jpg"></p>
+<p>Policies can be derived in 3 ways:</p>
+<ul>
+<li><strong>mapping function</strong>: from demonstrations you infer directly the policy</li>
+<li><strong>system model</strong>: from demonstrations you infer the transition model, and maybe a reward function, and from them you get the policy function</li>
+<li><strong>plans</strong>: demonstrations are passed along with user intentions and used to learn rules that associate a set of pre- and post-conditions with each actions and possibly a world model. Then you can fit this into an AI planner to get actions.</li>
+</ul>
+<p><strong>Gathering examples</strong><br>
+To gather examples, the process is as following:</p>
+<img src="img/11_gathering.jpg" class="nob">
+<ul>
+<li>The <strong>Record Mapping</strong> (Teacher Execution &#x2192; Recorded Execution) refers to whether the exact states/actions experienced by the teacher during the demonstration execution are recorded within the dataset.</li>
+<li>The <strong>Embodiment Mapping</strong> (Recorded Execution &#x2192; Learner) refers to whether the states/actions recorded within the data.</li>
+</ul>
+<p>Record and Embodiment mappings may be Identity (that is the output is the same as the input, so no data is lost within the mapping) or non-identity.</p>
+<img src="img/11_cross.jpg" class="c nob">
+<p>This image shows the possible intersections between identity and non-identity mappings. The content of each intersection is a mean to provide that kind of dataset are exactly those that the learner would observe/execute.</p>
+<p>In <em>demonstration</em> there is no embodiment mapping as the demonstration is performed on the actual robot-learner.</p>
+<p>In <em>imitation</em> the demonstration is not performed on the robot-learner, so a mapping function exists.</p>
+<h3 class="mume-header" id="demonstration">Demonstration</h3>
+
+<p>Demonstration is performed on actual robot.</p>
+<p><strong>Teleoperation</strong>: human teacher operates the robot and robot&#x2019;s sensors record data</p>
+<ul>
+<li>Joystick operation.</li>
+<li>Kinesthetic teaching.</li>
+</ul>
+<p><strong>Shadowing</strong>: robot operates itself but attempts to mimic humans</p>
+<ul>
+<li>Mimic motions, but record own motions.</li>
+<li>Follow a teacher in a navigation task.</li>
+</ul>
+<h3 class="mume-header" id="imitation">Imitation</h3>
+
+<p>Non-identity embodiment mapping.<br>
+Demonstration is performed by human and observed on actual robot.</p>
+<p><strong>Sensors on teacher</strong>, so get direct data from demonstrator, but not the robot.</p>
+<p><strong>External observation</strong>, so sensor data is external to demonstrator and robot.</p>
+<img src="img/11_mapping.jpg">
+<h3 class="mume-header" id="deriving-policy">Deriving Policy</h3>
+
+<img src="img/11_polderi.jpg">
+<p>In <strong>mapping</strong> we pick the right action directly from the data. We can do classification or regression.</p>
+<p>In <strong>plans</strong> we want to represent the output as a plan. So we do not consider single actions, rather their sequence. Hence, like for AIP we need</p>
+<ul>
+<li>pre-conditions</li>
+<li>post-conditions</li>
+<li>world state T(s&apos; | s, a)</li>
+<li>action sequence<br>
+Non-determinism is not handled very well</li>
+</ul>
+<p>In <strong>system model</strong>  we derive policy<br>
+&#x3C0; : Z <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> A<br>
+from model of the world T(s&apos; | s, a) and the reward R(s) similarly to RL.<br>
+Aim is to maximise cumulative reward over time.</p>
+<ul>
+<li>Engineered reward
+<ul>
+<li>Corresponds to the usual case.</li>
+<li>Sparse rewards for particular states.</li>
+<li>LfD has concentrated on helping to locate rewards, reducing blind exploration.</li>
+<li>Demonstration can highlight rewards.</li>
+<li>&#x201C;Ask for Help&#x201D; requests advice when all actions are approximately equally valued.</li>
+</ul>
+</li>
+<li>Learned reward.
+<ul>
+<li>Try to learn a reward function that generalises from individual rewards.</li>
+<li>Function approximation in RL.</li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="confidence-based-autonomy">Confidence Based Autonomy</h2>
+
+<p><v>2</v></p>
+<p>Confidence Based Autonomy is an interactive algorithm for LfD policy learning. Initially, the learner has no knowledge, but acquires policy through observing demonstrations.<br>
+The Learner then practices the task, and if an unfamiliar state is encountered, then learner can ask for more demonstrations.</p>
+<p>Two components:</p>
+<ul>
+<li><strong>Confident execution</strong> &#x2014; demonstrations triggered by learner&#x2019;  confidence.</li>
+<li><strong>Corrective demonstration</strong> &#x2014; demonstrations triggered by teacher correcting errors.</li>
+</ul>
+<p>The way it goes is:</p>
+<ul>
+<li>evaluate the current state;</li>
+<li>compute the confidence on performing the next move.</li>
+<li>If such an action confidence is above a threshold do it. Otherwise request demonstration; update the policy; and then execute the action.</li>
+<li>In case the confidence is high, but the teacher is not satisfied with the action, they can update the policy (corrective demonstration).</li>
+</ul>
+<p>This process is expressed in the following diagram.<br>
+<img src="img/11_cba.jpg"></p>
+<p>Robot&#x2019;s behaviour policy is represented by a classifier:<br>
+C : s <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> (a, c, db)<br>
+where</p>
+<ul>
+<li>s = state</li>
+<li>a <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2208;</mo></mrow><annotation encoding="application/x-tex">\in</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mrel">&#x2208;</span></span></span></span> A (action)</li>
+<li>c = action selection confidence</li>
+<li>db = decision boundary</li>
+</ul>
+<p>Policy is trained on state vectors s<sub>i</sub> (inputs) and actions a<sub>i</sub> (labels).</p>
+<p>State space divided into two regions:</p>
+<ul>
+<li>High confidence <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> autonomous execution</li>
+<li>Low confidence <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>&#x2192;</mo></mrow><annotation encoding="application/x-tex">\rarr</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">&#x2192;</span></span></span></span> demonstration</li>
+<li></li>
+</ul>
+<p>Two situations where confidence may be low:</p>
+<ul>
+<li>Unfamiliar (outlying points, the states are completely different from what the robot has encountered so far)</li>
+<li>Ambiguous (overlapping regions, it is not easy to decide what action to take). It is said to be ambiguous when the current state is distant from the closest seen state (euclidean distance) more than 3 times the avg neighbour distance of the states on the demonstration set.</li>
+</ul>
+<blockquote>
+<p>if either of this situation happens, that is the state is unseen or the boundary between actions is not clear to the robot, it asks for additional demonstration</p>
+</blockquote>
+<img src="img/11_Confidence.jpg">
+<h2 class="mume-header" id="ethics">Ethics</h2>
+
+<p><v>3</v></p>
+<p>Things considered harmful are:</p>
+<ul>
+<li><strong>Opacity</strong>: Back box models that cannot easily be interrogated.</li>
+<li><strong>Scale</strong>: The effects of the model can extend beyond the decision that it helps to make.</li>
+<li><strong>Damage</strong>: The model causes damage. The model causes harm to people, especially members of vulnerable groups.</li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
